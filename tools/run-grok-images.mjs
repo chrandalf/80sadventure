@@ -34,7 +34,30 @@ import { c } from './lib.mjs';
 
 const args = process.argv.slice(2);
 const positional = args.filter((a, i) => !a.startsWith('--') && (i === 0 || !args[i - 1].startsWith('--')));
-const flag = (n, d) => { const i = args.indexOf(`--${n}`); return i >= 0 ? args[i + 1] : d; };
+const flag = (n, d) => {
+  const i = args.indexOf(`--${n}`);
+  if (i < 0) return d;
+  const v = args[i + 1];
+  // `--budget` with nothing after it, or followed by another flag, is a typo.
+  // Silently treating the next flag as the value is how --price --budget
+  // became price="--budget" and budget=NaN - and a NaN budget fails every
+  // comparison, which switches the spending cap off without saying so.
+  if (v === undefined || v.startsWith('--')) {
+    console.error(c.red(`--${n} needs a value`));
+    process.exit(2);
+  }
+  return v;
+};
+
+/** A budget or price that is not a positive number must never be assumed. */
+const numeric = (name, raw) => {
+  const n = Number(raw);
+  if (!Number.isFinite(n) || n <= 0) {
+    console.error(c.red(`--${name} must be a positive number, got "${raw}"`));
+    process.exit(2);
+  }
+  return n;
+};
 
 const [jsonl, outDir] = positional;
 
@@ -89,7 +112,7 @@ if (!PROVIDERS) {
 const endpoint = flag('url', PROVIDERS.url);
 const model = flag('model', PROVIDERS.defaultModel);
 const resolution = flag('resolution', PROVIDERS.defaultResolution ?? '1k');
-const budget = Number(flag('budget', '2.80'));
+const budget = numeric('budget', flag('budget', '2.80'));
 const limit = Number(flag('limit', 'Infinity'));
 /**
  * How many images to have in flight. One image takes tens of seconds, so a
@@ -97,12 +120,12 @@ const limit = Number(flag('limit', 'Infinity'));
  * Six is comfortably inside both providers' rate limits; 429s back off and
  * retry anyway.
  */
-const concurrency = Number(flag('concurrency', '6'));
+const concurrency = numeric('concurrency', flag('concurrency', '6'));
 
 // Per-image price for the ledger. The xAI numbers are the console's
 // published flat rates; on OpenRouter the price is per model (Seedream 4.5
 // is $0.04 flat), so pass --price to match whatever model you chose.
-const PRICE = Number(flag('price',
+const PRICE = numeric('price', flag('price',
   { '1k': '0.04', '2k': '0.06' }[resolution.toLowerCase()] ?? '0.04'));
 
 if (!jsonl || !outDir) {
