@@ -378,6 +378,7 @@ export const DIALOGUE: Record<string, DialogueNode> = {
     choices: [
       { text: 'Do television signals record the future?', goto: 'derek_signals', once: true },
       { text: 'I need an aerial.', goto: 'derek_aerial' },
+      { text: 'Do you get many customers this late?', goto: 'derek_late', once: true },
       { text: 'No. Sorry.' },
     ],
   },
@@ -392,6 +393,19 @@ export const DIALOGUE: Record<string, DialogueNode> = {
       { who: 'jack', text: 'Is it?' },
       { who: 'derek', text: 'Structurally, yes. Practically, no.' },
     ],
+  },
+
+  derek_late: {
+    id: 'derek_late',
+    who: 'derek',
+    lines: [
+      { who: 'derek', text: 'After dark it is all urgent repairs. Curtains drawn, one lamp on, "it just went off, Derek."' },
+      { who: 'jack', text: 'Televisions?' },
+      { who: 'derek', text: 'Mostly.' },
+      { who: 'jack', text: 'I am not going to ask about the rest.' },
+      { who: 'derek', text: 'The rest is also televisions. This is a seaside town. People are starved of drama, not imagination.' },
+    ],
+    onEnd: [['cheeky', 'derekAfterDark'], ['score', 5, 'derekAfterDark']],
   },
 
   derek_aerial: {
@@ -766,12 +780,34 @@ export const DIALOGUE: Record<string, DialogueNode> = {
   valerie_after: {
     id: 'valerie_after',
     who: 'valerie',
-    lines: [{ who: 'valerie', text: 'Still here.' }],
+    intro: [
+      [{ who: 'valerie', text: 'Still here.' }],
+      [{ who: 'valerie', text: 'The bar is shut, the pool is shut, and whatever you are about to suggest is also shut.' }],
+      [
+        { who: 'valerie', text: 'Twice in one night. Either you are in trouble or you think you are charming.' },
+        { who: 'jack', text: 'Can it be both?' },
+        { who: 'valerie', text: 'It is usually both.' },
+      ],
+    ],
     choices: [
       { text: 'Has anyone else asked for Maggie tonight?', goto: 'valerie_asked', once: true },
       { text: 'Do you know a Doctor Vale?', goto: 'valerie_vale', showIf: ['flag', 'arthurColleague'], once: true },
+      { text: 'What time do you finish?', goto: 'valerie_finish', once: true },
       { text: 'No. Nothing.' },
     ],
+  },
+
+  valerie_finish: {
+    id: 'valerie_finish',
+    who: 'valerie',
+    lines: [
+      { who: 'valerie', text: 'Half past never.' },
+      { who: 'jack', text: 'Right. Yes. Obviously.' },
+      { who: 'valerie', text: 'Points for asking with a straight face, though.' },
+      { who: 'jack', text: 'It is the only face I have.' },
+      { who: 'valerie', text: 'Shame.', anim: 'smug' },
+    ],
+    onEnd: [['cheeky', 'valerieFinish'], ['score', 5, 'valerieFinish']],
   },
 
   valerie_asked: {
@@ -843,6 +879,8 @@ export const DIALOGUE: Record<string, DialogueNode> = {
       { who: 'graham', text: 'Films.' },
       { who: 'jack', text: 'What sort of films?' },
       { who: 'graham', text: 'The sort that are in the back section.' },
+      { who: 'jack', text: 'Are they educational?' },
+      { who: 'graham', text: 'Extremely.' },
     ],
   },
 
