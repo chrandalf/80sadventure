@@ -121,6 +121,12 @@ export class Actor {
     this.playIdle();
   }
 
+  /** Patrol route, if this character paces. Driven by AdventureScreen. */
+  patrol: [number, number][] | null = null;
+  patrolPause: [number, number] = [2, 6];
+  patrolIndex = 0;
+  patrolWait = 0;
+
   get isWalking(): boolean {
     return this.targetX !== null;
   }

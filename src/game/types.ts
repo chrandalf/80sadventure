@@ -116,6 +116,16 @@ export interface Hotspot {
    * the only thing that needs updating is this list of points.
    */
   polygon?: [number, number][];
+  /**
+   * Character id this hotspot follows.
+   *
+   * A hotspot is a fixed polygon, so one naming a character who paces would
+   * be left behind the moment they moved - the player would click the person
+   * and get nothing, then click empty floor and get their dialogue. With
+   * this, the rect and its walkTo shift by however far the character has
+   * walked from where the scene placed them.
+   */
+  tracks?: string;
   /** Where Jack stands to interact. Omit if he needn't approach. */
   walkTo?: [number, number];
   facing?: Facing;
@@ -157,6 +167,20 @@ export interface SceneCharacter {
   visibleIf?: Cond;
   /** Drawn in front of Jack regardless of y-order (foreground props). */
   foreground?: boolean;
+  /**
+   * Points this character walks between, forever, in order.
+   *
+   * A room where everyone stands perfectly still reads as a photograph with
+   * people pasted on it. Give a character two or three points and they pace,
+   * which costs nothing and makes the place look inhabited. They pause at
+   * each point for a random spell inside `patrolPause` (seconds), and they
+   * stop entirely while anyone is speaking, so nobody wanders off mid-line.
+   *
+   * Every point must be standable, or they will get stuck against a blocker:
+   * the geometry validator checks them.
+   */
+  patrol?: [number, number][];
+  patrolPause?: [number, number];
 }
 
 /**

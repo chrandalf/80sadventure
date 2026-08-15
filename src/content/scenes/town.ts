@@ -485,7 +485,11 @@ export const TOWN_SCENES: Record<string, Scene> = {
       { polygon: [276, 73, 320, 73, 320, 152, 276, 152], y: 152 },
     ],
     entries: { default: { x: 205, y: 135, facing: 'south' } },
-    characters: [{ id: 'derek', sprite: 'char.derek', x: 240, y: 130, facing: 'west' }],
+    characters: [{
+      id: 'derek', sprite: 'char.derek', x: 240, y: 130, facing: 'west',
+      patrol: [[240, 130], [150, 134], [240, 130], [200, 138]],
+      patrolPause: [3, 9],
+    }],
     ambience: [{ sfx: 'static', everyMin: 8, everyMax: 18 }],
     hotspots: [
       {

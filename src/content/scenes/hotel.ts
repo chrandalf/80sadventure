@@ -636,7 +636,11 @@ export const HOTEL_SCENES: Record<string, Scene> = {
       { polygon: [0, 20, 84, 20, 84, 152, 0, 152], y: 152 },
     ],
     entries: { default: { x: 113, y: 133, facing: 'south' }, fromAlley: { x: 290, y: 132, facing: 'west' } },
-    characters: [{ id: 'graham', sprite: 'char.graham', x: 250, y: 122, facing: 'south' }],
+    characters: [{
+      id: 'graham', sprite: 'char.graham', x: 250, y: 130, facing: 'south',
+      patrol: [[250, 130], [180, 134], [250, 130], [290, 132]],
+      patrolPause: [5, 12],
+    }],
     hotspots: [
       {
         id: 'graham',

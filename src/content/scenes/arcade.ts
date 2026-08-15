@@ -40,7 +40,11 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       fromOutside: { x: 110, y: 260, facing: 'east' },
     },
     characters: [
-      { id: 'arthur', sprite: 'char.arthur', x: 494, y: 272, facing: 'east' },
+      {
+        id: 'arthur', sprite: 'char.arthur', x: 494, y: 272, facing: 'east',
+        patrol: [[494, 272], [516, 278], [494, 272], [430, 270]],
+        patrolPause: [6, 14],
+      },
     ],
     ambience: [{ sfx: 'coin', everyMin: 9, everyMax: 20 }],
     onFirstEnter: [
@@ -306,7 +310,15 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       { id: 'stool', sprite: 'prop.stool', x: 470, y: 250 },
     ],
     characters: [
-      { id: 'kevin', sprite: 'char.kevin', x: 462, y: 280, facing: 'west', visibleIf: ['noflag', 'closingTime'] },
+      {
+        // Kevin drifts between the cabinets rather than standing sentry at
+        // one, which is what a sixteen-year-old with a pocket of ten-pences
+        // actually does. His hotspot tracks him.
+        id: 'kevin', sprite: 'char.kevin', x: 462, y: 280, facing: 'west',
+        visibleIf: ['noflag', 'closingTime'],
+        patrol: [[462, 280], [372, 274], [300, 268], [372, 274]],
+        patrolPause: [4, 11],
+      },
       { id: 'maggie', sprite: 'char.maggie', x: 192, y: 264, facing: 'east' },
     ],
     ambience: [
@@ -354,6 +366,7 @@ export const ARCADE_SCENES: Record<string, Scene> = {
         // before the room was fitted to its artwork, so clicking him missed and
         // clicking the cabinet behind him hit Kevin instead.
         rect: { x: 440, y: 206, w: 46, h: 76 },
+        tracks: 'kevin',
         walkTo: [416, 278],
         facing: 'east',
         visibleIf: ['noflag', 'closingTime'],

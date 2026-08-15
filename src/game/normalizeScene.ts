@@ -33,7 +33,14 @@ export function normalizeScene(scene: Scene): Scene {
   /** A flat [x,y,x,y,...] point list, as walkboxes and blockers use. */
   const points = (poly: number[]): number[] => poly.map((v) => v * k);
 
-  const character = (c: SceneCharacter): SceneCharacter => ({ ...c, x: c.x * k, y: c.y * k });
+  const character = (c: SceneCharacter): SceneCharacter => ({
+    ...c,
+    x: c.x * k,
+    y: c.y * k,
+    // Patrol points are positions like any other and must scale with the room,
+    // or a pacing character walks a route drawn for a screen half the size.
+    patrol: c.patrol?.map(([px, py]) => [px * k, py * k] as [number, number]),
+  });
   const object = (o: SceneObject): SceneObject => ({ ...o, x: o.x * k, y: o.y * k });
 
   return {

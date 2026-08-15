@@ -201,6 +201,21 @@ export function validateGeometry(): string[] {
       if (h.walkTo && !stand(h.walkTo[0], h.walkTo[1])) {
         problems.push(`${w}: hotspot "${h.id}" walkTo (${h.walkTo[0]},${h.walkTo[1]}) is not standable`);
       }
+      if (h.tracks && !scene.characters?.some((ch) => ch.id === h.tracks)) {
+        problems.push(`${w}: hotspot "${h.id}" tracks "${h.tracks}", who is not in this scene`);
+      }
+    }
+    // A patrol point inside a blocker leaves a character walking on the spot
+    // against the furniture forever, which is worse than not pacing at all.
+    for (const ch of scene.characters ?? []) {
+      (ch.patrol ?? []).forEach((p, i) => {
+        if (!stand(p[0], p[1])) {
+          problems.push(`${w}: character "${ch.id}" patrol point ${i} (${p[0]},${p[1]}) is not standable`);
+        }
+      });
+      if (ch.patrol && ch.patrol.length < 2) {
+        problems.push(`${w}: character "${ch.id}" has a patrol of one point - it will never move`);
+      }
     }
     const exits = scene.exits ?? [];
     for (const e of exits) {

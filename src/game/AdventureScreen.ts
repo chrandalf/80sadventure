@@ -189,6 +189,12 @@ export class AdventureScreen implements RunnerHost {
       if (def.anim) actor.play(def.anim);
       if (def.scale !== undefined) actor.fixedScale = def.scale;
       actor.foreground = !!def.foreground;
+      if (def.patrol?.length) {
+        actor.patrol = def.patrol;
+        if (def.patrolPause) actor.patrolPause = def.patrolPause;
+        // Stagger the first move, or everyone in the room sets off together.
+        actor.patrolWait = Math.random() * actor.patrolPause[1];
+      }
       this.npcs.push(actor);
     }
   }
@@ -260,6 +266,7 @@ export class AdventureScreen implements RunnerHost {
 
     this.jack.update(dt, this.scene.walkboxes, this.scene.depth, this.scene.blockers);
     for (const npc of this.npcs) npc.update(dt, undefined, this.scene.depth);
+    this.updatePatrols(dt);
     this.separateActors();
 
     // Fire the queued interaction once Jack has finished walking over.
@@ -429,9 +436,11 @@ export class AdventureScreen implements RunnerHost {
       return;
     }
     if (npc) {
-      const spot = this.scene.characters?.find((c) => c.id === npc.id);
+      // Their live position: a character who paces is rarely where the scene
+      // first placed them, and walking to the empty spot they left is worse
+      // than not walking at all.
       this.approachThen(
-        spot ? [spot.x - 24, spot.y] : undefined,
+        [npc.x - 24, npc.y],
         undefined,
         () => this.interactCharacter(npc.id, verb),
       );
@@ -620,7 +629,8 @@ export class AdventureScreen implements RunnerHost {
     for (const h of this.scene.hotspots ?? []) {
       if (!evalCond(this.state, h.visibleIf)) continue;
       if (h.hiddenUntil && !evalCond(this.state, h.hiddenUntil)) continue;
-      if (hotspotContains(h, x, y)) return h;
+      const live = this.tracked(h);
+      if (hotspotContains(live, x, y)) return live;
     }
     return null;
   }
@@ -663,6 +673,51 @@ export class AdventureScreen implements RunnerHost {
         if (isWalkable(boxes, bx, b.y, blockers)) b.x = bx;
       }
     }
+  }
+
+  /**
+   * Walk the pacing characters along their routes.
+   *
+   * Everyone freezes while anything is being said. A character who wanders
+   * off mid-sentence takes their speech bubble with them, and one who strolls
+   * away while the player is choosing a dialogue option is worse - the player
+   * picks a line and finds themselves talking to an empty bit of carpet.
+   */
+  private updatePatrols(dt: number): void {
+    if (this.dialogue.isOpen || this.speech.blocking || this.runner.busy) return;
+    for (const npc of this.npcs) {
+      if (!npc.patrol || npc.patrol.length < 2) continue;
+      if (!npc.visible || this.hidden.has(npc.id) || npc.isWalking) continue;
+      npc.patrolWait -= dt;
+      if (npc.patrolWait > 0) continue;
+      npc.patrolIndex = (npc.patrolIndex + 1) % npc.patrol.length;
+      const [px, py] = npc.patrol[npc.patrolIndex];
+      npc.walkTo(px, py);
+      const [lo, hi] = npc.patrolPause;
+      npc.patrolWait = lo + Math.random() * Math.max(0, hi - lo);
+    }
+  }
+
+  /**
+   * A hotspot, shifted to wherever the character it tracks has walked to.
+   *
+   * Returns the hotspot untouched when it tracks nobody, which is all of them
+   * except the handful naming a character who paces.
+   */
+  private tracked(h: Hotspot): Hotspot {
+    if (!h.tracks) return h;
+    const npc = this.npcs.find((a) => a.id === h.tracks);
+    const home = this.scene.characters?.find((ch) => ch.id === h.tracks);
+    if (!npc || !home) return h;
+    const dx = npc.x - home.x;
+    const dy = npc.y - home.y;
+    if (Math.abs(dx) < 0.5 && Math.abs(dy) < 0.5) return h;
+    return {
+      ...h,
+      rect: h.rect ? { ...h.rect, x: h.rect.x + dx, y: h.rect.y + dy } : undefined,
+      polygon: h.polygon?.map(([px, py]) => [px + dx, py + dy] as [number, number]),
+      walkTo: h.walkTo ? [h.walkTo[0] + dx, h.walkTo[1] + dy] : undefined,
+    };
   }
 
   private exitAt(x: number, y: number): Exit | null {
