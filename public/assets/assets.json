@@ -303,14 +303,14 @@
           "id": "coin_pusher",
           "name": "Coin Pusher",
           "bounds": {
-            "x": 454,
-            "y": 86,
-            "w": 106,
-            "h": 94
+            "x": 494,
+            "y": 118,
+            "w": 144,
+            "h": 198
           },
           "centre": [
-            507,
-            133
+            556,
+            211
           ],
           "verbs": [
             "LOOK",
@@ -325,14 +325,14 @@
           "id": "machine_turbo",
           "name": "Turbo Racer",
           "bounds": {
-            "x": 80,
-            "y": 52,
-            "w": 60,
-            "h": 128
+            "x": 172,
+            "y": 40,
+            "w": 58,
+            "h": 174
           },
           "centre": [
-            110,
-            116
+            201,
+            128
           ],
           "verbs": [
             "LOOK",
@@ -346,14 +346,14 @@
           "id": "machine_space",
           "name": "Space Wars",
           "bounds": {
-            "x": 148,
-            "y": 52,
-            "w": 60,
-            "h": 128
+            "x": 232,
+            "y": 32,
+            "w": 55,
+            "h": 180
           },
           "centre": [
-            178,
-            116
+            260,
+            123
           ],
           "verbs": [
             "LOOK",
@@ -366,14 +366,14 @@
           "id": "machine_manor",
           "name": "Monster Manor",
           "bounds": {
-            "x": 216,
-            "y": 52,
-            "w": 60,
-            "h": 128
+            "x": 290,
+            "y": 30,
+            "w": 61,
+            "h": 186
           },
           "centre": [
-            246,
-            116
+            321,
+            124
           ],
           "verbs": [
             "LOOK",
@@ -386,14 +386,14 @@
           "id": "machine_galactic",
           "name": "Galactic Raiders",
           "bounds": {
-            "x": 284,
-            "y": 52,
-            "w": 60,
-            "h": 128
+            "x": 354,
+            "y": 26,
+            "w": 82,
+            "h": 202
           },
           "centre": [
-            314,
-            116
+            395,
+            127
           ],
           "verbs": [
             "LOOK",
@@ -406,14 +406,14 @@
           "id": "onemorecredit",
           "name": "Unmarked Machine",
           "bounds": {
-            "x": 362,
-            "y": 46,
-            "w": 72,
-            "h": 136
+            "x": 443,
+            "y": 44,
+            "w": 61,
+            "h": 184
           },
           "centre": [
-            398,
-            114
+            473,
+            136
           ],
           "verbs": [
             "LOOK",
@@ -428,14 +428,14 @@
           "id": "basement_door",
           "name": "Staff Door",
           "bounds": {
-            "x": 8,
-            "y": 68,
-            "w": 52,
-            "h": 112
+            "x": 12,
+            "y": 24,
+            "w": 78,
+            "h": 174
           },
           "centre": [
-            34,
-            124
+            51,
+            111
           ],
           "verbs": [
             "LOOK",
@@ -448,14 +448,14 @@
           "id": "to_lobby",
           "name": "Lobby",
           "bounds": {
-            "x": 576,
-            "y": 60,
-            "w": 64,
-            "h": 120
+            "x": 110,
+            "y": 32,
+            "w": 56,
+            "h": 142
           },
           "centre": [
-            608,
-            120
+            138,
+            103
           ],
           "verbs": [
             "EXIT"
@@ -474,7 +474,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Starlight Arcade. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Coin Pusher (around x507, y133); Turbo Racer (around x110, y116); Space Wars (around x178, y116); Monster Manor (around x246, y116); Galactic Raiders (around x314, y116); Unmarked Machine (around x398, y114); Staff Door (around x34, y124). Visible ways out: Lobby. Characters stand in this room (drawn separately, not in the background): Kevin, Maggie. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Starlight Arcade. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Coin Pusher (around x556, y211); Turbo Racer (around x201, y128); Space Wars (around x260, y123); Monster Manor (around x321, y124); Galactic Raiders (around x395, y127); Unmarked Machine (around x473, y136); Staff Door (around x51, y111). Visible ways out: Lobby. Characters stand in this room (drawn separately, not in the background): Kevin, Maggie. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p0"
     },
     {

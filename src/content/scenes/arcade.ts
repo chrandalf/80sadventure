@@ -273,7 +273,7 @@ export const ARCADE_SCENES: Record<string, Scene> = {
     depth: DEPTH_WORLD,
     entries: {
       default: { x: 320, y: 256, facing: 'south' },
-      fromLobby: { x: 584, y: 252, facing: 'west' },
+      fromLobby: { x: 142, y: 224, facing: 'south' },
       fromBasement: { x: 60, y: 244, facing: 'east' },
     },
     objects: [
@@ -340,7 +340,7 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'coin_pusher',
         name: 'Coin Pusher',
-        polygon: [[458, 86], [556, 86], [560, 180], [454, 180]],
+        polygon: [[512, 126], [638, 118], [638, 316], [498, 300], [494, 196]],
         walkTo: [504, 236],
         facing: 'north',
         verbs: {
@@ -378,7 +378,7 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'machine_turbo',
         name: 'Turbo Racer',
-        polygon: [[84, 52], [136, 52], [140, 180], [80, 180]],
+        polygon: [[174, 44], [228, 40], [230, 214], [172, 214]],
         walkTo: [110, 228],
         facing: 'north',
         verbs: {
@@ -402,7 +402,7 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'machine_space',
         name: 'Space Wars',
-        polygon: [[152, 52], [204, 52], [208, 180], [148, 180]],
+        polygon: [[233, 34], [286, 32], [287, 212], [232, 212]],
         walkTo: [178, 228],
         facing: 'north',
         verbs: {
@@ -413,7 +413,7 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'machine_manor',
         name: 'Monster Manor',
-        polygon: [[220, 52], [272, 52], [276, 180], [216, 180]],
+        polygon: [[291, 32], [350, 30], [351, 216], [290, 216]],
         walkTo: [246, 228],
         facing: 'north',
         verbs: {
@@ -437,7 +437,7 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'machine_galactic',
         name: 'Galactic Raiders',
-        polygon: [[288, 52], [340, 52], [344, 180], [284, 180]],
+        polygon: [[355, 26], [436, 30], [434, 228], [354, 224]],
         walkTo: [314, 228],
         facing: 'north',
         verbs: {
@@ -463,7 +463,7 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'onemorecredit',
         name: 'Unmarked Machine',
-        polygon: [[366, 46], [430, 46], [434, 182], [362, 182]],
+        polygon: [[444, 44], [504, 46], [502, 228], [443, 226]],
         walkTo: [398, 232],
         facing: 'north',
         verbs: {
@@ -517,8 +517,8 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'basement_door',
         name: 'Staff Door',
-        rect: { x: 8, y: 68, w: 52, h: 112 },
-        walkTo: [48, 232],
+        polygon: [[12, 26], [90, 24], [90, 194], [12, 198]],
+        walkTo: [60, 236],
         facing: 'west',
         verbs: {
           LOOK: [['jack', 'STAFF ONLY. Which, tonight, is me.']],
@@ -538,11 +538,11 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'to_lobby',
         name: 'Lobby',
-        rect: { x: 576, y: 60, w: 64, h: 120 },
+        rect: { x: 110, y: 32, w: 56, h: 142 },
         to: 'arcade_lobby',
         entry: 'fromFloor',
-        walkTo: [580, 236],
-        arrow: 'right',
+        walkTo: [140, 216],
+        arrow: 'up',
       },
     ],
   },
