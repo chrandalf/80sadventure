@@ -114,7 +114,7 @@ export const OBJECTIVES: Objective[] = [
     hints: [
       'The Memory Master needs three things. The first is power, and the arcade has plenty.',
       'The basement fuse box is labelled incorrectly. The correct order is written on the arcade machines themselves.',
-      'The cabinets on the arcade floor are numbered on their coin doors. Set the four fuses in the basement to that same order, then USE CABLE WITH the POWER socket.',
+      'LOOK at the coin doors of the cabinets on the arcade floor to learn the order, then LOOK at the fuse box in the basement and USE it. There is no cable to fetch - the socket downstairs comes alive on its own once the fuses are right.',
     ],
   },
   {

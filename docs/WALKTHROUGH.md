@@ -64,7 +64,9 @@ Starts in **Starlight Arcade - Lobby**, 19:00, score 10.
    → office key behind it.
 7. **OPEN** the **office door** with it.
 8. In the office: **TAKE** the **screwdriver** from the desk, and **LOOK** at the
-   **framed photograph**. Note the date on it — you need it much later.
+   **framed photograph**. Do not skip this — looking at it is what tells Jack the
+   arcade opened in **1974**, and the safe in this room will not open until he
+   knows that. It is the single easiest step to miss and it blocks the ending.
 
 > The office is the room to check occlusion in. Walk behind the desk: Jack
 > should be cut off at the waist. Walk to the left of it: he should be whole.
@@ -98,15 +100,25 @@ Starts in **Starlight Arcade - Lobby**, 19:00, score 10.
 
 21. With the arcade key, **OPEN** the **staff door** on the arcade floor.
 22. In the basement, **OPEN** the **hatch** in the floor. → the machine room.
-23. **POWER**: the cabinets upstairs are numbered on their coin doors. Set the
-    four fuses in the basement to that same order.
-24. **USE CABLE WITH** the **POWER** socket.
-25. **SIGNAL**: get the **antenna** from Derek, **USE BOLT CUTTERS WITH
-    ANTENNA**, take it to the **Arcade Roof** and **USE ANTENNA WITH** the aerial
-    mast.
-26. **MEMORY**: the framed photograph in the office is dated **1974** — the year
-    Arthur opened the arcade. Use that on the **safe**, **TAKE** the cassette,
-    and put it in the **MEMORY** socket.
+23. **POWER**: **LOOK** at the **fuse box** in the basement first — Jack has to
+    notice it is mislabelled before he will touch it. Then **USE** the fuse box.
+    He sets them to 3, 1, 4, 2 himself, from the numbers on the cabinets' coin
+    doors.
+24. While in the basement, **LOOK** under the **dust sheets** → **bolt cutters**.
+    Nothing else gives you these, and the SIGNAL puzzle cannot be finished
+    without them.
+25. **SIGNAL**: get the **antenna** from the stock in the **TV Repair Shop**,
+    **USE BOLT CUTTERS WITH ANTENNA** to cut it down to size, then take it to the
+    **Arcade Roof** and **USE ANTENNA WITH** the aerial mast.
+26. **MEMORY**: back in the **office**, **OPEN** the **safe** — it takes 1974,
+    which Jack only knows if he looked at the framed photograph in step 8.
+    **TAKE** the cassette and **USE** it **WITH** the **MEMORY** socket.
+
+> There is no cable to find. The `cable` item exists but nothing in the game
+> gives it out, and the POWER socket only ever says the fuses come first — so
+> hunting for one is a dead end. Same for `gum`, `extension` and `cartridge`:
+> defined in `items.ts`, obtainable nowhere, referenced by nothing. They are
+> harmless but they are not puzzles.
 
 ## Act VI — the ending
 
