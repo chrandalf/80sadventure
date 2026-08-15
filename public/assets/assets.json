@@ -64,14 +64,14 @@
           "id": "arthur",
           "name": "Arthur",
           "bounds": {
-            "x": 552,
-            "y": 224,
-            "w": 40,
-            "h": 48
+            "x": 470,
+            "y": 196,
+            "w": 50,
+            "h": 78
           },
           "centre": [
-            572,
-            248
+            495,
+            235
           ],
           "verbs": [
             "LOOK",
@@ -4608,18 +4608,18 @@
       "type": "character-sheet",
       "path": "/assets/characters/jack.png",
       "dimensions": {
-        "width": 144,
-        "height": 160
+        "width": 288,
+        "height": 320
       },
       "transparency": "alpha-required",
       "animation": {
         "animated": true,
-        "frameWidth": 24,
-        "frameHeight": 40,
+        "frameWidth": 48,
+        "frameHeight": 80,
         "columns": 6,
         "rows": 4,
-        "sheetWidth": 144,
-        "sheetHeight": 160,
+        "sheetWidth": 288,
+        "sheetHeight": 320,
         "states": [
           "idle",
           "walk",
@@ -4675,18 +4675,18 @@
       "type": "character-sheet",
       "path": "/assets/characters/maggie.png",
       "dimensions": {
-        "width": 144,
-        "height": 160
+        "width": 288,
+        "height": 320
       },
       "transparency": "alpha-required",
       "animation": {
         "animated": true,
-        "frameWidth": 24,
-        "frameHeight": 40,
+        "frameWidth": 48,
+        "frameHeight": 80,
         "columns": 6,
         "rows": 4,
-        "sheetWidth": 144,
-        "sheetHeight": 160,
+        "sheetWidth": 288,
+        "sheetHeight": 320,
         "states": [
           "idle",
           "walk",
@@ -4742,18 +4742,18 @@
       "type": "character-sheet",
       "path": "/assets/characters/arthur.png",
       "dimensions": {
-        "width": 144,
-        "height": 160
+        "width": 288,
+        "height": 320
       },
       "transparency": "alpha-required",
       "animation": {
         "animated": true,
-        "frameWidth": 24,
-        "frameHeight": 40,
+        "frameWidth": 48,
+        "frameHeight": 80,
         "columns": 6,
         "rows": 4,
-        "sheetWidth": 144,
-        "sheetHeight": 160,
+        "sheetWidth": 288,
+        "sheetHeight": 320,
         "states": [
           "idle",
           "walk",
@@ -4809,18 +4809,18 @@
       "type": "character-sheet",
       "path": "/assets/characters/derek.png",
       "dimensions": {
-        "width": 144,
-        "height": 160
+        "width": 288,
+        "height": 320
       },
       "transparency": "alpha-required",
       "animation": {
         "animated": true,
-        "frameWidth": 24,
-        "frameHeight": 40,
+        "frameWidth": 48,
+        "frameHeight": 80,
         "columns": 6,
         "rows": 4,
-        "sheetWidth": 144,
-        "sheetHeight": 160,
+        "sheetWidth": 288,
+        "sheetHeight": 320,
         "states": [
           "idle",
           "walk",
@@ -4876,18 +4876,18 @@
       "type": "character-sheet",
       "path": "/assets/characters/kevin.png",
       "dimensions": {
-        "width": 144,
-        "height": 160
+        "width": 288,
+        "height": 320
       },
       "transparency": "alpha-required",
       "animation": {
         "animated": true,
-        "frameWidth": 24,
-        "frameHeight": 40,
+        "frameWidth": 48,
+        "frameHeight": 80,
         "columns": 6,
         "rows": 4,
-        "sheetWidth": 144,
-        "sheetHeight": 160,
+        "sheetWidth": 288,
+        "sheetHeight": 320,
         "states": [
           "idle",
           "walk",
@@ -4943,18 +4943,18 @@
       "type": "character-sheet",
       "path": "/assets/characters/brenda.png",
       "dimensions": {
-        "width": 144,
-        "height": 160
+        "width": 288,
+        "height": 320
       },
       "transparency": "alpha-required",
       "animation": {
         "animated": true,
-        "frameWidth": 24,
-        "frameHeight": 40,
+        "frameWidth": 48,
+        "frameHeight": 80,
         "columns": 6,
         "rows": 4,
-        "sheetWidth": 144,
-        "sheetHeight": 160,
+        "sheetWidth": 288,
+        "sheetHeight": 320,
         "states": [
           "idle",
           "walk",
@@ -5010,18 +5010,18 @@
       "type": "character-sheet",
       "path": "/assets/characters/valerie.png",
       "dimensions": {
-        "width": 144,
-        "height": 160
+        "width": 288,
+        "height": 320
       },
       "transparency": "alpha-required",
       "animation": {
         "animated": true,
-        "frameWidth": 24,
-        "frameHeight": 40,
+        "frameWidth": 48,
+        "frameHeight": 80,
         "columns": 6,
         "rows": 4,
-        "sheetWidth": 144,
-        "sheetHeight": 160,
+        "sheetWidth": 288,
+        "sheetHeight": 320,
         "states": [
           "idle",
           "walk",
@@ -5077,18 +5077,18 @@
       "type": "character-sheet",
       "path": "/assets/characters/graham.png",
       "dimensions": {
-        "width": 144,
-        "height": 160
+        "width": 288,
+        "height": 320
       },
       "transparency": "alpha-required",
       "animation": {
         "animated": true,
-        "frameWidth": 24,
-        "frameHeight": 40,
+        "frameWidth": 48,
+        "frameHeight": 80,
         "columns": 6,
         "rows": 4,
-        "sheetWidth": 144,
-        "sheetHeight": 160,
+        "sheetWidth": 288,
+        "sheetHeight": 320,
         "states": [
           "idle",
           "walk",
@@ -5144,18 +5144,18 @@
       "type": "character-sheet",
       "path": "/assets/characters/vale.png",
       "dimensions": {
-        "width": 144,
-        "height": 160
+        "width": 288,
+        "height": 320
       },
       "transparency": "alpha-required",
       "animation": {
         "animated": true,
-        "frameWidth": 24,
-        "frameHeight": 40,
+        "frameWidth": 48,
+        "frameHeight": 80,
         "columns": 6,
         "rows": 4,
-        "sheetWidth": 144,
-        "sheetHeight": 160,
+        "sheetWidth": 288,
+        "sheetHeight": 320,
         "states": [
           "idle",
           "walk",
@@ -5211,18 +5211,18 @@
       "type": "character-sheet",
       "path": "/assets/characters/guest.png",
       "dimensions": {
-        "width": 144,
-        "height": 160
+        "width": 288,
+        "height": 320
       },
       "transparency": "alpha-required",
       "animation": {
         "animated": true,
-        "frameWidth": 24,
-        "frameHeight": 40,
+        "frameWidth": 48,
+        "frameHeight": 80,
         "columns": 6,
         "rows": 4,
-        "sheetWidth": 144,
-        "sheetHeight": 160,
+        "sheetWidth": 288,
+        "sheetHeight": 320,
         "states": [
           "idle",
           "walk",

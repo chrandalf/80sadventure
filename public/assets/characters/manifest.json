@@ -1,13 +1,13 @@
 {
-  "_readme": "CHARACTER SPRITE CONTRACT. Game code never names a PNG - it asks for a logical id below. Drop a sprite sheet with the declared dimensions into this folder and it is used on the next load; no code change, no rebuild. To change a sheet's size or frame layout, edit its entry here - this is the only place geometry is defined. Missing files render as a clearly labelled placeholder sprite so the game always runs. See docs/ASSETS.md and docs/ART-BRIEF.md.",
+  "_readme": "CHARACTER SPRITE CONTRACT. Game code never names a PNG - it asks for a logical id below. Drop a sprite sheet with the declared dimensions into this folder and it is used on the next load; no code change, no rebuild. To change a sheet's size or frame layout, edit its entry here - this is the only place geometry is defined. Missing files render as a clearly labelled placeholder sprite so the game always runs. See docs/ASSETS.md and docs/ART-BRIEF.md. Character cells are 48x80: the generated source art is 1024px tall, so a 40px cell threw almost all of it away and left everyone tiny on screen. Changing frameWidth/frameHeight here and re-running assets:ingest --force rebuilds every sheet from the images already downloaded - it costs nothing to generate.",
   "templates": {
     "person": {
-      "frameWidth": 24,
-      "frameHeight": 40,
+      "frameWidth": 48,
+      "frameHeight": 80,
       "columns": 6,
       "rows": 4,
-      "anchorX": 12,
-      "anchorY": 40,
+      "anchorX": 24,
+      "anchorY": 80,
       "_layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is the right-facing row mirrored automatically, so you never draw it. Columns 0-3 of rows 0-2 are the walk cycle (col 0 doubles as the standing pose); columns 4-5 are the two-frame talk loop.",
       "animations": {
         "idle": {

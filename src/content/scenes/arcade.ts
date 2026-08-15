@@ -27,6 +27,11 @@ export const ARCADE_SCENES: Record<string, Scene> = {
     background: 'arcade_lobby',
     music: 'arcade',
     walkboxes: LOBBY_FLOOR,
+    // The change counter juts into the room; the machines stand on the floor.
+    blockers: [
+      [536, 244, 640, 244, 640, 300, 528, 292],
+      [150, 244, 278, 244, 278, 258, 150, 258],
+    ],
     depth: LOBBY_DEPTH,
     entries: {
       default: { x: 320, y: 266, facing: 'south' },
@@ -35,7 +40,7 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       fromOutside: { x: 110, y: 260, facing: 'east' },
     },
     characters: [
-      { id: 'arthur', sprite: 'char.arthur', x: 574, y: 268, facing: 'west' },
+      { id: 'arthur', sprite: 'char.arthur', x: 494, y: 272, facing: 'east' },
     ],
     ambience: [{ sfx: 'coin', everyMin: 9, everyMax: 20 }],
     onFirstEnter: [
@@ -46,8 +51,8 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'arthur',
         name: 'Arthur',
-        rect: { x: 552, y: 224, w: 40, h: 48 },
-        walkTo: [534, 268],
+        rect: { x: 470, y: 196, w: 50, h: 78 },
+        walkTo: [452, 270],
         facing: 'east',
         defaultVerb: 'TALK',
         verbs: {
@@ -275,6 +280,12 @@ export const ARCADE_SCENES: Record<string, Scene> = {
     background: 'arcade_floor',
     music: 'arcade',
     walkboxes: FLOOR_WORLD,
+    // The coin pusher stands on the floor in the near right corner, and the row
+    // of cabinets has a base that juts forward of the wall.
+    blockers: [
+      [488, 236, 640, 224, 640, 300, 470, 300],
+      [168, 192, 512, 192, 512, 214, 168, 214],
+    ],
     depth: DEPTH_WORLD,
     entries: {
       default: { x: 320, y: 256, facing: 'south' },
@@ -288,7 +299,7 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       { id: 'stool', sprite: 'prop.stool', x: 470, y: 250 },
     ],
     characters: [
-      { id: 'kevin', sprite: 'char.kevin', x: 500, y: 236, facing: 'north', visibleIf: ['noflag', 'closingTime'] },
+      { id: 'kevin', sprite: 'char.kevin', x: 452, y: 246, facing: 'east', visibleIf: ['noflag', 'closingTime'] },
       { id: 'maggie', sprite: 'char.maggie', x: 192, y: 264, facing: 'east' },
     ],
     ambience: [

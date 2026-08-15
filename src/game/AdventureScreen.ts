@@ -12,7 +12,7 @@ import { OBJECTIVES } from '../content/hints';
 import { SCENES } from '../content/scenes';
 import { VISIONS } from '../content/visions';
 import { ActionRunner, type RunnerHost } from './ActionRunner';
-import { Actor, clampToWalkable, depthScale } from './Actor';
+import { Actor, clampToWalkable, depthScale, isWalkable } from './Actor';
 import { hotspotContains } from './normalizeScene';
 import { drawArtBadge, SceneArtStore } from '../engine/SceneArtStore';
 import { BACKGROUNDS } from '../content/backgrounds';
@@ -47,6 +47,11 @@ export type ScreenExit = { kind: 'ending'; id: string } | { kind: 'menu' };
  * Implements RunnerHost so that hotspot responses, cutscenes, dialogue results
  * and endings all execute through the same action interpreter.
  */
+/** How close two characters may stand, in world pixels. */
+const ACTOR_WIDTH = 22;
+/** Beyond this difference in y they are at different depths and cannot touch. */
+const ACTOR_DEPTH_TOLERANCE = 14;
+
 export class AdventureScreen implements RunnerHost {
   state: GameState;
   ui: UiState = newUiState();
@@ -240,8 +245,9 @@ export class AdventureScreen implements RunnerHost {
     }
     this.state.playTime += dt;
 
-    this.jack.update(dt, this.scene.walkboxes, this.scene.depth);
+    this.jack.update(dt, this.scene.walkboxes, this.scene.depth, this.scene.blockers);
     for (const npc of this.npcs) npc.update(dt, undefined, this.scene.depth);
+    this.separateActors();
 
     // Fire the queued interaction once Jack has finished walking over.
     if (this.pendingInteraction && !this.jack.isWalking) {
@@ -430,7 +436,7 @@ export class AdventureScreen implements RunnerHost {
     }
 
     // Empty floor: walk there.
-    const target = clampToWalkable(this.scene.walkboxes, x, Math.min(y, PLAY_HEIGHT - 4));
+    const target = clampToWalkable(this.scene.walkboxes, x, Math.min(y, PLAY_HEIGHT - 4), this.scene.blockers);
     this.jack.walkTo(target.x, target.y);
   }
 
@@ -450,7 +456,7 @@ export class AdventureScreen implements RunnerHost {
       run();
       return;
     }
-    const target = clampToWalkable(this.scene.walkboxes, walkTo[0], walkTo[1]);
+    const target = clampToWalkable(this.scene.walkboxes, walkTo[0], walkTo[1], this.scene.blockers);
     this.jack.walkTo(target.x, target.y);
     this.pendingInteraction = () => {
       if (facing) this.jack.face(facing);
@@ -606,6 +612,46 @@ export class AdventureScreen implements RunnerHost {
       if (hotspotContains(h, x, y)) return h;
     }
     return null;
+  }
+
+  /**
+   * Nudge overlapping characters apart.
+   *
+   * Nobody paths around anybody - Jack walks to where he was told and the NPCs
+   * stand where the scene puts them - so without this they simply occupy the
+   * same spot and the one drawn second wins. A shove along x, proportional to
+   * how far they overlap, keeps them side by side without either of them
+   * needing to know the other exists. Only along x: pushing on y would change
+   * their depth order and make them swap in front of each other.
+   */
+  private separateActors(): void {
+    const actors = [this.jack, ...this.npcs.filter((n) => n.visible && !this.hidden.has(n.id))];
+    for (let i = 0; i < actors.length; i++) {
+      for (let j = i + 1; j < actors.length; j++) {
+        const a = actors[i];
+        const b = actors[j];
+        // Only characters standing at much the same depth can collide.
+        if (Math.abs(a.y - b.y) > ACTOR_DEPTH_TOLERANCE) continue;
+        const dx = b.x - a.x;
+        const gap = Math.abs(dx);
+        if (gap >= ACTOR_WIDTH) continue;
+        // Only tidy up characters at rest. Pushing someone who is walking makes
+        // them either bulldoze the other across the room or come to a dead stop
+        // behind them, and a standing NPC that cannot be walked past is a wall.
+        // So they pass through each other in motion, as they always did in this
+        // kind of game, and settle apart once they stop.
+        if (a.isWalking || b.isWalking) continue;
+
+        const dir = gap < 0.01 ? 1 : Math.sign(dx);
+        const boxes = this.scene.walkboxes;
+        const blockers = this.scene.blockers;
+        const push = (ACTOR_WIDTH - gap) / 2;
+        const ax = a.x - push * dir;
+        const bx = b.x + push * dir;
+        if (isWalkable(boxes, ax, a.y, blockers)) a.x = ax;
+        if (isWalkable(boxes, bx, b.y, blockers)) b.x = bx;
+      }
+    }
   }
 
   private exitAt(x: number, y: number): Exit | null {

@@ -15,7 +15,13 @@ export function pointInPoly(poly: number[], x: number, y: number): boolean {
   return inside;
 }
 
-export function isWalkable(boxes: number[][] | undefined, x: number, y: number): boolean {
+export function isWalkable(
+  boxes: number[][] | undefined,
+  x: number,
+  y: number,
+  blockers?: number[][],
+): boolean {
+  if (blockers?.some((p) => pointInPoly(p, x, y))) return false;
   // A scene with no walkboxes is entirely walkable - handy while blocking out
   // a new room before its geometry is drawn.
   if (!boxes || boxes.length === 0) return true;
@@ -27,8 +33,9 @@ export function clampToWalkable(
   boxes: number[][] | undefined,
   x: number,
   y: number,
+  blockers?: number[][],
 ): { x: number; y: number } {
-  if (isWalkable(boxes, x, y)) return { x, y };
+  if (isWalkable(boxes, x, y, blockers)) return { x, y };
   if (!boxes || boxes.length === 0) return { x, y };
 
   let best = { x, y };
@@ -60,7 +67,7 @@ export function clampToWalkable(
   // Nudge a pixel inward so the result is inside rather than exactly on the edge.
   const inx = best.x + Math.sign(x - best.x) * -1;
   const iny = best.y + Math.sign(y - best.y) * -1;
-  return isWalkable(boxes, inx, iny) ? { x: inx, y: iny } : best;
+  return isWalkable(boxes, inx, iny, blockers) ? { x: inx, y: iny } : best;
 }
 
 /** Perspective scale for a given floor y. */
@@ -175,7 +182,12 @@ export class Actor {
     return this.facing === 'west' && !this.anim.sheet.hasAnimation(`${this.restAnim}.west`);
   }
 
-  update(dt: number, boxes: number[][] | undefined, depth: DepthBand | undefined): void {
+  update(
+    dt: number,
+    boxes: number[][] | undefined,
+    depth: DepthBand | undefined,
+    blockers?: number[][],
+  ): void {
     if (this.targetX !== null && this.targetY !== null) {
       const scale = this.fixedScale ?? depthScale(depth, this.y);
       const speed = BASE_SPEED * scale;
@@ -197,14 +209,14 @@ export class Actor {
         // Direct step, else slide along whichever axis is still walkable. This
         // gets Jack around furniture without a full pathfinder, and a scene
         // whose walkbox has a genuine dead end simply stops him at the wall.
-        if (isWalkable(boxes, nx, ny)) {
+        if (isWalkable(boxes, nx, ny, blockers)) {
           this.strideDistance += Math.hypot(nx - this.x, ny - this.y);
           this.x = nx;
           this.y = ny;
-        } else if (isWalkable(boxes, nx, this.y)) {
+        } else if (isWalkable(boxes, nx, this.y, blockers)) {
           this.strideDistance += Math.abs(nx - this.x);
           this.x = nx;
-        } else if (isWalkable(boxes, this.x, ny)) {
+        } else if (isWalkable(boxes, this.x, ny, blockers)) {
           this.strideDistance += Math.abs(ny - this.y);
           this.y = ny;
         } else {

@@ -198,6 +198,15 @@ export interface Scene {
   music?: string;
   /** Walkable polygons, as flat [x,y,x,y,...] point lists. */
   walkboxes?: number[][];
+  /**
+   * Polygons cut back out of the walkable area, in the same flat form.
+   *
+   * A room's floor is usually one simple band, but the furniture standing on it
+   * is not - a character who can reach every point of that band walks straight
+   * through the coin pusher. Subtracting the footprint is far less work than
+   * describing the remaining floor as a set of polygons that avoid it.
+   */
+  blockers?: number[][];
   depth?: DepthBand;
   entries?: Record<string, { x: number; y: number; facing?: Facing }>;
   hotspots?: Hotspot[];

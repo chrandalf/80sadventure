@@ -126,6 +126,25 @@ come from.
 Alpha is then forced to binary, fully opaque or fully clear. Soft edges fringe
 badly once the game scales the frame up.
 
+### Character size is a manifest change, not a regeneration
+
+Cells are 48x80 in `public/assets/characters/manifest.json`, which is where the
+game reads them from and, since the generator now reads the same file, where
+the art spec gets them too. They started at 24x40 - a 320x200 number - which
+threw away almost all of a 1024px-tall generation and left everyone tiny beside
+the furniture.
+
+Change `frameWidth`/`frameHeight` there and re-run:
+
+```bash
+npm run assets:manifest
+npm run assets:ingest -- ./incoming --force
+```
+
+Every sheet is rebuilt from the images already downloaded, so resizing the cast
+costs nothing to generate. `--force` is needed because ingest will not overwrite
+art you have already accepted.
+
 ### Characters arrive as one figure, not a sheet
 
 A `char.*` asset is a 6×4 grid of 24×40 frames: a walk cycle in three
