@@ -379,6 +379,14 @@ export const HOTEL_SCENES: Record<string, Scene> = {
       default: { x: 260, y: 120, facing: 'west' },
       fromBeach: { x: 156, y: 140, facing: 'north' },
     },
+    characters: [
+      {
+        id: 'bather', sprite: 'char.cabin', x: 196, y: 106, facing: 'south',
+        visibleIf: ['flag', 'wrongCabin'],
+        patrol: [[196, 106], [160, 110], [196, 106], [232, 108]],
+        patrolPause: [7, 16],
+      },
+    ],
     onFirstEnter: [
       ['jack', 'An open-air swimming pool in September. The British are not a sensible people.'],
     ],
@@ -454,6 +462,12 @@ export const HOTEL_SCENES: Record<string, Scene> = {
                 ['score', 5, 'wrongCabin'],
                 ['wait', 0.4],
                 ['jack', 'The correct cabin is, I am now certain, next door.'],
+                ['wait', 0.6],
+                ['caption', 'The cabin door opens behind him.'],
+                ['wait', 0.5],
+                ['jack', 'And she is now standing behind me, is she.'],
+                ['wait', 0.4],
+                ['say', 'voice', 'I am.'],
               ],
             ],
           ],
@@ -481,6 +495,24 @@ export const HOTEL_SCENES: Record<string, Scene> = {
               ],
             ],
           ],
+        },
+      },
+      {
+        id: 'bather',
+        name: 'Bather',
+        rect: { x: 184, y: 74, w: 24, h: 34 },
+        tracks: 'bather',
+        walkTo: [196, 122],
+        facing: 'north',
+        visibleIf: ['flag', 'wrongCabin'],
+        defaultVerb: 'TALK',
+        verbs: {
+          LOOK: [
+            ['jack', 'Wrapped in a towel, entirely composed, and waiting for me to say something.'],
+            ['wait', 0.4],
+            ['jack', 'One of us is having a much worse evening than the other.'],
+          ],
+          TALK: [['dialogue', 'bather_talk']],
         },
       },
       {

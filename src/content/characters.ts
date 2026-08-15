@@ -115,6 +115,20 @@ export const CHARACTERS: Record<string, CharacterDef> = {
     sprite: 'char.guest',
   },
 
+  /**
+   * The other half of the running gag. The sprite has existed since the art
+   * spec was written and was wired to nothing, so the joke only ever had a
+   * man in it - which made it lopsided as well as thinner than it needed to
+   * be. She is the one person in this game entirely unbothered by any of it.
+   */
+  bather: {
+    id: 'bather',
+    name: 'Bather',
+    color: ramp('cyan', 3),
+    sprite: 'char.cabin',
+    talk: [{ node: 'bather_talk' }],
+  },
+
   machine: {
     id: 'machine',
     name: 'The Machine',

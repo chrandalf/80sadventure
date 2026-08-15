@@ -624,6 +624,69 @@ export const DIALOGUE: Record<string, DialogueNode> = {
     ],
   },
 
+  // ------------------------------------------------------------ THE BATHER
+
+  bather_talk: {
+    id: 'bather_talk',
+    who: 'bather',
+    intro: [
+      [
+        { who: 'bather', text: 'You are the one who opened cabin two.' },
+        { who: 'jack', text: 'I am aware.' },
+        { who: 'bather', text: 'Everyone is aware.' },
+      ],
+      [
+        { who: 'bather', text: 'Still here, then.' },
+        { who: 'jack', text: 'I am waiting for the shame to pass.' },
+        { who: 'bather', text: 'It does not. You simply get more of it and the old stuff moves down.' },
+      ],
+      [{ who: 'bather', text: 'If you are about to apologise again, do not.' }],
+    ],
+    choices: [
+      { text: 'I am extremely sorry.', goto: 'bather_sorry', once: true },
+      { text: 'Is it not freezing out here?', goto: 'bather_cold', once: true },
+      { text: 'Have you seen a man called Arthur?', goto: 'bather_arthur', once: true },
+      { text: 'I will leave you to it.' },
+    ],
+  },
+
+  bather_sorry: {
+    id: 'bather_sorry',
+    who: 'bather',
+    lines: [
+      { who: 'bather', text: 'You have gone a colour I have not seen outside a paint chart.' },
+      { who: 'jack', text: 'It is a family trait.' },
+      { who: 'bather', text: 'It was a door, love. I have survived worse. I have survived this pool.' },
+    ],
+    onEnd: [['cheeky', 'batherSorry'], ['score', 5, 'batherSorry']],
+  },
+
+  bather_cold: {
+    id: 'bather_cold',
+    who: 'bather',
+    lines: [
+      { who: 'bather', text: 'It is September on the south coast. Of course it is freezing.' },
+      { who: 'jack', text: 'Then why -' },
+      { who: 'bather', text: 'Because I have paid for a season ticket and I intend to get my money out of it.' },
+      { who: 'jack', text: 'That is the most British answer I have ever received.' },
+      { who: 'bather', text: 'Thank you.' },
+    ],
+    onEnd: [['cheeky', 'batherCold'], ['score', 5, 'batherCold']],
+  },
+
+  bather_arthur: {
+    id: 'bather_arthur',
+    who: 'bather',
+    lines: [
+      { who: 'bather', text: 'Arthur from the arcade? He swims here Tuesdays.' },
+      { who: 'jack', text: 'Tuesdays.' },
+      { who: 'bather', text: 'Every Tuesday for thirteen years. Never misses. Never speaks.' },
+      { who: 'jack', text: 'Everything in this town happens on a Tuesday.' },
+      { who: 'bather', text: 'That is Brighton Vale for you.' },
+    ],
+    onEnd: [['score', 10, 'batherArthur']],
+  },
+
   // ------------------------------------------------------------ BRENDA
 
   brenda_first: {
