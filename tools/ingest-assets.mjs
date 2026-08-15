@@ -24,6 +24,7 @@
 import { readdirSync, readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { resolve, dirname, basename, extname } from 'node:path';
 import { PNG } from 'pngjs';
+import jpeg from 'jpeg-js';
 import { ROOT, c } from './lib.mjs';
 
 const ASSETS_JSON = resolve(ROOT, 'public/assets/assets.json');
@@ -53,6 +54,35 @@ function px(img, x, y) {
  * whatever the generator left in the invisible pixels into the visible ones,
  * which is where dark halos around sprites come from.
  */
+/**
+ * Decode an image by its bytes rather than its file extension.
+ *
+ * Generators do not agree on format: one answers with PNG, another with JPEG
+ * regardless of what was asked for, and a file's name says nothing about
+ * either. Rejecting on extension meant an entire paid-for run of a provider
+ * that returns JPEG was unusable. JPEG has no alpha, which is fine here -
+ * every cut-out asset is chroma-keyed off a flat magenta field during ingest
+ * anyway, and that key works the same on either format.
+ */
+function decodeImage(buf) {
+  const magic = buf.subarray(0, 4).toString('hex');
+  if (magic === '89504e47') return PNG.sync.read(buf);
+  if (magic.startsWith('ffd8ff')) {
+    const raw = jpeg.decode(buf, { useTArray: true, formatAsRGBA: true });
+    const img = new PNG({ width: raw.width, height: raw.height });
+    img.data.set(raw.data);
+    return img;
+  }
+  const head = buf.subarray(0, 5).toString('utf8');
+  if (head.startsWith('data:')) {
+    throw new Error('a base64 data URL saved verbatim, not an image');
+  }
+  if (head.trimStart().startsWith('{')) {
+    throw new Error('JSON - the generator returned an error, not an image');
+  }
+  throw new Error(`unrecognised format (starts ${magic})`);
+}
+
 function resample(src, sx, sy, sw, sh, dw, dh) {
   const out = new PNG({ width: dw, height: dh });
   for (let y = 0; y < dh; y++) {
@@ -313,14 +343,9 @@ for (const file of files) {
   const asset = byAlias.get(stem);
   if (!asset) { unmatched.push(file); continue; }
 
-  if (extname(file).toLowerCase() !== '.png') {
-    failed.push([file, 'not a PNG - regenerate with output_format: "png"']);
-    continue;
-  }
-
   let src;
   try {
-    src = PNG.sync.read(readFileSync(resolve(dir, file)));
+    src = decodeImage(readFileSync(resolve(dir, file)));
   } catch (e) {
     failed.push([file, `unreadable: ${e.message}`]);
     continue;
