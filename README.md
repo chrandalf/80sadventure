@@ -18,8 +18,7 @@ No build step is needed to play, no backend, no accounts, no network calls.
 
 > **Working on this?** Start with **[`docs/PROGRESS.md`](docs/PROGRESS.md)** —
 > current status, architecture, art-direction history, known gaps and next steps.
-> Note that the original design specification lives only in chat history and is
-> not yet in this repository.
+> The design brief the game was built against is **[`docs/SPEC.md`](docs/SPEC.md)**.
 
 ## What this is
 

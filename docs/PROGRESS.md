@@ -1,24 +1,27 @@
 # ONE MORE CREDIT — project status & handover
 
 **Branch:** `claude/video-game-graphics-hhp0rl`
-**Last commit:** `d603ccb` — Refactor rendering onto an external asset pipeline
+**Last commit:** see `git log` — the branch is ahead of any hash written here
 **State:** Playable start-to-finish. Engine complete. Awaiting real artwork.
 
 ---
 
 ## ⚠️ Read this first
 
-**The original design specification is not in this repository.** It was pasted
-into a chat session in two parts:
+**The specification is [`docs/SPEC.md`](SPEC.md)** — recovered verbatim from the
+original brief and now in the repository. It arrived in two parts:
 
-1. The main spec — premise, mechanic, six acts, characters, 20 locations,
-   puzzles, endings, scoring, build instructions (numbered sections 1–45).
-2. An expansion — "Cheeky 1980s adult comedy scenes" (numbered sections 46–56).
+1. Sections 1–45 — premise, mechanic, six acts, characters, 20 locations,
+   puzzles, endings, scoring, build instructions.
+2. Sections 46–56 — the "Cheeky 1980s adult comedy scenes" expansion.
 
 Everything below refers to those section numbers, and the code comments cite
-them (`spec s.27`, `spec s.56`). **Re-add the spec to `docs/SPEC.md` before
-doing further content work**, or that traceability is lost. A condensed canon
-summary is in [Story bible](#story-bible) below, but it is not a substitute.
+them (`spec s.27`, `spec s.56`). **`SPEC.md` is the brief, not a description of
+the build. Never edit it to match the code.** Where the implementation
+deliberately departs from it — plain canvas rather than React, 640×400 rather
+than 320×200, square pixels rather than a 4:3 stretch — that belongs here, in
+this file. There is a condensed canon summary in [Story bible](#story-bible)
+below for orientation, but the spec itself is the authority.
 
 ---
 
@@ -170,8 +173,7 @@ invest in them further. They can be deleted in one commit once artwork lands.
 
 ## Next steps, in order
 
-1. **Restore `docs/SPEC.md`** from the chat history.
-2. **Generate artwork.** The pipeline is three commands — see
+1. **Generate artwork.** The pipeline is three commands — see
    **[`docs/GENERATING-ART.md`](GENERATING-ART.md)**:
 
    ```bash
@@ -182,14 +184,14 @@ invest in them further. They can be deleted in one commit once artwork lands.
 
    Start with `--only p0`: `bg.starlight_arcade` and `char.jack`. Look at those
    two in the game before spending on the other ninety.
-3. **Check it.** Ingest files everything at the right path and size, so it
+2. **Check it.** Ingest files everything at the right path and size, so it
    appears on the next visit to the room — no rebuild. Press **F1** to confirm
    the hotspot polygons land on the painted objects.
-4. **Adjust polygons, not art.** If they disagree, edit the polygon in
+3. **Adjust polygons, not art.** If they disagree, edit the polygon in
    `src/content/scenes/arcade.ts` — that is the whole point of the separation.
-5. **Convert the remaining 32 scenes** once the first proves out. Add
+4. **Convert the remaining 32 scenes** once the first proves out. Add
    `space: 'world'`, double the coordinates, add polygons.
-6. Then: remaining optional jokes, Brenda's dialogue, UI redesign.
+5. Then: remaining optional jokes, Brenda's dialogue, UI redesign.
 
 ---
 
@@ -309,6 +311,11 @@ and `char.cabin`), so it survives into the art pipeline.
   1.2× vertical stretch, which distorts supplied artwork. Defaulted to square
   pixels (artwork shown as painted); `aspect: 'crt43'` is a one-word opt-in.
   Flagged, not silently decided.
+- **The spec is recovered, not authored here.** `docs/SPEC.md` was reconstructed
+  verbatim from the original chat messages. It reads as a brief written before
+  the build, because it is one — sections 32–45 address "Claude" directly and
+  describe work already finished. Read it as the requirement it was, not as
+  instructions still outstanding.
 - **Save compatibility.** `SAVE_VERSION` is 1 and the scene id `arcade_floor`
   was renamed to `starlight_arcade`. Old saves fall back to the first scene
   rather than crashing, but bump `SAVE_VERSION` if that becomes user-visible.
