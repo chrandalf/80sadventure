@@ -1,6 +1,5 @@
 import type { Scene } from '../../game/types';
 
-const INDOOR_DEPTH = { yNear: 140, yFar: 104, scaleNear: 1, scaleFar: 0.74 };
 
 /**
  * Sections 46-56: the optional cheeky content.
@@ -211,8 +210,19 @@ export const HOTEL_SCENES: Record<string, Scene> = {
     name: 'Room 12',
     background: 'hotel_room12',
     music: 'mystery',
-    walkboxes: [[16, 106, 304, 106, 310, 140, 10, 140]],
-    depth: INDOOR_DEPTH,
+    // Carpet around the bed. The bed, the dressing table and the bedside table all stand in the room.
+    autoFloor: false,
+    walkboxes: [[16, 124, 300, 124, 306, 143, 10, 143]],
+    depth: { yNear: 143, yFar: 124, scaleNear: 1, scaleFar: 0.86 },
+    blockers: [
+      [20, 110, 131, 110, 131, 138, 20, 138],
+      [250, 110, 311, 110, 311, 134, 250, 134],
+      [0, 110, 36, 110, 36, 128, 0, 128],
+    ],
+    occluders: [
+      { polygon: [20, 52, 131, 52, 131, 138, 20, 138], y: 138 },
+      { polygon: [250, 30, 311, 30, 311, 134, 248, 134], y: 134 },
+    ],
     entries: { default: { x: 50, y: 132, facing: 'east' } },
     onFirstEnter: [
       ['jack', 'Maggie?'],
@@ -624,8 +634,18 @@ export const HOTEL_SCENES: Record<string, Scene> = {
     name: 'Back Section',
     background: 'video_shop_back',
     music: 'arcade',
-    walkboxes: [[16, 104, 300, 104, 306, 140, 10, 140]],
-    depth: INDOOR_DEPTH,
+    // Cobbles behind the shop. A crate on the right and a bin on the left sit near-camera.
+    autoFloor: false,
+    walkboxes: [[16, 132, 300, 132, 306, 143, 10, 143]],
+    depth: { yNear: 143, yFar: 132, scaleNear: 1, scaleFar: 0.9 },
+    blockers: [
+      [292, 133, 320, 133, 320, 150, 292, 150],
+      [4, 136, 36, 136, 36, 150, 4, 150],
+    ],
+    occluders: [
+      { polygon: [292, 131, 320, 131, 320, 150, 290, 150], y: 150 },
+      { polygon: [4, 136, 36, 136, 36, 150, 4, 150], y: 150 },
+    ],
     entries: { default: { x: 50, y: 132, facing: 'east' } },
     hotspots: [
       {
@@ -679,8 +699,18 @@ export const HOTEL_SCENES: Record<string, Scene> = {
     name: "Graham's Office",
     background: 'graham_office',
     music: 'arcade',
-    walkboxes: [[16, 106, 300, 106, 306, 140, 10, 140]],
-    depth: INDOOR_DEPTH,
+    // Carpet in front of the desk. The desk and the near filing cabinet are both down-stage.
+    autoFloor: false,
+    walkboxes: [[16, 130, 300, 130, 306, 143, 10, 143]],
+    depth: { yNear: 143, yFar: 130, scaleNear: 1, scaleFar: 0.9 },
+    blockers: [
+      [22, 127, 178, 127, 178, 152, 22, 152],
+      [265, 127, 320, 127, 320, 152, 265, 152],
+    ],
+    occluders: [
+      { polygon: [22, 100, 178, 100, 178, 152, 20, 152], y: 152 },
+      { polygon: [265, 97, 320, 97, 320, 152, 263, 152], y: 152 },
+    ],
     entries: { default: { x: 50, y: 132, facing: 'east' } },
     hotspots: [
       {

@@ -2,8 +2,6 @@ import type { Scene } from '../../game/types';
 
 const OUTDOOR = [[6, 100, 314, 100, 318, 140, 2, 140]];
 const OUTDOOR_DEPTH = { yNear: 140, yFar: 100, scaleNear: 1, scaleFar: 0.66 };
-const INDOOR = [[12, 100, 308, 100, 314, 140, 6, 140]];
-const INDOOR_DEPTH = { yNear: 140, yFar: 100, scaleNear: 1, scaleFar: 0.7 };
 
 /**
  * Brighton Vale (spec s.5). The seafront is the hub; everything else hangs off
@@ -756,8 +754,16 @@ export const TOWN_SCENES: Record<string, Scene> = {
     name: 'Police Station',
     background: 'police_station',
     music: 'mystery',
-    walkboxes: INDOOR,
-    depth: INDOOR_DEPTH,
+    // Tiled floor right of the front desk. The desk fills the left of the room.
+    autoFloor: false,
+    walkboxes: [[166, 130, 306, 130, 312, 143, 162, 143]],
+    depth: { yNear: 143, yFar: 130, scaleNear: 1, scaleFar: 0.9 },
+    blockers: [
+      [0, 126, 168, 126, 168, 152, 0, 152],
+    ],
+    occluders: [
+      { polygon: [0, 100, 168, 100, 168, 152, 0, 152], y: 152 },
+    ],
     entries: { default: { x: 60, y: 132, facing: 'east' } },
     hotspots: [
       {

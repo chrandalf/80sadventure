@@ -2,7 +2,6 @@ import type { Scene } from '../../game/types';
 
 const OUTDOOR = [[6, 104, 314, 104, 318, 140, 2, 140]];
 const OUTDOOR_DEPTH = { yNear: 140, yFar: 104, scaleNear: 1, scaleFar: 0.7 };
-const INDOOR_DEPTH = { yNear: 140, yFar: 104, scaleNear: 1, scaleFar: 0.74 };
 
 /**
  * The mystery's own locations: the cinema, the clock tower, the lighthouse and
@@ -268,8 +267,20 @@ export const STORY_SCENES: Record<string, Scene> = {
     name: 'Projection Room',
     background: 'cinema_projection',
     music: 'cinema',
-    walkboxes: [[16, 104, 300, 104, 306, 140, 10, 140]],
-    depth: INDOOR_DEPTH,
+    // A narrow strip of floor between the bench, the projector stand and the shelving - the room is almost entirely furniture.
+    autoFloor: false,
+    walkboxes: [[16, 134, 300, 134, 306, 143, 12, 143]],
+    depth: { yNear: 143, yFar: 134, scaleNear: 1, scaleFar: 0.92 },
+    blockers: [
+      [0, 128, 89, 128, 89, 152, 0, 152],
+      [72, 128, 131, 128, 131, 152, 72, 152],
+      [160, 128, 251, 128, 251, 152, 160, 152],
+    ],
+    occluders: [
+      { polygon: [0, 110, 89, 110, 89, 152, 0, 152], y: 152 },
+      { polygon: [72, 95, 131, 95, 131, 152, 70, 152], y: 152 },
+      { polygon: [160, 97, 251, 97, 251, 152, 158, 152], y: 152 },
+    ],
     entries: { default: { x: 60, y: 132, facing: 'east' } },
     ambience: [{ sfx: 'projector', everyMin: 12, everyMax: 28 }],
     hotspots: [
