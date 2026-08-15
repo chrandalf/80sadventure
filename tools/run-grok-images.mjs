@@ -224,7 +224,14 @@ let warnedFormat = false;
  */
 function extractImage(data) {
   const direct = data?.data?.[0];
-  if (direct?.b64_json) return { b64: direct.b64_json, mime: direct.media_type ?? null };
+  if (direct?.b64_json) {
+    // Some providers put a whole data URL in the b64_json field. Decoding
+    // that as raw base64 yields a file whose first bytes are the prefix -
+    // it has a .png name, previews in Explorer, and no decoder will read it.
+    const asUrl = /^data:([^;]+);base64,(.+)$/s.exec(direct.b64_json);
+    if (asUrl) return { b64: asUrl[2], mime: asUrl[1] };
+    return { b64: direct.b64_json, mime: direct.media_type ?? null };
+  }
 
   const parts = data?.choices?.[0]?.message?.images ?? data?.images ?? [];
   for (const part of parts) {
@@ -300,7 +307,24 @@ async function generate(req, dest) {
       }
       return false;
     }
-    writeFileSync(dest, Buffer.from(img.b64, 'base64'));
+    // Trust the bytes, not the declared type: a provider that sends JPEG
+    // without saying so would otherwise fill the folder with files that only
+    // fail at ingest, after they have been paid for.
+    const buf = Buffer.from(img.b64, 'base64');
+    const magic = buf.subarray(0, 4).toString('hex');
+    if (magic !== '89504e47') {
+      const kind = magic.startsWith('ffd8ff') ? 'JPEG'
+        : buf.subarray(0, 4).toString('ascii') === 'RIFF' ? 'WEBP'
+        : `unknown (${magic})`;
+      appendFileSync(errLog, `${req.custom_id}\tnot-png\tbytes are ${kind}, ingest decodes PNG only\n`);
+      if (!warnedFormat) {
+        warnedFormat = true;
+        console.log(c.yellow(`\n  ${model} is returning ${kind}, whatever it declares, and ingest decodes PNG only.`));
+        console.log(c.yellow('  Stop and use a provider that returns PNG (--provider openrouter does).\n'));
+      }
+      return false;
+    }
+    writeFileSync(dest, buf);
     return true;
   }
   return false;
