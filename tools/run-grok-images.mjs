@@ -140,8 +140,20 @@ const rank = (id) => {
   return 6; // items / icons
 };
 
+/**
+ * --only / --skip take a regular expression matched against the asset id, so
+ * one JSONL can be split across providers without regenerating it. The point
+ * is the cheeky assets: Google's and OpenAI's image models will not draw them,
+ * so they go to a model whose mature mode will, while the other hundred
+ * innocent sprites go wherever they are cheapest and most consistent.
+ */
+const only = flag('only', null);
+const skip = flag('skip', null);
+
 const requests = readFileSync(resolve(process.cwd(), jsonl), 'utf8')
   .split('\n').filter(Boolean).map((l) => JSON.parse(l))
+  .filter((r) => (!only || new RegExp(only, 'i').test(r.custom_id))
+    && (!skip || !new RegExp(skip, 'i').test(r.custom_id)))
   .sort((a, b) =>
     rank(a.custom_id) - rank(b.custom_id)
     || castRank(a.custom_id) - castRank(b.custom_id)
@@ -289,6 +301,7 @@ await Promise.all(Array.from({ length: Math.max(1, concurrency) }, worker));
 const spent = reserved;
 
 console.log(`\n${done} written, ${skipped} already present, ${failed} failed`);
+if (only || skip) console.log(c.dim(`  (filtered: ${requests.length} of the file's assets were in scope)`));
 console.log(`estimated spend this run: $${spent.toFixed(2)} at $${PRICE.toFixed(2)}/image (${model}, ${resolution})`);
 console.log(c.dim(`next: node tools/ingest-assets.mjs ${outDir}`));
 if (failed) console.log(c.yellow(`failures are itemised in ${errLog} - re-run to retry only what is missing`));
