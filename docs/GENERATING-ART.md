@@ -257,15 +257,18 @@ Nothing in the pipeline is OpenAI-specific except the batch endpoint. When the
 credits run out - or a particular image needs a model with different taste -
 the same round trip works one image at a time:
 
-1. `npm run assets:batch -- --missing --chroma` writes the JSONL as usual.
-   Every line's `prompt` field is the complete brief for one asset, including
-   the flat magenta `#FF00FF` background clause the keyer depends on. Copy the
-   prompt text into Grok verbatim.
-2. Save each result as `<custom_id>.png` (the id is on the same JSONL line,
-   e.g. `char.maggie.pose.wave.png`) into a folder.
+1. `npm run assets:batch -- --missing --chroma --md` writes a **brief sheet**
+   instead of a batch file: one section per outstanding asset, with the file
+   name to save as and the complete prompt ready to paste, including the flat
+   magenta `#FF00FF` background clause the keyer depends on. Run it on the
+   machine that has the ingested art, so `--missing` reflects what you
+   actually still need.
+2. Paste each prompt into Grok verbatim, save the result under the exact
+   file name shown (e.g. `char.maggie.side_walk_a.png`), all in one folder.
 3. `node tools/ingest-assets.mjs <folder>` - same keying, trimming, scaling
    and sheet assembly as ever. Ingest neither knows nor cares which model
-   painted the pixels.
+   painted the pixels, and it skips anything already in the game, so partial
+   folders and re-runs are safe.
 
 Two rules survive the change of model:
 

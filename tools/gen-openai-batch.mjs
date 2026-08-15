@@ -279,6 +279,44 @@ if (argv.includes('--missing')) {
   console.log(c.dim(`\n  --missing: ${before - assets.length} already in the game, asking for ${assets.length}`));
 }
 
+// --md: instead of a batch file, write a brief sheet a human can work through
+// in any generator's chat UI - Grok, mostly. One section per asset: the file
+// name to save as, and the full prompt ready to paste.
+if (args.includes('--md')) {
+  const mdOut = out.replace(/\.jsonl$/i, '') + '.md';
+  const byType = {};
+  for (const a of assets) (byType[a.type] ??= []).push(a);
+  const md = [
+    '# Image briefs',
+    '',
+    `${assets.length} assets outstanding. For each one: paste the prompt into the`,
+    'generator verbatim, save the result as the exact file name shown (PNG only),',
+    'collect them all in one folder, then run:',
+    '',
+    '```bash',
+    'node tools/ingest-assets.mjs <folder>',
+    '```',
+    '',
+    'Ingest keys out the magenta, trims, scales and assembles sheets itself, and',
+    'skips anything already in the game - so over-generating is harmless and',
+    're-running is safe. Do not edit the prompts: the flat magenta background',
+    'clause is what makes the cutout work, and the staging clauses on the cheeky',
+    'assets are the certificate.',
+    '',
+  ];
+  for (const [type, list] of Object.entries(byType)) {
+    md.push(`## ${type} (${list.length})`, '');
+    for (const a of list) {
+      md.push(`### \`${a.id}.png\``, '', '```', promptFor(a), '```', '');
+    }
+  }
+  writeFileSync(mdOut, md.join('\n'));
+  console.log(`\n${c.bold(mdOut)}`);
+  console.log(`  ${assets.length} briefs: ${Object.entries(byType).map(([t, l]) => `${t} ${l.length}`).join(', ')}`);
+  console.log(c.dim('  paste each prompt, save as the shown file name, then: node tools/ingest-assets.mjs <folder>\n'));
+  process.exit(0);
+}
+
 const lines = assets.map((a) => JSON.stringify({
   custom_id: a.id,
   method: 'POST',
