@@ -37,23 +37,56 @@ const positional = args.filter((a, i) => !a.startsWith('--') && (i === 0 || !arg
 const flag = (n, d) => { const i = args.indexOf(`--${n}`); return i >= 0 ? args[i + 1] : d; };
 
 const [jsonl, outDir] = positional;
-const model = flag('model', 'grok-imagine-image-2.0');
+
+/**
+ * --provider xai (default) hits api.x.ai directly; --provider openrouter
+ * hits OpenRouter's unified image API, which fronts the same xAI models
+ * plus ByteDance, Google, BFL and others under one key and one bill.
+ * The request shape differs slightly (OpenRouter takes `resolution: "1K"`
+ * and `aspect_ratio`); the budget, ordering and resume logic do not care.
+ */
+const provider = flag('provider', 'xai');
+const PROVIDERS = {
+  xai: {
+    url: 'https://api.x.ai/v1/images/generations',
+    env: 'XAI_API_KEY',
+    defaultModel: 'grok-imagine-image-2.0',
+    body: (model, prompt, resolution) => ({
+      model, prompt, n: 1, response_format: 'b64_json', resolution: resolution.toLowerCase(),
+    }),
+  },
+  openrouter: {
+    url: 'https://openrouter.ai/api/v1/images',
+    env: 'OPENROUTER_API_KEY',
+    defaultModel: 'bytedance-seed/seedream-4.5',
+    body: (model, prompt, resolution) => ({
+      model, prompt, resolution: resolution.toUpperCase(), aspect_ratio: '1:1',
+    }),
+  },
+}[provider];
+if (!PROVIDERS) {
+  console.error(c.red(`unknown provider "${provider}" - use xai or openrouter`));
+  process.exit(2);
+}
+
+const model = flag('model', PROVIDERS.defaultModel);
 const resolution = flag('resolution', '1k');
 const budget = Number(flag('budget', '2.80'));
 const limit = Number(flag('limit', 'Infinity'));
 
-// The console's published flat rates per generated image. If xAI changes
-// them, --price overrides without a code change.
+// Per-image price for the ledger. The xAI numbers are the console's
+// published flat rates; on OpenRouter the price is per model (Seedream 4.5
+// is $0.04 flat), so pass --price to match whatever model you chose.
 const PRICE = Number(flag('price',
   { '1k': '0.04', '2k': '0.06' }[resolution.toLowerCase()] ?? '0.04'));
 
 if (!jsonl || !outDir) {
-  console.error('usage: XAI_API_KEY=... node tools/run-grok-images.mjs <file.jsonl> <out-dir> [--budget 2.80]');
+  console.error(`usage: ${PROVIDERS.env}=... node tools/run-grok-images.mjs <file.jsonl> <out-dir> [--provider xai|openrouter] [--budget 2.80]`);
   process.exit(2);
 }
-const key = process.env.XAI_API_KEY;
+const key = process.env[PROVIDERS.env];
 if (!key) {
-  console.error(c.red('XAI_API_KEY is not set - it is on https://console.x.ai under API keys'));
+  console.error(c.red(`${PROVIDERS.env} is not set`));
   process.exit(2);
 }
 
@@ -113,15 +146,16 @@ for (const req of requests) {
     break;
   }
 
-  // The JSONL was written for OpenAI; keep the prompt, drop what xAI rejects.
+  // The JSONL was written for OpenAI; keep the prompt, rebuild the body in
+  // whatever shape this provider wants.
   const prompt = req.body.prompt ?? req.body.input;
-  const body = { model, prompt, n: 1, response_format: 'b64_json', resolution };
+  const body = PROVIDERS.body(model, prompt, resolution);
 
   let outcome = 'fail';
   for (let attempt = 0; attempt <= 2; attempt++) {
     let res;
     try {
-      res = await fetch('https://api.x.ai/v1/images/generations', {
+      res = await fetch(PROVIDERS.url, {
         method: 'POST',
         headers: { authorization: `Bearer ${key}`, 'content-type': 'application/json' },
         body: JSON.stringify(body),
@@ -140,7 +174,10 @@ for (const req of requests) {
       appendFileSync(errLog, `${req.custom_id}\t${res.status}\t${JSON.stringify(data?.error ?? data).slice(0, 300)}\n`);
       break;
     }
-    const b64 = data?.data?.[0]?.b64_json;
+    // OpenAI-style and OpenRouter-style responses both land here.
+    const b64 = data?.data?.[0]?.b64_json
+      ?? data?.images?.[0]?.b64_json
+      ?? data?.output?.[0]?.b64_json;
     if (!b64) {
       appendFileSync(errLog, `${req.custom_id}\tno-image\t${JSON.stringify(data).slice(0, 300)}\n`);
       break;
