@@ -1,12 +1,16 @@
 import type { Scene } from '../../game/types';
 
-/** Standard interior floor: a band across the bottom of the play area. */
-const FLOOR = [[8, 96, 312, 96, 316, 140, 4, 140]];
-const DEPTH = { yNear: 140, yFar: 96, scaleNear: 1, scaleFar: 0.62 };
-
-/** The same floor and perspective band, in world (640x400) coordinates. */
+/** Standard interior floor and perspective band, in world (640x400) space. */
 const FLOOR_WORLD = [[16, 192, 624, 192, 632, 280, 8, 280]];
 const DEPTH_WORLD = { yNear: 280, yFar: 192, scaleNear: 1, scaleFar: 0.62 };
+
+/**
+ * The lobby's back wall meets the floor lower than the arcade's, so its
+ * standing band is shallower and starts further down. Measured off
+ * public/assets/backgrounds/arcade_lobby.png.
+ */
+const LOBBY_FLOOR = [[24, 244, 616, 244, 634, 286, 6, 286]];
+const LOBBY_DEPTH = { yNear: 286, yFar: 244, scaleNear: 1, scaleFar: 0.78 };
 
 /**
  * Starlight Arcade and everything under it (spec Acts I, IV, V).
@@ -18,19 +22,20 @@ const DEPTH_WORLD = { yNear: 280, yFar: 192, scaleNear: 1, scaleFar: 0.62 };
 export const ARCADE_SCENES: Record<string, Scene> = {
   arcade_lobby: {
     id: 'arcade_lobby',
+    space: 'world',
     name: 'Starlight Arcade - Lobby',
     background: 'arcade_lobby',
     music: 'arcade',
-    walkboxes: FLOOR,
-    depth: DEPTH,
+    walkboxes: LOBBY_FLOOR,
+    depth: LOBBY_DEPTH,
     entries: {
-      default: { x: 60, y: 128, facing: 'east' },
-      fromFloor: { x: 40, y: 124, facing: 'east' },
-      fromOffice: { x: 187, y: 120, facing: 'south' },
-      fromOutside: { x: 296, y: 128, facing: 'west' },
+      default: { x: 320, y: 266, facing: 'south' },
+      fromFloor: { x: 420, y: 254, facing: 'south' },
+      fromOffice: { x: 508, y: 258, facing: 'south' },
+      fromOutside: { x: 110, y: 260, facing: 'east' },
     },
     characters: [
-      { id: 'arthur', sprite: 'char.arthur', x: 292, y: 122, facing: 'west' },
+      { id: 'arthur', sprite: 'char.arthur', x: 574, y: 268, facing: 'west' },
     ],
     ambience: [{ sfx: 'coin', everyMin: 9, everyMax: 20 }],
     onFirstEnter: [
@@ -41,8 +46,8 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'arthur',
         name: 'Arthur',
-        rect: { x: 278, y: 90, w: 28, h: 34 },
-        walkTo: [262, 126],
+        rect: { x: 552, y: 224, w: 40, h: 48 },
+        walkTo: [534, 268],
         facing: 'east',
         defaultVerb: 'TALK',
         verbs: {
@@ -90,8 +95,8 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'poster',
         name: 'Space Wars Poster',
-        rect: { x: 126, y: 24, w: 34, h: 46 },
-        walkTo: [143, 112],
+        polygon: [[284, 44], [356, 44], [356, 152], [284, 152]],
+        walkTo: [318, 252],
         facing: 'north',
         verbs: {
           LOOK: [
@@ -125,8 +130,8 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'office_door',
         name: 'Office Door',
-        rect: { x: 172, y: 28, w: 30, h: 60 },
-        walkTo: [187, 116],
+        polygon: [[478, 52], [538, 52], [538, 242], [478, 242]],
+        walkTo: [508, 258],
         facing: 'north',
         verbs: {
           LOOK: [['jack', "Arthur's office. Locked, on the grounds that it contains a kettle."]],
@@ -155,8 +160,8 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'vending',
         name: 'Vending Machine',
-        rect: { x: 42, y: 26, w: 30, h: 62 },
-        walkTo: [57, 112],
+        polygon: [[152, 84], [226, 84], [226, 220], [152, 220]],
+        walkTo: [190, 256],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'Twenty pence for a chocolate bar. Fifteen pence for the privilege of watching someone else eat it.']],
@@ -188,8 +193,8 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'cigarette_machine',
         name: 'Cigarette Machine',
-        rect: { x: 82, y: 30, w: 26, h: 58 },
-        walkTo: [95, 112],
+        polygon: [[230, 88], [277, 88], [277, 218], [230, 218]],
+        walkTo: [253, 254],
         facing: 'north',
         verbs: {
           LOOK: [
@@ -219,8 +224,8 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'counter',
         name: 'Change Counter',
-        rect: { x: 214, y: 58, w: 62, h: 34 },
-        walkTo: [245, 122],
+        polygon: [[542, 146], [640, 158], [640, 292], [538, 276]],
+        walkTo: [520, 266],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'A perspex tray worn white by twelve years of ten-pence pieces.']],
@@ -233,20 +238,20 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'to_floor',
         name: 'Arcade Floor',
-        rect: { x: 0, y: 28, w: 30, h: 62 },
+        rect: { x: 384, y: 42, w: 74, h: 176 },
         to: 'starlight_arcade',
         entry: 'fromLobby',
-        walkTo: [26, 118],
-        arrow: 'left',
+        walkTo: [420, 252],
+        arrow: 'up',
       },
       {
         id: 'to_outside',
         name: 'Seafront',
-        rect: { x: 286, y: 26, w: 34, h: 64 },
+        rect: { x: 8, y: 28, w: 134, h: 212 },
         to: 'seafront',
         entry: 'fromArcade',
-        walkTo: [300, 120],
-        arrow: 'right',
+        walkTo: [110, 258],
+        arrow: 'left',
         requires: ['flag', 'firstEvent'],
         lockedText: 'I am supposed to be working. Also it is raining sideways.',
       },
