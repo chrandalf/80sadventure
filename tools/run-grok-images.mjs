@@ -61,8 +61,17 @@ const dir = resolve(process.cwd(), outDir);
 mkdirSync(dir, { recursive: true });
 const errLog = join(dir, '_errors.log');
 
-/** Money runs out on icons, not on the player character. */
-const PRIORITY = ['character-pose', 'character-sheet', 'portrait', 'prop', 'effect', 'background', 'inventory-icon'];
+/**
+ * Money runs out on icons, not on the player character - and within the
+ * cast, on a background walk-on rather than on Jack. When the budget cuts
+ * the run short, what is missing should be the least-seen art in the game.
+ */
+const CAST = ['jack', 'maggie', 'arthur', 'kevin', 'brenda', 'valerie', 'derek', 'graham', 'guest', 'drvale', 'punter'];
+const castRank = (id) => {
+  const who = id.split('.')[1] ?? '';
+  const i = CAST.indexOf(who);
+  return i === -1 ? CAST.length : i;
+};
 const rank = (id) => {
   if (id.startsWith('char.') && id.split('.').length > 2) return 0; // poses
   if (id.startsWith('char.')) return 1;
@@ -75,7 +84,10 @@ const rank = (id) => {
 
 const requests = readFileSync(resolve(process.cwd(), jsonl), 'utf8')
   .split('\n').filter(Boolean).map((l) => JSON.parse(l))
-  .sort((a, b) => rank(a.custom_id) - rank(b.custom_id) || a.custom_id.localeCompare(b.custom_id));
+  .sort((a, b) =>
+    rank(a.custom_id) - rank(b.custom_id)
+    || castRank(a.custom_id) - castRank(b.custom_id)
+    || a.custom_id.localeCompare(b.custom_id));
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
