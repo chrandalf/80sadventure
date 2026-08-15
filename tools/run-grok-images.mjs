@@ -83,6 +83,12 @@ let spent = 0;
 let done = 0;
 let skipped = 0;
 let failed = 0;
+/**
+ * Consecutive hard failures. Three in a row with zero successes means the
+ * model name or the key is wrong, not the prompts - abort before the ledger
+ * fills up with billed-but-useless attempts.
+ */
+let streak = 0;
 
 // Sequential on purpose: the budget check must see every previous attempt.
 for (const req of requests) {
@@ -137,10 +143,17 @@ for (const req of requests) {
   spent += PRICE;
   if (outcome === 'ok') {
     done++;
+    streak = 0;
     console.log(`${c.green('+')} ${req.custom_id}  ($${spent.toFixed(2)} of $${budget.toFixed(2)})`);
   } else {
     failed++;
+    streak++;
     console.log(`${c.red('x')} ${req.custom_id}  (see _errors.log)`);
+    if (streak >= 3 && done === 0) {
+      console.error(c.red('\nthree failures and no successes - the model name or key is wrong.'));
+      console.error(c.red(`check ${errLog}, then retry (already-written files are skipped). Try --model grok-2-image.`));
+      break;
+    }
   }
 }
 
