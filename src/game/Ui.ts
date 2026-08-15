@@ -142,7 +142,7 @@ export function drawPanel(
         rect(ctx, x + 2, y + 2, SLOT - 6, SLOT - 6, ramp('violet', 1));
         outline(ctx, x, y, SLOT - 2, SLOT - 2, ramp('cyan', 2));
       }
-      drawItemIcon(ctx, assets, itemId, x + 4, y + 4);
+      drawItemIcon(ctx, assets, itemId, x, y);
     }
   }
 
@@ -173,8 +173,24 @@ export function drawItemIcon(
   const spriteId = itemId.startsWith('cassette_') ? itemId : `item.${itemId}`;
   if (!assets.has(spriteId)) return;
   const sheet = assets.get(spriteId);
-  // Icons are anchored bottom-centre like everything else, so offset to the slot.
-  sheet.drawFrame(ctx, 0, x + sheet.anchorX, y + sheet.anchorY);
+
+  /*
+   * Icons are anchored bottom-centre like every other sprite, so the anchor has
+   * to be pushed down and right to land the picture's top-left corner on the
+   * slot. That offset must be in *drawn* pixels, not source pixels: a sheet with
+   * renderScale 2 draws a 16px icon at 32px, and offsetting by the unscaled
+   * anchor put every icon half its own height above its slot - straddling the
+   * status bar and covering the score.
+   *
+   * Centred in the slot rather than corner-aligned, so icons of different sizes
+   * sit consistently.
+   */
+  const s = sheet.renderScale;
+  const w = sheet.frameWidth * s;
+  const h = sheet.frameHeight * s;
+  const cx = x + (SLOT - 2 - w) / 2;
+  const cy = y + (SLOT - 2 - h) / 2;
+  sheet.drawFrame(ctx, 0, cx + sheet.anchorX * s, cy + sheet.anchorY * s);
 }
 
 function drawArrow(

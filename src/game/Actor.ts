@@ -108,6 +108,8 @@ export class Actor {
   private targetY: number | null = null;
   /** Ground covered on foot, which drives the synthetic stride. */
   private strideDistance = 0;
+  /** Remaining waypoints after the current target. */
+  private path: [number, number][] = [];
   /** Animation to return to once the current one-shot finishes. */
   private restAnim = 'idle';
 
@@ -128,6 +130,21 @@ export class Actor {
   }
 
   walkTo(x: number, y: number): void {
+    this.path.length = 0;
+    this.targetX = x;
+    this.targetY = y;
+  }
+
+  /**
+   * Walk a route, rather than straight at a point.
+   *
+   * The last waypoint is the destination; the rest are corners to get round
+   * whatever is in the way.
+   */
+  followPath(points: [number, number][]): void {
+    if (!points.length) return;
+    this.path = points.slice(1);
+    const [x, y] = points[0];
     this.targetX = x;
     this.targetY = y;
   }
@@ -198,9 +215,14 @@ export class Actor {
       if (dist < 1.5) {
         this.x = this.targetX;
         this.y = this.targetY;
-        this.targetX = null;
-        this.targetY = null;
-        this.playIdle();
+        const next = this.path.shift();
+        if (next) {
+          [this.targetX, this.targetY] = next;
+        } else {
+          this.targetX = null;
+          this.targetY = null;
+          this.playIdle();
+        }
       } else {
         const stepLen = Math.min(dist, speed * dt);
         const nx = this.x + (dx / dist) * stepLen;
@@ -220,9 +242,17 @@ export class Actor {
           this.strideDistance += Math.abs(ny - this.y);
           this.y = ny;
         } else {
-          this.targetX = null;
-          this.targetY = null;
-          this.playIdle();
+          // Wedged. With a real route this should not happen, but if the
+          // geometry has changed under us, take the next corner rather than
+          // stopping dead where the player cannot see why.
+          const next = this.path.shift();
+          if (next) {
+            [this.targetX, this.targetY] = next;
+          } else {
+            this.targetX = null;
+            this.targetY = null;
+            this.playIdle();
+          }
         }
 
         // Face the dominant axis of travel. The vertical bias is deliberate:

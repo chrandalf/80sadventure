@@ -14,6 +14,7 @@ import { VISIONS } from '../content/visions';
 import { ActionRunner, type RunnerHost } from './ActionRunner';
 import { Actor, clampToWalkable, depthScale, isWalkable } from './Actor';
 import { hotspotContains } from './normalizeScene';
+import { buildNavGrid, findPath, type NavGrid } from './pathfind';
 import { drawArtBadge, SceneArtStore } from '../engine/SceneArtStore';
 import { BACKGROUNDS } from '../content/backgrounds';
 import { sceneArtFor } from '../content/sceneArt';
@@ -78,6 +79,10 @@ export class AdventureScreen implements RunnerHost {
   private npcs: Actor[] = [];
   /** Scenery that depth-sorts against characters. */
   private objects: Actor[] = [];
+  /** Walkable grid for the current room, rebuilt when the room changes. */
+  private nav: NavGrid | null = null;
+  private navSceneId = '';
+
   /** Set true to draw hotspot polygons and walkboxes. Toggled with F1. */
   private debugOverlay = false;
   /** Characters hidden by script, beyond their scene `visibleIf`. */
@@ -435,9 +440,8 @@ export class AdventureScreen implements RunnerHost {
       return;
     }
 
-    // Empty floor: walk there.
-    const target = clampToWalkable(this.scene.walkboxes, x, Math.min(y, PLAY_HEIGHT - 4), this.scene.blockers);
-    this.jack.walkTo(target.x, target.y);
+    // Empty floor: walk there, round anything in the way.
+    this.routeJack(x, Math.min(y, PLAY_HEIGHT - 4));
   }
 
   /** Walk to a spot first if one is given, then run the interaction. */
@@ -456,8 +460,7 @@ export class AdventureScreen implements RunnerHost {
       run();
       return;
     }
-    const target = clampToWalkable(this.scene.walkboxes, walkTo[0], walkTo[1], this.scene.blockers);
-    this.jack.walkTo(target.x, target.y);
+    this.routeJack(walkTo[0], walkTo[1]);
     this.pendingInteraction = () => {
       if (facing) this.jack.face(facing);
       run();
@@ -739,7 +742,25 @@ export class AdventureScreen implements RunnerHost {
   }
 
   walkJack(x: number, y: number): void {
-    this.jack.walkTo(x, y);
+    this.routeJack(x, y);
+  }
+
+  /**
+   * Send Jack to a point, going round whatever is in the way.
+   *
+   * The nav grid is per room and only worth building once, so it is cached
+   * until the scene changes. Blockers and walkboxes are fixed for a room, so
+   * nothing invalidates it mid-scene.
+   */
+  private routeJack(x: number, y: number): void {
+    const target = clampToWalkable(
+      this.scene.walkboxes, x, Math.min(y, PLAY_HEIGHT - 4), this.scene.blockers,
+    );
+    if (this.navSceneId !== this.scene.id || !this.nav) {
+      this.nav = buildNavGrid(GAME_WIDTH, PLAY_HEIGHT, this.scene.walkboxes, this.scene.blockers);
+      this.navSceneId = this.scene.id;
+    }
+    this.jack.followPath(findPath(this.nav, this.jack.x, this.jack.y, target.x, target.y));
   }
 
   isJackWalking(): boolean {
