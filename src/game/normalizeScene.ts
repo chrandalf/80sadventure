@@ -30,6 +30,9 @@ export function normalizeScene(scene: Scene): Scene {
     walkTo: pair(h.walkTo),
   });
 
+  /** A flat [x,y,x,y,...] point list, as walkboxes and blockers use. */
+  const points = (poly: number[]): number[] => poly.map((v) => v * k);
+
   const character = (c: SceneCharacter): SceneCharacter => ({ ...c, x: c.x * k, y: c.y * k });
   const object = (o: SceneObject): SceneObject => ({ ...o, x: o.x * k, y: o.y * k });
 
@@ -54,6 +57,8 @@ export function normalizeScene(scene: Scene): Scene {
       : undefined,
     hotspots: scene.hotspots?.map(hotspot),
     exits: scene.exits?.map((e) => ({ ...e, rect: rect(e.rect)!, walkTo: pair(e.walkTo) })),
+    blockers: scene.blockers?.map(points),
+    occluders: scene.occluders?.map((o) => ({ polygon: points(o.polygon), y: o.y * k })),
     characters: scene.characters?.map(character),
     objects: scene.objects?.map(object),
   };

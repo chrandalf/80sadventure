@@ -207,6 +207,16 @@ export interface Scene {
    * describing the remaining floor as a set of polygons that avoid it.
    */
   blockers?: number[][];
+  /**
+   * Parts of the background that characters can stand *behind*.
+   *
+   * The pixels are already in the plate, so rather than commissioning a
+   * separate cut-out image per room, the polygon is clipped out of the plate
+   * and redrawn in front of anyone standing up-stage of it. `y` is its baseline
+   * for depth sorting: a character below that line is nearer the camera and
+   * draws over it, one above is behind and gets occluded.
+   */
+  occluders?: { polygon: number[]; y: number }[];
   depth?: DepthBand;
   entries?: Record<string, { x: number; y: number; facing?: Facing }>;
   hotspots?: Hotspot[];

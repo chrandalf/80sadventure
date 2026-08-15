@@ -265,6 +265,29 @@ other ninety.
 
 ---
 
+## Walking behind the scenery
+
+A character standing up-stage of a desk should have their legs hidden by it.
+That needs no extra artwork: the desk is already painted into the plate, so the
+scene names a polygon and the engine clips that region back out and redraws it
+in front of whoever is behind it.
+
+```ts
+occluders: [{ polygon: [102, 83, 251, 89, 251, 136, 107, 143], y: 144 }],
+blockers:  [[103, 128, 251, 133, 251, 143, 103, 143]],
+```
+
+`y` is the occluder's baseline: a character below that line is nearer the camera
+and draws over it; above it and they are behind and get cut off. Occluders sort
+into the same list as characters and props, so it is the same depth rule
+everywhere.
+
+Pair each one with a `blocker` over the furniture's footprint, or the character
+will stand *inside* the desk rather than behind it.
+
+Press **F1**: walkboxes green, hotspots amber, blockers red, occluders violet
+with their baseline drawn across the screen.
+
 ## After ingest
 
 Every scene looks for `/assets/backgrounds/<scene-id>.webp` (or `.png`) by

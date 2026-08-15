@@ -44,6 +44,9 @@ export class SceneArtStore {
   private source = new Map<string, ArtSource>();
   private requested = new Set<string>();
   private layerCache = new Map<string, HTMLImageElement | null>();
+  private occluders = new Map<string, HTMLCanvasElement>();
+  /** Bumped when a scene's plate changes, so cut-outs of it are rebuilt. */
+  private revision = new Map<string, number>();
 
   /** Scenes still waiting on real artwork, for the startup report. */
   get awaitingArtwork(): string[] {
@@ -120,6 +123,7 @@ export class SceneArtStore {
       ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
       ctx.drawImage(img, 0, 0);
       this.source.set(req.sceneId, 'artwork');
+      this.revision.set(req.sceneId, (this.revision.get(req.sceneId) ?? 0) + 1);
       console.info(`[art] ${req.sceneId}: using artwork ${req.background}`);
     });
   }
@@ -135,6 +139,40 @@ export class SceneArtStore {
       if (img) this.layerCache.set(src, img);
     });
     return null;
+  }
+
+  /**
+   * A slice of a scene's plate, to be redrawn in front of characters.
+   *
+   * Anything a character can stand behind - a desk, a counter, the near end of
+   * a railing - is already painted into the background. Clipping it back out
+   * and drawing it again after the actors costs nothing and needs no extra
+   * artwork, which a separate foreground image for every room would.
+   *
+   * Keyed by the plate's revision so it is rebuilt when real art swaps in over
+   * the painter.
+   */
+  occluder(sceneId: string, index: number, polygon: number[]): HTMLCanvasElement | null {
+    const plate = this.plates.get(sceneId);
+    if (!plate || polygon.length < 6) return null;
+    const key = `${sceneId}:${index}:${this.revision.get(sceneId) ?? 0}`;
+    const cached = this.occluders.get(key);
+    if (cached) return cached;
+
+    const cv = document.createElement('canvas');
+    cv.width = GAME_WIDTH;
+    cv.height = GAME_HEIGHT;
+    const ctx = cv.getContext('2d')!;
+    ctx.imageSmoothingEnabled = false;
+    ctx.beginPath();
+    ctx.moveTo(polygon[0], polygon[1]);
+    for (let i = 2; i < polygon.length; i += 2) ctx.lineTo(polygon[i], polygon[i + 1]);
+    ctx.closePath();
+    ctx.clip();
+    ctx.drawImage(plate, 0, 0);
+
+    this.occluders.set(key, cv);
+    return cv;
   }
 
   /** Force a scene to be rebuilt, e.g. after art is hot-swapped. */

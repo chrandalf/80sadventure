@@ -569,6 +569,13 @@ export const ARCADE_SCENES: Record<string, Scene> = {
     background: 'arcade_office',
     music: 'mystery',
     walkboxes: [[14, 100, 306, 100, 312, 140, 8, 140]],
+    // The desk, so Jack can stand behind it. Authored in this scene's 320x200
+    // space; normalizeScene scales it with everything else.
+    occluders: [{
+      polygon: [102, 83, 251, 89, 251, 136, 235, 144, 107, 143, 102, 129],
+      y: 144,
+    }],
+    blockers: [[103, 128, 251, 133, 251, 143, 103, 143]],
     depth: { yNear: 140, yFar: 100, scaleNear: 1, scaleFar: 0.68 },
     entries: { default: { x: 160, y: 132, facing: 'north' } },
     hotspots: [

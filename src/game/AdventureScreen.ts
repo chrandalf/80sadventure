@@ -869,12 +869,28 @@ export class AdventureScreen implements RunnerHost {
     // so a character walking up-stage of a cabinet is drawn behind it and one
     // walking down-stage is drawn in front. Anything that must always be in
     // front belongs in a foreground art layer instead.
-    const drawables = [
+    const drawables: { y: number; paint: () => void }[] = [
       ...this.npcs.filter((n) => n.visible && !this.hidden.has(n.id) && !n.foreground),
       ...this.objects,
       ...(this.jack.visible ? [this.jack] : []),
-    ].sort((a, b) => a.y - b.y);
-    for (const actor of drawables) actor.draw(ctx, this.scene.depth);
+    ].map((actor) => ({ y: actor.y, paint: () => actor.draw(ctx, this.scene.depth) }));
+
+    // Occluders sort into the same list. A character standing up-stage of the
+    // desk is drawn first and the desk covers his legs; one standing down-stage
+    // of it is drawn afterwards and walks in front. That is the whole trick -
+    // the pixels are the background's own, clipped and drawn a second time.
+    (this.scene.occluders ?? []).forEach((occ, i) => {
+      drawables.push({
+        y: occ.y,
+        paint: () => {
+          const cut = this.art.occluder(this.scene.id, i, occ.polygon);
+          if (cut) ctx.drawImage(cut, 0, 0);
+        },
+      });
+    });
+
+    drawables.sort((a, b) => a.y - b.y);
+    for (const d of drawables) d.paint();
     for (const fg of this.npcs.filter((n) => n.foreground && n.visible)) {
       fg.draw(ctx, this.scene.depth);
     }
@@ -956,6 +972,34 @@ export class AdventureScreen implements RunnerHost {
       ctx.beginPath();
       ctx.moveTo(o.x - 10, o.y);
       ctx.lineTo(o.x + 10, o.y);
+      ctx.stroke();
+    }
+
+    // Blockers: floor that furniture is standing on.
+    ctx.strokeStyle = ramp('red', 2);
+    for (const b of this.scene.blockers ?? []) {
+      ctx.beginPath();
+      for (let i = 0; i < b.length; i += 2) {
+        if (i === 0) ctx.moveTo(b[0], b[1]);
+        else ctx.lineTo(b[i], b[i + 1]);
+      }
+      ctx.closePath();
+      ctx.stroke();
+    }
+
+    // Occluders, with the baseline that decides who is in front of them.
+    ctx.strokeStyle = ramp('violet', 3);
+    for (const o of this.scene.occluders ?? []) {
+      ctx.beginPath();
+      for (let i = 0; i < o.polygon.length; i += 2) {
+        if (i === 0) ctx.moveTo(o.polygon[0], o.polygon[1]);
+        else ctx.lineTo(o.polygon[i], o.polygon[i + 1]);
+      }
+      ctx.closePath();
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(0, o.y);
+      ctx.lineTo(GAME_WIDTH, o.y);
       ctx.stroke();
     }
     ctx.restore();
