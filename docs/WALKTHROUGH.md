@@ -154,6 +154,16 @@ Raiders are all playable. Each is reachable with a coin or a token.
 **Dialogue.** Long lines should page three at a time with a small chevron
 showing there is more. Choices should be one per row and legible over the art.
 
+**Repeat conversations.** Talk to the same person three or four times in a
+row. The opening should change from the second conversation onward and rotate
+after that — Brenda invents new rules, Maggie starts keeping count, Arthur
+worries that people will talk. Word-for-word repetition of the first greeting
+is a bug now, not the expected behaviour.
+
+**Cabin one at the Lido** is almost always empty. Roughly one game in seven it
+is not — a shriek and a hard cut, no visual, once per playthrough. Do not
+expect to see it on any given run; do report it if it fires twice.
+
 **The optional seaside-postcard scenes** (spec s.46–56) are entirely skippable
 and tracked separately as CHEEKY MOMENTS on the score screen. The hotel, the
 pool cabins and the Far Beach are all off the critical path — except the blank

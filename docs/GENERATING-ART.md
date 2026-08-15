@@ -251,6 +251,36 @@ without writing.
 
 ---
 
+## Using Grok (or any other generator) by hand
+
+Nothing in the pipeline is OpenAI-specific except the batch endpoint. When the
+credits run out - or a particular image needs a model with different taste -
+the same round trip works one image at a time:
+
+1. `npm run assets:batch -- --missing --chroma` writes the JSONL as usual.
+   Every line's `prompt` field is the complete brief for one asset, including
+   the flat magenta `#FF00FF` background clause the keyer depends on. Copy the
+   prompt text into Grok verbatim.
+2. Save each result as `<custom_id>.png` (the id is on the same JSONL line,
+   e.g. `char.maggie.pose.wave.png`) into a folder.
+3. `node tools/ingest-assets.mjs <folder>` - same keying, trimming, scaling
+   and sheet assembly as ever. Ingest neither knows nor cares which model
+   painted the pixels.
+
+Two rules survive the change of model:
+
+- **Keep the magenta clause.** A "transparent background" from a chat UI is
+  usually a fake checkerboard; the flat key colour is the only thing the
+  ingest can remove cleanly.
+- **Keep the staging clauses on the cheeky assets.** The briefs for the Far
+  Beach, the pool cabins and the hotel guest already say exactly how modesty
+  is preserved - towels, umbrellas, silhouettes, framing. Those clauses are
+  the joke, per spec s.49/s.54/s.56: the game teases constantly and shows
+  nothing, so the artwork has to do the same. Prompts that drop those clauses
+  produce images the game will not use.
+
+---
+
 ## Filtering
 
 ```bash
