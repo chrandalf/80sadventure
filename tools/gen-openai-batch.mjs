@@ -3,7 +3,7 @@
  *
  *   node tools/gen-openai-batch.mjs [--endpoint images|responses]
  *                                   [--only p0,p1] [--type background,portrait]
- *                                   [--model gpt-image-1] [--out <file>]
+ *                                   [--missing] [--model gpt-image-1] [--out <file>]
  *
  * THE ONE RULE THAT BREAKS BATCHES: the `url` on every line must be character
  * for character the same as the endpoint the batch is created with. A file full
@@ -16,11 +16,12 @@
  * on, so the round trip needs no bookkeeping: generate, save each image as
  * <custom_id>.png, ingest.
  */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { ROOT, c } from './lib.mjs';
 
-const args = process.argv.slice(2);
+const argv = process.argv.slice(2);
+const args = argv;
 const flag = (name, fallback) => {
   const i = args.indexOf(`--${name}`);
   return i >= 0 && args[i + 1] && !args[i + 1].startsWith('--') ? args[i + 1] : fallback;
@@ -156,6 +157,19 @@ function bodyFor(asset) {
 let assets = manifest.assets;
 if (only.length) assets = assets.filter((a) => only.includes(a.priority));
 if (types.length) assets = assets.filter((a) => types.includes(a.type));
+
+// --missing: only ask for what is not already in the game. A partly successful
+// run is the normal case - refusals and per-asset errors are expected - so the
+// retry should cost only what actually failed.
+if (argv.includes('--missing')) {
+  const before = assets.length;
+  assets = assets.filter((a) => {
+    const asNamed = resolve(ROOT, 'public' + a.path);
+    const asPng = resolve(ROOT, 'public' + a.path.replace(/\.(webp|jpe?g)$/i, '.png'));
+    return !existsSync(asNamed) && !existsSync(asPng);
+  });
+  console.log(c.dim(`\n  --missing: ${before - assets.length} already in the game, asking for ${assets.length}`));
+}
 
 const lines = assets.map((a) => JSON.stringify({
   custom_id: a.id,
