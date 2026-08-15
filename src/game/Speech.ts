@@ -13,18 +13,47 @@ interface Pending {
   /** Where the speaker is, in game pixels. Text floats above them. */
   anchorX?: number;
   anchorY?: number;
+  /** Wrapped lines, split into screenfuls. Never empty. */
+  pages: string[][];
+  page: number;
 }
 
 const CHARS_PER_SEC = 46;
-const MAX_LINE_WIDTH = 460;
+
+/**
+ * Speech is a column above a character's head, so it is deliberately narrower
+ * than a caption spanning the screen. Both leave room for the block to be
+ * centred on an off-centre speaker without running past the frame.
+ */
+const WRAP_WIDTH: Record<SpeechKind, number> = {
+  speech: 340,
+  caption: 440,
+  card: 480,
+  death: 480,
+};
+
+/** Beyond this, a line becomes a second page rather than a taller block. */
+const LINES_PER_PAGE = 3;
+
+/** Space between the text and the edge of its backing panel. */
+const PAD_X = 8;
+const PAD_Y = 5;
+
+/** Space between that panel and the edge of the screen. */
+const SCREEN_MARGIN = 8;
+
+/** Rows below this are behind the interface panel. */
+const PLAYFIELD_H = 288;
 
 /**
  * On-screen text: character-by-character reveal, SPACE to finish the current
- * line instantly, click or SPACE again to dismiss (spec s.6, s.24).
+ * page instantly, SPACE again for the next page (spec s.6, s.24).
  *
  * Speech floats above whoever is talking and is coloured per character, so the
  * player can tell who is speaking without a name label - the convention every
- * LucasArts game used.
+ * LucasArts game used. Long lines are broken into pages instead of growing a
+ * wall of text over the scene, and every block sits on a dimmed panel so it
+ * stays readable over busy artwork.
  */
 export class Speech {
   private current: Pending | null = null;
@@ -48,6 +77,12 @@ export class Speech {
     anchor?: { x: number; y: number },
     subtitle?: string,
   ): void {
+    const lines = font.wrap(text, WRAP_WIDTH[kind]);
+    const perPage = kind === 'card' || kind === 'death' ? lines.length : LINES_PER_PAGE;
+    const pages: string[][] = [];
+    for (let i = 0; i < lines.length; i += perPage) pages.push(lines.slice(i, i + perPage));
+    if (!pages.length) pages.push(['']);
+
     this.current = {
       kind,
       text,
@@ -55,16 +90,37 @@ export class Speech {
       color,
       anchorX: anchor?.x,
       anchorY: anchor?.y,
+      pages,
+      page: 0,
     };
-    this.revealed = 0;
-    this.finished = false;
-    this.sfxAccumulator = 0;
-    // Cards and deaths sit for a fixed beat; speech scales with its length.
-    this.dwell = kind === 'card' || kind === 'death' ? 2.2 : 0.7 + text.length * 0.035;
+    this.beginPage();
   }
 
   dismiss(): void {
     this.current = null;
+  }
+
+  /** Reset the reveal for whichever page is now current. */
+  private beginPage(): void {
+    const cur = this.current;
+    if (!cur) return;
+    this.revealed = 0;
+    this.finished = false;
+    this.sfxAccumulator = 0;
+    // Cards and deaths sit for a fixed beat; speech scales with its length.
+    const chars = this.pageText().length;
+    this.dwell = cur.kind === 'card' || cur.kind === 'death' ? 2.2 : 0.7 + chars * 0.035;
+  }
+
+  private pageText(): string {
+    const cur = this.current;
+    if (!cur) return '';
+    return cur.pages[cur.page].join(' ');
+  }
+
+  private get hasMorePages(): boolean {
+    const cur = this.current;
+    return !!cur && cur.page < cur.pages.length - 1;
   }
 
   /**
@@ -76,11 +132,13 @@ export class Speech {
     const cur = this.current;
     if (!cur) return false;
 
+    const total = this.pageText().length;
+
     if (!this.finished) {
       if (skip) {
-        // First press completes the line rather than skipping it entirely -
+        // First press completes the page rather than skipping it entirely -
         // otherwise a fast clicker misses text they meant to read.
-        this.revealed = cur.text.length;
+        this.revealed = total;
         this.finished = true;
         return true;
       }
@@ -91,48 +149,79 @@ export class Speech {
         this.sfxAccumulator -= 3;
         if (cur.kind !== 'caption') audio.sfx('typewriter');
       }
-      if (this.revealed >= cur.text.length) {
-        this.revealed = cur.text.length;
+      if (this.revealed >= total) {
+        this.revealed = total;
         this.finished = true;
       }
       return false;
     }
 
     if (skip) {
-      this.current = null;
+      this.advance();
       return true;
     }
     this.dwell -= dt;
-    if (this.dwell <= 0) this.current = null;
+    if (this.dwell <= 0) this.advance();
     return false;
+  }
+
+  /** Next page, or dismiss if that was the last one. */
+  private advance(): void {
+    const cur = this.current;
+    if (!cur) return;
+    if (this.hasMorePages) {
+      cur.page++;
+      this.beginPage();
+      return;
+    }
+    this.current = null;
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
     const cur = this.current;
     if (!cur) return;
-    const shown = cur.text.slice(0, Math.floor(this.revealed));
 
     if (cur.kind === 'card' || cur.kind === 'death') {
-      this.drawCard(ctx, cur, shown);
+      this.drawCard(ctx, cur);
       return;
     }
 
-    const lines = font.wrap(cur.text, MAX_LINE_WIDTH);
+    const lines = cur.pages[cur.page];
     const lh = font.lineHeight();
     const blockH = lines.length * lh;
+    const halfW = Math.max(...lines.map((l) => font.measure(l))) / 2;
 
-    // Position above the speaker, clamped on screen. Captions sit centre-low.
+    // Centre on the speaker, then clamp using the block's real width. Clamping
+    // to a fixed margin is what let long lines run off the right-hand edge.
+    const limit = halfW + PAD_X + SCREEN_MARGIN;
     let cx = GAME_WIDTH / 2;
     let top = 24;
     if (cur.kind === 'speech' && cur.anchorX !== undefined && cur.anchorY !== undefined) {
-      cx = Math.max(120, Math.min(GAME_WIDTH - 120, cur.anchorX));
-      top = Math.max(8, cur.anchorY - 92 - blockH);
+      cx = cur.anchorX;
+      top = cur.anchorY - 92 - blockH;
     } else if (cur.kind === 'caption') {
-      top = 200;
+      top = PLAYFIELD_H - 64 - blockH;
     }
+    cx = Math.max(limit, Math.min(GAME_WIDTH - limit, cx));
+    top = Math.max(
+      PAD_Y + SCREEN_MARGIN,
+      Math.min(PLAYFIELD_H - blockH - PAD_Y - SCREEN_MARGIN, top),
+    );
+
+    // A dimmed plate behind the text. Artwork underneath is arbitrary, and an
+    // outline alone does not survive a bright or busy background.
+    ctx.globalAlpha = 0.62;
+    ctx.fillStyle = Colors.ink;
+    ctx.fillRect(
+      Math.round(cx - halfW - PAD_X),
+      Math.round(top - PAD_Y),
+      Math.round(halfW * 2 + PAD_X * 2),
+      Math.round(blockH + PAD_Y * 2 - 2),
+    );
+    ctx.globalAlpha = 1;
 
     // Re-wrap only the revealed prefix so lines don't reflow as they type.
-    let remaining = shown.length;
+    let remaining = Math.floor(this.revealed);
     lines.forEach((line, i) => {
       if (remaining <= 0) return;
       const part = line.slice(0, remaining);
@@ -143,15 +232,20 @@ export class Speech {
         align: 'center',
       });
     });
+
+    if (this.finished && this.hasMorePages) {
+      drawMoreArrow(ctx, cx, top + blockH + PAD_Y - 3, cur.color);
+    }
   }
 
-  private drawCard(ctx: CanvasRenderingContext2D, cur: Pending, shown: string): void {
+  private drawCard(ctx: CanvasRenderingContext2D, cur: Pending): void {
     ctx.fillStyle = Colors.ink;
     ctx.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
     const isDeath = cur.kind === 'death';
     const color = isDeath ? Colors.danger : cur.color;
-    const lines = font.wrap(shown, 480);
+    const shown = this.pageText().slice(0, Math.floor(this.revealed));
+    const lines = font.wrap(shown, WRAP_WIDTH[cur.kind]);
     const lh = font.lineHeight(3);
     const startY = GAME_HEIGHT / 2 - (lines.length * lh) / 2 - (cur.subtitle ? 8 : 0);
 
@@ -172,5 +266,17 @@ export class Speech {
         align: 'center',
       });
     }
+  }
+}
+
+/**
+ * A small triangle marking "there is more to read". Drawn as pixels rather than
+ * a glyph so it does not depend on the 5x7 font carrying an arrow character.
+ */
+function drawMoreArrow(ctx: CanvasRenderingContext2D, cx: number, y: number, color: string): void {
+  ctx.fillStyle = color;
+  for (let row = 0; row < 3; row++) {
+    const w = 5 - row * 2;
+    ctx.fillRect(Math.round(cx - w / 2), y + row, w, 1);
   }
 }
