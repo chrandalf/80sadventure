@@ -65,7 +65,24 @@ export const SCENE_ART: Record<string, SceneArt> = {
   },
 };
 
-/** Art entry for a scene, if it has been converted to external artwork. */
-export function sceneArtFor(sceneId: string): SceneArt | undefined {
-  return SCENE_ART[sceneId];
+/**
+ * Art entry for a scene.
+ *
+ * Every scene looks for `/assets/backgrounds/<id>.webp` by convention, whether
+ * or not it appears above. The map is an *override* - for rooms that need
+ * layers, or a path that is not the scene id - not a gate on whether artwork is
+ * looked for at all. Registering each room by hand meant dropping thirty-three
+ * finished backgrounds into the right folder and still seeing the placeholders,
+ * because the engine had only been told about one of them.
+ *
+ * A file that is not there fails to load and the room keeps its painter, which
+ * is what an unconverted room did before.
+ */
+export function sceneArtFor(sceneId: string): SceneArt {
+  return SCENE_ART[sceneId] ?? {
+    id: sceneId,
+    background: `/assets/backgrounds/${sceneId}.webp`,
+    width: ART_WIDTH,
+    height: ART_HEIGHT,
+  };
 }

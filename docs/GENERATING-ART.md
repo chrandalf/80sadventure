@@ -161,6 +161,12 @@ other ninety.
 
 ## After ingest
 
+Every scene looks for `/assets/backgrounds/<scene-id>.webp` (or `.png`) by
+convention, so a room picks its artwork up as soon as the file is there. There
+is no per-room registration step. `src/content/sceneArt.ts` is only for rooms
+that want something extra — a foreground layer, or a path that is not the scene
+id.
+
 Press **F1** in game to draw the hotspot polygons over the artwork. The polygons
 are the truth; if they land in the wrong place, the art disagrees with the
 manifest coordinates. Move the polygons in `src/content/scenes/`, not the art —
