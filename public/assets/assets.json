@@ -25,11 +25,12 @@
     ]
   },
   "counts": {
-    "total": 151,
+    "total": 192,
     "byType": {
       "background": 33,
+      "background-layer": 1,
       "character-sheet": 10,
-      "character-pose": 60,
+      "character-pose": 100,
       "portrait": 10,
       "prop": 1,
       "inventory-icon": 33,
@@ -37,9 +38,9 @@
       "effect": 3
     },
     "byPriority": {
-      "p1": 115,
-      "p0": 8,
-      "p2": 28
+      "p1": 143,
+      "p0": 12,
+      "p2": 37
     }
   },
   "assets": [
@@ -283,14 +284,14 @@
           "id": "kevin",
           "name": "Kevin",
           "bounds": {
-            "x": 476,
-            "y": 168,
-            "w": 48,
+            "x": 440,
+            "y": 206,
+            "w": 46,
             "h": 76
           },
           "centre": [
-            500,
-            206
+            463,
+            244
           ],
           "verbs": [
             "LOOK",
@@ -726,14 +727,14 @@
           "id": "basement_up",
           "name": "Arcade Floor",
           "bounds": {
-            "x": 0,
-            "y": 200,
-            "w": 36,
-            "h": 88
+            "x": 400,
+            "y": 30,
+            "w": 106,
+            "h": 216
           },
           "centre": [
-            18,
-            244
+            453,
+            138
           ],
           "verbs": [
             "EXIT"
@@ -1122,6 +1123,26 @@
           "isCharacter": false
         },
         {
+          "id": "revue_poster",
+          "name": "Revue Poster",
+          "bounds": {
+            "x": 156,
+            "y": 90,
+            "w": 70,
+            "h": 170
+          },
+          "centre": [
+            191,
+            175
+          ],
+          "verbs": [
+            "LOOK",
+            "TAKE"
+          ],
+          "conditional": true,
+          "isCharacter": false
+        },
+        {
           "id": "pier_back",
           "name": "Seafront",
           "bounds": {
@@ -1144,14 +1165,14 @@
           "id": "pier_cafe",
           "name": "Pier Café",
           "bounds": {
-            "x": 260,
-            "y": 80,
-            "w": 80,
-            "h": 68
+            "x": 524,
+            "y": 40,
+            "w": 116,
+            "h": 200
           },
           "centre": [
-            300,
-            114
+            582,
+            140
           ],
           "verbs": [
             "EXIT"
@@ -1163,14 +1184,14 @@
           "id": "pier_cinema",
           "name": "Abandoned Cinema",
           "bounds": {
-            "x": 584,
-            "y": 192,
-            "w": 56,
-            "h": 96
+            "x": 300,
+            "y": 30,
+            "w": 150,
+            "h": 110
           },
           "centre": [
-            612,
-            240
+            375,
+            85
           ],
           "verbs": [
             "EXIT"
@@ -1208,7 +1229,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "The Pier. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Photographic Booth (around x508, y120); Woman in a Red Coat (around x224, y192); Lighthouse (around x50, y102). Visible ways out: Seafront; Pier Café; Abandoned Cinema; Lighthouse. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "The Pier. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Photographic Booth (around x508, y120); Woman in a Red Coat (around x224, y192); Lighthouse (around x50, y102); Revue Poster (around x191, y175). Visible ways out: Seafront; Pier Café; Abandoned Cinema; Lighthouse. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -1289,14 +1310,14 @@
           "id": "cafe_out",
           "name": "Pier",
           "bounds": {
-            "x": 0,
-            "y": 192,
-            "w": 48,
-            "h": 96
+            "x": 176,
+            "y": 30,
+            "w": 84,
+            "h": 244
           },
           "centre": [
-            24,
-            240
+            218,
+            152
           ],
           "verbs": [
             "EXIT"
@@ -1393,17 +1414,36 @@
           "isCharacter": false
         },
         {
+          "id": "menu_board",
+          "name": "Menu Board",
+          "bounds": {
+            "x": 344,
+            "y": 50,
+            "w": 96,
+            "h": 86
+          },
+          "centre": [
+            392,
+            93
+          ],
+          "verbs": [
+            "LOOK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
           "id": "chips_out",
           "name": "Seafront",
           "bounds": {
-            "x": 0,
-            "y": 192,
-            "w": 48,
-            "h": 96
+            "x": 456,
+            "y": 24,
+            "w": 152,
+            "h": 236
           },
           "centre": [
-            24,
-            240
+            532,
+            142
           ],
           "verbs": [
             "EXIT"
@@ -1422,7 +1462,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Fish & Chip Shop. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Fryers (around x230, y158); Butter (around x440, y190); Price List (around x508, y94). Visible ways out: Seafront. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Fish & Chip Shop. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Fryers (around x230, y158); Butter (around x440, y190); Price List (around x508, y94); Menu Board (around x392, y93). Visible ways out: Seafront. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -1691,14 +1731,14 @@
           "id": "tv_out",
           "name": "Back Alley",
           "bounds": {
-            "x": 0,
-            "y": 208,
-            "w": 40,
-            "h": 80
+            "x": 386,
+            "y": 40,
+            "w": 84,
+            "h": 216
           },
           "centre": [
-            20,
-            248
+            428,
+            148
           ],
           "verbs": [
             "EXIT"
@@ -1867,14 +1907,14 @@
           "id": "plastic_ghost",
           "name": "Plastic Ghost",
           "bounds": {
-            "x": 456,
-            "y": 84,
-            "w": 60,
-            "h": 84
+            "x": 410,
+            "y": 16,
+            "w": 72,
+            "h": 184
           },
           "centre": [
-            486,
-            126
+            446,
+            108
           ],
           "verbs": [
             "LOOK",
@@ -1887,14 +1927,14 @@
           "id": "skeleton",
           "name": "Skeleton",
           "bounds": {
-            "x": 112,
-            "y": 128,
-            "w": 56,
-            "h": 88
+            "x": 72,
+            "y": 28,
+            "w": 68,
+            "h": 148
           },
           "centre": [
-            140,
-            172
+            106,
+            102
           ],
           "verbs": [
             "LOOK",
@@ -1907,14 +1947,14 @@
           "id": "rubber_duck",
           "name": "Rubber Duck",
           "bounds": {
-            "x": 300,
-            "y": 244,
-            "w": 28,
-            "h": 24
+            "x": 408,
+            "y": 254,
+            "w": 50,
+            "h": 32
           },
           "centre": [
-            314,
-            256
+            433,
+            270
           ],
           "verbs": [
             "LOOK",
@@ -1927,14 +1967,14 @@
           "id": "haunted_out",
           "name": "Amusement Park",
           "bounds": {
-            "x": 0,
-            "y": 200,
-            "w": 40,
-            "h": 88
+            "x": 480,
+            "y": 60,
+            "w": 84,
+            "h": 212
           },
           "centre": [
-            20,
-            244
+            522,
+            166
           ],
           "verbs": [
             "EXIT"
@@ -1953,8 +1993,30 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Haunted House. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Plastic Ghost (around x486, y126); Skeleton (around x140, y172); Rubber Duck (around x314, y256). Visible ways out: Amusement Park. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Haunted House. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Plastic Ghost (around x446, y108); Skeleton (around x106, y102); Rubber Duck (around x433, y270). Visible ways out: Amusement Park. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
+    },
+    {
+      "id": "bg.haunted_house.midground",
+      "scene": "haunted_house",
+      "type": "background-layer",
+      "path": "/assets/backgrounds/haunted_house_duck.png",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "notes": "Composited between the background plate and the characters."
+      },
+      "description": "Optional midground layer for Haunted House, aligned pixel-for-pixel with the background plate. Scenery sitting behind characters but in front of the base plate.",
+      "priority": "p2"
     },
     {
       "id": "bg.bus_station",
@@ -1975,14 +2037,14 @@
           "id": "timetable",
           "name": "Timetable",
           "bounds": {
-            "x": 380,
-            "y": 112,
-            "w": 144,
-            "h": 88
+            "x": 472,
+            "y": 96,
+            "w": 60,
+            "h": 112
           },
           "centre": [
-            452,
-            156
+            502,
+            152
           ],
           "verbs": [
             "LOOK"
@@ -1994,14 +2056,14 @@
           "id": "bench",
           "name": "Bench",
           "bounds": {
-            "x": 96,
-            "y": 164,
-            "w": 128,
-            "h": 52
+            "x": 120,
+            "y": 184,
+            "w": 148,
+            "h": 84
           },
           "centre": [
-            160,
-            190
+            194,
+            226
           ],
           "verbs": [
             "LOOK",
@@ -2011,17 +2073,37 @@
           "isCharacter": false
         },
         {
+          "id": "kiosk_shutter",
+          "name": "Shuttered Kiosk",
+          "bounds": {
+            "x": 530,
+            "y": 110,
+            "w": 110,
+            "h": 154
+          },
+          "centre": [
+            585,
+            187
+          ],
+          "verbs": [
+            "LOOK",
+            "OPEN"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
           "id": "bus_sea",
           "name": "Seafront",
           "bounds": {
             "x": 0,
-            "y": 192,
-            "w": 48,
-            "h": 96
+            "y": 216,
+            "w": 44,
+            "h": 72
           },
           "centre": [
-            24,
-            240
+            22,
+            252
           ],
           "verbs": [
             "EXIT"
@@ -2033,14 +2115,14 @@
           "id": "bus_park",
           "name": "Amusement Park",
           "bounds": {
-            "x": 592,
-            "y": 192,
-            "w": 48,
-            "h": 96
+            "x": 184,
+            "y": 56,
+            "w": 96,
+            "h": 104
           },
           "centre": [
-            616,
-            240
+            232,
+            108
           ],
           "verbs": [
             "EXIT"
@@ -2052,14 +2134,14 @@
           "id": "bus_phone",
           "name": "Telephone Box",
           "bounds": {
-            "x": 256,
-            "y": 112,
+            "x": 32,
+            "y": 100,
             "w": 52,
-            "h": 96
+            "h": 112
           },
           "centre": [
-            282,
-            160
+            58,
+            156
           ],
           "verbs": [
             "EXIT"
@@ -2071,14 +2153,14 @@
           "id": "bus_town",
           "name": "Town Hall",
           "bounds": {
-            "x": 380,
-            "y": 200,
-            "w": 80,
-            "h": 40
+            "x": 284,
+            "y": 124,
+            "w": 140,
+            "h": 124
           },
           "centre": [
-            420,
-            220
+            354,
+            186
           ],
           "verbs": [
             "EXIT"
@@ -2090,14 +2172,14 @@
           "id": "bus_clock",
           "name": "Clock Tower",
           "bounds": {
-            "x": 60,
-            "y": 80,
-            "w": 80,
-            "h": 72
+            "x": 340,
+            "y": 40,
+            "w": 48,
+            "h": 60
           },
           "centre": [
-            100,
-            116
+            364,
+            70
           ],
           "verbs": [
             "EXIT"
@@ -2109,14 +2191,14 @@
           "id": "bus_hotel",
           "name": "Golden Sands Hotel",
           "bounds": {
-            "x": 500,
-            "y": 80,
-            "w": 88,
-            "h": 72
+            "x": 392,
+            "y": 52,
+            "w": 68,
+            "h": 68
           },
           "centre": [
-            544,
-            116
+            426,
+            86
           ],
           "verbs": [
             "EXIT"
@@ -2135,7 +2217,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Bus Station. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Timetable (around x452, y156); Bench (around x160, y190). Visible ways out: Seafront; Amusement Park; Telephone Box; Town Hall; Clock Tower; Golden Sands Hotel. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Bus Station. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Timetable (around x502, y152); Bench (around x194, y226); Shuttered Kiosk (around x585, y187). Visible ways out: Seafront; Amusement Park; Telephone Box; Town Hall; Clock Tower; Golden Sands Hotel. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -2244,14 +2326,14 @@
           "id": "notice_board",
           "name": "Notice Board",
           "bounds": {
-            "x": 496,
-            "y": 104,
-            "w": 88,
-            "h": 68
+            "x": 484,
+            "y": 68,
+            "w": 144,
+            "h": 124
           },
           "centre": [
-            540,
-            138
+            556,
+            130
           ],
           "verbs": [
             "LOOK",
@@ -2264,14 +2346,14 @@
           "id": "town_doors",
           "name": "Doors",
           "bounds": {
-            "x": 276,
-            "y": 124,
-            "w": 88,
-            "h": 92
+            "x": 256,
+            "y": 60,
+            "w": 200,
+            "h": 194
           },
           "centre": [
-            320,
-            170
+            356,
+            157
           ],
           "verbs": [
             "LOOK",
@@ -2281,17 +2363,37 @@
           "isCharacter": false
         },
         {
+          "id": "radiator",
+          "name": "Radiator",
+          "bounds": {
+            "x": 88,
+            "y": 170,
+            "w": 62,
+            "h": 70
+          },
+          "centre": [
+            119,
+            205
+          ],
+          "verbs": [
+            "LOOK",
+            "USE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
           "id": "hall_out",
           "name": "Bus Station",
           "bounds": {
             "x": 0,
-            "y": 192,
-            "w": 48,
-            "h": 96
+            "y": 160,
+            "w": 112,
+            "h": 128
           },
           "centre": [
-            24,
-            240
+            56,
+            224
           ],
           "verbs": [
             "EXIT"
@@ -2329,7 +2431,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Town Hall. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Notice Board (around x540, y138); Doors (around x320, y170). Visible ways out: Bus Station; Police Station. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Town Hall. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Notice Board (around x556, y130); Doors (around x356, y157); Radiator (around x119, y205). Visible ways out: Bus Station; Police Station. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -2388,17 +2490,37 @@
           "isCharacter": false
         },
         {
+          "id": "coat_stand",
+          "name": "Coat Stand",
+          "bounds": {
+            "x": 20,
+            "y": 84,
+            "w": 56,
+            "h": 156
+          },
+          "centre": [
+            48,
+            162
+          ],
+          "verbs": [
+            "LOOK",
+            "TAKE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
           "id": "police_out",
           "name": "Town Hall",
           "bounds": {
-            "x": 0,
-            "y": 192,
-            "w": 48,
-            "h": 96
+            "x": 290,
+            "y": 20,
+            "w": 170,
+            "h": 244
           },
           "centre": [
-            24,
-            240
+            375,
+            142
           ],
           "verbs": [
             "EXIT"
@@ -2417,7 +2539,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Police Station. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Missing Person Posters (around x536, y122); Desk Bell (around x354, y162). Visible ways out: Town Hall. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Police Station. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Missing Person Posters (around x536, y122); Desk Bell (around x354, y162); Coat Stand (around x48, y162). Visible ways out: Town Hall. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -2813,14 +2935,14 @@
           "id": "proj_out",
           "name": "Lobby",
           "bounds": {
-            "x": 0,
-            "y": 200,
-            "w": 44,
-            "h": 88
+            "x": 504,
+            "y": 24,
+            "w": 124,
+            "h": 252
           },
           "centre": [
-            22,
-            244
+            566,
+            150
           ],
           "verbs": [
             "EXIT"
@@ -2987,14 +3109,14 @@
           "id": "mechanism",
           "name": "Mechanism",
           "bounds": {
-            "x": 92,
-            "y": 112,
-            "w": 160,
-            "h": 112
+            "x": 20,
+            "y": 40,
+            "w": 192,
+            "h": 220
           },
           "centre": [
-            172,
-            168
+            116,
+            150
           ],
           "verbs": [
             "LOOK",
@@ -3007,14 +3129,14 @@
           "id": "clock_back",
           "name": "Back of the Clock Face",
           "bounds": {
-            "x": 240,
-            "y": 24,
-            "w": 160,
-            "h": 160
+            "x": 216,
+            "y": 16,
+            "w": 250,
+            "h": 208
           },
           "centre": [
-            320,
-            104
+            341,
+            120
           ],
           "verbs": [
             "LOOK"
@@ -3026,14 +3148,14 @@
           "id": "recorder_shelf",
           "name": "Ledge",
           "bounds": {
-            "x": 432,
-            "y": 192,
-            "w": 120,
-            "h": 36
+            "x": 288,
+            "y": 216,
+            "w": 80,
+            "h": 64
           },
           "centre": [
-            492,
-            210
+            328,
+            248
           ],
           "verbs": [
             "LOOK",
@@ -3046,14 +3168,14 @@
           "id": "clockint_out",
           "name": "Outside",
           "bounds": {
-            "x": 0,
-            "y": 216,
-            "w": 44,
-            "h": 72
+            "x": 460,
+            "y": 52,
+            "w": 120,
+            "h": 220
           },
           "centre": [
-            22,
-            252
+            520,
+            162
           ],
           "verbs": [
             "EXIT"
@@ -3072,7 +3194,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Inside the Clock Tower. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Mechanism (around x172, y168); Back of the Clock Face (around x320, y104); Ledge (around x492, y210). Visible ways out: Outside. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Inside the Clock Tower. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Mechanism (around x116, y150); Back of the Clock Face (around x341, y120); Ledge (around x328, y248). Visible ways out: Outside. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -3204,14 +3326,14 @@
           "id": "log_book",
           "name": "Log Book",
           "bounds": {
-            "x": 400,
-            "y": 216,
-            "w": 88,
-            "h": 36
+            "x": 490,
+            "y": 144,
+            "w": 130,
+            "h": 96
           },
           "centre": [
-            444,
-            234
+            555,
+            192
           ],
           "verbs": [
             "LOOK",
@@ -3224,14 +3346,14 @@
           "id": "lh_locker",
           "name": "Keeper's Locker",
           "bounds": {
-            "x": 192,
-            "y": 192,
-            "w": 92,
-            "h": 44
+            "x": 282,
+            "y": 84,
+            "w": 90,
+            "h": 190
           },
           "centre": [
-            238,
-            214
+            327,
+            179
           ],
           "verbs": [
             "LOOK",
@@ -3244,14 +3366,14 @@
           "id": "porthole",
           "name": "Porthole",
           "bounds": {
-            "x": 76,
-            "y": 84,
-            "w": 76,
-            "h": 76
+            "x": 50,
+            "y": 40,
+            "w": 104,
+            "h": 110
           },
           "centre": [
-            114,
-            122
+            102,
+            95
           ],
           "verbs": [
             "LOOK"
@@ -3263,14 +3385,14 @@
           "id": "lh_stairs",
           "name": "Stairs",
           "bounds": {
-            "x": 260,
-            "y": 40,
-            "w": 120,
-            "h": 180
+            "x": 384,
+            "y": 16,
+            "w": 112,
+            "h": 240
           },
           "centre": [
-            320,
-            130
+            440,
+            136
           ],
           "verbs": [
             "LOOK"
@@ -3282,14 +3404,14 @@
           "id": "lhint_out",
           "name": "Outside",
           "bounds": {
-            "x": 0,
-            "y": 228,
-            "w": 48,
-            "h": 60
+            "x": 172,
+            "y": 52,
+            "w": 100,
+            "h": 224
           },
           "centre": [
-            24,
-            258
+            222,
+            164
           ],
           "verbs": [
             "EXIT"
@@ -3308,7 +3430,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Inside the Lighthouse. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Log Book (around x444, y234); Keeper's Locker (around x238, y214); Porthole (around x114, y122); Stairs (around x320, y130). Visible ways out: Outside. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Inside the Lighthouse. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Log Book (around x555, y192); Keeper's Locker (around x327, y179); Porthole (around x102, y95); Stairs (around x440, y136). Visible ways out: Outside. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -3592,7 +3714,8 @@
             198
           ],
           "verbs": [
-            "LOOK"
+            "LOOK",
+            "PUSH"
           ],
           "conditional": false,
           "isCharacter": false
@@ -3668,14 +3791,14 @@
           "id": "door10",
           "name": "Room 10",
           "bounds": {
-            "x": 20,
-            "y": 80,
-            "w": 60,
-            "h": 136
+            "x": 54,
+            "y": 56,
+            "w": 120,
+            "h": 200
           },
           "centre": [
-            50,
-            148
+            114,
+            156
           ],
           "verbs": [
             "LOOK",
@@ -3688,14 +3811,14 @@
           "id": "door11",
           "name": "Room 11",
           "bounds": {
-            "x": 140,
-            "y": 72,
-            "w": 60,
-            "h": 144
+            "x": 224,
+            "y": 54,
+            "w": 108,
+            "h": 202
           },
           "centre": [
-            170,
-            144
+            278,
+            155
           ],
           "verbs": [
             "LOOK",
@@ -3708,14 +3831,14 @@
           "id": "door12",
           "name": "Room 12",
           "bounds": {
-            "x": 300,
-            "y": 64,
-            "w": 60,
-            "h": 152
+            "x": 382,
+            "y": 50,
+            "w": 100,
+            "h": 206
           },
           "centre": [
-            330,
-            140
+            432,
+            153
           ],
           "verbs": [
             "LOOK",
@@ -3728,14 +3851,14 @@
           "id": "door14",
           "name": "Room 14",
           "bounds": {
-            "x": 488,
-            "y": 72,
-            "w": 60,
-            "h": 144
+            "x": 522,
+            "y": 54,
+            "w": 80,
+            "h": 202
           },
           "centre": [
-            518,
-            144
+            562,
+            155
           ],
           "verbs": [
             "LOOK",
@@ -3748,14 +3871,14 @@
           "id": "corridor_down",
           "name": "Reception",
           "bounds": {
-            "x": 0,
-            "y": 216,
-            "w": 40,
-            "h": 72
+            "x": 604,
+            "y": 30,
+            "w": 36,
+            "h": 250
           },
           "centre": [
-            20,
-            252
+            622,
+            155
           ],
           "verbs": [
             "EXIT"
@@ -3774,7 +3897,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Hotel Corridor. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Room 10 (around x50, y148); Room 11 (around x170, y144); Room 12 (around x330, y140); Room 14 (around x518, y144). Visible ways out: Reception. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Hotel Corridor. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Room 10 (around x114, y156); Room 11 (around x278, y155); Room 12 (around x432, y153); Room 14 (around x562, y155). Visible ways out: Reception. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -3924,14 +4047,14 @@
           "id": "cabin1",
           "name": "Cabin 1",
           "bounds": {
-            "x": 284,
-            "y": 68,
-            "w": 80,
+            "x": 304,
+            "y": 54,
+            "w": 58,
             "h": 148
           },
           "centre": [
-            324,
-            142
+            333,
+            128
           ],
           "verbs": [
             "LOOK",
@@ -3944,14 +4067,14 @@
           "id": "cabin2",
           "name": "Cabin 2",
           "bounds": {
-            "x": 372,
-            "y": 68,
-            "w": 80,
+            "x": 364,
+            "y": 54,
+            "w": 56,
             "h": 148
           },
           "centre": [
-            412,
-            142
+            392,
+            128
           ],
           "verbs": [
             "LOOK",
@@ -3964,14 +4087,14 @@
           "id": "cabin3",
           "name": "Cabin 3",
           "bounds": {
-            "x": 460,
-            "y": 68,
-            "w": 80,
+            "x": 422,
+            "y": 54,
+            "w": 56,
             "h": 148
           },
           "centre": [
-            500,
-            142
+            450,
+            128
           ],
           "verbs": [
             "LOOK",
@@ -3985,13 +4108,13 @@
           "name": "Swimming Pool",
           "bounds": {
             "x": 0,
-            "y": 112,
-            "w": 244,
-            "h": 92
+            "y": 160,
+            "w": 236,
+            "h": 128
           },
           "centre": [
-            122,
-            158
+            118,
+            224
           ],
           "verbs": [
             "LOOK",
@@ -4004,14 +4127,14 @@
           "id": "no_running",
           "name": "Sign",
           "bounds": {
-            "x": 528,
-            "y": 208,
-            "w": 96,
-            "h": 40
+            "x": 530,
+            "y": 136,
+            "w": 92,
+            "h": 144
           },
           "centre": [
             576,
-            228
+            208
           ],
           "verbs": [
             "LOOK"
@@ -4023,14 +4146,14 @@
           "id": "pool_out",
           "name": "Seafront",
           "bounds": {
-            "x": 0,
-            "y": 208,
-            "w": 40,
-            "h": 80
+            "x": 616,
+            "y": 80,
+            "w": 24,
+            "h": 140
           },
           "centre": [
-            20,
-            248
+            628,
+            150
           ],
           "verbs": [
             "EXIT"
@@ -4042,14 +4165,14 @@
           "id": "pool_beach",
           "name": "The Far Beach",
           "bounds": {
-            "x": 600,
-            "y": 208,
-            "w": 40,
-            "h": 80
+            "x": 252,
+            "y": 268,
+            "w": 124,
+            "h": 20
           },
           "centre": [
-            620,
-            248
+            314,
+            278
           ],
           "verbs": [
             "EXIT"
@@ -4068,7 +4191,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Seafront Pool. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Cabin 1 (around x324, y142); Cabin 2 (around x412, y142); Cabin 3 (around x500, y142); Swimming Pool (around x122, y158); Sign (around x576, y228). Visible ways out: Seafront; The Far Beach. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Seafront Pool. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Cabin 1 (around x333, y128); Cabin 2 (around x392, y128); Cabin 3 (around x450, y128); Swimming Pool (around x118, y224); Sign (around x576, y208). Visible ways out: Seafront; The Far Beach. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -4319,14 +4442,14 @@
           "id": "video_out",
           "name": "Back Alley",
           "bounds": {
-            "x": 0,
-            "y": 200,
-            "w": 44,
-            "h": 88
+            "x": 180,
+            "y": 44,
+            "w": 84,
+            "h": 212
           },
           "centre": [
-            22,
-            244
+            222,
+            150
           ],
           "verbs": [
             "EXIT"
@@ -4338,14 +4461,14 @@
           "id": "video_office",
           "name": "Graham's Office",
           "bounds": {
-            "x": 400,
-            "y": 176,
-            "w": 80,
-            "h": 48
+            "x": 296,
+            "y": 60,
+            "w": 68,
+            "h": 180
           },
           "centre": [
-            440,
-            200
+            330,
+            150
           ],
           "verbs": [
             "EXIT"
@@ -4357,14 +4480,14 @@
           "id": "video_back",
           "name": "Back Section",
           "bounds": {
-            "x": 572,
-            "y": 48,
-            "w": 68,
-            "h": 120
+            "x": 516,
+            "y": 40,
+            "w": 100,
+            "h": 216
           },
           "centre": [
-            606,
-            108
+            566,
+            148
           ],
           "verbs": [
             "EXIT"
@@ -4551,14 +4674,14 @@
           "id": "goffice_out",
           "name": "Video Shop",
           "bounds": {
-            "x": 0,
-            "y": 204,
-            "w": 44,
-            "h": 84
+            "x": 360,
+            "y": 20,
+            "w": 140,
+            "h": 250
           },
           "centre": [
-            22,
-            246
+            430,
+            145
           ],
           "verbs": [
             "EXIT"
@@ -4587,7 +4710,7 @@
       "path": "/assets/characters/jack.png",
       "dimensions": {
         "width": 288,
-        "height": 320
+        "height": 400
       },
       "transparency": "alpha-required",
       "animation": {
@@ -4595,9 +4718,9 @@
         "frameWidth": 48,
         "frameHeight": 80,
         "columns": 6,
-        "rows": 4,
+        "rows": 5,
         "sheetWidth": 288,
-        "sheetHeight": 320,
+        "sheetHeight": 400,
         "states": [
           "idle",
           "walk",
@@ -4607,9 +4730,10 @@
           "happy",
           "frightened",
           "worried",
-          "smug"
+          "smug",
+          "fidget"
         ],
-        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Anchor is bottom-centre of each frame - the character stands on that point."
+        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Row 4 column 0 is the idle fidget. Anchor is bottom-centre of each frame - the character stands on that point."
       },
       "characters": [
         "jack"
@@ -4906,6 +5030,158 @@
       "priority": "p0"
     },
     {
+      "id": "char.jack.front_alarm",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/jack.front_alarm.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.jack",
+        "sheetPath": "/assets/characters/jack.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 0
+          },
+          {
+            "row": 3,
+            "col": 3
+          }
+        ]
+      },
+      "characters": [
+        "jack"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Jack Mercer, 20, male. Trainee arcade-machine technician and the player character. Cheap dark bomber jacket over a band t-shirt, jeans, trainers, unfortunate 1987 hair. Wiry, slightly slouched, permanently unimpressed. POSE: Facing the camera, alarmed: eyes wide, shoulders up, both hands raised a little in front of the chest, leaning back very slightly. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p0"
+    },
+    {
+      "id": "char.jack.front_annoyed",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/jack.front_annoyed.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.jack",
+        "sheetPath": "/assets/characters/jack.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 1
+          },
+          {
+            "row": 3,
+            "col": 4
+          }
+        ]
+      },
+      "characters": [
+        "jack"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Jack Mercer, 20, male. Trainee arcade-machine technician and the player character. Cheap dark bomber jacket over a band t-shirt, jeans, trainers, unfortunate 1987 hair. Wiry, slightly slouched, permanently unimpressed. POSE: Facing the camera, thoroughly unimpressed: head tilted, eyebrows down, arms folded, weight on one hip. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p0"
+    },
+    {
+      "id": "char.jack.front_pleased",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/jack.front_pleased.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.jack",
+        "sheetPath": "/assets/characters/jack.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 2
+          },
+          {
+            "row": 3,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "jack"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Jack Mercer, 20, male. Trainee arcade-machine technician and the player character. Cheap dark bomber jacket over a band t-shirt, jeans, trainers, unfortunate 1987 hair. Wiry, slightly slouched, permanently unimpressed. POSE: Facing the camera, quietly delighted with themselves: chin up, small smile, hands on hips or one thumb hooked in a pocket. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p0"
+    },
+    {
+      "id": "char.jack.front_fidget",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/jack.front_fidget.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.jack",
+        "sheetPath": "/assets/characters/jack.png",
+        "cells": [
+          {
+            "row": 4,
+            "col": 0
+          }
+        ]
+      },
+      "characters": [
+        "jack"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Jack Mercer, 20, male. Trainee arcade-machine technician and the player character. Cheap dark bomber jacket over a band t-shirt, jeans, trainers, unfortunate 1987 hair. Wiry, slightly slouched, permanently unimpressed. POSE: Facing the camera, hands jammed in his jacket pockets, shoulders hunched, glancing off to one side as though he has just noticed something he would rather not have. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p0"
+    },
+    {
       "id": "portrait.jack",
       "scene": null,
       "type": "portrait",
@@ -4936,7 +5212,7 @@
       "path": "/assets/characters/maggie.png",
       "dimensions": {
         "width": 288,
-        "height": 320
+        "height": 400
       },
       "transparency": "alpha-required",
       "animation": {
@@ -4944,9 +5220,9 @@
         "frameWidth": 48,
         "frameHeight": 80,
         "columns": 6,
-        "rows": 4,
+        "rows": 5,
         "sheetWidth": 288,
-        "sheetHeight": 320,
+        "sheetHeight": 400,
         "states": [
           "idle",
           "walk",
@@ -4956,9 +5232,10 @@
           "happy",
           "frightened",
           "worried",
-          "smug"
+          "smug",
+          "fidget"
         ],
-        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Anchor is bottom-centre of each frame - the character stands on that point."
+        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Row 4 column 0 is the idle fidget. Anchor is bottom-centre of each frame - the character stands on that point."
       },
       "characters": [
         "maggie"
@@ -5255,6 +5532,158 @@
       "priority": "p1"
     },
     {
+      "id": "char.maggie.front_alarm",
+      "scene": "starlight_arcade",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/maggie.front_alarm.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.maggie",
+        "sheetPath": "/assets/characters/maggie.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 0
+          },
+          {
+            "row": 3,
+            "col": 3
+          }
+        ]
+      },
+      "characters": [
+        "maggie"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Margaret \"Maggie\" Vale, 19, female. Works at the arcade. Practical and guarded, never styled as a romantic prize. Denim jacket, dark red top, jeans, boots. Stands like someone who knows more than she is saying. POSE: Facing the camera, alarmed: eyes wide, shoulders up, both hands raised a little in front of the chest, leaning back very slightly. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.maggie.front_annoyed",
+      "scene": "starlight_arcade",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/maggie.front_annoyed.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.maggie",
+        "sheetPath": "/assets/characters/maggie.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 1
+          },
+          {
+            "row": 3,
+            "col": 4
+          }
+        ]
+      },
+      "characters": [
+        "maggie"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Margaret \"Maggie\" Vale, 19, female. Works at the arcade. Practical and guarded, never styled as a romantic prize. Denim jacket, dark red top, jeans, boots. Stands like someone who knows more than she is saying. POSE: Facing the camera, thoroughly unimpressed: head tilted, eyebrows down, arms folded, weight on one hip. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.maggie.front_pleased",
+      "scene": "starlight_arcade",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/maggie.front_pleased.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.maggie",
+        "sheetPath": "/assets/characters/maggie.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 2
+          },
+          {
+            "row": 3,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "maggie"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Margaret \"Maggie\" Vale, 19, female. Works at the arcade. Practical and guarded, never styled as a romantic prize. Denim jacket, dark red top, jeans, boots. Stands like someone who knows more than she is saying. POSE: Facing the camera, quietly delighted with themselves: chin up, small smile, hands on hips or one thumb hooked in a pocket. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.maggie.front_fidget",
+      "scene": "starlight_arcade",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/maggie.front_fidget.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.maggie",
+        "sheetPath": "/assets/characters/maggie.png",
+        "cells": [
+          {
+            "row": 4,
+            "col": 0
+          }
+        ]
+      },
+      "characters": [
+        "maggie"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Margaret \"Maggie\" Vale, 19, female. Works at the arcade. Practical and guarded, never styled as a romantic prize. Denim jacket, dark red top, jeans, boots. Stands like someone who knows more than she is saying. POSE: Facing the camera, tucking her hair behind one ear and pulling her denim jacket straight, weight shifted onto one hip. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
       "id": "portrait.maggie",
       "scene": null,
       "type": "portrait",
@@ -5285,7 +5714,7 @@
       "path": "/assets/characters/arthur.png",
       "dimensions": {
         "width": 288,
-        "height": 320
+        "height": 400
       },
       "transparency": "alpha-required",
       "animation": {
@@ -5293,9 +5722,9 @@
         "frameWidth": 48,
         "frameHeight": 80,
         "columns": 6,
-        "rows": 4,
+        "rows": 5,
         "sheetWidth": 288,
-        "sheetHeight": 320,
+        "sheetHeight": 400,
         "states": [
           "idle",
           "walk",
@@ -5305,9 +5734,10 @@
           "happy",
           "frightened",
           "worried",
-          "smug"
+          "smug",
+          "fidget"
         ],
-        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Anchor is bottom-centre of each frame - the character stands on that point."
+        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Row 4 column 0 is the idle fidget. Anchor is bottom-centre of each frame - the character stands on that point."
       },
       "characters": [
         "arthur"
@@ -5604,6 +6034,158 @@
       "priority": "p1"
     },
     {
+      "id": "char.arthur.front_alarm",
+      "scene": "arcade_lobby",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/arthur.front_alarm.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.arthur",
+        "sheetPath": "/assets/characters/arthur.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 0
+          },
+          {
+            "row": 3,
+            "col": 3
+          }
+        ]
+      },
+      "characters": [
+        "arthur"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Arthur Bell, 57, male. Owns the arcade. Enormous grey moustache, permanent mustard cardigan over shirt and tie, slacks. Slightly stooped, hands often in cardigan pockets. POSE: Facing the camera, alarmed: eyes wide, shoulders up, both hands raised a little in front of the chest, leaning back very slightly. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.arthur.front_annoyed",
+      "scene": "arcade_lobby",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/arthur.front_annoyed.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.arthur",
+        "sheetPath": "/assets/characters/arthur.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 1
+          },
+          {
+            "row": 3,
+            "col": 4
+          }
+        ]
+      },
+      "characters": [
+        "arthur"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Arthur Bell, 57, male. Owns the arcade. Enormous grey moustache, permanent mustard cardigan over shirt and tie, slacks. Slightly stooped, hands often in cardigan pockets. POSE: Facing the camera, thoroughly unimpressed: head tilted, eyebrows down, arms folded, weight on one hip. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.arthur.front_pleased",
+      "scene": "arcade_lobby",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/arthur.front_pleased.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.arthur",
+        "sheetPath": "/assets/characters/arthur.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 2
+          },
+          {
+            "row": 3,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "arthur"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Arthur Bell, 57, male. Owns the arcade. Enormous grey moustache, permanent mustard cardigan over shirt and tie, slacks. Slightly stooped, hands often in cardigan pockets. POSE: Facing the camera, quietly delighted with themselves: chin up, small smile, hands on hips or one thumb hooked in a pocket. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.arthur.front_fidget",
+      "scene": "arcade_lobby",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/arthur.front_fidget.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.arthur",
+        "sheetPath": "/assets/characters/arthur.png",
+        "cells": [
+          {
+            "row": 4,
+            "col": 0
+          }
+        ]
+      },
+      "characters": [
+        "arthur"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Arthur Bell, 57, male. Owns the arcade. Enormous grey moustache, permanent mustard cardigan over shirt and tie, slacks. Slightly stooped, hands often in cardigan pockets. POSE: Facing the camera, hitching his slacks up by the waistband with both hands and giving his cardigan a tug, entirely unselfconsciously. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
       "id": "portrait.arthur",
       "scene": null,
       "type": "portrait",
@@ -5634,7 +6216,7 @@
       "path": "/assets/characters/derek.png",
       "dimensions": {
         "width": 288,
-        "height": 320
+        "height": 400
       },
       "transparency": "alpha-required",
       "animation": {
@@ -5642,9 +6224,9 @@
         "frameWidth": 48,
         "frameHeight": 80,
         "columns": 6,
-        "rows": 4,
+        "rows": 5,
         "sheetWidth": 288,
-        "sheetHeight": 320,
+        "sheetHeight": 400,
         "states": [
           "idle",
           "walk",
@@ -5654,9 +6236,10 @@
           "happy",
           "frightened",
           "worried",
-          "smug"
+          "smug",
+          "fidget"
         ],
-        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Anchor is bottom-centre of each frame - the character stands on that point."
+        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Row 4 column 0 is the idle fidget. Anchor is bottom-centre of each frame - the character stands on that point."
       },
       "characters": [
         "derek"
@@ -5953,6 +6536,158 @@
       "priority": "p1"
     },
     {
+      "id": "char.derek.front_alarm",
+      "scene": "tv_shop",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/derek.front_alarm.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.derek",
+        "sheetPath": "/assets/characters/derek.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 0
+          },
+          {
+            "row": 3,
+            "col": 3
+          }
+        ]
+      },
+      "characters": [
+        "derek"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Derek Piper, 32, male. Television repairman and conspiracy theorist. Brown shop coat over a shirt, wild hair, oversized square glasses. Always mid-gesture, mid-explanation. POSE: Facing the camera, alarmed: eyes wide, shoulders up, both hands raised a little in front of the chest, leaning back very slightly. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.derek.front_annoyed",
+      "scene": "tv_shop",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/derek.front_annoyed.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.derek",
+        "sheetPath": "/assets/characters/derek.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 1
+          },
+          {
+            "row": 3,
+            "col": 4
+          }
+        ]
+      },
+      "characters": [
+        "derek"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Derek Piper, 32, male. Television repairman and conspiracy theorist. Brown shop coat over a shirt, wild hair, oversized square glasses. Always mid-gesture, mid-explanation. POSE: Facing the camera, thoroughly unimpressed: head tilted, eyebrows down, arms folded, weight on one hip. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.derek.front_pleased",
+      "scene": "tv_shop",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/derek.front_pleased.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.derek",
+        "sheetPath": "/assets/characters/derek.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 2
+          },
+          {
+            "row": 3,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "derek"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Derek Piper, 32, male. Television repairman and conspiracy theorist. Brown shop coat over a shirt, wild hair, oversized square glasses. Always mid-gesture, mid-explanation. POSE: Facing the camera, quietly delighted with themselves: chin up, small smile, hands on hips or one thumb hooked in a pocket. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.derek.front_fidget",
+      "scene": "tv_shop",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/derek.front_fidget.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.derek",
+        "sheetPath": "/assets/characters/derek.png",
+        "cells": [
+          {
+            "row": 4,
+            "col": 0
+          }
+        ]
+      },
+      "characters": [
+        "derek"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Derek Piper, 32, male. Television repairman and conspiracy theorist. Brown shop coat over a shirt, wild hair, oversized square glasses. Always mid-gesture, mid-explanation. POSE: Facing the camera, scratching the back of his head with one hand while the other rummages in the pocket of his shop coat. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
       "id": "portrait.derek",
       "scene": null,
       "type": "portrait",
@@ -5983,7 +6718,7 @@
       "path": "/assets/characters/kevin.png",
       "dimensions": {
         "width": 288,
-        "height": 320
+        "height": 400
       },
       "transparency": "alpha-required",
       "animation": {
@@ -5991,9 +6726,9 @@
         "frameWidth": 48,
         "frameHeight": 80,
         "columns": 6,
-        "rows": 4,
+        "rows": 5,
         "sheetWidth": 288,
-        "sheetHeight": 320,
+        "sheetHeight": 400,
         "states": [
           "idle",
           "walk",
@@ -6003,9 +6738,10 @@
           "happy",
           "frightened",
           "worried",
-          "smug"
+          "smug",
+          "fidget"
         ],
-        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Anchor is bottom-centre of each frame - the character stands on that point."
+        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Row 4 column 0 is the idle fidget. Anchor is bottom-centre of each frame - the character stands on that point."
       },
       "characters": [
         "kevin"
@@ -6302,6 +7038,158 @@
       "priority": "p1"
     },
     {
+      "id": "char.kevin.front_alarm",
+      "scene": "starlight_arcade",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/kevin.front_alarm.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.kevin",
+        "sheetPath": "/assets/characters/kevin.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 0
+          },
+          {
+            "row": 3,
+            "col": 3
+          }
+        ]
+      },
+      "characters": [
+        "kevin"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Kevin, 16, male. Arcade kid. Shell suit in colours that should not co-exist, trainers, pockets sagging with ten-pence pieces. Permanently smug posture. POSE: Facing the camera, alarmed: eyes wide, shoulders up, both hands raised a little in front of the chest, leaning back very slightly. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.kevin.front_annoyed",
+      "scene": "starlight_arcade",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/kevin.front_annoyed.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.kevin",
+        "sheetPath": "/assets/characters/kevin.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 1
+          },
+          {
+            "row": 3,
+            "col": 4
+          }
+        ]
+      },
+      "characters": [
+        "kevin"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Kevin, 16, male. Arcade kid. Shell suit in colours that should not co-exist, trainers, pockets sagging with ten-pence pieces. Permanently smug posture. POSE: Facing the camera, thoroughly unimpressed: head tilted, eyebrows down, arms folded, weight on one hip. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.kevin.front_pleased",
+      "scene": "starlight_arcade",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/kevin.front_pleased.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.kevin",
+        "sheetPath": "/assets/characters/kevin.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 2
+          },
+          {
+            "row": 3,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "kevin"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Kevin, 16, male. Arcade kid. Shell suit in colours that should not co-exist, trainers, pockets sagging with ten-pence pieces. Permanently smug posture. POSE: Facing the camera, quietly delighted with themselves: chin up, small smile, hands on hips or one thumb hooked in a pocket. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.kevin.front_fidget",
+      "scene": "starlight_arcade",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/kevin.front_fidget.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.kevin",
+        "sheetPath": "/assets/characters/kevin.png",
+        "cells": [
+          {
+            "row": 4,
+            "col": 0
+          }
+        ]
+      },
+      "characters": [
+        "kevin"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Kevin, 16, male. Arcade kid. Shell suit in colours that should not co-exist, trainers, pockets sagging with ten-pence pieces. Permanently smug posture. POSE: Facing the camera, hammering an imaginary joystick with both hands, tongue between his teeth. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
       "id": "portrait.kevin",
       "scene": null,
       "type": "portrait",
@@ -6332,7 +7220,7 @@
       "path": "/assets/characters/brenda.png",
       "dimensions": {
         "width": 288,
-        "height": 320
+        "height": 400
       },
       "transparency": "alpha-required",
       "animation": {
@@ -6340,9 +7228,9 @@
         "frameWidth": 48,
         "frameHeight": 80,
         "columns": 6,
-        "rows": 4,
+        "rows": 5,
         "sheetWidth": 288,
-        "sheetHeight": 320,
+        "sheetHeight": 400,
         "states": [
           "idle",
           "walk",
@@ -6352,9 +7240,10 @@
           "happy",
           "frightened",
           "worried",
-          "smug"
+          "smug",
+          "fidget"
         ],
-        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Anchor is bottom-centre of each frame - the character stands on that point."
+        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Row 4 column 0 is the idle fidget. Anchor is bottom-centre of each frame - the character stands on that point."
       },
       "characters": [
         "brenda"
@@ -6651,6 +7540,158 @@
       "priority": "p1"
     },
     {
+      "id": "char.brenda.front_alarm",
+      "scene": "amusement_park",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/brenda.front_alarm.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.brenda",
+        "sheetPath": "/assets/characters/brenda.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 0
+          },
+          {
+            "row": 3,
+            "col": 3
+          }
+        ]
+      },
+      "characters": [
+        "brenda"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Brenda Holt, 46, female. Runs the amusement-park kiosk. Tabard over a blouse, immovable set hair, arms folded as a default stance. POSE: Facing the camera, alarmed: eyes wide, shoulders up, both hands raised a little in front of the chest, leaning back very slightly. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.brenda.front_annoyed",
+      "scene": "amusement_park",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/brenda.front_annoyed.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.brenda",
+        "sheetPath": "/assets/characters/brenda.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 1
+          },
+          {
+            "row": 3,
+            "col": 4
+          }
+        ]
+      },
+      "characters": [
+        "brenda"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Brenda Holt, 46, female. Runs the amusement-park kiosk. Tabard over a blouse, immovable set hair, arms folded as a default stance. POSE: Facing the camera, thoroughly unimpressed: head tilted, eyebrows down, arms folded, weight on one hip. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.brenda.front_pleased",
+      "scene": "amusement_park",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/brenda.front_pleased.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.brenda",
+        "sheetPath": "/assets/characters/brenda.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 2
+          },
+          {
+            "row": 3,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "brenda"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Brenda Holt, 46, female. Runs the amusement-park kiosk. Tabard over a blouse, immovable set hair, arms folded as a default stance. POSE: Facing the camera, quietly delighted with themselves: chin up, small smile, hands on hips or one thumb hooked in a pocket. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.brenda.front_fidget",
+      "scene": "amusement_park",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/brenda.front_fidget.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.brenda",
+        "sheetPath": "/assets/characters/brenda.png",
+        "cells": [
+          {
+            "row": 4,
+            "col": 0
+          }
+        ]
+      },
+      "characters": [
+        "brenda"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Brenda Holt, 46, female. Runs the amusement-park kiosk. Tabard over a blouse, immovable set hair, arms folded as a default stance. POSE: Facing the camera, arms folded, straightening her tabard with a sharp tug and looking at something over your shoulder with deep suspicion. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
       "id": "portrait.brenda",
       "scene": null,
       "type": "portrait",
@@ -6681,7 +7722,7 @@
       "path": "/assets/characters/valerie.png",
       "dimensions": {
         "width": 288,
-        "height": 320
+        "height": 400
       },
       "transparency": "alpha-required",
       "animation": {
@@ -6689,9 +7730,9 @@
         "frameWidth": 48,
         "frameHeight": 80,
         "columns": 6,
-        "rows": 4,
+        "rows": 5,
         "sheetWidth": 288,
-        "sheetHeight": 320,
+        "sheetHeight": 400,
         "states": [
           "idle",
           "walk",
@@ -6701,9 +7742,10 @@
           "happy",
           "frightened",
           "worried",
-          "smug"
+          "smug",
+          "fidget"
         ],
-        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Anchor is bottom-centre of each frame - the character stands on that point."
+        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Row 4 column 0 is the idle fidget. Anchor is bottom-centre of each frame - the character stands on that point."
       },
       "characters": [
         "valerie"
@@ -7000,6 +8042,158 @@
       "priority": "p1"
     },
     {
+      "id": "char.valerie.front_alarm",
+      "scene": "hotel_reception",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/valerie.front_alarm.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.valerie",
+        "sheetPath": "/assets/characters/valerie.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 0
+          },
+          {
+            "row": 3,
+            "col": 3
+          }
+        ]
+      },
+      "characters": [
+        "valerie"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Valerie Price, 28, female. Receptionist at the Golden Sands Hotel. Glamorous and sardonic; sharp 1987 shoulders, gold earrings, immaculate. Bored expression as a resting state. POSE: Facing the camera, alarmed: eyes wide, shoulders up, both hands raised a little in front of the chest, leaning back very slightly. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.valerie.front_annoyed",
+      "scene": "hotel_reception",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/valerie.front_annoyed.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.valerie",
+        "sheetPath": "/assets/characters/valerie.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 1
+          },
+          {
+            "row": 3,
+            "col": 4
+          }
+        ]
+      },
+      "characters": [
+        "valerie"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Valerie Price, 28, female. Receptionist at the Golden Sands Hotel. Glamorous and sardonic; sharp 1987 shoulders, gold earrings, immaculate. Bored expression as a resting state. POSE: Facing the camera, thoroughly unimpressed: head tilted, eyebrows down, arms folded, weight on one hip. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.valerie.front_pleased",
+      "scene": "hotel_reception",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/valerie.front_pleased.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.valerie",
+        "sheetPath": "/assets/characters/valerie.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 2
+          },
+          {
+            "row": 3,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "valerie"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Valerie Price, 28, female. Receptionist at the Golden Sands Hotel. Glamorous and sardonic; sharp 1987 shoulders, gold earrings, immaculate. Bored expression as a resting state. POSE: Facing the camera, quietly delighted with themselves: chin up, small smile, hands on hips or one thumb hooked in a pocket. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.valerie.front_fidget",
+      "scene": "hotel_reception",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/valerie.front_fidget.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.valerie",
+        "sheetPath": "/assets/characters/valerie.png",
+        "cells": [
+          {
+            "row": 4,
+            "col": 0
+          }
+        ]
+      },
+      "characters": [
+        "valerie"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Valerie Price, 28, female. Receptionist at the Golden Sands Hotel. Glamorous and sardonic; sharp 1987 shoulders, gold earrings, immaculate. Bored expression as a resting state. POSE: Facing the camera, examining her nails at arm's length, one shoulder dropped, thoroughly bored. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
       "id": "portrait.valerie",
       "scene": null,
       "type": "portrait",
@@ -7030,7 +8224,7 @@
       "path": "/assets/characters/graham.png",
       "dimensions": {
         "width": 288,
-        "height": 320
+        "height": 400
       },
       "transparency": "alpha-required",
       "animation": {
@@ -7038,9 +8232,9 @@
         "frameWidth": 48,
         "frameHeight": 80,
         "columns": 6,
-        "rows": 4,
+        "rows": 5,
         "sheetWidth": 288,
-        "sheetHeight": 320,
+        "sheetHeight": 400,
         "states": [
           "idle",
           "walk",
@@ -7050,9 +8244,10 @@
           "happy",
           "frightened",
           "worried",
-          "smug"
+          "smug",
+          "fidget"
         ],
-        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Anchor is bottom-centre of each frame - the character stands on that point."
+        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Row 4 column 0 is the idle fidget. Anchor is bottom-centre of each frame - the character stands on that point."
       },
       "characters": [
         "graham"
@@ -7349,6 +8544,158 @@
       "priority": "p1"
     },
     {
+      "id": "char.graham.front_alarm",
+      "scene": "video_shop",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/graham.front_alarm.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.graham",
+        "sheetPath": "/assets/characters/graham.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 0
+          },
+          {
+            "row": 3,
+            "col": 3
+          }
+        ]
+      },
+      "characters": [
+        "graham"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Graham, 34, male. Owns the video rental shop. Slightly-too-tight polo shirt, moustache, the unhurried patience of a man who has heard every excuse twice. POSE: Facing the camera, alarmed: eyes wide, shoulders up, both hands raised a little in front of the chest, leaning back very slightly. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.graham.front_annoyed",
+      "scene": "video_shop",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/graham.front_annoyed.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.graham",
+        "sheetPath": "/assets/characters/graham.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 1
+          },
+          {
+            "row": 3,
+            "col": 4
+          }
+        ]
+      },
+      "characters": [
+        "graham"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Graham, 34, male. Owns the video rental shop. Slightly-too-tight polo shirt, moustache, the unhurried patience of a man who has heard every excuse twice. POSE: Facing the camera, thoroughly unimpressed: head tilted, eyebrows down, arms folded, weight on one hip. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.graham.front_pleased",
+      "scene": "video_shop",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/graham.front_pleased.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.graham",
+        "sheetPath": "/assets/characters/graham.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 2
+          },
+          {
+            "row": 3,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "graham"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Graham, 34, male. Owns the video rental shop. Slightly-too-tight polo shirt, moustache, the unhurried patience of a man who has heard every excuse twice. POSE: Facing the camera, quietly delighted with themselves: chin up, small smile, hands on hips or one thumb hooked in a pocket. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.graham.front_fidget",
+      "scene": "video_shop",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/graham.front_fidget.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.graham",
+        "sheetPath": "/assets/characters/graham.png",
+        "cells": [
+          {
+            "row": 4,
+            "col": 0
+          }
+        ]
+      },
+      "characters": [
+        "graham"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Graham, 34, male. Owns the video rental shop. Slightly-too-tight polo shirt, moustache, the unhurried patience of a man who has heard every excuse twice. POSE: Facing the camera, tugging his too-tight polo shirt down over his stomach and smoothing his moustache with a thumb. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
       "id": "portrait.graham",
       "scene": null,
       "type": "portrait",
@@ -7379,7 +8726,7 @@
       "path": "/assets/characters/vale.png",
       "dimensions": {
         "width": 288,
-        "height": 320
+        "height": 400
       },
       "transparency": "alpha-required",
       "animation": {
@@ -7387,9 +8734,9 @@
         "frameWidth": 48,
         "frameHeight": 80,
         "columns": 6,
-        "rows": 4,
+        "rows": 5,
         "sheetWidth": 288,
-        "sheetHeight": 320,
+        "sheetHeight": 400,
         "states": [
           "idle",
           "walk",
@@ -7399,9 +8746,10 @@
           "happy",
           "frightened",
           "worried",
-          "smug"
+          "smug",
+          "fidget"
         ],
-        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Anchor is bottom-centre of each frame - the character stands on that point."
+        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Row 4 column 0 is the idle fidget. Anchor is bottom-centre of each frame - the character stands on that point."
       },
       "characters": [
         "vale"
@@ -7698,6 +9046,158 @@
       "priority": "p2"
     },
     {
+      "id": "char.drvale.front_alarm",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/vale.front_alarm.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.drvale",
+        "sheetPath": "/assets/characters/vale.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 0
+          },
+          {
+            "row": 3,
+            "col": 3
+          }
+        ]
+      },
+      "characters": [
+        "vale"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Dr Elliot Vale. White shirt, dark trousers, black tie - always exactly this. Row 3 holds his three states instead of expressions: 0 = full black silhouette with no facial detail at all, 1 = normal and fully rendered, 2 = distorted, as though torn by scanlines. His face must be unreadable in state 0. POSE: Facing the camera, alarmed: eyes wide, shoulders up, both hands raised a little in front of the chest, leaning back very slightly. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p2"
+    },
+    {
+      "id": "char.drvale.front_annoyed",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/vale.front_annoyed.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.drvale",
+        "sheetPath": "/assets/characters/vale.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 1
+          },
+          {
+            "row": 3,
+            "col": 4
+          }
+        ]
+      },
+      "characters": [
+        "vale"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Dr Elliot Vale. White shirt, dark trousers, black tie - always exactly this. Row 3 holds his three states instead of expressions: 0 = full black silhouette with no facial detail at all, 1 = normal and fully rendered, 2 = distorted, as though torn by scanlines. His face must be unreadable in state 0. POSE: Facing the camera, thoroughly unimpressed: head tilted, eyebrows down, arms folded, weight on one hip. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p2"
+    },
+    {
+      "id": "char.drvale.front_pleased",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/vale.front_pleased.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.drvale",
+        "sheetPath": "/assets/characters/vale.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 2
+          },
+          {
+            "row": 3,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "vale"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Dr Elliot Vale. White shirt, dark trousers, black tie - always exactly this. Row 3 holds his three states instead of expressions: 0 = full black silhouette with no facial detail at all, 1 = normal and fully rendered, 2 = distorted, as though torn by scanlines. His face must be unreadable in state 0. POSE: Facing the camera, quietly delighted with themselves: chin up, small smile, hands on hips or one thumb hooked in a pocket. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p2"
+    },
+    {
+      "id": "char.drvale.front_fidget",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/vale.front_fidget.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.drvale",
+        "sheetPath": "/assets/characters/vale.png",
+        "cells": [
+          {
+            "row": 4,
+            "col": 0
+          }
+        ]
+      },
+      "characters": [
+        "vale"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Dr Elliot Vale. White shirt, dark trousers, black tie - always exactly this. Row 3 holds his three states instead of expressions: 0 = full black silhouette with no facial detail at all, 1 = normal and fully rendered, 2 = distorted, as though torn by scanlines. His face must be unreadable in state 0. POSE: Facing the camera, mid-fidget: shifting weight onto the other foot and adjusting their own clothing, entirely unselfconsciously. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p2"
+    },
+    {
       "id": "portrait.vale",
       "scene": null,
       "type": "portrait",
@@ -7728,7 +9228,7 @@
       "path": "/assets/characters/guest.png",
       "dimensions": {
         "width": 288,
-        "height": 320
+        "height": 400
       },
       "transparency": "alpha-required",
       "animation": {
@@ -7736,9 +9236,9 @@
         "frameWidth": 48,
         "frameHeight": 80,
         "columns": 6,
-        "rows": 4,
+        "rows": 5,
         "sheetWidth": 288,
-        "sheetHeight": 320,
+        "sheetHeight": 400,
         "states": [
           "idle",
           "walk",
@@ -7748,9 +9248,10 @@
           "happy",
           "frightened",
           "worried",
-          "smug"
+          "smug",
+          "fidget"
         ],
-        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Anchor is bottom-centre of each frame - the character stands on that point."
+        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Row 4 column 0 is the idle fidget. Anchor is bottom-centre of each frame - the character stands on that point."
       },
       "characters": [
         "guest"
@@ -8044,6 +9545,158 @@
         "notes": "Assembled into the character sheet by assets:ingest."
       },
       "description": "A hotel guest, adult male, seen for one comic beat wrapped in a bath towel from the waist down. Drawn from the chest up in near-silhouette against a bright doorway; no explicit detail. He is calm and dignified; the joke is entirely Jack's reaction. POSE: Seen from directly behind, facing away from the camera, arms at the sides. No face visible. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p2"
+    },
+    {
+      "id": "char.guest.front_alarm",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/guest.front_alarm.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.guest",
+        "sheetPath": "/assets/characters/guest.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 0
+          },
+          {
+            "row": 3,
+            "col": 3
+          }
+        ]
+      },
+      "characters": [
+        "guest"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "A hotel guest, adult male, seen for one comic beat wrapped in a bath towel from the waist down. Drawn from the chest up in near-silhouette against a bright doorway; no explicit detail. He is calm and dignified; the joke is entirely Jack's reaction. POSE: Facing the camera, alarmed: eyes wide, shoulders up, both hands raised a little in front of the chest, leaning back very slightly. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p2"
+    },
+    {
+      "id": "char.guest.front_annoyed",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/guest.front_annoyed.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.guest",
+        "sheetPath": "/assets/characters/guest.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 1
+          },
+          {
+            "row": 3,
+            "col": 4
+          }
+        ]
+      },
+      "characters": [
+        "guest"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "A hotel guest, adult male, seen for one comic beat wrapped in a bath towel from the waist down. Drawn from the chest up in near-silhouette against a bright doorway; no explicit detail. He is calm and dignified; the joke is entirely Jack's reaction. POSE: Facing the camera, thoroughly unimpressed: head tilted, eyebrows down, arms folded, weight on one hip. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p2"
+    },
+    {
+      "id": "char.guest.front_pleased",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/guest.front_pleased.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.guest",
+        "sheetPath": "/assets/characters/guest.png",
+        "cells": [
+          {
+            "row": 3,
+            "col": 2
+          },
+          {
+            "row": 3,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "guest"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "A hotel guest, adult male, seen for one comic beat wrapped in a bath towel from the waist down. Drawn from the chest up in near-silhouette against a bright doorway; no explicit detail. He is calm and dignified; the joke is entirely Jack's reaction. POSE: Facing the camera, quietly delighted with themselves: chin up, small smile, hands on hips or one thumb hooked in a pocket. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p2"
+    },
+    {
+      "id": "char.guest.front_fidget",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/guest.front_fidget.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.guest",
+        "sheetPath": "/assets/characters/guest.png",
+        "cells": [
+          {
+            "row": 4,
+            "col": 0
+          }
+        ]
+      },
+      "characters": [
+        "guest"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "A hotel guest, adult male, seen for one comic beat wrapped in a bath towel from the waist down. Drawn from the chest up in near-silhouette against a bright doorway; no explicit detail. He is calm and dignified; the joke is entirely Jack's reaction. POSE: Facing the camera, gripping the knot of his towel with one hand and standing on his dignity. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
       "priority": "p2"
     },
     {

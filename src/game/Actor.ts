@@ -121,6 +121,17 @@ export class Actor {
     this.playIdle();
   }
 
+  /**
+   * Seconds until this character does their idle fidget.
+   *
+   * A character standing perfectly still is the tell that they are a picture
+   * rather than a person, and the fix is cheap: every so often, when nothing
+   * else is happening, play their own bit of business once and go back to
+   * standing. Staggered per actor so a room does not twitch in unison.
+   */
+  private fidgetTimer = 8 + Math.random() * 18;
+  private fidgeting = false;
+
   /** Patrol route, if this character paces. Driven by AdventureScreen. */
   patrol: [number, number][] | null = null;
   patrolPause: [number, number] = [2, 6];
@@ -205,6 +216,33 @@ export class Actor {
     return this.facing === 'west' && !this.anim.sheet.hasAnimation(`${this.restAnim}.west`);
   }
 
+  /**
+   * Tick the idle fidget. Called from update once movement has been resolved,
+   * and only when the character is standing in their resting state - never
+   * over a scripted emotion, which would throw away what the script asked for.
+   */
+  private updateFidget(dt: number): void {
+    if (!this.anim.sheet.hasAnimation('fidget')) return;
+    if (this.isWalking || this.restAnim !== 'idle') {
+      if (this.fidgeting) this.fidgeting = false;
+      return;
+    }
+    this.fidgetTimer -= dt;
+    if (this.fidgeting) {
+      if (this.fidgetTimer <= 0) {
+        this.fidgeting = false;
+        this.fidgetTimer = 9 + Math.random() * 20;
+        this.playIdle();
+      }
+      return;
+    }
+    if (this.fidgetTimer <= 0) {
+      this.fidgeting = true;
+      this.fidgetTimer = 0.9 + Math.random() * 0.7;
+      this.playDirectional('fidget');
+    }
+  }
+
   update(
     dt: number,
     boxes: number[][] | undefined,
@@ -272,6 +310,7 @@ export class Actor {
       }
     }
 
+    this.updateFidget(dt);
     this.anim.update(dt);
   }
 

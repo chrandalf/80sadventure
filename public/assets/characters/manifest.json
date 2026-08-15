@@ -5,10 +5,10 @@
       "frameWidth": 48,
       "frameHeight": 80,
       "columns": 6,
-      "rows": 4,
+      "rows": 5,
       "anchorX": 24,
       "anchorY": 80,
-      "_layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is the right-facing row mirrored automatically, so you never draw it. Columns 0-3 of rows 0-2 are the walk cycle (col 0 doubles as the standing pose); columns 4-5 are the two-frame talk loop.",
+      "_layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions, row 4 = idle business. Left-facing is the right-facing row mirrored automatically, so you never draw it. Columns 0-3 of rows 0-2 are the walk cycle (col 0 doubles as the standing pose); columns 4-5 are the two-frame talk loop. Row 4 col 0 is the character's own idle fidget, played now and then when they have been standing still.",
       "animations": {
         "idle": {
           "frames": [
@@ -124,6 +124,13 @@
         "smug": {
           "frames": [
             23
+          ],
+          "fps": 0,
+          "loop": false
+        },
+        "fidget": {
+          "frames": [
+            24
           ],
           "fps": 0,
           "loop": false
