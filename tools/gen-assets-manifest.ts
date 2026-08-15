@@ -141,7 +141,10 @@ function describeScene(scene: Scene, spots: HotspotSpec[]): string {
   if (exits.length) parts.push(`Visible ways out: ${exits.join('; ')}.`);
   if (cast.length) parts.push(`Characters stand in this room (drawn separately, not in the background): ${cast.join(', ')}.`);
   parts.push(
-    'No characters, no text, no UI, no watermark in the background plate itself.',
+    // "No characters" flatly contradicts a must-depict list that names a
+    // figure, and a contradicted prompt gets reasoned about rather than drawn.
+    // What is meant is that the cast are sprites, not painted into the plate.
+    'None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark.',
     `Compose the important content in the top ${PLAY_HEIGHT} rows; the bottom ${GAME_HEIGHT - PLAY_HEIGHT} rows sit behind the interface panel during play.`,
   );
   return parts.join(' ');
@@ -246,6 +249,49 @@ const CHARACTER_BRIEFS: Record<string, string> = {
   crowd: 'A generic arcade punter, recoloured per instance to populate the early-evening arcade. Ordinary British 1987 casual clothing, nothing distinctive.',
 };
 
+/**
+ * The poses each character is generated in, and which cells of the sheet each
+ * one fills.
+ *
+ * A model cannot draw twenty-four consistent frames, but it can draw six
+ * separate pictures of the same person. Ingest assembles them, scaling the
+ * whole set by one factor so nobody changes height between frames. Cells no
+ * pose claims fall back to the standing pose, so a missing generation costs
+ * that movement rather than the character.
+ */
+const POSES = [
+  {
+    key: 'front_stand',
+    cells: [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [3, 0], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5]],
+    brief: 'Standing still, facing the camera, arms relaxed at the sides, feet together, weight even.',
+  },
+  {
+    key: 'front_talk',
+    cells: [[0, 5]],
+    brief: 'Facing the camera mid-sentence: mouth open, chin slightly raised, one hand lifted a little as if explaining something. Same stance and same feet as the standing pose.',
+  },
+  {
+    key: 'side_stand',
+    cells: [[1, 0], [1, 2], [1, 4], [1, 5]],
+    brief: 'In full profile facing to the right, standing still, arms at the sides, feet together.',
+  },
+  {
+    key: 'side_walk_a',
+    cells: [[1, 1]],
+    brief: 'In full profile facing to the right, mid-stride: near leg forward and bent at the knee, far arm swung forward, body leaning very slightly into the step.',
+  },
+  {
+    key: 'side_walk_b',
+    cells: [[1, 3]],
+    brief: 'In full profile facing to the right, mid-stride on the opposite foot to the other walking pose: far leg forward, near arm swung forward.',
+  },
+  {
+    key: 'back_stand',
+    cells: [[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5]],
+    brief: 'Seen from directly behind, facing away from the camera, arms at the sides. No face visible.',
+  },
+] as const;
+
 for (const [id, def] of Object.entries(CHARACTERS)) {
   if (!def.sprite) continue;
   const scenes = appearsIn.get(id) ?? [];
@@ -281,6 +327,36 @@ for (const [id, def] of Object.entries(CHARACTERS)) {
       `Appears in: ${scenes.length ? scenes.join(', ') : 'cutscenes only'}.`,
     priority: id === 'jack' ? 'p0' : scenes.length ? 'p1' : 'p2',
   });
+
+  for (const pose of POSES) {
+    assets.push({
+      id: `${def.sprite}.${pose.key}`,
+      scene: scenes[0] ?? null,
+      type: 'character-pose',
+      path: `/assets/characters/poses/${id}.${pose.key}.png`,
+      dimensions: { width: PERSON.frameWidth, height: PERSON.frameHeight },
+      transparency: 'alpha-required',
+      animation: { animated: false },
+      // How ingest folds this picture into the sheet.
+      assemble: {
+        sheet: def.sprite,
+        sheetPath: `/assets/characters/${id}.png`,
+        cells: pose.cells.map(([row, col]) => ({ row, col })),
+      },
+      characters: [id],
+      hotspots: [],
+      layering: { plane: 'midground', depthSorted: true, notes: 'Assembled into the character sheet by assets:ingest.' },
+      description:
+        `${CHARACTER_BRIEFS[id] ?? def.name} ` +
+        `POSE: ${pose.brief} ` +
+        'One single full-length figure, whole body visible from the top of the head to the soles of the shoes, ' +
+        'standing at the same height and the same distance from the camera in every pose of this set. ' +
+        'Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, ' +
+        'flat cel shading with two or three tones per surface, no gradients. ' +
+        'Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.',
+      priority: id === 'jack' ? 'p0' : scenes.length ? 'p1' : 'p2',
+    });
+  }
 
   assets.push({
     id: `portrait.${id}`,

@@ -63,7 +63,11 @@ const { artDirection: art, renderResolution: res } = manifest;
  */
 function sizeFor(asset) {
   const full = asset.dimensions.width === res.width && asset.dimensions.height === res.height;
-  return full ? '1536x1024' : '1024x1024';
+  if (full) return '1536x1024';
+  // A standing figure is far taller than it is wide; a square frame spends most
+  // of itself on empty background either side.
+  if (asset.type === 'character-pose' || asset.type === 'character-sheet') return '1024x1536';
+  return '1024x1024';
 }
 
 function qualityFor(asset) {
@@ -110,6 +114,12 @@ function framing(asset) {
           : 'Everything that is not the subject must be fully transparent, not white and not black.',
         'The image will be centre-cropped slightly, so let the effect run past all four edges.',
       ].join(' ');
+    case 'character-pose':
+      return [
+        'One single figure, alone, in the pose described below, the whole body visible from the top of the head to the soles of the shoes with clear space above and below.',
+        `Isolated on ${EMPTY_BG()} - no floor, no cast shadow, no scenery, no second figure.`,
+        'Do not draw a grid, a contact sheet or several poses side by side: one picture, one pose.',
+      ].join(' ');
     case 'character-sheet':
       return [
         'One single full-length standing figure, alone, facing the camera, arms relaxed at the sides, feet together, whole body visible from the top of the head to the soles of the shoes with clear space around it.',
@@ -134,7 +144,12 @@ function framing(asset) {
 const CLARIFY = {
   'char.guest': 'Fully covered and non-explicit: an ordinary adult in a bath towel as seen in a broad television sitcom. No nudity.',
   'portrait.guest': 'Fully covered and non-explicit: an ordinary adult in a bath towel as seen in a broad television sitcom. No nudity.',
-  'bg.nudist_beach': 'A deserted shingle beach late at night, lit by moonlight. Any figure is distant, fully obscured by the umbrella, towel and windbreak, and reads only as a shape. Nothing explicit and no nudity: this is a seaside-postcard joke, staged entirely through objects in the way.',
+  'bg.nudist_beach': [
+    'A moonlit shingle beach. This is the naturist end of the beach and the joke is a seaside postcard, so the bathers are implied rather than shown.',
+    'Stage it entirely through things in the way: two or three bathers behind the striped windbreak, visible only as heads and shoulders above its top edge; one pair of feet sticking out past the far end of it; a neatly folded pile of clothes and a pair of shoes on the towel beside the umbrella.',
+    'Nothing below the shoulders of any figure is visible at any point. No torsos, no anatomy, no bare skin beyond faces, necks and feet. The windbreak, the umbrella and the bank of shingle do all of the concealing.',
+    'Coy and comic in the manner of a 1970s British seaside postcard, never explicit.',
+  ].join(' '),
   'bg.pool_cabins': 'Closed wooden changing cabins beside an empty pool at night. Doors shut, nobody visible. Nothing explicit and no nudity.',
 };
 

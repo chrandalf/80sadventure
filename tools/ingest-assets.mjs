@@ -305,6 +305,9 @@ const skipped = [];
 const unmatched = [];
 const failed = [];
 
+/** Poses waiting to be folded into a sheet, keyed by the sheet they belong to. */
+const poseSets = new Map();
+
 for (const file of files) {
   const stem = basename(file, extname(file));
   const asset = byAlias.get(stem);
@@ -320,6 +323,16 @@ for (const file of files) {
     src = PNG.sync.read(readFileSync(resolve(dir, file)));
   } catch (e) {
     failed.push([file, `unreadable: ${e.message}`]);
+    continue;
+  }
+
+  // A pose is not an asset on its own - it is one cell of a sheet. Hold it and
+  // assemble once every pose of that character has been read.
+  if (asset.type === 'character-pose' && asset.assemble) {
+    keyOutFlatBorder(src);
+    const set = poseSets.get(asset.assemble.sheet) ?? { asset, poses: [] };
+    set.poses.push({ id: asset.id, img: src, cells: asset.assemble.cells });
+    poseSets.set(asset.assemble.sheet, set);
     continue;
   }
 
@@ -362,6 +375,87 @@ for (const file of files) {
     writeFileSync(dest, PNG.sync.write(out));
   }
   written.push([asset.id, `${src.width}x${src.height} -> ${w}x${h} ${how}`]);
+}
+
+/* --------------------------------------------------------------- assemble */
+
+for (const [sheetId, set] of poseSets) {
+  const sheetAsset = manifest.assets.find((a) => a.id === sheetId);
+  if (!sheetAsset) {
+    failed.push([sheetId, 'poses supplied for a sheet that is not in the manifest']);
+    continue;
+  }
+  const { frameWidth: fw, frameHeight: fh, columns, rows } = sheetAsset.animation;
+
+  const trimmed = set.poses.map((pose) => {
+    const b = alphaBounds(pose.img) ?? { x: 0, y: 0, w: pose.img.width, h: pose.img.height };
+    return { ...pose, bounds: b };
+  });
+
+  /*
+   * One scale for the whole set, taken from the tallest pose.
+   *
+   * Scaling each pose to fill its own cell would make the character grow and
+   * shrink between frames, because a walking figure's bounding box is a
+   * different shape from a standing one. Sizing them all together keeps the
+   * head at a constant height and the feet on the ground.
+   */
+  const tallest = Math.max(...trimmed.map((t) => t.bounds.h));
+  const widest = Math.max(...trimmed.map((t) => t.bounds.w));
+  const scale = Math.min(fh / tallest, fw / widest);
+
+  const sheet = blank(fw * columns, fh * rows);
+  const filled = new Set();
+  let standing = null;
+
+  for (const pose of trimmed) {
+    const dw = Math.max(1, Math.round(pose.bounds.w * scale));
+    const dh = Math.max(1, Math.round(pose.bounds.h * scale));
+    const cell = resample(pose.img, pose.bounds.x, pose.bounds.y, pose.bounds.w, pose.bounds.h, dw, dh);
+    binarise(cell);
+    // Bottom-centred: the anchor is the soles of the feet.
+    const ox = Math.round((fw - dw) / 2);
+    const oy = fh - dh;
+    for (const { row, col } of pose.cells) {
+      blit(sheet, cell, col * fw + ox, row * fh + oy);
+      filled.add(`${row},${col}`);
+    }
+    if (pose.id.endsWith('front_stand')) standing = { cell, ox, oy };
+  }
+
+  // Any cell no supplied pose claims falls back to standing, so a pose that
+  // failed to generate costs that movement rather than the whole character.
+  const fallback = standing ?? (() => {
+    const first = trimmed[0];
+    if (!first) return null;
+    const dw = Math.max(1, Math.round(first.bounds.w * scale));
+    const dh = Math.max(1, Math.round(first.bounds.h * scale));
+    const cell = resample(first.img, first.bounds.x, first.bounds.y, first.bounds.w, first.bounds.h, dw, dh);
+    binarise(cell);
+    return { cell, ox: Math.round((fw - dw) / 2), oy: fh - dh };
+  })();
+
+  let gaps = 0;
+  if (fallback) {
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < columns; col++) {
+        if (filled.has(`${row},${col}`)) continue;
+        blit(sheet, fallback.cell, col * fw + fallback.ox, row * fh + fallback.oy);
+        gaps++;
+      }
+    }
+  }
+
+  const dest = resolve(ROOT, 'public' + sheetAsset.path.replace(/\.(webp|jpe?g)$/i, '.png'));
+  if (existsSync(dest) && !force) {
+    skipped.push([sheetId, `assembled from ${set.poses.length} poses, but a sheet exists - use --force`]);
+    continue;
+  }
+  if (!dry) {
+    mkdirSync(dirname(dest), { recursive: true });
+    writeFileSync(dest, PNG.sync.write(sheet));
+  }
+  written.push([sheetId, `${set.poses.length} poses -> ${fw * columns}x${fh * rows}${gaps ? `, ${gaps} cells filled from the standing pose` : ''}`]);
 }
 
 /* ----------------------------------------------------------------- report */

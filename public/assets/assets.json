@@ -25,11 +25,12 @@
     ]
   },
   "counts": {
-    "total": 92,
+    "total": 152,
     "byType": {
       "background": 33,
       "background-layer": 1,
       "character-sheet": 10,
+      "character-pose": 60,
       "portrait": 10,
       "prop": 1,
       "inventory-icon": 33,
@@ -37,9 +38,9 @@
       "effect": 3
     },
     "byPriority": {
-      "p1": 73,
-      "p0": 2,
-      "p2": 17
+      "p1": 115,
+      "p0": 8,
+      "p2": 29
     }
   },
   "assets": [
@@ -237,7 +238,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Starlight Arcade - Lobby. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Space Wars Poster (around x320, y98); Office Door (around x508, y147); Vending Machine (around x189, y152); Cigarette Machine (around x254, y153); Change Counter (around x590, y218). Visible ways out: Arcade Floor; Seafront. Characters stand in this room (drawn separately, not in the background): Arthur. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Starlight Arcade - Lobby. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Space Wars Poster (around x320, y98); Office Door (around x508, y147); Vending Machine (around x189, y152); Cigarette Machine (around x254, y153); Change Counter (around x590, y218). Visible ways out: Arcade Floor; Seafront. Characters stand in this room (drawn separately, not in the background): Arthur. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -474,7 +475,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Starlight Arcade. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Coin Pusher (around x556, y211); Turbo Racer (around x201, y128); Space Wars (around x260, y123); Monster Manor (around x321, y124); Galactic Raiders (around x395, y127); Unmarked Machine (around x473, y136); Staff Door (around x51, y111). Visible ways out: Lobby. Characters stand in this room (drawn separately, not in the background): Kevin, Maggie. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Starlight Arcade. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Coin Pusher (around x556, y211); Turbo Racer (around x201, y128); Space Wars (around x260, y123); Monster Manor (around x321, y124); Galactic Raiders (around x395, y127); Unmarked Machine (around x473, y136); Staff Door (around x51, y111). Visible ways out: Lobby. Characters stand in this room (drawn separately, not in the background): Kevin, Maggie. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p0"
     },
     {
@@ -665,7 +666,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Arthur's Office. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Desk (around x284, y190); Framed Photograph (around x452, y92); Safe (around x540, y198); Filing Cabinet (around x66, y164); Television (around x606, y108); Telephone (around x240, y170). Visible ways out: Lobby. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Arthur's Office. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Desk (around x284, y190); Framed Photograph (around x452, y92); Safe (around x540, y198); Filing Cabinet (around x66, y164); Television (around x606, y108); Telephone (around x240, y170). Visible ways out: Lobby. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -774,7 +775,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Arcade Basement. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Fuse Box (around x492, y120); Dust Sheets (around x132, y160); Floor Hatch (around x320, y240). Visible ways out: Arcade Floor. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Arcade Basement. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Fuse Box (around x492, y120); Dust Sheets (around x132, y160); Floor Hatch (around x320, y240). Visible ways out: Arcade Floor. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -863,7 +864,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Arcade Roof. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Aerial Mast (around x490, y128); Parapet (around x320, y190). Visible ways out: Hatch. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Arcade Roof. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Aerial Mast (around x490, y128); Parapet (around x320, y190). Visible ways out: Hatch. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -1065,7 +1066,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "The Seafront. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Railings (around x320, y154); Newspaper (around x110, y236); Television Listings (around x170, y236). Visible ways out: Starlight Arcade; Fish & Chip Shop; Back Alley; The Lido; The Pier; Town Centre. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "The Seafront. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Railings (around x320, y154); Newspaper (around x110, y236); Television Listings (around x170, y236). Visible ways out: Starlight Arcade; Fish & Chip Shop; Back Alley; The Lido; The Pier; Town Centre. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -1230,7 +1231,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "The Pier. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Photographic Booth (around x508, y120); Woman in a Red Coat (around x224, y192); Lighthouse (around x50, y102). Visible ways out: Seafront; Pier Café; Abandoned Cinema; Lighthouse. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "The Pier. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Photographic Booth (around x508, y120); Woman in a Red Coat (around x224, y192); Lighthouse (around x50, y102). Visible ways out: Seafront; Pier Café; Abandoned Cinema; Lighthouse. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -1337,7 +1338,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Pier Café. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Tea Urn (around x86, y136); Formica Table (around x400, y198); Window (around x468, y88). Visible ways out: Pier. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Pier Café. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Tea Urn (around x86, y136); Formica Table (around x400, y198); Window (around x468, y88). Visible ways out: Pier. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -1444,7 +1445,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Fish & Chip Shop. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Fryers (around x230, y158); Butter (around x440, y190); Price List (around x508, y94). Visible ways out: Seafront. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Fish & Chip Shop. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Fryers (around x230, y158); Butter (around x440, y190); Price List (around x508, y94). Visible ways out: Seafront. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -1629,7 +1630,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Back Alley. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Bins (around x526, y204); Fire Door (around x112, y182); Puddle (around x240, y260); Dead Fly (around x362, y240); Dead Fly (around x390, y248); Dead Fly (around x418, y240). Visible ways out: Seafront; Piper's Television Emporium. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Back Alley. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Bins (around x526, y204); Fire Door (around x112, y182); Puddle (around x240, y260); Dead Fly (around x362, y240); Dead Fly (around x390, y248); Dead Fly (around x418, y240). Visible ways out: Seafront; Piper's Television Emporium. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -1739,7 +1740,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Piper's Television Emporium. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Wall of Televisions (around x316, y104); Aerial (around x540, y202). Visible ways out: Back Alley. Characters stand in this room (drawn separately, not in the background): Derek. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Piper's Television Emporium. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Wall of Televisions (around x316, y104); Aerial (around x540, y202). Visible ways out: Back Alley. Characters stand in this room (drawn separately, not in the background): Derek. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -1867,7 +1868,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Amusement Park. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Big Wheel (around x132, y116); Kiosk (around x452, y142). Visible ways out: Bus Station; Haunted House. Characters stand in this room (drawn separately, not in the background): Brenda. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Amusement Park. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Big Wheel (around x132, y116); Kiosk (around x452, y142). Visible ways out: Bus Station; Haunted House. Characters stand in this room (drawn separately, not in the background): Brenda. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -1975,7 +1976,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Haunted House. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Plastic Ghost (around x486, y126); Skeleton (around x140, y172); Rubber Duck (around x314, y256). Visible ways out: Amusement Park. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Haunted House. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Plastic Ghost (around x486, y126); Skeleton (around x140, y172); Rubber Duck (around x314, y256). Visible ways out: Amusement Park. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -2157,7 +2158,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Bus Station. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Timetable (around x452, y156); Bench (around x160, y190). Visible ways out: Seafront; Amusement Park; Telephone Box; Town Hall; Clock Tower; Golden Sands Hotel. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Bus Station. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Timetable (around x452, y156); Bench (around x160, y190). Visible ways out: Seafront; Amusement Park; Telephone Box; Town Hall; Clock Tower; Golden Sands Hotel. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -2244,7 +2245,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Telephone Box. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Telephone (around x320, y136); Cards (around x222, y106). Visible ways out: Bus Station. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Telephone Box. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Telephone (around x320, y136); Cards (around x222, y106). Visible ways out: Bus Station. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -2351,7 +2352,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Town Hall. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Notice Board (around x540, y138); Doors (around x320, y170). Visible ways out: Bus Station; Police Station. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Town Hall. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Notice Board (around x540, y138); Doors (around x320, y170). Visible ways out: Bus Station; Police Station. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -2439,7 +2440,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Police Station. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Missing Person Posters (around x536, y122); Desk Bell (around x354, y162). Visible ways out: Town Hall. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Police Station. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Missing Person Posters (around x536, y122); Desk Bell (around x354, y162). Visible ways out: Town Hall. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -2606,7 +2607,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "The Regal Cinema. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Marquee (around x320, y90); Boarded Doors (around x320, y168); Pavement Grating (around x164, y236); Woman in the Red Coat (around x498, y166); Poster Case (around x458, y164). Visible ways out: Pier; Inside. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "The Regal Cinema. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Marquee (around x320, y90); Boarded Doors (around x320, y168); Pavement Grating (around x164, y236); Woman in the Red Coat (around x498, y166); Poster Case (around x458, y164). Visible ways out: Pier; Inside. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -2733,7 +2734,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Cinema Lobby. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Ticket Booth (around x308, y140); Projection Room Door (around x588, y136); Carpet (around x130, y240). Visible ways out: Outside; Projection Room. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Cinema Lobby. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Ticket Booth (around x308, y140); Projection Room Door (around x588, y136); Carpet (around x130, y240). Visible ways out: Outside; Projection Room. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -2861,7 +2862,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Projection Room. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Projector (around x136, y122); Shelf (around x356, y220); Old Poster (around x432, y98); Film Cans (around x346, y234). Visible ways out: Lobby. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Projection Room. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Projector (around x136, y122); Shelf (around x356, y220); Old Poster (around x432, y98); Film Cans (around x346, y234). Visible ways out: Lobby. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -2987,7 +2988,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Clock Tower. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Clock Face (around x320, y90); Something on the Ground (around x404, y258); Maintenance Panel (around x320, y204). Visible ways out: Bus Station; Inside the Tower. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Clock Tower. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Clock Face (around x320, y90); Something on the Ground (around x404, y258); Maintenance Panel (around x320, y204). Visible ways out: Bus Station; Inside the Tower. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -3094,7 +3095,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Inside the Clock Tower. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Mechanism (around x172, y168); Back of the Clock Face (around x320, y104); Ledge (around x492, y210). Visible ways out: Outside. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Inside the Clock Tower. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Mechanism (around x172, y168); Back of the Clock Face (around x320, y104); Ledge (around x492, y210). Visible ways out: Outside. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -3204,7 +3205,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "The Lighthouse. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Lighthouse Door (around x452, y198); Rocks (around x130, y258). Visible ways out: Pier. Characters stand in this room (drawn separately, not in the background): Maggie. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "The Lighthouse. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Lighthouse Door (around x452, y198); Rocks (around x130, y258). Visible ways out: Pier. Characters stand in this room (drawn separately, not in the background): Maggie. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -3330,7 +3331,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Inside the Lighthouse. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Log Book (around x444, y234); Keeper's Locker (around x238, y214); Porthole (around x114, y122); Stairs (around x320, y130). Visible ways out: Outside. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Inside the Lighthouse. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Log Book (around x444, y234); Keeper's Locker (around x238, y214); Porthole (around x114, y122); Stairs (around x320, y130). Visible ways out: Outside. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -3501,7 +3502,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Underground Machine Room. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: POWER Socket (around x228, y144); SIGNAL Socket (around x312, y144); MEMORY Socket (around x396, y144); Memory Master 3000 (around x320, y80). Visible ways out: Basement. Characters stand in this room (drawn separately, not in the background): Maggie, Arthur. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Underground Machine Room. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: POWER Socket (around x228, y144); SIGNAL Socket (around x312, y144); MEMORY Socket (around x396, y144); Memory Master 3000 (around x320, y80). Visible ways out: Basement. Characters stand in this room (drawn separately, not in the background): Maggie, Arthur. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -3668,7 +3669,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Golden Sands Hotel. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Key Pigeonholes (around x320, y112); Register (around x384, y164); Desk Bell (around x224, y160); Potted Palm (around x60, y198). Visible ways out: Bus Station; Stairs. Characters stand in this room (drawn separately, not in the background): Valerie. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Golden Sands Hotel. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Key Pigeonholes (around x320, y112); Register (around x384, y164); Desk Bell (around x224, y160); Potted Palm (around x60, y198). Visible ways out: Bus Station; Stairs. Characters stand in this room (drawn separately, not in the background): Valerie. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -3796,7 +3797,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Hotel Corridor. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Room 10 (around x50, y148); Room 11 (around x170, y144); Room 12 (around x330, y140); Room 14 (around x518, y144). Visible ways out: Reception. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Hotel Corridor. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Room 10 (around x50, y148); Room 11 (around x170, y144); Room 12 (around x330, y140); Room 14 (around x518, y144). Visible ways out: Reception. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -3924,7 +3925,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Room 12. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Bathroom Door (around x236, y128); Bed (around x150, y194); Dressing Table (around x546, y138); Window (around x374, y98). Visible ways out: Corridor. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Room 12. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Bathroom Door (around x236, y128); Bed (around x150, y194); Dressing Table (around x546, y138); Window (around x374, y98). Visible ways out: Corridor. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -4090,7 +4091,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Seafront Pool. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Cabin 1 (around x324, y142); Cabin 2 (around x412, y142); Cabin 3 (around x500, y142); Swimming Pool (around x122, y158); Sign (around x576, y228). Visible ways out: Seafront; The Far Beach. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Seafront Pool. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Cabin 1 (around x324, y142); Cabin 2 (around x412, y142); Cabin 3 (around x500, y142); Swimming Pool (around x122, y158); Sign (around x576, y228). Visible ways out: Seafront; The Far Beach. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -4237,7 +4238,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "The Far Beach. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Beach Umbrella (around x132, y150); Towel (around x278, y204); Sunbather (around x470, y162); Windbreak (around x566, y226); Shingle (around x130, y254). Visible ways out: Seafront Pool. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "The Far Beach. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Beach Umbrella (around x132, y150); Towel (around x278, y204); Sunbather (around x470, y162); Windbreak (around x566, y226); Shingle (around x130, y254). Visible ways out: Seafront Pool. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -4405,7 +4406,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Video Rental Shop. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Video Cassettes (around x198, y124); Display Projector (around x450, y144); Beaded Curtain (around x606, y108). Visible ways out: Back Alley; Graham's Office; Back Section. Characters stand in this room (drawn separately, not in the background): Graham. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Video Rental Shop. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Video Cassettes (around x198, y124); Display Projector (around x450, y144); Beaded Curtain (around x606, y108). Visible ways out: Back Alley; Graham's Office; Back Section. Characters stand in this room (drawn separately, not in the background): Graham. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -4492,7 +4493,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Back Section. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Shelf (around x320, y114); Sign (around x320, y178). Visible ways out: Video Shop. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Back Section. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Shelf (around x320, y114); Sign (around x320, y178). Visible ways out: Video Shop. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -4599,7 +4600,7 @@
         },
         "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
       },
-      "description": "Graham's Office. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Calendar (around x472, y116); Desk (around x230, y194); Pot Plant (around x590, y188). Visible ways out: Video Shop. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "description": "Graham's Office. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Calendar (around x472, y116); Desk (around x230, y194); Pot Plant (around x590, y188). Visible ways out: Video Shop. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p1"
     },
     {
@@ -4643,6 +4644,288 @@
         "notes": "Sorted against other characters and props by baseline y."
       },
       "description": "Jack Mercer, 20, male. Trainee arcade-machine technician and the player character. Cheap dark bomber jacket over a band t-shirt, jeans, trainers, unfortunate 1987 hair. Wiry, slightly slouched, permanently unimpressed.. Sprite sheet for a late-1980s VGA point-and-click adventure: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients, no anti-aliased edges. Fully transparent background. Consistent proportions and colours across every frame on the sheet. Appears in: cutscenes only.",
+      "priority": "p0"
+    },
+    {
+      "id": "char.jack.front_stand",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/jack.front_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.jack",
+        "sheetPath": "/assets/characters/jack.png",
+        "cells": [
+          {
+            "row": 0,
+            "col": 0
+          },
+          {
+            "row": 0,
+            "col": 1
+          },
+          {
+            "row": 0,
+            "col": 2
+          },
+          {
+            "row": 0,
+            "col": 3
+          },
+          {
+            "row": 0,
+            "col": 4
+          },
+          {
+            "row": 3,
+            "col": 0
+          },
+          {
+            "row": 3,
+            "col": 1
+          },
+          {
+            "row": 3,
+            "col": 2
+          },
+          {
+            "row": 3,
+            "col": 3
+          },
+          {
+            "row": 3,
+            "col": 4
+          },
+          {
+            "row": 3,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "jack"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Jack Mercer, 20, male. Trainee arcade-machine technician and the player character. Cheap dark bomber jacket over a band t-shirt, jeans, trainers, unfortunate 1987 hair. Wiry, slightly slouched, permanently unimpressed. POSE: Standing still, facing the camera, arms relaxed at the sides, feet together, weight even. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p0"
+    },
+    {
+      "id": "char.jack.front_talk",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/jack.front_talk.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.jack",
+        "sheetPath": "/assets/characters/jack.png",
+        "cells": [
+          {
+            "row": 0,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "jack"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Jack Mercer, 20, male. Trainee arcade-machine technician and the player character. Cheap dark bomber jacket over a band t-shirt, jeans, trainers, unfortunate 1987 hair. Wiry, slightly slouched, permanently unimpressed. POSE: Facing the camera mid-sentence: mouth open, chin slightly raised, one hand lifted a little as if explaining something. Same stance and same feet as the standing pose. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p0"
+    },
+    {
+      "id": "char.jack.side_stand",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/jack.side_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.jack",
+        "sheetPath": "/assets/characters/jack.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 0
+          },
+          {
+            "row": 1,
+            "col": 2
+          },
+          {
+            "row": 1,
+            "col": 4
+          },
+          {
+            "row": 1,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "jack"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Jack Mercer, 20, male. Trainee arcade-machine technician and the player character. Cheap dark bomber jacket over a band t-shirt, jeans, trainers, unfortunate 1987 hair. Wiry, slightly slouched, permanently unimpressed. POSE: In full profile facing to the right, standing still, arms at the sides, feet together. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p0"
+    },
+    {
+      "id": "char.jack.side_walk_a",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/jack.side_walk_a.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.jack",
+        "sheetPath": "/assets/characters/jack.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 1
+          }
+        ]
+      },
+      "characters": [
+        "jack"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Jack Mercer, 20, male. Trainee arcade-machine technician and the player character. Cheap dark bomber jacket over a band t-shirt, jeans, trainers, unfortunate 1987 hair. Wiry, slightly slouched, permanently unimpressed. POSE: In full profile facing to the right, mid-stride: near leg forward and bent at the knee, far arm swung forward, body leaning very slightly into the step. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p0"
+    },
+    {
+      "id": "char.jack.side_walk_b",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/jack.side_walk_b.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.jack",
+        "sheetPath": "/assets/characters/jack.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 3
+          }
+        ]
+      },
+      "characters": [
+        "jack"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Jack Mercer, 20, male. Trainee arcade-machine technician and the player character. Cheap dark bomber jacket over a band t-shirt, jeans, trainers, unfortunate 1987 hair. Wiry, slightly slouched, permanently unimpressed. POSE: In full profile facing to the right, mid-stride on the opposite foot to the other walking pose: far leg forward, near arm swung forward. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p0"
+    },
+    {
+      "id": "char.jack.back_stand",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/jack.back_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.jack",
+        "sheetPath": "/assets/characters/jack.png",
+        "cells": [
+          {
+            "row": 2,
+            "col": 0
+          },
+          {
+            "row": 2,
+            "col": 1
+          },
+          {
+            "row": 2,
+            "col": 2
+          },
+          {
+            "row": 2,
+            "col": 3
+          },
+          {
+            "row": 2,
+            "col": 4
+          },
+          {
+            "row": 2,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "jack"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Jack Mercer, 20, male. Trainee arcade-machine technician and the player character. Cheap dark bomber jacket over a band t-shirt, jeans, trainers, unfortunate 1987 hair. Wiry, slightly slouched, permanently unimpressed. POSE: Seen from directly behind, facing away from the camera, arms at the sides. No face visible. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
       "priority": "p0"
     },
     {
@@ -4713,6 +4996,288 @@
       "priority": "p1"
     },
     {
+      "id": "char.maggie.front_stand",
+      "scene": "starlight_arcade",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/maggie.front_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.maggie",
+        "sheetPath": "/assets/characters/maggie.png",
+        "cells": [
+          {
+            "row": 0,
+            "col": 0
+          },
+          {
+            "row": 0,
+            "col": 1
+          },
+          {
+            "row": 0,
+            "col": 2
+          },
+          {
+            "row": 0,
+            "col": 3
+          },
+          {
+            "row": 0,
+            "col": 4
+          },
+          {
+            "row": 3,
+            "col": 0
+          },
+          {
+            "row": 3,
+            "col": 1
+          },
+          {
+            "row": 3,
+            "col": 2
+          },
+          {
+            "row": 3,
+            "col": 3
+          },
+          {
+            "row": 3,
+            "col": 4
+          },
+          {
+            "row": 3,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "maggie"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Margaret \"Maggie\" Vale, 19, female. Works at the arcade. Practical and guarded, never styled as a romantic prize. Denim jacket, dark red top, jeans, boots. Stands like someone who knows more than she is saying. POSE: Standing still, facing the camera, arms relaxed at the sides, feet together, weight even. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.maggie.front_talk",
+      "scene": "starlight_arcade",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/maggie.front_talk.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.maggie",
+        "sheetPath": "/assets/characters/maggie.png",
+        "cells": [
+          {
+            "row": 0,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "maggie"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Margaret \"Maggie\" Vale, 19, female. Works at the arcade. Practical and guarded, never styled as a romantic prize. Denim jacket, dark red top, jeans, boots. Stands like someone who knows more than she is saying. POSE: Facing the camera mid-sentence: mouth open, chin slightly raised, one hand lifted a little as if explaining something. Same stance and same feet as the standing pose. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.maggie.side_stand",
+      "scene": "starlight_arcade",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/maggie.side_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.maggie",
+        "sheetPath": "/assets/characters/maggie.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 0
+          },
+          {
+            "row": 1,
+            "col": 2
+          },
+          {
+            "row": 1,
+            "col": 4
+          },
+          {
+            "row": 1,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "maggie"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Margaret \"Maggie\" Vale, 19, female. Works at the arcade. Practical and guarded, never styled as a romantic prize. Denim jacket, dark red top, jeans, boots. Stands like someone who knows more than she is saying. POSE: In full profile facing to the right, standing still, arms at the sides, feet together. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.maggie.side_walk_a",
+      "scene": "starlight_arcade",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/maggie.side_walk_a.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.maggie",
+        "sheetPath": "/assets/characters/maggie.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 1
+          }
+        ]
+      },
+      "characters": [
+        "maggie"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Margaret \"Maggie\" Vale, 19, female. Works at the arcade. Practical and guarded, never styled as a romantic prize. Denim jacket, dark red top, jeans, boots. Stands like someone who knows more than she is saying. POSE: In full profile facing to the right, mid-stride: near leg forward and bent at the knee, far arm swung forward, body leaning very slightly into the step. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.maggie.side_walk_b",
+      "scene": "starlight_arcade",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/maggie.side_walk_b.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.maggie",
+        "sheetPath": "/assets/characters/maggie.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 3
+          }
+        ]
+      },
+      "characters": [
+        "maggie"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Margaret \"Maggie\" Vale, 19, female. Works at the arcade. Practical and guarded, never styled as a romantic prize. Denim jacket, dark red top, jeans, boots. Stands like someone who knows more than she is saying. POSE: In full profile facing to the right, mid-stride on the opposite foot to the other walking pose: far leg forward, near arm swung forward. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.maggie.back_stand",
+      "scene": "starlight_arcade",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/maggie.back_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.maggie",
+        "sheetPath": "/assets/characters/maggie.png",
+        "cells": [
+          {
+            "row": 2,
+            "col": 0
+          },
+          {
+            "row": 2,
+            "col": 1
+          },
+          {
+            "row": 2,
+            "col": 2
+          },
+          {
+            "row": 2,
+            "col": 3
+          },
+          {
+            "row": 2,
+            "col": 4
+          },
+          {
+            "row": 2,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "maggie"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Margaret \"Maggie\" Vale, 19, female. Works at the arcade. Practical and guarded, never styled as a romantic prize. Denim jacket, dark red top, jeans, boots. Stands like someone who knows more than she is saying. POSE: Seen from directly behind, facing away from the camera, arms at the sides. No face visible. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
       "id": "portrait.maggie",
       "scene": null,
       "type": "portrait",
@@ -4777,6 +5342,288 @@
         "notes": "Sorted against other characters and props by baseline y."
       },
       "description": "Arthur Bell, 57, male. Owns the arcade. Enormous grey moustache, permanent mustard cardigan over shirt and tie, slacks. Slightly stooped, hands often in cardigan pockets.. Sprite sheet for a late-1980s VGA point-and-click adventure: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients, no anti-aliased edges. Fully transparent background. Consistent proportions and colours across every frame on the sheet. Appears in: arcade_lobby, arcade_machineroom.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.arthur.front_stand",
+      "scene": "arcade_lobby",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/arthur.front_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.arthur",
+        "sheetPath": "/assets/characters/arthur.png",
+        "cells": [
+          {
+            "row": 0,
+            "col": 0
+          },
+          {
+            "row": 0,
+            "col": 1
+          },
+          {
+            "row": 0,
+            "col": 2
+          },
+          {
+            "row": 0,
+            "col": 3
+          },
+          {
+            "row": 0,
+            "col": 4
+          },
+          {
+            "row": 3,
+            "col": 0
+          },
+          {
+            "row": 3,
+            "col": 1
+          },
+          {
+            "row": 3,
+            "col": 2
+          },
+          {
+            "row": 3,
+            "col": 3
+          },
+          {
+            "row": 3,
+            "col": 4
+          },
+          {
+            "row": 3,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "arthur"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Arthur Bell, 57, male. Owns the arcade. Enormous grey moustache, permanent mustard cardigan over shirt and tie, slacks. Slightly stooped, hands often in cardigan pockets. POSE: Standing still, facing the camera, arms relaxed at the sides, feet together, weight even. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.arthur.front_talk",
+      "scene": "arcade_lobby",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/arthur.front_talk.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.arthur",
+        "sheetPath": "/assets/characters/arthur.png",
+        "cells": [
+          {
+            "row": 0,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "arthur"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Arthur Bell, 57, male. Owns the arcade. Enormous grey moustache, permanent mustard cardigan over shirt and tie, slacks. Slightly stooped, hands often in cardigan pockets. POSE: Facing the camera mid-sentence: mouth open, chin slightly raised, one hand lifted a little as if explaining something. Same stance and same feet as the standing pose. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.arthur.side_stand",
+      "scene": "arcade_lobby",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/arthur.side_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.arthur",
+        "sheetPath": "/assets/characters/arthur.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 0
+          },
+          {
+            "row": 1,
+            "col": 2
+          },
+          {
+            "row": 1,
+            "col": 4
+          },
+          {
+            "row": 1,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "arthur"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Arthur Bell, 57, male. Owns the arcade. Enormous grey moustache, permanent mustard cardigan over shirt and tie, slacks. Slightly stooped, hands often in cardigan pockets. POSE: In full profile facing to the right, standing still, arms at the sides, feet together. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.arthur.side_walk_a",
+      "scene": "arcade_lobby",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/arthur.side_walk_a.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.arthur",
+        "sheetPath": "/assets/characters/arthur.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 1
+          }
+        ]
+      },
+      "characters": [
+        "arthur"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Arthur Bell, 57, male. Owns the arcade. Enormous grey moustache, permanent mustard cardigan over shirt and tie, slacks. Slightly stooped, hands often in cardigan pockets. POSE: In full profile facing to the right, mid-stride: near leg forward and bent at the knee, far arm swung forward, body leaning very slightly into the step. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.arthur.side_walk_b",
+      "scene": "arcade_lobby",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/arthur.side_walk_b.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.arthur",
+        "sheetPath": "/assets/characters/arthur.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 3
+          }
+        ]
+      },
+      "characters": [
+        "arthur"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Arthur Bell, 57, male. Owns the arcade. Enormous grey moustache, permanent mustard cardigan over shirt and tie, slacks. Slightly stooped, hands often in cardigan pockets. POSE: In full profile facing to the right, mid-stride on the opposite foot to the other walking pose: far leg forward, near arm swung forward. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.arthur.back_stand",
+      "scene": "arcade_lobby",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/arthur.back_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.arthur",
+        "sheetPath": "/assets/characters/arthur.png",
+        "cells": [
+          {
+            "row": 2,
+            "col": 0
+          },
+          {
+            "row": 2,
+            "col": 1
+          },
+          {
+            "row": 2,
+            "col": 2
+          },
+          {
+            "row": 2,
+            "col": 3
+          },
+          {
+            "row": 2,
+            "col": 4
+          },
+          {
+            "row": 2,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "arthur"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Arthur Bell, 57, male. Owns the arcade. Enormous grey moustache, permanent mustard cardigan over shirt and tie, slacks. Slightly stooped, hands often in cardigan pockets. POSE: Seen from directly behind, facing away from the camera, arms at the sides. No face visible. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
       "priority": "p1"
     },
     {
@@ -4847,6 +5694,288 @@
       "priority": "p1"
     },
     {
+      "id": "char.derek.front_stand",
+      "scene": "tv_shop",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/derek.front_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.derek",
+        "sheetPath": "/assets/characters/derek.png",
+        "cells": [
+          {
+            "row": 0,
+            "col": 0
+          },
+          {
+            "row": 0,
+            "col": 1
+          },
+          {
+            "row": 0,
+            "col": 2
+          },
+          {
+            "row": 0,
+            "col": 3
+          },
+          {
+            "row": 0,
+            "col": 4
+          },
+          {
+            "row": 3,
+            "col": 0
+          },
+          {
+            "row": 3,
+            "col": 1
+          },
+          {
+            "row": 3,
+            "col": 2
+          },
+          {
+            "row": 3,
+            "col": 3
+          },
+          {
+            "row": 3,
+            "col": 4
+          },
+          {
+            "row": 3,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "derek"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Derek Piper, 32, male. Television repairman and conspiracy theorist. Brown shop coat over a shirt, wild hair, oversized square glasses. Always mid-gesture, mid-explanation. POSE: Standing still, facing the camera, arms relaxed at the sides, feet together, weight even. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.derek.front_talk",
+      "scene": "tv_shop",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/derek.front_talk.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.derek",
+        "sheetPath": "/assets/characters/derek.png",
+        "cells": [
+          {
+            "row": 0,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "derek"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Derek Piper, 32, male. Television repairman and conspiracy theorist. Brown shop coat over a shirt, wild hair, oversized square glasses. Always mid-gesture, mid-explanation. POSE: Facing the camera mid-sentence: mouth open, chin slightly raised, one hand lifted a little as if explaining something. Same stance and same feet as the standing pose. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.derek.side_stand",
+      "scene": "tv_shop",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/derek.side_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.derek",
+        "sheetPath": "/assets/characters/derek.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 0
+          },
+          {
+            "row": 1,
+            "col": 2
+          },
+          {
+            "row": 1,
+            "col": 4
+          },
+          {
+            "row": 1,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "derek"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Derek Piper, 32, male. Television repairman and conspiracy theorist. Brown shop coat over a shirt, wild hair, oversized square glasses. Always mid-gesture, mid-explanation. POSE: In full profile facing to the right, standing still, arms at the sides, feet together. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.derek.side_walk_a",
+      "scene": "tv_shop",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/derek.side_walk_a.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.derek",
+        "sheetPath": "/assets/characters/derek.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 1
+          }
+        ]
+      },
+      "characters": [
+        "derek"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Derek Piper, 32, male. Television repairman and conspiracy theorist. Brown shop coat over a shirt, wild hair, oversized square glasses. Always mid-gesture, mid-explanation. POSE: In full profile facing to the right, mid-stride: near leg forward and bent at the knee, far arm swung forward, body leaning very slightly into the step. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.derek.side_walk_b",
+      "scene": "tv_shop",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/derek.side_walk_b.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.derek",
+        "sheetPath": "/assets/characters/derek.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 3
+          }
+        ]
+      },
+      "characters": [
+        "derek"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Derek Piper, 32, male. Television repairman and conspiracy theorist. Brown shop coat over a shirt, wild hair, oversized square glasses. Always mid-gesture, mid-explanation. POSE: In full profile facing to the right, mid-stride on the opposite foot to the other walking pose: far leg forward, near arm swung forward. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.derek.back_stand",
+      "scene": "tv_shop",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/derek.back_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.derek",
+        "sheetPath": "/assets/characters/derek.png",
+        "cells": [
+          {
+            "row": 2,
+            "col": 0
+          },
+          {
+            "row": 2,
+            "col": 1
+          },
+          {
+            "row": 2,
+            "col": 2
+          },
+          {
+            "row": 2,
+            "col": 3
+          },
+          {
+            "row": 2,
+            "col": 4
+          },
+          {
+            "row": 2,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "derek"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Derek Piper, 32, male. Television repairman and conspiracy theorist. Brown shop coat over a shirt, wild hair, oversized square glasses. Always mid-gesture, mid-explanation. POSE: Seen from directly behind, facing away from the camera, arms at the sides. No face visible. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
       "id": "portrait.derek",
       "scene": null,
       "type": "portrait",
@@ -4911,6 +6040,288 @@
         "notes": "Sorted against other characters and props by baseline y."
       },
       "description": "Kevin, 16, male. Arcade kid. Shell suit in colours that should not co-exist, trainers, pockets sagging with ten-pence pieces. Permanently smug posture.. Sprite sheet for a late-1980s VGA point-and-click adventure: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients, no anti-aliased edges. Fully transparent background. Consistent proportions and colours across every frame on the sheet. Appears in: starlight_arcade.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.kevin.front_stand",
+      "scene": "starlight_arcade",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/kevin.front_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.kevin",
+        "sheetPath": "/assets/characters/kevin.png",
+        "cells": [
+          {
+            "row": 0,
+            "col": 0
+          },
+          {
+            "row": 0,
+            "col": 1
+          },
+          {
+            "row": 0,
+            "col": 2
+          },
+          {
+            "row": 0,
+            "col": 3
+          },
+          {
+            "row": 0,
+            "col": 4
+          },
+          {
+            "row": 3,
+            "col": 0
+          },
+          {
+            "row": 3,
+            "col": 1
+          },
+          {
+            "row": 3,
+            "col": 2
+          },
+          {
+            "row": 3,
+            "col": 3
+          },
+          {
+            "row": 3,
+            "col": 4
+          },
+          {
+            "row": 3,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "kevin"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Kevin, 16, male. Arcade kid. Shell suit in colours that should not co-exist, trainers, pockets sagging with ten-pence pieces. Permanently smug posture. POSE: Standing still, facing the camera, arms relaxed at the sides, feet together, weight even. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.kevin.front_talk",
+      "scene": "starlight_arcade",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/kevin.front_talk.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.kevin",
+        "sheetPath": "/assets/characters/kevin.png",
+        "cells": [
+          {
+            "row": 0,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "kevin"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Kevin, 16, male. Arcade kid. Shell suit in colours that should not co-exist, trainers, pockets sagging with ten-pence pieces. Permanently smug posture. POSE: Facing the camera mid-sentence: mouth open, chin slightly raised, one hand lifted a little as if explaining something. Same stance and same feet as the standing pose. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.kevin.side_stand",
+      "scene": "starlight_arcade",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/kevin.side_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.kevin",
+        "sheetPath": "/assets/characters/kevin.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 0
+          },
+          {
+            "row": 1,
+            "col": 2
+          },
+          {
+            "row": 1,
+            "col": 4
+          },
+          {
+            "row": 1,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "kevin"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Kevin, 16, male. Arcade kid. Shell suit in colours that should not co-exist, trainers, pockets sagging with ten-pence pieces. Permanently smug posture. POSE: In full profile facing to the right, standing still, arms at the sides, feet together. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.kevin.side_walk_a",
+      "scene": "starlight_arcade",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/kevin.side_walk_a.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.kevin",
+        "sheetPath": "/assets/characters/kevin.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 1
+          }
+        ]
+      },
+      "characters": [
+        "kevin"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Kevin, 16, male. Arcade kid. Shell suit in colours that should not co-exist, trainers, pockets sagging with ten-pence pieces. Permanently smug posture. POSE: In full profile facing to the right, mid-stride: near leg forward and bent at the knee, far arm swung forward, body leaning very slightly into the step. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.kevin.side_walk_b",
+      "scene": "starlight_arcade",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/kevin.side_walk_b.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.kevin",
+        "sheetPath": "/assets/characters/kevin.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 3
+          }
+        ]
+      },
+      "characters": [
+        "kevin"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Kevin, 16, male. Arcade kid. Shell suit in colours that should not co-exist, trainers, pockets sagging with ten-pence pieces. Permanently smug posture. POSE: In full profile facing to the right, mid-stride on the opposite foot to the other walking pose: far leg forward, near arm swung forward. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.kevin.back_stand",
+      "scene": "starlight_arcade",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/kevin.back_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.kevin",
+        "sheetPath": "/assets/characters/kevin.png",
+        "cells": [
+          {
+            "row": 2,
+            "col": 0
+          },
+          {
+            "row": 2,
+            "col": 1
+          },
+          {
+            "row": 2,
+            "col": 2
+          },
+          {
+            "row": 2,
+            "col": 3
+          },
+          {
+            "row": 2,
+            "col": 4
+          },
+          {
+            "row": 2,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "kevin"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Kevin, 16, male. Arcade kid. Shell suit in colours that should not co-exist, trainers, pockets sagging with ten-pence pieces. Permanently smug posture. POSE: Seen from directly behind, facing away from the camera, arms at the sides. No face visible. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
       "priority": "p1"
     },
     {
@@ -4981,6 +6392,288 @@
       "priority": "p1"
     },
     {
+      "id": "char.brenda.front_stand",
+      "scene": "amusement_park",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/brenda.front_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.brenda",
+        "sheetPath": "/assets/characters/brenda.png",
+        "cells": [
+          {
+            "row": 0,
+            "col": 0
+          },
+          {
+            "row": 0,
+            "col": 1
+          },
+          {
+            "row": 0,
+            "col": 2
+          },
+          {
+            "row": 0,
+            "col": 3
+          },
+          {
+            "row": 0,
+            "col": 4
+          },
+          {
+            "row": 3,
+            "col": 0
+          },
+          {
+            "row": 3,
+            "col": 1
+          },
+          {
+            "row": 3,
+            "col": 2
+          },
+          {
+            "row": 3,
+            "col": 3
+          },
+          {
+            "row": 3,
+            "col": 4
+          },
+          {
+            "row": 3,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "brenda"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Brenda Holt, 46, female. Runs the amusement-park kiosk. Tabard over a blouse, immovable set hair, arms folded as a default stance. POSE: Standing still, facing the camera, arms relaxed at the sides, feet together, weight even. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.brenda.front_talk",
+      "scene": "amusement_park",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/brenda.front_talk.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.brenda",
+        "sheetPath": "/assets/characters/brenda.png",
+        "cells": [
+          {
+            "row": 0,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "brenda"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Brenda Holt, 46, female. Runs the amusement-park kiosk. Tabard over a blouse, immovable set hair, arms folded as a default stance. POSE: Facing the camera mid-sentence: mouth open, chin slightly raised, one hand lifted a little as if explaining something. Same stance and same feet as the standing pose. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.brenda.side_stand",
+      "scene": "amusement_park",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/brenda.side_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.brenda",
+        "sheetPath": "/assets/characters/brenda.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 0
+          },
+          {
+            "row": 1,
+            "col": 2
+          },
+          {
+            "row": 1,
+            "col": 4
+          },
+          {
+            "row": 1,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "brenda"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Brenda Holt, 46, female. Runs the amusement-park kiosk. Tabard over a blouse, immovable set hair, arms folded as a default stance. POSE: In full profile facing to the right, standing still, arms at the sides, feet together. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.brenda.side_walk_a",
+      "scene": "amusement_park",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/brenda.side_walk_a.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.brenda",
+        "sheetPath": "/assets/characters/brenda.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 1
+          }
+        ]
+      },
+      "characters": [
+        "brenda"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Brenda Holt, 46, female. Runs the amusement-park kiosk. Tabard over a blouse, immovable set hair, arms folded as a default stance. POSE: In full profile facing to the right, mid-stride: near leg forward and bent at the knee, far arm swung forward, body leaning very slightly into the step. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.brenda.side_walk_b",
+      "scene": "amusement_park",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/brenda.side_walk_b.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.brenda",
+        "sheetPath": "/assets/characters/brenda.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 3
+          }
+        ]
+      },
+      "characters": [
+        "brenda"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Brenda Holt, 46, female. Runs the amusement-park kiosk. Tabard over a blouse, immovable set hair, arms folded as a default stance. POSE: In full profile facing to the right, mid-stride on the opposite foot to the other walking pose: far leg forward, near arm swung forward. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.brenda.back_stand",
+      "scene": "amusement_park",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/brenda.back_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.brenda",
+        "sheetPath": "/assets/characters/brenda.png",
+        "cells": [
+          {
+            "row": 2,
+            "col": 0
+          },
+          {
+            "row": 2,
+            "col": 1
+          },
+          {
+            "row": 2,
+            "col": 2
+          },
+          {
+            "row": 2,
+            "col": 3
+          },
+          {
+            "row": 2,
+            "col": 4
+          },
+          {
+            "row": 2,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "brenda"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Brenda Holt, 46, female. Runs the amusement-park kiosk. Tabard over a blouse, immovable set hair, arms folded as a default stance. POSE: Seen from directly behind, facing away from the camera, arms at the sides. No face visible. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
       "id": "portrait.brenda",
       "scene": null,
       "type": "portrait",
@@ -5045,6 +6738,288 @@
         "notes": "Sorted against other characters and props by baseline y."
       },
       "description": "Valerie Price, 28, female. Receptionist at the Golden Sands Hotel. Glamorous and sardonic; sharp 1987 shoulders, gold earrings, immaculate. Bored expression as a resting state.. Sprite sheet for a late-1980s VGA point-and-click adventure: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients, no anti-aliased edges. Fully transparent background. Consistent proportions and colours across every frame on the sheet. Appears in: hotel_reception.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.valerie.front_stand",
+      "scene": "hotel_reception",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/valerie.front_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.valerie",
+        "sheetPath": "/assets/characters/valerie.png",
+        "cells": [
+          {
+            "row": 0,
+            "col": 0
+          },
+          {
+            "row": 0,
+            "col": 1
+          },
+          {
+            "row": 0,
+            "col": 2
+          },
+          {
+            "row": 0,
+            "col": 3
+          },
+          {
+            "row": 0,
+            "col": 4
+          },
+          {
+            "row": 3,
+            "col": 0
+          },
+          {
+            "row": 3,
+            "col": 1
+          },
+          {
+            "row": 3,
+            "col": 2
+          },
+          {
+            "row": 3,
+            "col": 3
+          },
+          {
+            "row": 3,
+            "col": 4
+          },
+          {
+            "row": 3,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "valerie"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Valerie Price, 28, female. Receptionist at the Golden Sands Hotel. Glamorous and sardonic; sharp 1987 shoulders, gold earrings, immaculate. Bored expression as a resting state. POSE: Standing still, facing the camera, arms relaxed at the sides, feet together, weight even. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.valerie.front_talk",
+      "scene": "hotel_reception",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/valerie.front_talk.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.valerie",
+        "sheetPath": "/assets/characters/valerie.png",
+        "cells": [
+          {
+            "row": 0,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "valerie"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Valerie Price, 28, female. Receptionist at the Golden Sands Hotel. Glamorous and sardonic; sharp 1987 shoulders, gold earrings, immaculate. Bored expression as a resting state. POSE: Facing the camera mid-sentence: mouth open, chin slightly raised, one hand lifted a little as if explaining something. Same stance and same feet as the standing pose. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.valerie.side_stand",
+      "scene": "hotel_reception",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/valerie.side_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.valerie",
+        "sheetPath": "/assets/characters/valerie.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 0
+          },
+          {
+            "row": 1,
+            "col": 2
+          },
+          {
+            "row": 1,
+            "col": 4
+          },
+          {
+            "row": 1,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "valerie"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Valerie Price, 28, female. Receptionist at the Golden Sands Hotel. Glamorous and sardonic; sharp 1987 shoulders, gold earrings, immaculate. Bored expression as a resting state. POSE: In full profile facing to the right, standing still, arms at the sides, feet together. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.valerie.side_walk_a",
+      "scene": "hotel_reception",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/valerie.side_walk_a.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.valerie",
+        "sheetPath": "/assets/characters/valerie.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 1
+          }
+        ]
+      },
+      "characters": [
+        "valerie"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Valerie Price, 28, female. Receptionist at the Golden Sands Hotel. Glamorous and sardonic; sharp 1987 shoulders, gold earrings, immaculate. Bored expression as a resting state. POSE: In full profile facing to the right, mid-stride: near leg forward and bent at the knee, far arm swung forward, body leaning very slightly into the step. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.valerie.side_walk_b",
+      "scene": "hotel_reception",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/valerie.side_walk_b.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.valerie",
+        "sheetPath": "/assets/characters/valerie.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 3
+          }
+        ]
+      },
+      "characters": [
+        "valerie"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Valerie Price, 28, female. Receptionist at the Golden Sands Hotel. Glamorous and sardonic; sharp 1987 shoulders, gold earrings, immaculate. Bored expression as a resting state. POSE: In full profile facing to the right, mid-stride on the opposite foot to the other walking pose: far leg forward, near arm swung forward. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.valerie.back_stand",
+      "scene": "hotel_reception",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/valerie.back_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.valerie",
+        "sheetPath": "/assets/characters/valerie.png",
+        "cells": [
+          {
+            "row": 2,
+            "col": 0
+          },
+          {
+            "row": 2,
+            "col": 1
+          },
+          {
+            "row": 2,
+            "col": 2
+          },
+          {
+            "row": 2,
+            "col": 3
+          },
+          {
+            "row": 2,
+            "col": 4
+          },
+          {
+            "row": 2,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "valerie"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Valerie Price, 28, female. Receptionist at the Golden Sands Hotel. Glamorous and sardonic; sharp 1987 shoulders, gold earrings, immaculate. Bored expression as a resting state. POSE: Seen from directly behind, facing away from the camera, arms at the sides. No face visible. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
       "priority": "p1"
     },
     {
@@ -5115,6 +7090,288 @@
       "priority": "p1"
     },
     {
+      "id": "char.graham.front_stand",
+      "scene": "video_shop",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/graham.front_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.graham",
+        "sheetPath": "/assets/characters/graham.png",
+        "cells": [
+          {
+            "row": 0,
+            "col": 0
+          },
+          {
+            "row": 0,
+            "col": 1
+          },
+          {
+            "row": 0,
+            "col": 2
+          },
+          {
+            "row": 0,
+            "col": 3
+          },
+          {
+            "row": 0,
+            "col": 4
+          },
+          {
+            "row": 3,
+            "col": 0
+          },
+          {
+            "row": 3,
+            "col": 1
+          },
+          {
+            "row": 3,
+            "col": 2
+          },
+          {
+            "row": 3,
+            "col": 3
+          },
+          {
+            "row": 3,
+            "col": 4
+          },
+          {
+            "row": 3,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "graham"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Graham, 34, male. Owns the video rental shop. Slightly-too-tight polo shirt, moustache, the unhurried patience of a man who has heard every excuse twice. POSE: Standing still, facing the camera, arms relaxed at the sides, feet together, weight even. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.graham.front_talk",
+      "scene": "video_shop",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/graham.front_talk.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.graham",
+        "sheetPath": "/assets/characters/graham.png",
+        "cells": [
+          {
+            "row": 0,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "graham"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Graham, 34, male. Owns the video rental shop. Slightly-too-tight polo shirt, moustache, the unhurried patience of a man who has heard every excuse twice. POSE: Facing the camera mid-sentence: mouth open, chin slightly raised, one hand lifted a little as if explaining something. Same stance and same feet as the standing pose. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.graham.side_stand",
+      "scene": "video_shop",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/graham.side_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.graham",
+        "sheetPath": "/assets/characters/graham.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 0
+          },
+          {
+            "row": 1,
+            "col": 2
+          },
+          {
+            "row": 1,
+            "col": 4
+          },
+          {
+            "row": 1,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "graham"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Graham, 34, male. Owns the video rental shop. Slightly-too-tight polo shirt, moustache, the unhurried patience of a man who has heard every excuse twice. POSE: In full profile facing to the right, standing still, arms at the sides, feet together. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.graham.side_walk_a",
+      "scene": "video_shop",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/graham.side_walk_a.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.graham",
+        "sheetPath": "/assets/characters/graham.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 1
+          }
+        ]
+      },
+      "characters": [
+        "graham"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Graham, 34, male. Owns the video rental shop. Slightly-too-tight polo shirt, moustache, the unhurried patience of a man who has heard every excuse twice. POSE: In full profile facing to the right, mid-stride: near leg forward and bent at the knee, far arm swung forward, body leaning very slightly into the step. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.graham.side_walk_b",
+      "scene": "video_shop",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/graham.side_walk_b.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.graham",
+        "sheetPath": "/assets/characters/graham.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 3
+          }
+        ]
+      },
+      "characters": [
+        "graham"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Graham, 34, male. Owns the video rental shop. Slightly-too-tight polo shirt, moustache, the unhurried patience of a man who has heard every excuse twice. POSE: In full profile facing to the right, mid-stride on the opposite foot to the other walking pose: far leg forward, near arm swung forward. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.graham.back_stand",
+      "scene": "video_shop",
+      "type": "character-pose",
+      "path": "/assets/characters/poses/graham.back_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.graham",
+        "sheetPath": "/assets/characters/graham.png",
+        "cells": [
+          {
+            "row": 2,
+            "col": 0
+          },
+          {
+            "row": 2,
+            "col": 1
+          },
+          {
+            "row": 2,
+            "col": 2
+          },
+          {
+            "row": 2,
+            "col": 3
+          },
+          {
+            "row": 2,
+            "col": 4
+          },
+          {
+            "row": 2,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "graham"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Graham, 34, male. Owns the video rental shop. Slightly-too-tight polo shirt, moustache, the unhurried patience of a man who has heard every excuse twice. POSE: Seen from directly behind, facing away from the camera, arms at the sides. No face visible. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p1"
+    },
+    {
       "id": "portrait.graham",
       "scene": null,
       "type": "portrait",
@@ -5182,6 +7439,288 @@
       "priority": "p2"
     },
     {
+      "id": "char.drvale.front_stand",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/vale.front_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.drvale",
+        "sheetPath": "/assets/characters/vale.png",
+        "cells": [
+          {
+            "row": 0,
+            "col": 0
+          },
+          {
+            "row": 0,
+            "col": 1
+          },
+          {
+            "row": 0,
+            "col": 2
+          },
+          {
+            "row": 0,
+            "col": 3
+          },
+          {
+            "row": 0,
+            "col": 4
+          },
+          {
+            "row": 3,
+            "col": 0
+          },
+          {
+            "row": 3,
+            "col": 1
+          },
+          {
+            "row": 3,
+            "col": 2
+          },
+          {
+            "row": 3,
+            "col": 3
+          },
+          {
+            "row": 3,
+            "col": 4
+          },
+          {
+            "row": 3,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "vale"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Dr Elliot Vale. White shirt, dark trousers, black tie - always exactly this. Row 3 holds his three states instead of expressions: 0 = full black silhouette with no facial detail at all, 1 = normal and fully rendered, 2 = distorted, as though torn by scanlines. His face must be unreadable in state 0. POSE: Standing still, facing the camera, arms relaxed at the sides, feet together, weight even. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p2"
+    },
+    {
+      "id": "char.drvale.front_talk",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/vale.front_talk.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.drvale",
+        "sheetPath": "/assets/characters/vale.png",
+        "cells": [
+          {
+            "row": 0,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "vale"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Dr Elliot Vale. White shirt, dark trousers, black tie - always exactly this. Row 3 holds his three states instead of expressions: 0 = full black silhouette with no facial detail at all, 1 = normal and fully rendered, 2 = distorted, as though torn by scanlines. His face must be unreadable in state 0. POSE: Facing the camera mid-sentence: mouth open, chin slightly raised, one hand lifted a little as if explaining something. Same stance and same feet as the standing pose. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p2"
+    },
+    {
+      "id": "char.drvale.side_stand",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/vale.side_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.drvale",
+        "sheetPath": "/assets/characters/vale.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 0
+          },
+          {
+            "row": 1,
+            "col": 2
+          },
+          {
+            "row": 1,
+            "col": 4
+          },
+          {
+            "row": 1,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "vale"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Dr Elliot Vale. White shirt, dark trousers, black tie - always exactly this. Row 3 holds his three states instead of expressions: 0 = full black silhouette with no facial detail at all, 1 = normal and fully rendered, 2 = distorted, as though torn by scanlines. His face must be unreadable in state 0. POSE: In full profile facing to the right, standing still, arms at the sides, feet together. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p2"
+    },
+    {
+      "id": "char.drvale.side_walk_a",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/vale.side_walk_a.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.drvale",
+        "sheetPath": "/assets/characters/vale.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 1
+          }
+        ]
+      },
+      "characters": [
+        "vale"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Dr Elliot Vale. White shirt, dark trousers, black tie - always exactly this. Row 3 holds his three states instead of expressions: 0 = full black silhouette with no facial detail at all, 1 = normal and fully rendered, 2 = distorted, as though torn by scanlines. His face must be unreadable in state 0. POSE: In full profile facing to the right, mid-stride: near leg forward and bent at the knee, far arm swung forward, body leaning very slightly into the step. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p2"
+    },
+    {
+      "id": "char.drvale.side_walk_b",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/vale.side_walk_b.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.drvale",
+        "sheetPath": "/assets/characters/vale.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 3
+          }
+        ]
+      },
+      "characters": [
+        "vale"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Dr Elliot Vale. White shirt, dark trousers, black tie - always exactly this. Row 3 holds his three states instead of expressions: 0 = full black silhouette with no facial detail at all, 1 = normal and fully rendered, 2 = distorted, as though torn by scanlines. His face must be unreadable in state 0. POSE: In full profile facing to the right, mid-stride on the opposite foot to the other walking pose: far leg forward, near arm swung forward. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p2"
+    },
+    {
+      "id": "char.drvale.back_stand",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/vale.back_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.drvale",
+        "sheetPath": "/assets/characters/vale.png",
+        "cells": [
+          {
+            "row": 2,
+            "col": 0
+          },
+          {
+            "row": 2,
+            "col": 1
+          },
+          {
+            "row": 2,
+            "col": 2
+          },
+          {
+            "row": 2,
+            "col": 3
+          },
+          {
+            "row": 2,
+            "col": 4
+          },
+          {
+            "row": 2,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "vale"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "Dr Elliot Vale. White shirt, dark trousers, black tie - always exactly this. Row 3 holds his three states instead of expressions: 0 = full black silhouette with no facial detail at all, 1 = normal and fully rendered, 2 = distorted, as though torn by scanlines. His face must be unreadable in state 0. POSE: Seen from directly behind, facing away from the camera, arms at the sides. No face visible. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p2"
+    },
+    {
       "id": "portrait.vale",
       "scene": null,
       "type": "portrait",
@@ -5246,6 +7785,288 @@
         "notes": "Sorted against other characters and props by baseline y."
       },
       "description": "A hotel guest, adult male, seen for one comic beat wrapped in a bath towel from the waist down. Drawn from the chest up in near-silhouette against a bright doorway; no explicit detail. He is calm and dignified; the joke is entirely Jack's reaction.. Sprite sheet for a late-1980s VGA point-and-click adventure: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients, no anti-aliased edges. Fully transparent background. Consistent proportions and colours across every frame on the sheet. Appears in: cutscenes only.",
+      "priority": "p2"
+    },
+    {
+      "id": "char.guest.front_stand",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/guest.front_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.guest",
+        "sheetPath": "/assets/characters/guest.png",
+        "cells": [
+          {
+            "row": 0,
+            "col": 0
+          },
+          {
+            "row": 0,
+            "col": 1
+          },
+          {
+            "row": 0,
+            "col": 2
+          },
+          {
+            "row": 0,
+            "col": 3
+          },
+          {
+            "row": 0,
+            "col": 4
+          },
+          {
+            "row": 3,
+            "col": 0
+          },
+          {
+            "row": 3,
+            "col": 1
+          },
+          {
+            "row": 3,
+            "col": 2
+          },
+          {
+            "row": 3,
+            "col": 3
+          },
+          {
+            "row": 3,
+            "col": 4
+          },
+          {
+            "row": 3,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "guest"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "A hotel guest, adult male, seen for one comic beat wrapped in a bath towel from the waist down. Drawn from the chest up in near-silhouette against a bright doorway; no explicit detail. He is calm and dignified; the joke is entirely Jack's reaction. POSE: Standing still, facing the camera, arms relaxed at the sides, feet together, weight even. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p2"
+    },
+    {
+      "id": "char.guest.front_talk",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/guest.front_talk.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.guest",
+        "sheetPath": "/assets/characters/guest.png",
+        "cells": [
+          {
+            "row": 0,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "guest"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "A hotel guest, adult male, seen for one comic beat wrapped in a bath towel from the waist down. Drawn from the chest up in near-silhouette against a bright doorway; no explicit detail. He is calm and dignified; the joke is entirely Jack's reaction. POSE: Facing the camera mid-sentence: mouth open, chin slightly raised, one hand lifted a little as if explaining something. Same stance and same feet as the standing pose. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p2"
+    },
+    {
+      "id": "char.guest.side_stand",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/guest.side_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.guest",
+        "sheetPath": "/assets/characters/guest.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 0
+          },
+          {
+            "row": 1,
+            "col": 2
+          },
+          {
+            "row": 1,
+            "col": 4
+          },
+          {
+            "row": 1,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "guest"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "A hotel guest, adult male, seen for one comic beat wrapped in a bath towel from the waist down. Drawn from the chest up in near-silhouette against a bright doorway; no explicit detail. He is calm and dignified; the joke is entirely Jack's reaction. POSE: In full profile facing to the right, standing still, arms at the sides, feet together. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p2"
+    },
+    {
+      "id": "char.guest.side_walk_a",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/guest.side_walk_a.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.guest",
+        "sheetPath": "/assets/characters/guest.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 1
+          }
+        ]
+      },
+      "characters": [
+        "guest"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "A hotel guest, adult male, seen for one comic beat wrapped in a bath towel from the waist down. Drawn from the chest up in near-silhouette against a bright doorway; no explicit detail. He is calm and dignified; the joke is entirely Jack's reaction. POSE: In full profile facing to the right, mid-stride: near leg forward and bent at the knee, far arm swung forward, body leaning very slightly into the step. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p2"
+    },
+    {
+      "id": "char.guest.side_walk_b",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/guest.side_walk_b.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.guest",
+        "sheetPath": "/assets/characters/guest.png",
+        "cells": [
+          {
+            "row": 1,
+            "col": 3
+          }
+        ]
+      },
+      "characters": [
+        "guest"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "A hotel guest, adult male, seen for one comic beat wrapped in a bath towel from the waist down. Drawn from the chest up in near-silhouette against a bright doorway; no explicit detail. He is calm and dignified; the joke is entirely Jack's reaction. POSE: In full profile facing to the right, mid-stride on the opposite foot to the other walking pose: far leg forward, near arm swung forward. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
+      "priority": "p2"
+    },
+    {
+      "id": "char.guest.back_stand",
+      "scene": null,
+      "type": "character-pose",
+      "path": "/assets/characters/poses/guest.back_stand.png",
+      "dimensions": {
+        "width": 48,
+        "height": 80
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "assemble": {
+        "sheet": "char.guest",
+        "sheetPath": "/assets/characters/guest.png",
+        "cells": [
+          {
+            "row": 2,
+            "col": 0
+          },
+          {
+            "row": 2,
+            "col": 1
+          },
+          {
+            "row": 2,
+            "col": 2
+          },
+          {
+            "row": 2,
+            "col": 3
+          },
+          {
+            "row": 2,
+            "col": 4
+          },
+          {
+            "row": 2,
+            "col": 5
+          }
+        ]
+      },
+      "characters": [
+        "guest"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Assembled into the character sheet by assets:ingest."
+      },
+      "description": "A hotel guest, adult male, seen for one comic beat wrapped in a bath towel from the waist down. Drawn from the chest up in near-silhouette against a bright doorway; no explicit detail. He is calm and dignified; the joke is entirely Jack's reaction. POSE: Seen from directly behind, facing away from the camera, arms at the sides. No face visible. One single full-length figure, whole body visible from the top of the head to the soles of the shoes, standing at the same height and the same distance from the camera in every pose of this set. Late-1980s VGA point-and-click adventure character art: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients. Exactly the same person as the other poses of this character: identical face, hair, build and clothing, in identical colours.",
       "priority": "p2"
     },
     {

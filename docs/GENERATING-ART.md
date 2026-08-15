@@ -145,7 +145,36 @@ Every sheet is rebuilt from the images already downloaded, so resizing the cast
 costs nothing to generate. `--force` is needed because ingest will not overwrite
 art you have already accepted.
 
-### Characters arrive as one figure, not a sheet
+### Characters: six poses, assembled into a sheet
+
+A `char.*` sheet is a 6x4 grid of the same person in twenty-four positions. No
+model draws that. But it will draw six separate pictures of one person, so each
+character is generated as six `char.<id>.<pose>` assets and `assets:ingest`
+folds them into the sheet:
+
+| Pose | Fills |
+|---|---|
+| `front_stand` | facing-camera row, and the expression row |
+| `front_talk` | the second cell of the talk loop |
+| `side_stand` | the contact frames of the side walk, and its talk loop |
+| `side_walk_a` | the first passing frame |
+| `side_walk_b` | the other passing frame |
+| `back_stand` | the whole facing-away row |
+
+The side view gets a real four-frame cycle — contact, passing, contact, passing
+— which is the one the player sees most.
+
+Every pose of a character is scaled by **one** factor, taken from the tallest of
+them, and bottom-aligned in its cell. Scaling each pose to fill its own cell
+would make the character grow and shrink between frames, because a walking
+figure's bounding box is a different shape from a standing one.
+
+Cells no supplied pose claims fall back to the standing pose, so a pose that
+failed to generate costs that one movement rather than the whole character. If
+only the plain `char.<id>` image exists, the old behaviour still applies: it is
+copied into all 24 cells and the engine fakes a stride.
+
+### If only one figure arrives
 
 A `char.*` asset is a 6×4 grid of 24×40 frames: a walk cycle in three
 directions, a talk loop and six expressions, with the same person in all
