@@ -39,13 +39,24 @@ Starts in **Starlight Arcade - Lobby**, 19:00, score 10.
 2. Go through the **archway** (↑) to the **Arcade Floor**.
 3. **LOOK** at the **Coin Pusher**, then **TAKE** the coin wedged behind the
    mechanism. → 20p.
-4. **TALK** to **Kevin** about high scores until he lends you the rest.
-   → £2.20 as `kevin_money`.
-5. Back in the lobby, **USE** the money **WITH Arthur**, then the 20p as well.
+4. Back in the lobby, **USE** the 20p **WITH** the **vending machine**.
+   → chocolate. You have now spent your only coin, which is the point.
+5. On the arcade floor, **USE CHOCOLATE WITH Kevin**. *Only now* will he lend
+   you anything — asking without it gets "What is in it for me?" and nothing
+   else, however many times you ask.
+6. **TALK** to **Kevin** → *Can you lend me two pounds?* → £2.20 as
+   `kevin_money`.
+7. Get the second 20p: change falls under the **cigarette machine** in the
+   lobby. Kevin mentions this if you ask him about anything strange.
+8. **USE** the money **WITH Arthur**, then the 20p as well.
    → arcade key, score ~95.
 
+> Kevin's loan is gated on having fed him, not on how you ask. That is why the
+> chocolate detour exists: your one coin has to be spent before it can be
+> earned back twelve times over.
+>
 > The two halves of the £2.40 are deliberately separate items. Handing over only
-> one should be refused with a line, not silently accepted.
+> one is refused with a line, not silently accepted.
 
 ## Act II — the office
 

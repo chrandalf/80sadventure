@@ -22,9 +22,9 @@ export const OBJECTIVES: Objective[] = [
     id: 'money',
     done: ['flag', 'debtPaid'],
     hints: [
-      'Arthur will not hand over the key until the two pounds forty is settled. Money is lying around the arcade if you look.',
-      'The coin pusher has been swallowing coins all evening. Something is stuck in the mechanism. Kevin also has money, and an ego.',
-      'LOOK at the coin pusher, then TAKE the coin wedged behind the mechanism. Talk to Kevin about high scores until he lends you the rest, then give it all to Arthur.',
+      'Arthur will not hand over the key until the two pounds forty is settled. Money is lying around the arcade if you look, and Kevin has some - but not for nothing.',
+      'The coin pusher has been swallowing coins all evening. Kevin will not lend you anything out of kindness; he is sixteen and he is hungry. There is also change under the cigarette machine in the lobby.',
+      'TAKE the coin wedged in the coin pusher. USE it in the lobby vending machine for a chocolate bar, GIVE the chocolate to Kevin, then ask him for the two pounds. Get a second 20p from under the cigarette machine, and give Arthur the lot.',
     ],
   },
   {

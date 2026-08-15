@@ -306,7 +306,7 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       { id: 'stool', sprite: 'prop.stool', x: 470, y: 250 },
     ],
     characters: [
-      { id: 'kevin', sprite: 'char.kevin', x: 452, y: 246, facing: 'east', visibleIf: ['noflag', 'closingTime'] },
+      { id: 'kevin', sprite: 'char.kevin', x: 462, y: 280, facing: 'west', visibleIf: ['noflag', 'closingTime'] },
       { id: 'maggie', sprite: 'char.maggie', x: 192, y: 264, facing: 'east' },
     ],
     ambience: [
@@ -350,8 +350,11 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'kevin',
         name: 'Kevin',
-        rect: { x: 476, y: 168, w: 48, h: 76 },
-        walkTo: [444, 252],
+        // Kevin's hotspot follows his sprite. It used to sit where he stood
+        // before the room was fitted to its artwork, so clicking him missed and
+        // clicking the cabinet behind him hit Kevin instead.
+        rect: { x: 440, y: 206, w: 46, h: 76 },
+        walkTo: [416, 278],
         facing: 'east',
         visibleIf: ['noflag', 'closingTime'],
         defaultVerb: 'TALK',
