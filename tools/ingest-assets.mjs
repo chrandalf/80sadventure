@@ -248,7 +248,9 @@ if (!existsSync(dir)) {
   process.exit(2);
 }
 
-const files = readdirSync(dir).filter((f) => !f.startsWith('.'));
+// Skip dotfiles and the unpacker's own _errors.log, which would otherwise be
+// reported as an unrecognised asset every single run.
+const files = readdirSync(dir).filter((f) => !f.startsWith('.') && !f.startsWith('_'));
 const written = [];
 const skipped = [];
 const unmatched = [];
