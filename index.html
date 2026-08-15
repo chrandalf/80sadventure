@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>One More Credit</title>
+    <meta name="description" content="A 1980s point-and-click comedy adventure set in Brighton Vale." />
+    <meta name="theme-color" content="#0a0713" />
+    <style>
+      /* The page is only ever a black frame around a 320x200 canvas. */
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: #0a0713;
+        overflow: hidden;
+        /* No text selection or long-press menus dragging on the canvas. */
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+        overscroll-behavior: none;
+      }
+
+      #app {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+      }
+
+      #app canvas {
+        image-rendering: pixelated;
+        image-rendering: crisp-edges;
+        /* A faint glow around the tube, so the frame is not a hard black edge. */
+        box-shadow: 0 0 60px rgba(122, 77, 232, 0.25);
+        cursor: none;
+      }
+
+      #noscript {
+        color: #d8d4e8;
+        font: 14px/1.6 ui-monospace, "Courier New", monospace;
+        text-align: center;
+        padding: 3rem 1.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <noscript>
+        <p id="noscript">
+          ONE MORE CREDIT needs JavaScript.<br />
+          It is 1987 in there. Please enable it.
+        </p>
+      </noscript>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

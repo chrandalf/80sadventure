@@ -1,0 +1,158 @@
+import type { Action, Cond, Scene } from '../game/types';
+import { TUNES } from '../engine/Audio';
+import { CHARACTERS } from './characters';
+import { DIALOGUE } from './dialogue';
+import { ENDINGS } from './endings';
+import { ITEMS } from './items';
+import { SCENES } from './scenes';
+import { VISIONS } from './visions';
+import { BACKGROUNDS } from './backgrounds';
+
+/**
+ * Cross-check every reference in the content data.
+ *
+ * In an adventure game a mistyped id is not a crash - it is a silent soft-lock
+ * forty minutes in, where a door never opens or a conversation never starts.
+ * This walks the whole content graph at startup and reports anything dangling,
+ * which is far cheaper than finding it by playing.
+ */
+export function validateContent(spriteIds: ReadonlySet<string>): string[] {
+  const problems: string[] = [];
+  const at = (where: string, msg: string) => problems.push(`${where}: ${msg}`);
+
+  const checkAction = (where: string, action: Action): void => {
+    switch (action[0]) {
+      case 'goto':
+        if (!SCENES[action[1]]) at(where, `goto unknown scene "${action[1]}"`);
+        else if (action[2] && !SCENES[action[1]].entries?.[action[2]]) {
+          at(where, `goto "${action[1]}" wants entry "${action[2]}" which does not exist`);
+        }
+        break;
+      case 'dialogue':
+        if (!DIALOGUE[action[1]]) at(where, `dialogue unknown node "${action[1]}"`);
+        break;
+      case 'give':
+      case 'take':
+        if (!ITEMS[action[1]]) at(where, `references unknown item "${action[1]}"`);
+        break;
+      case 'say':
+        if (!CHARACTERS[action[1]]) at(where, `unknown speaker "${action[1]}"`);
+        break;
+      case 'music':
+        if (!TUNES[action[1]]) at(where, `unknown tune "${action[1]}"`);
+        break;
+      case 'vision':
+        if (!VISIONS[action[1]]) at(where, `unknown vision "${action[1]}"`);
+        break;
+      case 'ending':
+        if (!ENDINGS[action[1]]) at(where, `unknown ending "${action[1]}"`);
+        break;
+      case 'if':
+        checkCond(where, action[1]);
+        action[2].forEach((a) => checkAction(where, a));
+        action[3]?.forEach((a) => checkAction(where, a));
+        break;
+      default:
+        break;
+    }
+  };
+
+  const checkCond = (where: string, cond: Cond | undefined): void => {
+    if (!cond) return;
+    if (cond[0] === 'has' || cond[0] === 'nothas') {
+      if (!ITEMS[cond[1]]) at(where, `condition references unknown item "${cond[1]}"`);
+    } else if (cond[0] === 'visited') {
+      if (!SCENES[cond[1]]) at(where, `condition references unknown scene "${cond[1]}"`);
+    } else if (cond[0] === 'and' || cond[0] === 'or') {
+      cond.slice(1).forEach((c) => checkCond(where, c as Cond));
+    } else if (cond[0] === 'not') {
+      checkCond(where, cond[1]);
+    }
+  };
+
+  const checkScene = (scene: Scene): void => {
+    const w = `scene ${scene.id}`;
+    if (!BACKGROUNDS[scene.background]) at(w, `unknown background "${scene.background}"`);
+    if (scene.music && !TUNES[scene.music]) at(w, `unknown music "${scene.music}"`);
+
+    for (const ch of scene.characters ?? []) {
+      if (!spriteIds.has(ch.sprite)) at(w, `character "${ch.id}" uses unknown sprite "${ch.sprite}"`);
+      if (!CHARACTERS[ch.id]) at(w, `character "${ch.id}" is not defined in characters.ts`);
+      checkCond(w, ch.visibleIf);
+    }
+
+    for (const h of scene.hotspots ?? []) {
+      const hw = `${w} hotspot ${h.id}`;
+      checkCond(hw, h.visibleIf);
+      checkCond(hw, h.hiddenUntil);
+      for (const actions of Object.values(h.verbs ?? {})) {
+        actions?.forEach((a) => checkAction(hw, a));
+      }
+      for (const [item, actions] of Object.entries(h.useWith ?? {})) {
+        if (!ITEMS[item]) at(hw, `useWith references unknown item "${item}"`);
+        actions.forEach((a) => checkAction(hw, a));
+      }
+      // A hotspot with no responses at all is almost certainly unfinished.
+      if (!h.verbs && !h.useWith) at(hw, 'has no verbs and no useWith - it does nothing');
+    }
+
+    for (const e of scene.exits ?? []) {
+      const ew = `${w} exit ${e.id}`;
+      if (!SCENES[e.to]) at(ew, `points at unknown scene "${e.to}"`);
+      else if (e.entry && !SCENES[e.to].entries?.[e.entry]) {
+        at(ew, `wants entry "${e.entry}" which ${e.to} does not define`);
+      }
+      checkCond(ew, e.requires);
+      checkCond(ew, e.visibleIf);
+    }
+
+    scene.onEnter?.forEach((a) => checkAction(`${w} onEnter`, a));
+    scene.onFirstEnter?.forEach((a) => checkAction(`${w} onFirstEnter`, a));
+  };
+
+  Object.values(SCENES).forEach(checkScene);
+
+  // Dialogue graph.
+  for (const node of Object.values(DIALOGUE)) {
+    const w = `dialogue ${node.id}`;
+    for (const line of node.lines ?? []) {
+      if (!CHARACTERS[line.who]) at(w, `unknown speaker "${line.who}"`);
+      checkCond(w, line.showIf);
+      line.actions?.forEach((a) => checkAction(w, a));
+    }
+    for (const choice of node.choices ?? []) {
+      if (choice.goto && !DIALOGUE[choice.goto]) at(w, `choice goes to unknown node "${choice.goto}"`);
+      checkCond(w, choice.showIf);
+      choice.actions?.forEach((a) => checkAction(w, a));
+      // A choice with neither goto nor actions is the intended way to write
+      // "end the conversation", so it is not flagged.
+    }
+    node.onEnd?.forEach((a) => checkAction(`${w} onEnd`, a));
+  }
+
+  // Characters' talk routing.
+  for (const def of Object.values(CHARACTERS)) {
+    for (const entry of def.talk ?? []) {
+      if (!DIALOGUE[entry.node]) at(`character ${def.id}`, `talk points at unknown node "${entry.node}"`);
+      checkCond(`character ${def.id}`, entry.showIf);
+    }
+    if (def.sprite && !spriteIds.has(def.sprite)) {
+      at(`character ${def.id}`, `unknown sprite "${def.sprite}"`);
+    }
+  }
+
+  // Endings.
+  for (const ending of Object.values(ENDINGS)) {
+    ending.script.forEach((a) => checkAction(`ending ${ending.id}`, a));
+  }
+
+  // Every item should have an inventory icon declared in the manifest.
+  for (const item of Object.values(ITEMS)) {
+    const spriteId = item.id.startsWith('cassette_') ? item.id : `item.${item.id}`;
+    if (!spriteIds.has(spriteId)) {
+      at(`item ${item.id}`, `no manifest sprite "${spriteId}" - it will have no inventory icon`);
+    }
+  }
+
+  return problems;
+}

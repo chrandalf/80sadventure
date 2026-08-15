@@ -1,0 +1,33 @@
+{
+  "name": "Arcade Dusk 32",
+  "note": "The single source of truth for every colour in the game. Sprites, backgrounds, UI and font must use ONLY these colours (plus fully-transparent pixels, alpha 0). Tools read this file; the game imports it. Change it here and everything follows.",
+  "transparencyRule": "Alpha is binary. A pixel is either fully opaque (255) or fully transparent (0). No partial alpha - it produces halos when scaled and breaks the pixel-art read.",
+  "ramps": {
+    "neutral": ["#0a0713", "#1b1430", "#33244d", "#5a4a73", "#8f86a8", "#d8d4e8"],
+    "magenta": ["#4a0f3a", "#92196e", "#e0349e", "#ff8fd0"],
+    "cyan": ["#06333f", "#0a7d8c", "#22d3d8", "#9ff6f0"],
+    "violet": ["#241452", "#4423a8", "#7a4de8", "#b48cff"],
+    "amber": ["#4a2408", "#a8560c", "#f09030", "#ffd486"],
+    "phosphor": ["#0c3319", "#1a7a35", "#3ad65e", "#a6f7a0"],
+    "red": ["#5c0d17", "#c4142e", "#ff5a5a"],
+    "blue": ["#101f5c", "#2050c8", "#64a8ff"]
+  },
+  "roles": {
+    "void": "#0a0713",
+    "shadow": "#1b1430",
+    "ink": "#0a0713",
+    "paper": "#d8d4e8",
+    "uiPanel": "#1b1430",
+    "uiPanelLight": "#33244d",
+    "uiBorder": "#7a4de8",
+    "uiText": "#d8d4e8",
+    "uiTextDim": "#8f86a8",
+    "uiHighlight": "#22d3d8",
+    "hotspotHint": "#ffd486",
+    "danger": "#ff5a5a",
+    "success": "#3ad65e",
+    "neonPrimary": "#e0349e",
+    "neonSecondary": "#22d3d8",
+    "creditGlow": "#ffd486"
+  }
+}
