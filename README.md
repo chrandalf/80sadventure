@@ -16,6 +16,9 @@ No build step is needed to play, no backend, no accounts, no network calls.
 
 ---
 
+> **Playing or testing it?** **[`docs/WALKTHROUGH.md`](docs/WALKTHROUGH.md)** is
+> every step in order, with what to check in each room.
+>
 > **Working on this?** Start with **[`docs/PROGRESS.md`](docs/PROGRESS.md)** —
 > current status, architecture, art-direction history, known gaps and next steps.
 > The design brief the game was built against is **[`docs/SPEC.md`](docs/SPEC.md)**.
