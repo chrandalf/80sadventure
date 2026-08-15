@@ -25,8 +25,8 @@ No build step is needed to play, no backend, no accounts, no network calls.
 
 A complete adventure-game engine and the game built on it:
 
-- **320 × 200** internal resolution, integer-scaled, with a 4:3 CRT presentation
-  (1.2 tall pixels, scanlines, bloom, chromatic aberration, occasional flicker)
+- **640 × 400** internal resolution, integer-scaled, with a subtle and fully
+  optional CRT post-process (the game is built to look right with it disabled)
 - Eight-verb interface — LOOK, TAKE, USE, TALK, PUSH, PULL, OPEN, CLOSE
 - Walkboxes with perspective scaling, hotspots, exits, inventory
 - Branching dialogue with per-character conversation states
@@ -35,10 +35,11 @@ A complete adventure-game engine and the game built on it:
 - Three-level hint system that tracks what you are actually stuck on
 - Four endings, four playable arcade cabinets, 1000-point score
 - Original synthesised soundtrack and sound effects — no audio files
-- **33 hand-composed pixel-art backgrounds, painted in code**
+- An external asset pipeline: illustrated backgrounds, character sprite sheets
+  and props drop in as image files with no code change and no rebuild
 
-Everything visual and audible is generated from source in this repository.
-Nothing is sampled, traced or copied.
+All audio is generated from source in this repository. Nothing is sampled,
+traced or copied.
 
 ---
 
@@ -60,30 +61,38 @@ Nothing is sampled, traced or copied.
 
 ## Graphics
 
-The look comes from three decisions, in order of importance:
+The engine is **completely separated from the artwork**. Scenes name image files;
+the artwork contains no interaction logic, and interaction is defined by
+invisible polygons in the game data. An illustrator can redraw a room end to end
+without a programmer touching the scene.
 
-1. **A locked 32-colour palette** (`src/content/palette.json`). Every pixel the
-   game draws comes from it. This is what makes art from different sources cohere.
-2. **Authoring at 320 × 200.** A character is 24 × 40 — a few hundred meaningful
-   pixels, not a few hundred thousand. It is the difference between art you can
-   finish and art you cannot.
-3. **Ordered dithering.** You cannot draw a smooth sky in 32 colours, so the
-   painters interleave two palette colours in a 4 × 4 pattern and let the eye
-   blend them, exactly as artists did on EGA and early VGA hardware.
+Each scene resolves its backdrop in this order:
 
-Every background and sprite is **replaceable by dropping a PNG in**, with no
-code change and no rebuild. Missing art is not an error — the engine generates a
-correctly-sized, palette-correct, animating placeholder, so the game is fully
-playable with zero art files on disk.
+1. **External artwork** at the manifest path — always wins, loads
+   asynchronously and swaps in live
+2. **A procedural painter** — a fallback kept only until real art replaces it
+3. **A labelled `ARTWORK PLACEHOLDER` card** — if a scene has neither
 
-**→ [`docs/ASSETS.md`](docs/ASSETS.md) is the full art guide**: the sprite
-contract, sheet layouts, the validator, and the quantiser that turns high-res or
-generated images into palette-locked pixel art.
+Drop a 640 × 400 image at `public/assets/backgrounds/<scene>.webp` and it
+appears on the next visit to that room. Same for
+`public/assets/characters/<id>.png`. Press **F1** in game to draw the hotspot
+polygons and walkboxes over the art and check they agree.
+
+**`public/assets/assets.json`** is the complete art requirements specification —
+92 assets with dimensions, transparency, animation layout, layering plane,
+hotspot pixel coordinates and a written brief for each. It is *generated* from
+the live game data (`npm run assets:manifest`), so it cannot drift.
+
+> The procedural painters in `src/content/backgrounds.ts` are a fallback, not the
+> art direction. See [`docs/PROGRESS.md`](docs/PROGRESS.md) for that history.
+
+**→ [`docs/ASSETS.md`](docs/ASSETS.md)** covers the sprite contract, sheet
+layouts and the validator.
 
 ```bash
+npm run assets:manifest       # regenerate assets.json from the game data
+npm run assets:validate       # check art against the manifests
 npm run assets:placeholders   # drawing templates at the exact final sizes
-npm run assets:validate       # check art against the manifest and palette
-node tools/quantize.mjs img.png --sprite char.jack
 ```
 
 ---
@@ -95,7 +104,8 @@ src/engine/     Reusable: screen, palette, sprites, bitmap font, input, audio
 src/game/       Adventure systems: verbs, walkboxes, dialogue, actions, UI, saves
 src/content/    The game itself, as data: scenes, dialogue, items, hints, endings
 tools/          Asset pipeline (Node, no browser)
-public/assets/  Sprite manifest and any art overrides
+public/assets/  backgrounds/ characters/ portraits/ objects/ effects/ ui/ audio/
+                plus assets.json, the generated art specification
 ```
 
 The split matters: `src/engine` knows nothing about Brighton Vale, and
@@ -112,7 +122,8 @@ The split matters: `src/engine` knows nothing about Brighton Vale, and
 | `npm run build` | Typecheck and build to `dist/` |
 | `npm run preview` | Serve the production build |
 | `npm run typecheck` | Types only |
-| `npm run assets:validate` | Check all art against the manifest |
+| `npm run assets:manifest` | Regenerate `assets.json` from the game data |
+| `npm run assets:validate` | Check all art against the manifests |
 | `npm run assets:placeholders` | Regenerate drawing templates |
 
 `dist/` is fully static — it will run from GitHub Pages, itch.io, or a folder.
