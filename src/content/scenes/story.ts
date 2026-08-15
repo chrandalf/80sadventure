@@ -2,7 +2,6 @@ import type { Scene } from '../../game/types';
 
 const OUTDOOR = [[6, 104, 314, 104, 318, 140, 2, 140]];
 const OUTDOOR_DEPTH = { yNear: 140, yFar: 104, scaleNear: 1, scaleFar: 0.7 };
-const INDOOR = [[12, 104, 308, 104, 314, 140, 6, 140]];
 const INDOOR_DEPTH = { yNear: 140, yFar: 104, scaleNear: 1, scaleFar: 0.74 };
 
 /**
@@ -157,8 +156,18 @@ export const STORY_SCENES: Record<string, Scene> = {
     name: 'Cinema Lobby',
     background: 'cinema_lobby',
     music: 'cinema',
-    walkboxes: INDOOR,
-    depth: INDOOR_DEPTH,
+    // Carpet in front of the ticket kiosk; the rope barrier is near-camera on the right.
+    autoFloor: false,
+    walkboxes: [[16, 126, 300, 126, 306, 143, 10, 143]],
+    depth: { yNear: 143, yFar: 126, scaleNear: 1, scaleFar: 0.86 },
+    blockers: [
+      [78, 122, 147, 122, 147, 138, 78, 138],
+      [278, 124, 320, 124, 320, 146, 278, 146],
+    ],
+    occluders: [
+      { polygon: [78, 20, 147, 20, 147, 138, 77, 134], y: 138 },
+      { polygon: [278, 105, 320, 105, 320, 148, 276, 148], y: 148 },
+    ],
     entries: { default: { x: 60, y: 132, facing: 'east' } },
     ambience: [{ sfx: 'buzz', everyMin: 10, everyMax: 24 }],
     onFirstEnter: [
@@ -741,8 +750,16 @@ export const STORY_SCENES: Record<string, Scene> = {
     name: 'Underground Machine Room',
     background: 'arcade_machineroom',
     music: 'machine',
-    walkboxes: [[16, 118, 304, 118, 310, 140, 10, 140]],
-    depth: { yNear: 140, yFar: 118, scaleNear: 1, scaleFar: 0.9 },
+    // A shallow strip of wet concrete - the plate gives very little floor above the interface panel. The workbench is near-camera on the right.
+    autoFloor: false,
+    walkboxes: [[20, 129, 300, 129, 306, 143, 14, 143]],
+    depth: { yNear: 143, yFar: 129, scaleNear: 1, scaleFar: 0.9 },
+    blockers: [
+      [222, 128, 302, 128, 302, 146, 222, 146],
+    ],
+    occluders: [
+      { polygon: [222, 118, 304, 118, 304, 152, 220, 152], y: 152 },
+    ],
     entries: { default: { x: 50, y: 134, facing: 'east' } },
     characters: [
       { id: 'maggie', sprite: 'char.maggie', x: 96, y: 136, facing: 'east', visibleIf: ['flag', 'machineFound'] },

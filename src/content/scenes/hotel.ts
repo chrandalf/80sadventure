@@ -1,6 +1,5 @@
 import type { Scene } from '../../game/types';
 
-const INDOOR = [[12, 104, 308, 104, 314, 140, 6, 140]];
 const INDOOR_DEPTH = { yNear: 140, yFar: 104, scaleNear: 1, scaleFar: 0.74 };
 
 /**
@@ -19,8 +18,18 @@ export const HOTEL_SCENES: Record<string, Scene> = {
     name: 'Golden Sands Hotel',
     background: 'hotel_reception',
     music: 'seafront',
-    walkboxes: INDOOR,
-    depth: INDOOR_DEPTH,
+    // Carpet in front of the desk. The reception desk is the thing to stand behind; the palm is near-camera on the left.
+    autoFloor: false,
+    walkboxes: [[20, 128, 300, 128, 306, 143, 14, 143]],
+    depth: { yNear: 143, yFar: 128, scaleNear: 1, scaleFar: 0.88 },
+    blockers: [
+      [102, 125, 237, 125, 237, 152, 102, 152],
+      [0, 125, 42, 125, 42, 152, 0, 152],
+    ],
+    occluders: [
+      { polygon: [102, 87, 237, 87, 237, 156, 101, 152], y: 156 },
+      { polygon: [0, 15, 42, 15, 42, 152, 0, 152], y: 152 },
+    ],
     entries: { default: { x: 60, y: 132, facing: 'east' }, fromStairs: { x: 280, y: 130, facing: 'west' } },
     characters: [{ id: 'valerie', sprite: 'char.valerie', x: 150, y: 118, facing: 'south' }],
     onFirstEnter: [
@@ -542,8 +551,16 @@ export const HOTEL_SCENES: Record<string, Scene> = {
     name: 'Video Rental Shop',
     background: 'video_shop',
     music: 'arcade',
-    walkboxes: INDOOR,
-    depth: INDOOR_DEPTH,
+    // Open lino floor. The tape shelving fills the near left corner.
+    autoFloor: false,
+    walkboxes: [[84, 125, 310, 125, 316, 143, 80, 143]],
+    depth: { yNear: 143, yFar: 125, scaleNear: 1, scaleFar: 0.86 },
+    blockers: [
+      [0, 120, 84, 120, 84, 146, 0, 146],
+    ],
+    occluders: [
+      { polygon: [0, 20, 84, 20, 84, 152, 0, 152], y: 152 },
+    ],
     entries: { default: { x: 50, y: 132, facing: 'east' }, fromAlley: { x: 290, y: 132, facing: 'west' } },
     characters: [{ id: 'graham', sprite: 'char.graham', x: 250, y: 122, facing: 'south' }],
     hotspots: [

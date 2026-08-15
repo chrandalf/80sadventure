@@ -212,8 +212,18 @@ export const TOWN_SCENES: Record<string, Scene> = {
     name: 'Pier Café',
     background: 'pier_cafe',
     music: 'seafront',
-    walkboxes: INDOOR,
-    depth: INDOOR_DEPTH,
+    // Tiled floor between the service counter and the table. Both are down-stage of anyone standing.
+    autoFloor: false,
+    walkboxes: [[90, 132, 310, 132, 316, 143, 86, 143]],
+    depth: { yNear: 143, yFar: 132, scaleNear: 1, scaleFar: 0.9 },
+    blockers: [
+      [0, 128, 89, 128, 89, 148, 0, 148],
+      [160, 120, 310, 120, 310, 148, 160, 148],
+    ],
+    occluders: [
+      { polygon: [0, 72, 89, 72, 89, 152, 0, 152], y: 152 },
+      { polygon: [160, 105, 310, 105, 310, 152, 158, 152], y: 152 },
+    ],
     entries: { default: { x: 160, y: 130, facing: 'north' } },
     hotspots: [
       {
@@ -424,8 +434,18 @@ export const TOWN_SCENES: Record<string, Scene> = {
     name: "Piper's Television Emporium",
     background: 'tv_shop',
     music: 'mystery',
-    walkboxes: [[12, 112, 308, 112, 314, 140, 6, 140]],
-    depth: { yNear: 140, yFar: 112, scaleNear: 1, scaleFar: 0.82 },
+    // Floorboards between the display cases on the left and the shelving on the right; both are down-stage furniture.
+    autoFloor: false,
+    walkboxes: [[84, 128, 278, 128, 282, 143, 80, 143]],
+    depth: { yNear: 143, yFar: 128, scaleNear: 1, scaleFar: 0.88 },
+    blockers: [
+      [0, 124, 84, 124, 84, 146, 0, 146],
+      [276, 124, 320, 124, 320, 146, 276, 146],
+    ],
+    occluders: [
+      { polygon: [0, 75, 84, 75, 84, 152, 0, 152], y: 152 },
+      { polygon: [276, 73, 320, 73, 320, 152, 276, 152], y: 152 },
+    ],
     entries: { default: { x: 60, y: 132, facing: 'east' } },
     characters: [{ id: 'derek', sprite: 'char.derek', x: 240, y: 130, facing: 'west' }],
     ambience: [{ sfx: 'static', everyMin: 8, everyMax: 18 }],
