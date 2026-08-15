@@ -132,8 +132,11 @@ if (!jsonl || !outDir) {
   console.error(`usage: ${PROVIDERS.env}=... node tools/run-grok-images.mjs <file.jsonl> <out-dir> [--provider xai|openrouter] [--budget 2.80]`);
   process.exit(2);
 }
+// A dry run talks to nobody, so it must not demand a key - being told to go
+// and find one before you are allowed to ask what something costs is exactly
+// backwards.
 const key = process.env[PROVIDERS.env];
-if (!key) {
+if (!key && !args.includes('--dry')) {
   console.error(c.red(`${PROVIDERS.env} is not set`));
   process.exit(2);
 }
