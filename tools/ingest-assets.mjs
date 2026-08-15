@@ -24,7 +24,22 @@
 import { readdirSync, readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { resolve, dirname, basename, extname } from 'node:path';
 import { PNG } from 'pngjs';
-import jpeg from 'jpeg-js';
+
+/**
+ * JPEG support is optional, and loaded rather than imported.
+ *
+ * A static import makes the package mandatory: someone who pulls the repo and
+ * runs ingest before `npm install` gets a module-not-found crash and no
+ * artwork at all - including the PNG work that never needed the decoder. A
+ * missing optional package should cost the one format it decodes, nothing
+ * more.
+ */
+let jpeg = null;
+try {
+  jpeg = (await import('jpeg-js')).default;
+} catch {
+  /* Reported at the point a JPEG is actually found, where it means something. */
+}
 import { ROOT, c } from './lib.mjs';
 
 const ASSETS_JSON = resolve(ROOT, 'public/assets/assets.json');
@@ -68,6 +83,7 @@ function decodeImage(buf) {
   const magic = buf.subarray(0, 4).toString('hex');
   if (magic === '89504e47') return PNG.sync.read(buf);
   if (magic.startsWith('ffd8ff')) {
+    if (!jpeg) throw new Error('a JPEG, and the jpeg-js decoder is not installed - run `npm install`');
     const raw = jpeg.decode(buf, { useTArray: true, formatAsRGBA: true });
     const img = new PNG({ width: raw.width, height: raw.height });
     img.data.set(raw.data);
