@@ -57,16 +57,22 @@ four failed batches, this is the path that gets you pictures today.
 
 ### If a batch does succeed
 
-The output is one `.jsonl` of base64, not image files. Unpack it first:
+The output is one `.jsonl` of base64, not image files, and it is big — every
+image is inlined, so ninety-two of them run to well over a hundred megabytes.
+**Do not open it in an editor.** Download it and hand it straight to the
+unpacker:
 
 ```bash
 npm run assets:unpack -- batch_output.jsonl ./incoming
 npm run assets:ingest -- ./incoming
 ```
 
-`custom_id` carries the asset id through, so nothing needs tracking. The
-unpacker reads both request shapes and logs per-asset failures rather than
-stopping.
+The unpacker reads the file as a stream, one line at a time, decoding and
+writing each image before touching the next, so memory stays flat no matter how
+large the file gets. `custom_id` carries the asset id through, so nothing needs
+tracking. It reads both request shapes, tolerates the CRLF line endings a
+Windows download adds, and logs per-asset failures rather than stopping on the
+first one.
 
 ---
 

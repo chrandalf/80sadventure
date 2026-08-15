@@ -3,7 +3,7 @@
  *
  *   node tools/gen-openai-batch.mjs [--endpoint images|responses]
  *                                   [--only p0,p1] [--type background,portrait]
- *                                   [--model gpt-image-1] [--out <file>]
+ *                                   [--missing] [--model gpt-image-1] [--out <file>]
  *
  * THE ONE RULE THAT BREAKS BATCHES: the `url` on every line must be character
  * for character the same as the endpoint the batch is created with. A file full
@@ -16,11 +16,12 @@
  * on, so the round trip needs no bookkeeping: generate, save each image as
  * <custom_id>.png, ingest.
  */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { ROOT, c } from './lib.mjs';
 
-const args = process.argv.slice(2);
+const argv = process.argv.slice(2);
+const args = argv;
 const flag = (name, fallback) => {
   const i = args.indexOf(`--${name}`);
   return i >= 0 && args[i + 1] && !args[i + 1].startsWith('--') ? args[i + 1] : fallback;
@@ -77,7 +78,10 @@ function framing(asset) {
     case 'ui':
       return [
         'A single flat illustrated backdrop plate for a point-and-click adventure room, drawn as one continuous painted scene from a fixed camera at standing eye level.',
-        'Completely empty of people and animals.',
+        // Not "empty of people": some rooms list a figure among the objects the
+        // plate must contain, and a blanket ban contradicts that list. gpt-5
+        // stopped to reason about the conflict rather than draw anything.
+        'The only figures in the plate are any listed below as objects to depict; those are scenery. No other people or animals.',
         'The image will be centre-cropped to a slightly wider frame, so keep everything important away from the extreme top and bottom edges.',
       ].join(' ');
     case 'background-layer':
@@ -103,13 +107,22 @@ function framing(asset) {
   }
 }
 
-/** Reduce needless refusals on the two deliberately non-explicit comedy assets. */
-const CLARIFY = new Set(['char.guest', 'portrait.guest']);
+/**
+ * The seaside-postcard scenes are non-graphic by design (spec s.49, s.54): the
+ * comedy is in the staging, never in what is shown. Saying so plainly keeps the
+ * generator from either refusing or overreaching - both of which are wrong.
+ */
+const CLARIFY = {
+  'char.guest': 'Fully covered and non-explicit: an ordinary adult in a bath towel as seen in a broad television sitcom. No nudity.',
+  'portrait.guest': 'Fully covered and non-explicit: an ordinary adult in a bath towel as seen in a broad television sitcom. No nudity.',
+  'bg.nudist_beach': 'A deserted shingle beach late at night, lit by moonlight. Any figure is distant, fully obscured by the umbrella, towel and windbreak, and reads only as a shape. Nothing explicit and no nudity: this is a seaside-postcard joke, staged entirely through objects in the way.',
+  'bg.pool_cabins': 'Closed wooden changing cabins beside an empty pool at night. Doors shut, nobody visible. Nothing explicit and no nudity.',
+};
 
 function promptFor(asset) {
   const parts = [STYLE, framing(asset), asset.description];
-  if (CLARIFY.has(asset.id)) {
-    parts.push('Fully covered and non-explicit: an ordinary adult in a bath towel as seen in a broad television sitcom. No nudity.');
+  if (CLARIFY[asset.id]) {
+    parts.push(CLARIFY[asset.id]);
   }
   if (asset.transparency === 'alpha-required') {
     parts.push('The background must be genuine transparency (alpha), not a white, black or chequerboard fill. Hard edges, no soft feathering or glow at the silhouette.');
@@ -156,6 +169,19 @@ function bodyFor(asset) {
 let assets = manifest.assets;
 if (only.length) assets = assets.filter((a) => only.includes(a.priority));
 if (types.length) assets = assets.filter((a) => types.includes(a.type));
+
+// --missing: only ask for what is not already in the game. A partly successful
+// run is the normal case - refusals and per-asset errors are expected - so the
+// retry should cost only what actually failed.
+if (argv.includes('--missing')) {
+  const before = assets.length;
+  assets = assets.filter((a) => {
+    const asNamed = resolve(ROOT, 'public' + a.path);
+    const asPng = resolve(ROOT, 'public' + a.path.replace(/\.(webp|jpe?g)$/i, '.png'));
+    return !existsSync(asNamed) && !existsSync(asPng);
+  });
+  console.log(c.dim(`\n  --missing: ${before - assets.length} already in the game, asking for ${assets.length}`));
+}
 
 const lines = assets.map((a) => JSON.stringify({
   custom_id: a.id,
