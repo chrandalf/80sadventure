@@ -51,16 +51,31 @@ const PROVIDERS = {
     url: 'https://api.x.ai/v1/images/generations',
     env: 'XAI_API_KEY',
     defaultModel: 'grok-imagine-image-2.0',
+    defaultResolution: '1k',
     body: (model, prompt, resolution) => ({
       model, prompt, n: 1, response_format: 'b64_json', resolution: resolution.toLowerCase(),
     }),
   },
+  /**
+   * OpenRouter, via chat completions with image modalities.
+   *
+   * Not the unified /api/v1/images route, deliberately. That route works and
+   * is cheap, but Seedream answers it with `media_type: image/jpeg`, and the
+   * whole ingest chain decodes PNG only - so every image would have been paid
+   * for and then rejected. This route returns a `data:image/png;base64,...`
+   * URL, and its default model is the one that holds a character's face and
+   * clothes steady across six separate generations, which is the thing six
+   * poses of one person actually depend on.
+   */
   openrouter: {
-    url: 'https://openrouter.ai/api/v1/images',
+    url: 'https://openrouter.ai/api/v1/chat/completions',
     env: 'OPENROUTER_API_KEY',
-    defaultModel: 'bytedance-seed/seedream-4.5',
-    body: (model, prompt, resolution) => ({
-      model, prompt, resolution: resolution.toUpperCase(), aspect_ratio: '1:1',
+    defaultModel: 'google/gemini-2.5-flash-image',
+    defaultResolution: 'auto',
+    body: (model, prompt) => ({
+      model,
+      messages: [{ role: 'user', content: prompt }],
+      modalities: ['image', 'text'],
     }),
   },
 }[provider];
@@ -73,7 +88,7 @@ if (!PROVIDERS) {
 // stub when testing the budget arithmetic without spending anything.
 const endpoint = flag('url', PROVIDERS.url);
 const model = flag('model', PROVIDERS.defaultModel);
-const resolution = flag('resolution', '1k');
+const resolution = flag('resolution', PROVIDERS.defaultResolution ?? '1k');
 const budget = Number(flag('budget', '2.80'));
 const limit = Number(flag('limit', 'Infinity'));
 /**
@@ -134,6 +149,29 @@ const requests = readFileSync(resolve(process.cwd(), jsonl), 'utf8')
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+/** Set once, so a wrong-format model says so once rather than per image. */
+let warnedFormat = false;
+
+/**
+ * Pull the image out of whichever response shape came back.
+ *
+ * Three are in play: OpenAI-style `data[0].b64_json`, the same with a
+ * `media_type` beside it, and chat-completions image modalities, where the
+ * image arrives as a `data:image/png;base64,...` URL inside the message.
+ */
+function extractImage(data) {
+  const direct = data?.data?.[0];
+  if (direct?.b64_json) return { b64: direct.b64_json, mime: direct.media_type ?? null };
+
+  const parts = data?.choices?.[0]?.message?.images ?? data?.images ?? [];
+  for (const part of parts) {
+    const url = part?.image_url?.url ?? part?.url ?? (typeof part === 'string' ? part : null);
+    const m = url && /^data:([^;]+);base64,(.+)$/s.exec(url);
+    if (m) return { b64: m[2], mime: m[1] };
+  }
+  return null;
+}
+
 /**
  * Money committed to requests that are in flight or finished.
  *
@@ -182,15 +220,24 @@ async function generate(req, dest) {
       appendFileSync(errLog, `${req.custom_id}\t${res.status}\t${JSON.stringify(data?.error ?? data).slice(0, 300)}\n`);
       return false;
     }
-    // OpenAI-style and OpenRouter-style responses both land here.
-    const b64 = data?.data?.[0]?.b64_json
-      ?? data?.images?.[0]?.b64_json
-      ?? data?.output?.[0]?.b64_json;
-    if (!b64) {
+    const img = extractImage(data);
+    if (!img) {
       appendFileSync(errLog, `${req.custom_id}\tno-image\t${JSON.stringify(data).slice(0, 300)}\n`);
       return false;
     }
-    writeFileSync(dest, Buffer.from(b64, 'base64'));
+    // A JPEG here is not a wasted image but it is a wasted download: ingest
+    // decodes PNG only. Say so once, plainly, rather than letting it surface
+    // as thirty "not a PNG" lines at ingest time.
+    if (img.mime && !/png/i.test(img.mime)) {
+      appendFileSync(errLog, `${req.custom_id}\tnot-png\t${img.mime} - ingest decodes PNG only\n`);
+      if (!warnedFormat) {
+        warnedFormat = true;
+        console.log(c.yellow(`\n  ${model} is returning ${img.mime}, and ingest decodes PNG only.`));
+        console.log(c.yellow('  Stop and pick a model that returns PNG (google/gemini-2.5-flash-image does).\n'));
+      }
+      return false;
+    }
+    writeFileSync(dest, Buffer.from(img.b64, 'base64'));
     return true;
   }
   return false;
