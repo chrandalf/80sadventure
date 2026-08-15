@@ -44,7 +44,7 @@ export const SCENES: Record<string, Scene> = Object.fromEntries(
  * often enough that measured-by-eye has to win.
  */
 function withFloor(scene: Scene): Scene {
-  if (scene.space === 'world') return scene;
+  if (scene.space === 'world' || scene.autoFloor === false) return scene;
   const fitted = (FLOORS.floors as Record<string, { walkboxes: number[][]; depth: DepthBand }>)[scene.id];
   if (!fitted) return scene;
   return { ...scene, walkboxes: fitted.walkboxes, depth: fitted.depth };

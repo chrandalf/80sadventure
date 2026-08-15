@@ -745,8 +745,19 @@ export const ARCADE_SCENES: Record<string, Scene> = {
     name: 'Arcade Basement',
     background: 'arcade_basement',
     music: 'machine',
-    walkboxes: [[14, 106, 306, 106, 312, 140, 8, 140]],
-    depth: { yNear: 140, yFar: 106, scaleNear: 1, scaleFar: 0.74 },
+    // Concrete floor between the sheeted cabinets and the crates. Both stand on
+    // it rather than against the wall, so both occlude and both are solid.
+    autoFloor: false,
+    walkboxes: [[16, 125, 308, 125, 316, 143, 10, 143]],
+    depth: { yNear: 143, yFar: 125, scaleNear: 1, scaleFar: 0.86 },
+    blockers: [
+      [14, 120, 156, 120, 156, 146, 14, 146],
+      [246, 120, 288, 120, 288, 144, 246, 144],
+    ],
+    occluders: [
+      { polygon: [14, 42, 156, 42, 156, 146, 14, 146], y: 146 },
+      { polygon: [246, 118, 288, 118, 288, 144, 246, 144], y: 144 },
+    ],
     entries: { default: { x: 60, y: 130, facing: 'east' }, fromHatch: { x: 160, y: 130, facing: 'north' } },
     ambience: [{ sfx: 'hum', everyMin: 6, everyMax: 12 }],
     onFirstEnter: [

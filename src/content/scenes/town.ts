@@ -106,8 +106,20 @@ export const TOWN_SCENES: Record<string, Scene> = {
     name: 'The Pier',
     background: 'pier',
     music: 'seafront',
-    walkboxes: [[30, 100, 290, 100, 300, 140, 20, 140]],
-    depth: OUTDOOR_DEPTH,
+    // Deck boards, with the photo booth and the cafe front standing on them.
+    autoFloor: false,
+    walkboxes: [[20, 118, 300, 118, 310, 143, 10, 143]],
+    depth: { yNear: 143, yFar: 118, scaleNear: 1, scaleFar: 0.78 },
+    blockers: [
+      [216, 118, 262, 118, 262, 145, 216, 145],
+      [262, 110, 320, 110, 320, 145, 262, 145],
+      [84, 116, 104, 116, 104, 133, 84, 133],
+    ],
+    occluders: [
+      { polygon: [216, 39, 262, 39, 262, 127, 216, 127], y: 127 },
+      { polygon: [260, 8, 320, 8, 320, 120, 260, 120], y: 120 },
+      { polygon: [84, 116, 104, 116, 104, 133, 84, 133], y: 133 },
+    ],
     entries: { default: { x: 60, y: 130, facing: 'east' } },
     ambience: [{ sfx: 'seagull', everyMin: 14, everyMax: 30 }],
     hotspots: [
@@ -257,8 +269,16 @@ export const TOWN_SCENES: Record<string, Scene> = {
     name: 'Fish & Chip Shop',
     background: 'chip_shop',
     music: 'seafront',
-    walkboxes: INDOOR,
-    depth: INDOOR_DEPTH,
+    // The serving counter fills the left of the room; customers stand right of it.
+    autoFloor: false,
+    walkboxes: [[220, 125, 314, 125, 318, 143, 216, 143]],
+    depth: { yNear: 143, yFar: 125, scaleNear: 1, scaleFar: 0.86 },
+    blockers: [
+      [0, 118, 232, 118, 232, 146, 0, 146],
+    ],
+    occluders: [
+      { polygon: [0, 74, 232, 74, 232, 146, 0, 146], y: 146 },
+    ],
     entries: { default: { x: 160, y: 132, facing: 'north' } },
     hotspots: [
       {
@@ -318,8 +338,16 @@ export const TOWN_SCENES: Record<string, Scene> = {
     name: 'Back Alley',
     background: 'back_alley',
     music: 'mystery',
-    walkboxes: [[20, 108, 300, 108, 306, 140, 14, 140]],
-    depth: { yNear: 140, yFar: 108, scaleNear: 1, scaleFar: 0.78 },
+    // Cobbles between the shop fronts; the bins are down-stage on the right.
+    autoFloor: false,
+    walkboxes: [[70, 120, 312, 120, 318, 143, 64, 143]],
+    depth: { yNear: 143, yFar: 120, scaleNear: 1, scaleFar: 0.8 },
+    blockers: [
+      [214, 122, 320, 122, 320, 146, 214, 146],
+    ],
+    occluders: [
+      { polygon: [214, 92, 320, 92, 320, 146, 212, 146], y: 146 },
+    ],
     entries: { default: { x: 160, y: 132, facing: 'south' } },
     hotspots: [
       {

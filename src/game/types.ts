@@ -217,6 +217,15 @@ export interface Scene {
    * draws over it, one above is behind and gets occluded.
    */
   occluders?: { polygon: number[]; y: number }[];
+  /**
+   * Set false when this room's floor has been measured by eye.
+   *
+   * floors.json is fitted from the artwork by a detector that reads a dado rail
+   * or a row of cabinet bases as the floor often enough to need overruling, and
+   * a legacy-space room cannot overrule it just by declaring walkboxes - those
+   * are in a different coordinate space and get replaced wholesale.
+   */
+  autoFloor?: boolean;
   depth?: DepthBand;
   entries?: Record<string, { x: number; y: number; facing?: Facing }>;
   hotspots?: Hotspot[];
