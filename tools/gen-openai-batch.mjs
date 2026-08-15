@@ -257,9 +257,12 @@ function scrubTransparency(text) {
 
 function promptFor(asset) {
   const parts = [STYLE, framing(asset), scrubTransparency(asset.description)];
-  if (CLARIFY[asset.id]) {
-    parts.push(CLARIFY[asset.id]);
-  }
+  // Match the sheet as well as the asset: a pose is `char.guest.front_stand`,
+  // and a map keyed by `char.guest` missed all ten of them - so every guest
+  // pose was generated with no staging note whatsoever, which is why they
+  // came back generic. The portrait matched only because its id has two parts.
+  const brief = CLARIFY[asset.id] ?? CLARIFY[asset.id.split('.').slice(0, 2).join('.')];
+  if (brief) parts.push(brief);
   if (asset.transparency === 'alpha-required') {
     parts.push(useChroma
       ? CHROMA
