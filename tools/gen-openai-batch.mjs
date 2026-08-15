@@ -177,6 +177,23 @@ const CLARIFY = {
  * generator was willing to draw.
  */
 const SPICY = {
+  // Both sexes, to the same standard and the same ceiling. The male guest
+  // used to be the only one drawn at all - the cabin occupant was a flat
+  // silhouette - which made the running gag lopsided as well as tamer than
+  // the certificate allows.
+  'char.cabin': [
+    'An adult woman just out of the water, wrapped in a large striped beach',
+    'towel knotted above the chest, hair wet, holding the towel closed with',
+    'one hand. Bare shoulders, arms and lower legs; the towel is opaque and',
+    'secure. She is unbothered and faintly amused - the comedy is that she',
+    'is far less embarrassed than he is. Non-explicit: nothing beyond bare',
+    'shoulders and legs, as an R-rated seaside comedy would show.',
+  ].join(' '),
+  'portrait.cabin': [
+    'Head and bare shoulders of an adult woman just out of the water, hair',
+    'wet, a striped towel knotted above the chest, one eyebrow raised.',
+    'Bare shoulders only. Non-explicit.',
+  ].join(' '),
   'char.guest': [
     'An adult man fresh out of the shower: bare-chested, still damp, a bath',
     'towel wrapped and knotted firmly round his waist, another small towel',
@@ -193,11 +210,12 @@ const SPICY = {
   ].join(' '),
   'bg.nudist_beach': [
     'A moonlit shingle beach - the naturist end, staged like a saucy 1970s',
-    'British seaside postcard. Two or three adult bathers, far from the',
-    'camera and small in the frame, seen strictly from behind: bare backs',
-    'and shoulders in the moonlight, everything from the waist down hidden',
-    'by the shingle bank, the striped windbreak or draped towels. One',
-    'neatly folded pile of clothes with shoes on top beside the umbrella.',
+    'British seaside postcard. Three or four adult bathers, men and women,',
+    'far from the camera and small in the frame, seen strictly from behind:',
+    'bare backs and shoulders in the moonlight, everything from the waist',
+    'down hidden by the shingle bank, the striped windbreak, draped towels',
+    'or the water they are wading into. One neatly folded pile of clothes',
+    'with shoes on top beside the umbrella.',
     'No figure is close to the camera, none faces it, and no detail beyond',
     'a bare back is ever visible: rear views at a distance, comic and coy,',
     'the postcard tradition of implied nudity. Nothing frontal, nothing',
