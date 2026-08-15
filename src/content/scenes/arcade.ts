@@ -1,8 +1,8 @@
 import type { Scene } from '../../game/types';
 
 /** Standard interior floor and perspective band, in world (640x400) space. */
-const FLOOR_WORLD = [[16, 192, 624, 192, 632, 280, 8, 280]];
-const DEPTH_WORLD = { yNear: 280, yFar: 192, scaleNear: 1, scaleFar: 0.62 };
+const FLOOR_WORLD = [[16, 192, 624, 192, 632, 286, 8, 286]];
+const DEPTH_WORLD = { yNear: 286, yFar: 192, scaleNear: 1, scaleFar: 0.62 };
 
 /**
  * The lobby's back wall meets the floor lower than the arcade's, so its
@@ -280,11 +280,18 @@ export const ARCADE_SCENES: Record<string, Scene> = {
     background: 'arcade_floor',
     music: 'arcade',
     walkboxes: FLOOR_WORLD,
-    // The coin pusher stands on the floor in the near right corner, and the row
-    // of cabinets has a base that juts forward of the wall.
+    // The coin pusher's footprint, and the base of the cabinet row. The pusher
+    // is cut back to where it actually meets the carpet: it used to swallow the
+    // whole right-hand corner, including the spot its own hotspot walks to, so
+    // it could never be reached at all.
     blockers: [
-      [488, 236, 640, 224, 640, 300, 470, 300],
+      [496, 244, 640, 236, 640, 292, 484, 288],
       [168, 192, 512, 192, 512, 214, 168, 214],
+    ],
+    // Standing at its left edge puts Jack partly behind the glass, which is
+    // right - the machine is nearer the camera than he is.
+    occluders: [
+      { polygon: [478, 196, 640, 112, 640, 320, 486, 304], y: 292 },
     ],
     depth: DEPTH_WORLD,
     entries: {
@@ -357,7 +364,7 @@ export const ARCADE_SCENES: Record<string, Scene> = {
         id: 'coin_pusher',
         name: 'Coin Pusher',
         polygon: [[512, 126], [638, 118], [638, 316], [498, 300], [494, 196]],
-        walkTo: [504, 236],
+        walkTo: [466, 268],
         facing: 'north',
         verbs: {
           LOOK: [

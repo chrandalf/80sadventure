@@ -48,21 +48,18 @@ export const SCENE_ART: Record<string, SceneArt> = {
    * The first converted scene. Drop a 640x400 image at the path below and it
    * appears in game on the next visit - no code change, no rebuild.
    */
-  starlight_arcade: {
-    id: 'starlight_arcade',
-    background: '/assets/backgrounds/starlight_arcade.webp',
-    width: ART_WIDTH,
-    height: ART_HEIGHT,
-    layers: [
-      {
-        // Optional. The near edge of the arcade floor and the corner of the
-        // nearest cabinet, so Jack can walk *behind* it. Omit the file and the
-        // scene simply renders without it.
-        src: '/assets/backgrounds/starlight_arcade_foreground.webp',
-        plane: 'foreground',
-      },
-    ],
-  },
+  // Empty by design.
+  //
+  // A foreground layer used to live here: a second image, aligned pixel for
+  // pixel with the plate, holding the near-camera scenery so characters could
+  // walk behind it. Scene `occluders` do that from the plate's own pixels
+  // instead, so the extra image is redundant - and it was actively harmful.
+  // Asked for "only the objects nearest the camera, everything else
+  // transparent", the generator returned an abstract overlay of streaks, which
+  // then composited over the whole room and looked like rain indoors.
+  //
+  // Layers still work, for a room that genuinely needs artwork the plate cannot
+  // provide. Nothing needs one yet.
 };
 
 /**

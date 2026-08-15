@@ -25,10 +25,9 @@
     ]
   },
   "counts": {
-    "total": 152,
+    "total": 151,
     "byType": {
       "background": 33,
-      "background-layer": 1,
       "character-sheet": 10,
       "character-pose": 60,
       "portrait": 10,
@@ -40,7 +39,7 @@
     "byPriority": {
       "p1": 115,
       "p0": 8,
-      "p2": 29
+      "p2": 28
     }
   },
   "assets": [
@@ -477,28 +476,6 @@
       },
       "description": "Starlight Arcade. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Coin Pusher (around x556, y211); Turbo Racer (around x201, y128); Space Wars (around x260, y123); Monster Manor (around x321, y124); Galactic Raiders (around x395, y127); Unmarked Machine (around x473, y136); Staff Door (around x51, y111). Visible ways out: Lobby. Characters stand in this room (drawn separately, not in the background): Kevin, Maggie. None of the named characters are painted into the plate - they are supplied separately as sprites. No text, no UI, no watermark. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
       "priority": "p0"
-    },
-    {
-      "id": "bg.starlight_arcade.foreground",
-      "scene": "starlight_arcade",
-      "type": "background-layer",
-      "path": "/assets/backgrounds/starlight_arcade_foreground.webp",
-      "dimensions": {
-        "width": 640,
-        "height": 400
-      },
-      "transparency": "alpha-required",
-      "animation": {
-        "animated": false
-      },
-      "characters": [],
-      "hotspots": [],
-      "layering": {
-        "plane": "foreground",
-        "notes": "Near-camera scenery, composited over characters. Everything not part of that scenery must be fully transparent."
-      },
-      "description": "Optional foreground layer for Starlight Arcade, aligned pixel-for-pixel with the background plate. Only the objects nearest the camera, which characters should be able to walk behind. Everything else transparent.",
-      "priority": "p2"
     },
     {
       "id": "bg.arcade_office",
