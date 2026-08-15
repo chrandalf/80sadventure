@@ -86,11 +86,16 @@ the live game data (`npm run assets:manifest`), so it cannot drift.
 > The procedural painters in `src/content/backgrounds.ts` are a fallback, not the
 > art direction. See [`docs/PROGRESS.md`](docs/PROGRESS.md) for that history.
 
+**→ [`docs/GENERATING-ART.md`](docs/GENERATING-ART.md)** is the three-command
+pipeline for generating the art and getting it into the game.
 **→ [`docs/ASSETS.md`](docs/ASSETS.md)** covers the sprite contract, sheet
 layouts and the validator.
 
 ```bash
 npm run assets:manifest       # regenerate assets.json from the game data
+npm run assets:batch          # build the image-request .jsonl from assets.json
+npm run assets:generate       # run it against the API (or use the Batch API)
+npm run assets:ingest         # crop, resize, binarise alpha, file it correctly
 npm run assets:validate       # check art against the manifests
 npm run assets:placeholders   # drawing templates at the exact final sizes
 ```

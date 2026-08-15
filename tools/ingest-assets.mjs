@@ -1,0 +1,347 @@
+/**
+ * Ingest externally generated artwork into the game.
+ *
+ *   node tools/ingest-assets.mjs <incoming-dir> [--dry] [--force]
+ *
+ * Generative image APIs return whatever size and aspect they feel like, with
+ * soft alpha and generous padding. The game wants exact dimensions, binary
+ * alpha and a specific file path. This bridges the two so nobody hand-crops
+ * ninety-two images.
+ *
+ * Matching: a file is matched to an asset by its basename, tried as the asset
+ * id (`bg.starlight_arcade.png`), the id with dots as underscores, or the
+ * basename of the asset's declared path (`starlight_arcade.png`).
+ *
+ * Fitting depends on what the asset is:
+ *   - full-screen plates (640x400)  cover-crop, then area-average downscale
+ *   - sprites, icons, portraits     trim to the alpha bounding box, then fit
+ *                                   inside the frame, anchored to the bottom
+ *   - character sheets              see buildStillSheet() below
+ *
+ * Input must be PNG - pngjs cannot decode WebP or JPEG. Ask the generator for
+ * `output_format: "png"`.
+ */
+import { readdirSync, readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { resolve, dirname, basename, extname } from 'node:path';
+import { PNG } from 'pngjs';
+import { ROOT, c } from './lib.mjs';
+
+const ASSETS_JSON = resolve(ROOT, 'public/assets/assets.json');
+
+const args = process.argv.slice(2);
+const dry = args.includes('--dry');
+const force = args.includes('--force');
+const incoming = args.find((a) => !a.startsWith('--'));
+
+if (!incoming) {
+  console.error('usage: node tools/ingest-assets.mjs <incoming-dir> [--dry] [--force]');
+  process.exit(2);
+}
+
+/* ------------------------------------------------------------------ pixels */
+
+/** Straight-alpha RGBA at a pixel. */
+function px(img, x, y) {
+  const i = (y * img.width + x) << 2;
+  return [img.data[i], img.data[i + 1], img.data[i + 2], img.data[i + 3]];
+}
+
+/**
+ * Area-average resample, done in premultiplied alpha.
+ *
+ * Averaging straight RGB across a transparent edge drags the colour of
+ * whatever the generator left in the invisible pixels into the visible ones,
+ * which is where dark halos around sprites come from.
+ */
+function resample(src, sx, sy, sw, sh, dw, dh) {
+  const out = new PNG({ width: dw, height: dh });
+  for (let y = 0; y < dh; y++) {
+    const y0 = sy + (y * sh) / dh;
+    const y1 = sy + ((y + 1) * sh) / dh;
+    for (let x = 0; x < dw; x++) {
+      const x0 = sx + (x * sw) / dw;
+      const x1 = sx + ((x + 1) * sw) / dw;
+      let r = 0, g = 0, b = 0, a = 0, n = 0;
+      const yi0 = Math.floor(y0), yi1 = Math.max(yi0 + 1, Math.ceil(y1));
+      const xi0 = Math.floor(x0), xi1 = Math.max(xi0 + 1, Math.ceil(x1));
+      for (let yy = yi0; yy < yi1; yy++) {
+        if (yy < 0 || yy >= src.height) continue;
+        for (let xx = xi0; xx < xi1; xx++) {
+          if (xx < 0 || xx >= src.width) continue;
+          const [pr, pg, pb, pa] = px(src, xx, yy);
+          const m = pa / 255;
+          r += pr * m; g += pg * m; b += pb * m; a += pa; n++;
+        }
+      }
+      const i = (y * dw + x) << 2;
+      if (!n || a === 0) { out.data[i] = out.data[i + 1] = out.data[i + 2] = out.data[i + 3] = 0; continue; }
+      const am = a / n / 255;
+      out.data[i] = Math.round(r / n / am);
+      out.data[i + 1] = Math.round(g / n / am);
+      out.data[i + 2] = Math.round(b / n / am);
+      out.data[i + 3] = Math.round(a / n);
+    }
+  }
+  return out;
+}
+
+/** Bounding box of pixels above the alpha threshold, or null if fully clear. */
+function alphaBounds(img, threshold = 16) {
+  let minX = img.width, minY = img.height, maxX = -1, maxY = -1;
+  for (let y = 0; y < img.height; y++) {
+    for (let x = 0; x < img.width; x++) {
+      if (img.data[((y * img.width + x) << 2) + 3] < threshold) continue;
+      if (x < minX) minX = x;
+      if (x > maxX) maxX = x;
+      if (y < minY) minY = y;
+      if (y > maxY) maxY = y;
+    }
+  }
+  if (maxX < 0) return null;
+  return { x: minX, y: minY, w: maxX - minX + 1, h: maxY - minY + 1 };
+}
+
+/**
+ * Some generators return an opaque checkerboard or flat backdrop instead of
+ * real transparency. Detect a uniform border and knock it out, so a sprite that
+ * was asked for with alpha still ends up with alpha.
+ */
+function keyOutFlatBorder(img, tolerance = 12) {
+  const corners = [
+    px(img, 0, 0), px(img, img.width - 1, 0),
+    px(img, 0, img.height - 1), px(img, img.width - 1, img.height - 1),
+  ];
+  if (corners.some((p) => p[3] < 250)) return false; // already has alpha
+  const [r0, g0, b0] = corners[0];
+  const near = (p) => Math.abs(p[0] - r0) <= tolerance && Math.abs(p[1] - g0) <= tolerance && Math.abs(p[2] - b0) <= tolerance;
+  if (!corners.every(near)) return false;
+
+  // Flood from the border only, so a same-coloured region inside stays opaque.
+  const seen = new Uint8Array(img.width * img.height);
+  const stack = [];
+  for (let x = 0; x < img.width; x++) { stack.push([x, 0], [x, img.height - 1]); }
+  for (let y = 0; y < img.height; y++) { stack.push([0, y], [img.width - 1, y]); }
+  let cleared = 0;
+  while (stack.length) {
+    const [x, y] = stack.pop();
+    if (x < 0 || y < 0 || x >= img.width || y >= img.height) continue;
+    const k = y * img.width + x;
+    if (seen[k]) continue;
+    seen[k] = 1;
+    if (!near(px(img, x, y))) continue;
+    img.data[(k << 2) + 3] = 0;
+    cleared++;
+    stack.push([x + 1, y], [x - 1, y], [x, y + 1], [x, y - 1]);
+  }
+  return cleared > 0;
+}
+
+/** Alpha must be all-or-nothing; soft edges halo badly under integer scaling. */
+function binarise(img, threshold = 128) {
+  for (let i = 3; i < img.data.length; i += 4) {
+    img.data[i] = img.data[i] >= threshold ? 255 : 0;
+  }
+}
+
+function opaque(img) {
+  for (let i = 3; i < img.data.length; i += 4) img.data[i] = 255;
+}
+
+function blank(w, h) {
+  const p = new PNG({ width: w, height: h });
+  p.data.fill(0);
+  return p;
+}
+
+function blit(dst, src, dx, dy) {
+  for (let y = 0; y < src.height; y++) {
+    const ty = dy + y;
+    if (ty < 0 || ty >= dst.height) continue;
+    for (let x = 0; x < src.width; x++) {
+      const tx = dx + x;
+      if (tx < 0 || tx >= dst.width) continue;
+      const s = (y * src.width + x) << 2;
+      if (src.data[s + 3] === 0) continue;
+      const d = (ty * dst.width + tx) << 2;
+      dst.data[d] = src.data[s];
+      dst.data[d + 1] = src.data[s + 1];
+      dst.data[d + 2] = src.data[s + 2];
+      dst.data[d + 3] = src.data[s + 3];
+    }
+  }
+}
+
+/* ------------------------------------------------------------------- fits */
+
+/** Fill the frame edge to edge, cropping the overflow. For opaque plates. */
+function fitCover(src, w, h) {
+  const scale = Math.max(w / src.width, h / src.height);
+  const cw = Math.min(src.width, Math.round(w / scale));
+  const ch = Math.min(src.height, Math.round(h / scale));
+  return resample(src, (src.width - cw) / 2, (src.height - ch) / 2, cw, ch, w, h);
+}
+
+/**
+ * Trim the padding, then fit the whole subject inside the frame without
+ * cropping, sitting it on the bottom edge - sprites are anchored at their feet,
+ * so vertical centring would make characters hover.
+ */
+function fitContain(src, w, h, { bottom = true } = {}) {
+  const b = alphaBounds(src) ?? { x: 0, y: 0, w: src.width, h: src.height };
+  const scale = Math.min(w / b.w, h / b.h);
+  const dw = Math.max(1, Math.round(b.w * scale));
+  const dh = Math.max(1, Math.round(b.h * scale));
+  const shrunk = resample(src, b.x, b.y, b.w, b.h, dw, dh);
+  const out = blank(w, h);
+  blit(out, shrunk, Math.round((w - dw) / 2), bottom ? h - dh : Math.round((h - dh) / 2));
+  return out;
+}
+
+/**
+ * Build a sprite sheet from a single standing figure.
+ *
+ * No image model produces a frame-accurate 6x4 animation grid with a
+ * consistent character across all 24 cells - it produces something that looks
+ * like a sprite sheet and animates like a flip-book of different people. So
+ * when the delivered file is not already a real sheet, the one good pose is
+ * copied into every cell. The character renders correctly, stands, turns and
+ * talks; it just does not yet move its legs. Replace the file with a genuine
+ * sheet later and nothing else has to change.
+ */
+function buildStillSheet(src, anim) {
+  const { frameWidth: fw, frameHeight: fh, columns, rows } = anim;
+  const frame = fitContain(src, fw, fh);
+  const sheet = blank(fw * columns, fh * rows);
+  for (let r = 0; r < rows; r++) {
+    for (let col = 0; col < columns; col++) blit(sheet, frame, col * fw, r * fh);
+  }
+  return sheet;
+}
+
+/** An already-authored sheet: exact size, or an exact integer multiple of it. */
+function isRealSheet(src, w, h) {
+  if (src.width === w && src.height === h) return true;
+  const k = src.width / w;
+  return k >= 2 && Number.isInteger(k) && src.height === h * k;
+}
+
+/* ------------------------------------------------------------------- main */
+
+const manifest = JSON.parse(readFileSync(ASSETS_JSON, 'utf8'));
+
+/** Every name an asset may reasonably arrive under. */
+function aliases(asset) {
+  const fromPath = basename(asset.path).replace(/\.\w+$/, '');
+  return new Set([asset.id, asset.id.replace(/\./g, '_'), asset.id.replace(/\./g, '-'), fromPath]);
+}
+
+const byAlias = new Map();
+for (const asset of manifest.assets) {
+  for (const a of aliases(asset)) {
+    if (!byAlias.has(a)) byAlias.set(a, asset);
+  }
+}
+
+const dir = resolve(process.cwd(), incoming);
+if (!existsSync(dir)) {
+  console.error(c.red(`no such directory: ${dir}`));
+  process.exit(2);
+}
+
+const files = readdirSync(dir).filter((f) => !f.startsWith('.'));
+const written = [];
+const skipped = [];
+const unmatched = [];
+const failed = [];
+
+for (const file of files) {
+  const stem = basename(file, extname(file));
+  const asset = byAlias.get(stem);
+  if (!asset) { unmatched.push(file); continue; }
+
+  if (extname(file).toLowerCase() !== '.png') {
+    failed.push([file, 'not a PNG - regenerate with output_format: "png"']);
+    continue;
+  }
+
+  let src;
+  try {
+    src = PNG.sync.read(readFileSync(resolve(dir, file)));
+  } catch (e) {
+    failed.push([file, `unreadable: ${e.message}`]);
+    continue;
+  }
+
+  const { width: w, height: h } = asset.dimensions;
+  const wantsAlpha = asset.transparency === 'alpha-required';
+  const fullScreen = w === manifest.renderResolution.width && h === manifest.renderResolution.height;
+
+  let out;
+  let how;
+  if (asset.type === 'character-sheet') {
+    if (isRealSheet(src, w, h)) {
+      out = src.width === w ? src : resample(src, 0, 0, src.width, src.height, w, h);
+      how = 'sheet';
+    } else {
+      if (wantsAlpha) keyOutFlatBorder(src);
+      out = buildStillSheet(src, asset.animation);
+      how = `still x${asset.animation.columns * asset.animation.rows}`;
+    }
+  } else if (fullScreen) {
+    // Rain, dust and glow span the whole frame; letterboxing them would leave
+    // transparent bands across the screen. Crop rather than contain.
+    if (wantsAlpha) keyOutFlatBorder(src);
+    out = fitCover(src, w, h);
+    how = 'cover';
+  } else {
+    if (wantsAlpha) keyOutFlatBorder(src);
+    out = wantsAlpha ? fitContain(src, w, h, { bottom: asset.type !== 'portrait' }) : fitCover(src, w, h);
+    how = wantsAlpha ? 'trim+contain' : 'cover';
+  }
+
+  if (wantsAlpha) binarise(out); else opaque(out);
+
+  // The loader tries .png before the .webp named in the manifest, so writing
+  // PNG here needs no manifest edit and no rebuild.
+  const dest = resolve(ROOT, 'public' + asset.path.replace(/\.(webp|jpe?g)$/i, '.png'));
+  if (existsSync(dest) && !force) { skipped.push([asset.id, 'exists, use --force']); continue; }
+
+  if (!dry) {
+    mkdirSync(dirname(dest), { recursive: true });
+    writeFileSync(dest, PNG.sync.write(out));
+  }
+  written.push([asset.id, `${src.width}x${src.height} -> ${w}x${h} ${how}`]);
+}
+
+/* ----------------------------------------------------------------- report */
+
+const have = new Set(written.map(([id]) => id));
+const missing = manifest.assets.filter((a) => {
+  if (have.has(a.id)) return false;
+  const dest = resolve(ROOT, 'public' + a.path.replace(/\.(webp|jpe?g)$/i, '.png'));
+  const asNamed = resolve(ROOT, 'public' + a.path);
+  return !existsSync(dest) && !existsSync(asNamed);
+});
+
+const line = (n, label, paint) => console.log(`${paint(String(n).padStart(4))}  ${label}`);
+
+console.log(`\n${c.bold('ingest')}  ${dir}${dry ? c.yellow('  (dry run, nothing written)') : ''}`);
+console.log('');
+for (const [id, note] of written) console.log(`  ${c.green('+')} ${id.padEnd(28)} ${c.dim(note)}`);
+for (const [id, note] of skipped) console.log(`  ${c.yellow('=')} ${id.padEnd(28)} ${c.dim(note)}`);
+for (const [f, note] of failed) console.log(`  ${c.red('x')} ${f.padEnd(28)} ${c.dim(note)}`);
+for (const f of unmatched) console.log(`  ${c.red('?')} ${f.padEnd(28)} ${c.dim('no asset with that id')}`);
+
+console.log('');
+line(written.length, 'written', c.green);
+line(skipped.length, 'skipped', c.yellow);
+line(failed.length + unmatched.length, 'rejected', failed.length + unmatched.length ? c.red : c.dim);
+line(missing.length, `still missing of ${manifest.assets.length}`, missing.length ? c.yellow : c.green);
+
+if (missing.length) {
+  const p0 = missing.filter((a) => a.priority === 'p0');
+  if (p0.length) console.log(`\n  ${c.yellow('p0 outstanding:')} ${p0.map((a) => a.id).join(' ')}`);
+}
+console.log('');
+
+process.exit(failed.length ? 1 : 0);

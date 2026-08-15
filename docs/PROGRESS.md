@@ -171,11 +171,20 @@ invest in them further. They can be deleted in one commit once artwork lands.
 ## Next steps, in order
 
 1. **Restore `docs/SPEC.md`** from the chat history.
-2. **Generate artwork** from `public/assets/assets.json`. Start with the `p0`
-   assets: `bg.starlight_arcade` and `char.jack`.
-3. **Drop art in and check it.** `public/assets/backgrounds/starlight_arcade.webp`
-   (640×400) and `public/assets/characters/jack.png` (144×160). No rebuild
-   needed. Press **F1** to confirm hotspot polygons land on the painted objects.
+2. **Generate artwork.** The pipeline is three commands — see
+   **[`docs/GENERATING-ART.md`](GENERATING-ART.md)**:
+
+   ```bash
+   npm run assets:batch -- --only p0
+   OPENAI_API_KEY=... npm run assets:generate -- one-more-credit-images.jsonl ./incoming
+   npm run assets:ingest -- ./incoming
+   ```
+
+   Start with `--only p0`: `bg.starlight_arcade` and `char.jack`. Look at those
+   two in the game before spending on the other ninety.
+3. **Check it.** Ingest files everything at the right path and size, so it
+   appears on the next visit to the room — no rebuild. Press **F1** to confirm
+   the hotspot polygons land on the painted objects.
 4. **Adjust polygons, not art.** If they disagree, edit the polygon in
    `src/content/scenes/arcade.ts` — that is the whole point of the separation.
 5. **Convert the remaining 32 scenes** once the first proves out. Add
@@ -191,6 +200,9 @@ invest in them further. They can be deleted in one commit once artwork lands.
 | `npm run dev` | Dev server |
 | `npm run build` | Typecheck + build |
 | `npm run assets:manifest` | Regenerate `assets.json` from live game data |
+| `npm run assets:batch` | Build the image-request `.jsonl` from `assets.json` |
+| `npm run assets:generate` | Run that `.jsonl` against the image API directly |
+| `npm run assets:ingest` | Crop, resize, binarise alpha, file art correctly |
 | `npm run assets:validate` | Check art against manifests and palette |
 | `npm run assets:placeholders` | Drawing templates at exact final sizes |
 

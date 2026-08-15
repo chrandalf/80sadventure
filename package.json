@@ -13,7 +13,10 @@
     "assets:validate": "node tools/validate-assets.mjs",
     "assets:quantize": "node tools/quantize.mjs",
     "assets:palette": "node tools/make-palette-image.mjs",
-    "assets:manifest": "esbuild tools/gen-assets-manifest.ts --bundle --platform=node --format=esm --outfile=node_modules/.cache/gen-assets.mjs --log-level=error && node node_modules/.cache/gen-assets.mjs"
+    "assets:manifest": "esbuild tools/gen-assets-manifest.ts --bundle --platform=node --format=esm --outfile=node_modules/.cache/gen-assets.mjs --log-level=error && node node_modules/.cache/gen-assets.mjs",
+    "assets:batch": "node tools/gen-openai-batch.mjs",
+    "assets:generate": "node tools/run-openai-images.mjs",
+    "assets:ingest": "node tools/ingest-assets.mjs"
   },
   "devDependencies": {
     "pngjs": "^7.0.0",
