@@ -1,8 +1,9 @@
 import { GAME_HEIGHT, GAME_WIDTH } from '../engine/Screen';
 import {
-  boards, bricks, cabinet, checker, Colors, type Ctx, ditherFill, font, gradientV, hline,
-  lightPool, neonLine, neonText, nightSky, outline, ramp, rect, rng, sea, silhouette,
-  speckle, staticScreen, vline, windowPane,
+  boards, bricks, cabinet, celEllipse, celQuad, celShape, checker, Colors, type Ctx,
+  ditherFill, font, gradientV, groundShadow, hline, lightPool, neonLine, neonText, nightSky,
+  outline, ramp, rampGradient, rect, rng, sea, shade, silhouette, speckle, staticScreen,
+  vline, windowPane,
 } from '../game/paint';
 
 /**
@@ -63,17 +64,14 @@ export const BACKGROUNDS: Record<string, (c: Ctx) => void> = {
     font.draw(c, 'STAFF', 17, 26, { color: ramp('neutral', 3), align: 'center' });
 
     // Four named cabinets along the back wall.
-    const machines: [number, string, string][] = [
-      [40, ramp('magenta', 1), ramp('magenta', 2)],
-      [74, ramp('cyan', 1), ramp('cyan', 2)],
-      [108, ramp('amber', 1), ramp('amber', 2)],
-      [142, ramp('phosphor', 1), ramp('phosphor', 2)],
+    const machines: [number, string][] = [
+      [40, 'magenta'], [74, 'teal'], [108, 'amber'], [142, 'phosphor'],
     ];
-    machines.forEach(([x, body, accent], i) => {
-      cabinet(c, x, 26, 30, 62, body, accent, ramp('cyan', 0), true, 30 + i);
-      lightPool(c, x + 15, 92, 18, 8, accent, 0.4);
+    machines.forEach(([x, rampName], i) => {
+      cabinet(c, x, 26, 30, 62, rampName, shade(rampName, 0.28), true, 30 + i, 1.5);
+      lightPool(c, x + 15, 94, 22, 9, shade(rampName, 0.7), 0.45);
       // Cabinet numbers on the coin doors - the clue for the fuse-box order.
-      font.draw(c, String([3, 1, 4, 2][i]), x + 15, 82, { color: ramp('amber', 3), align: 'center' });
+      font.draw(c, String([3, 1, 4, 2][i]), x + 15, 80, { color: shade('gold', 0.92), align: 'center' });
     });
 
     // ONE MORE CREDIT: the odd one out. No marquee, no colour, screen off.
@@ -1229,71 +1227,218 @@ export const BACKGROUNDS: Record<string, (c: Ctx) => void> = {
   },
 
   pool_cabins(c) {
-    nightSky(c, 0, 0, W, 34, 441);
-    // Open-air seafront pool: tiled surround, a row of striped cabins.
-    rect(c, 0, 30, W, 24, ramp('cyan', 0));
-    rect(c, 0, 54, W, GAME_HEIGHT - 54, ramp('paper', 0));
-    checker(c, 0, 100, W, GAME_HEIGHT - 100, ramp('cyan', 0), ramp('paper', 0), 8);
-    // The pool itself, top left, gently rippling.
-    rect(c, 0, 56, 120, 42, ramp('cyan', 1));
-    for (let i = 0; i < 30; i++) {
-      hline(c, Math.floor(rng(451 + i)() * 110), 58 + ((i * 7) % 38), 6, ramp('cyan', 2));
-    }
-    outline(c, 0, 56, 120, 42, ramp('paper', 0));
+    rampGradient(c, 0, 0, W, 30, 'violet', 0.06, 0.34, 1.3);
 
-    // Four changing cabins with striped curtains. One is the wrong one (s.48).
-    for (let i = 0; i < 4; i++) {
-      const x = 142 + i * 44;
-      rect(c, x, 40, 40, 62, ramp('neutral', 1));
-      rect(c, x - 2, 34, 44, 8, ramp('red', 1));
-      // Curtain.
-      for (let s = 0; s < 36; s += 4) {
-        rect(c, x + 2 + s, 46, 4, 54, (s / 4) % 2 ? ramp('paper', 0) : ramp('cyan', 2));
-      }
-      font.draw(c, String(i + 1), x + 20, 36, { color: ramp('paper', 0), align: 'center' });
+    // Tiled surround, drawn in perspective so the floor recedes.
+    rampGradient(c, 0, 28, W, GAME_HEIGHT - 28, 'neutral', 0.86, 0.6, 0.9);
+    c.strokeStyle = shade('teal', 0.42);
+    c.lineWidth = 1;
+    for (let i = 0; i <= 12; i++) {
+      c.beginPath();
+      c.moveTo(160 + (i - 6) * 14, 100);
+      c.lineTo(160 + (i - 6) * 44, GAME_HEIGHT);
+      c.stroke();
     }
-    // Deckchairs stacked, and a very British sign about running.
-    rect(c, 20, 108, 40, 4, ramp('amber', 1));
-    rect(c, 24, 112, 4, 16, ramp('amber', 0));
-    rect(c, 52, 112, 4, 16, ramp('amber', 0));
-    rect(c, 264, 106, 46, 16, ramp('paper', 0));
-    font.draw(c, 'NO RUNNING', 287, 110, { color: ramp('red', 1), align: 'center' });
+    for (let y = 102, gap = 5; y < GAME_HEIGHT; gap += 2.4, y += gap) {
+      c.beginPath();
+      c.moveTo(0, y);
+      c.lineTo(W, y);
+      c.stroke();
+    }
+
+    // The pool: a curved basin, not a rectangle, with a lit lip.
+    celShape(c, (ctx) => {
+      ctx.beginPath();
+      ctx.ellipse(52, 78, 66, 26, -0.06, 0, Math.PI * 2);
+    }, 'teal', { base: 0.44, shadow: 0.2, light: [-3, -3], outlineWidth: 2 });
+    c.save();
+    c.beginPath();
+    c.ellipse(52, 78, 62, 22, -0.06, 0, Math.PI * 2);
+    c.clip();
+    for (let i = 0; i < 22; i++) {
+      const r = rng(451 + i);
+      c.fillStyle = shade('teal', 0.72 + r() * 0.2);
+      c.fillRect(-10 + r() * 130, 58 + r() * 40, 5 + r() * 8, 1);
+    }
+    c.restore();
+
+    // Four changing cabins, each leaning slightly, with striped curtain wedges.
+    for (let i = 0; i < 4; i++) {
+      const x = 138 + i * 44;
+      const lean = (i - 1.5) * 2;
+      groundShadow(c, x + 20, 104, 22, 5);
+      // Body.
+      celQuad(c, [
+        [x + lean, 34], [x + 40 + lean, 34], [x + 40, 102], [x, 102],
+      ], 'neutral', { base: 0.68, shadow: 0.24, light: [-3, -2] });
+      // Scalloped valance.
+      for (let k = 0; k < 5; k++) {
+        celEllipse(c, x + 5 + k * 8 + lean, 34, 5, 4, 'red',
+          { base: 0.72, shadow: 0.18, outlineWidth: 1 });
+      }
+      // Curtain: alternating vertical panels, one hanging open.
+      const open = i === 1 ? 10 : 0;
+      for (let sIdx = 0; sIdx < 5; sIdx++) {
+        const sx = x + 3 + sIdx * 7 + open;
+        if (sx > x + 37) break;
+        celQuad(c, [
+          [sx + lean * 0.6, 42], [sx + 7 + lean * 0.6, 42],
+          [sx + 7 + Math.sin(sIdx) * 1.5, 100], [sx + Math.sin(sIdx) * 1.5, 100],
+        ], sIdx % 2 ? 'teal' : 'neutral', {
+          base: sIdx % 2 ? 0.72 : 0.94, shadow: 0.16, outlineWidth: 1, outline: null,
+        });
+      }
+      c.strokeStyle = Colors.ink;
+      c.lineWidth = 1;
+      c.strokeRect(x + 2, 42, 38, 58);
+      font.draw(c, String(i + 1), x + 20 + lean, 26, { color: shade('gold', 0.9), align: 'center' });
+    }
+
+    // Stacked deckchairs and the sign nobody obeys.
+    celQuad(c, [[16, 112], [58, 108], [58, 116], [16, 120]], 'wood', { base: 0.5 });
+    celQuad(c, [[20, 118], [26, 118], [26, 136], [20, 136]], 'wood', { base: 0.4, outlineWidth: 1 });
+    celQuad(c, [[48, 116], [54, 116], [54, 134], [48, 134]], 'wood', { base: 0.4, outlineWidth: 1 });
+    celQuad(c, [[262, 104], [312, 100], [312, 120], [262, 124]], 'neutral', { base: 0.94, shadow: 0.2 });
+    font.draw(c, 'NO PETTING', 287, 109, { color: shade('red', 0.55), align: 'center' });
   },
 
   nudist_beach(c) {
-    // The whole composition is built to obscure. Per spec s.49/s.56 the joke is
-    // the staging - umbrellas, towels, deckchairs and foreground objects - not
-    // the figures, which are distant, tiny and entirely blocked.
-    nightSky(c, 0, 0, W, 40, 461);
-    sea(c, 0, 36, W, 26, 471);
-    gradientV(c, 0, 60, W, GAME_HEIGHT - 60, [ramp('amber', 1), ramp('amber', 0), ramp('neutral', 1)], 0.8);
-    speckle(c, 0, 62, W, 82, ramp('amber', 2), 0.05, 481);
-
-    // Background figures, drawn first then covered by beach furniture.
-    for (const [fx, fh] of [[70, 16], [148, 15], [232, 17]] as const) {
-      silhouette(c, fx, 84, fh, ramp('neutral', 1));
+    // Per spec s.49 and s.56 the entire composition exists to obstruct. Every
+    // sightline is blocked by a parasol, a windbreak, a towel or a deckchair,
+    // positioned with a precision the game itself comments on. The figures are
+    // distant, tiny and completely covered; the joke is the staging.
+    // Night, like the rest of the game. Moonlight on wet sand, not sunshine.
+    rampGradient(c, 0, 0, W, 40, 'violet', 0.02, 0.3, 1.6);
+    const r0 = rng(4711);
+    for (let i = 0; i < 50; i++) {
+      rect(c, r0() * W, r0() * 34, 1, 1, shade('neutral', 0.55 + r0() * 0.4));
     }
+    celEllipse(c, 274, 16, 8, 8, 'gold', { base: 0.94, shadow: 0.1, outline: null });
+    lightPool(c, 274, 16, 30, 30, shade('gold', 0.8), 0.22);
 
-    // Umbrellas: large, opaque, "strategically positioned".
-    for (const [ux, col] of [[64, ramp('red', 1)], [142, ramp('cyan', 1)], [226, ramp('amber', 2)]] as const) {
-      vline(c, ux, 66, 24, ramp('neutral', 2));
-      for (let i = 0; i < 5; i++) {
-        const w = 40 - i * 6;
-        rect(c, ux - w / 2, 62 + i * 2, w, 3, i % 2 ? col : ramp('paper', 0));
+    rampGradient(c, 0, 34, W, 26, 'blue', 0.06, 0.24, 1);
+    rampGradient(c, 0, 56, W, GAME_HEIGHT - 56, 'gold', 0.2, 0.1, 0.8);
+
+    // A lazy shoreline curve rather than a hard horizontal edge, catching the
+    // moon along its crest.
+    c.fillStyle = shade('blue', 0.34);
+    c.beginPath();
+    c.moveTo(0, 62);
+    c.bezierCurveTo(90, 54, 210, 70, W, 58);
+    c.lineTo(W, 48);
+    c.lineTo(0, 48);
+    c.closePath();
+    c.fill();
+    c.strokeStyle = shade('teal', 0.62);
+    c.lineWidth = 1;
+    c.beginPath();
+    c.moveTo(0, 62);
+    c.bezierCurveTo(90, 54, 210, 70, W, 58);
+    c.stroke();
+    lightPool(c, 274, 58, 60, 10, shade('gold', 0.7), 0.18);
+
+    speckle(c, 0, 64, W, 80, shade('gold', 0.34), 0.03, 481);
+
+    // Distant bathers: flat silhouettes, drawn first so everything else covers
+    // them. None is more than a few pixels of shoulder and a head.
+    for (const [fx, fh] of [[68, 15], [150, 13], [232, 16]] as const) {
+      silhouette(c, fx, 82, fh, shade('neutral', 0.16));
+    }
+    // A raised arm and a sunhat poking past the canopies, so the player can
+    // see that something is being blocked. That is the entire joke.
+    celEllipse(c, 96, 60, 7, 3, 'neutral', { base: 0.12, outline: null });
+    c.strokeStyle = shade('neutral', 0.16);
+    c.lineWidth = 2;
+    c.beginPath();
+    c.moveTo(196, 74);
+    c.quadraticCurveTo(202, 62, 199, 54);
+    c.stroke();
+
+    // Parasols. Proper cone-shaped canopies with alternating panels, a
+    // scalloped hem and a leaning pole - the "strategically positioned" gag.
+    const parasol = (px: number, py: number, r: number, a: string, b: string, lean: number) => {
+      groundShadow(c, px + lean, 92, r * 0.8, r * 0.22);
+      // Pole first, so the canopy sits over it.
+      celQuad(c, [
+        [px + lean - 1.5, py],
+        [px + lean + 1.5, py],
+        [px + 1.5, 96],
+        [px - 1.5, 96],
+      ], 'wood', { base: 0.5, outline: Colors.ink, outlineWidth: 1 });
+
+      // Canopy panels radiating from the apex.
+      const panels = 8;
+      for (let i = 0; i < panels; i++) {
+        const a0 = Math.PI + (i / panels) * Math.PI;
+        const a1 = Math.PI + ((i + 1) / panels) * Math.PI;
+        celShape(c, (ctx) => {
+          ctx.beginPath();
+          ctx.moveTo(px + lean, py);
+          ctx.lineTo(px + lean + Math.cos(a0) * r, py - Math.sin(a0) * r * 0.42 + r * 0.30);
+          ctx.quadraticCurveTo(
+            px + lean + Math.cos((a0 + a1) / 2) * r * 1.06,
+            py - Math.sin((a0 + a1) / 2) * r * 0.42 + r * 0.40,
+            px + lean + Math.cos(a1) * r, py - Math.sin(a1) * r * 0.42 + r * 0.30,
+          );
+          ctx.closePath();
+        }, i % 2 ? a : b, { base: i % 2 ? 0.66 : 0.86, shadow: 0.2, light: [-1, -2], outlineWidth: 1 });
       }
-    }
-    // Towels and deckchairs in the foreground, blocking the rest.
-    for (const [tx, col] of [[40, ramp('magenta', 2)], [116, ramp('phosphor', 2)], [200, ramp('blue', 2)], [270, ramp('amber', 2)]] as const) {
-      rect(c, tx, 96, 44, 12, col);
-      for (let s = 0; s < 44; s += 8) rect(c, tx + s, 96, 4, 12, ramp('paper', 0));
-    }
-    rect(c, 8, 88, 26, 4, ramp('amber', 1));
-    rect(c, 10, 92, 3, 14, ramp('neutral', 2));
-    rect(c, 30, 92, 3, 14, ramp('neutral', 2));
-    // A windbreak across the front - the last line of defence.
-    for (let i = 0; i < 5; i++) {
-      vline(c, 250 + i * 16, 100, 26, ramp('neutral', 2));
-      rect(c, 250 + i * 16, 100, 16, 26, i % 2 ? ramp('red', 1) : ramp('paper', 0));
+    };
+    parasol(66, 48, 34, 'red', 'neutral', -3);
+    parasol(152, 44, 32, 'teal', 'neutral', 2);
+    parasol(238, 50, 33, 'gold', 'neutral', -2);
+
+    // Deckchairs: triangular frames with striped canvas.
+    const deckchair = (dx: number, dy: number, flip: number) => {
+      groundShadow(c, dx, dy + 16, 20, 5);
+      celQuad(c, [
+        [dx - 18 * flip, dy + 16], [dx - 12 * flip, dy - 12],
+        [dx - 9 * flip, dy - 12], [dx - 15 * flip, dy + 16],
+      ], 'wood', { base: 0.42, outlineWidth: 1 });
+      celQuad(c, [
+        [dx + 16 * flip, dy + 16], [dx + 4 * flip, dy - 2],
+        [dx + 8 * flip, dy - 2], [dx + 20 * flip, dy + 16],
+      ], 'wood', { base: 0.42, outlineWidth: 1 });
+      // Canvas sling.
+      celQuad(c, [
+        [dx - 12 * flip, dy - 11], [dx + 6 * flip, dy - 1],
+        [dx + 6 * flip, dy + 4], [dx - 12 * flip, dy - 6],
+      ], 'teal', { base: 0.72, shadow: 0.18, outlineWidth: 1 });
+    };
+    deckchair(28, 84, 1);
+    deckchair(292, 80, -1);
+
+    // Towels laid out in the mid-ground, each one squarely in the way.
+    const towel = (tx: number, ty: number, rampName: string, tilt: number) => {
+      celQuad(c, [
+        [tx, ty], [tx + 46, ty - tilt], [tx + 44, ty + 13 - tilt], [tx - 2, ty + 13],
+      ], rampName, { base: 0.78, shadow: 0.2, outlineWidth: 1 });
+      c.save();
+      c.beginPath();
+      c.moveTo(tx, ty); c.lineTo(tx + 46, ty - tilt);
+      c.lineTo(tx + 44, ty + 13 - tilt); c.lineTo(tx - 2, ty + 13);
+      c.closePath(); c.clip();
+      for (let sx = 0; sx < 48; sx += 9) {
+        c.fillStyle = shade('neutral', 0.92);
+        c.fillRect(tx + sx, ty - 4, 4, 20);
+      }
+      c.restore();
+    };
+    towel(96, 96, 'magenta', 3);
+    towel(178, 100, 'phosphor', -2);
+
+    // The windbreak across the foreground: angled panels on canes, the final
+    // and most absurd layer of obstruction.
+    for (let i = 0; i < 6; i++) {
+      const bx = 40 + i * 44;
+      const sway = Math.sin(i * 1.3) * 3;
+      celQuad(c, [
+        [bx + sway, 104], [bx + 44 - sway, 102],
+        [bx + 44, 138], [bx, 138],
+      ], i % 2 ? 'red' : 'neutral', { base: i % 2 ? 0.7 : 0.9, shadow: 0.22, light: [-2, -1], outlineWidth: 1 });
+      celQuad(c, [
+        [bx - 1.5 + sway, 98], [bx + 1.5 + sway, 98], [bx + 1.5, 142], [bx - 1.5, 142],
+      ], 'wood', { base: 0.46, outlineWidth: 1 });
     }
   },
 };

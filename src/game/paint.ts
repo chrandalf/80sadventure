@@ -1,17 +1,19 @@
 import { font } from '../engine/BitmapFont';
-import { Colors, ramp } from '../engine/Palette';
+import { Colors, ramp, shade, snapImageData } from '../engine/Palette';
 
 /**
  * Pixel-art drawing primitives for the procedurally painted backgrounds.
  *
- * Two techniques carry most of the visual load:
+ * Three techniques carry the visual load:
  *
- * 1. **Ordered (Bayer) dithering.** With 32 colours you cannot draw a smooth
- *    sky. Dithering interleaves two palette colours in a fixed 4x4 pattern so
- *    the eye blends them into intermediate shades - the same trick every
- *    artist used on EGA and early VGA hardware. It is the single biggest
- *    reason a locked palette can still look rich.
- * 2. **Deterministic noise.** Every scene seeds its own PRNG, so the "random"
+ * 1. **Draw smooth, snap afterwards.** Painters use the full canvas API -
+ *    curves, ellipses, gradients - and `snapToPalette` forces the result onto
+ *    the locked palette at the end. Without this the art has to be built from
+ *    axis-aligned rectangles, which is exactly what reads as "blocky".
+ * 2. **Cel shading.** Flat tones with a hard edge between lit and shadow face,
+ *    plus a dark contour. This is how cartoon animation describes a volume;
+ *    gradients look airbrushed and wrong for the style.
+ * 3. **Deterministic noise.** Every scene seeds its own PRNG, so the "random"
  *    grime, stars and crowd detail are identical on every load. Backgrounds
  *    are stable across saves, screenshots and reloads.
  */
@@ -57,12 +59,37 @@ export function vline(c: Ctx, x: number, y: number, h: number, color: string): v
   rect(c, x, y, 1, h, color);
 }
 
+/** Linear-light interpolation between two sRGB colours. */
+function mixHex(a: string, b: string, t: number): string {
+  const toLin = (v: number) => {
+    const s = v / 255;
+    return s <= 0.04045 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4);
+  };
+  const toSrgb = (v: number) => {
+    const s = v <= 0.0031308 ? v * 12.92 : 1.055 * Math.pow(v, 1 / 2.4) - 0.055;
+    return Math.max(0, Math.min(255, Math.round(s * 255)));
+  };
+  const pa = [1, 3, 5].map((i) => toLin(parseInt(a.slice(i, i + 2), 16)));
+  const pb = [1, 3, 5].map((i) => toLin(parseInt(b.slice(i, i + 2), 16)));
+  return (
+    '#' +
+    pa
+      .map((v, i) => toSrgb(v + (pb[i] - v) * t).toString(16).padStart(2, '0'))
+      .join('')
+  );
+}
+
 /**
- * Vertical gradient across a colour ramp, dithered between adjacent steps.
+ * Vertical gradient across a colour ramp.
  *
- * `power` bends the ramp: values below 1 hold the first colour longer, which is
- * what a real sky does - most of it is one shade with the transition crowded
- * near the horizon.
+ * This used to dither between adjacent palette entries, and that visible 4x4
+ * checkerboard was the single biggest cause of the art reading as "blocky".
+ * Now that the palette expands each ramp to 16 smooth shades, the gradient is
+ * interpolated exactly and the final `snapToPalette` pass lands it on legal
+ * colours - so a sky is a sky rather than a mesh.
+ *
+ * `power` bends the ramp: below 1 holds the first colour longer, which is what
+ * a real sky does - most of it one shade, the transition crowded at the horizon.
  */
 export function gradientV(
   c: Ctx,
@@ -78,15 +105,31 @@ export function gradientV(
     const t = Math.pow(h <= 1 ? 0 : py / (h - 1), power);
     const pos = t * (colors.length - 1);
     const i = Math.min(colors.length - 2, Math.floor(pos));
-    const frac = pos - i;
-    for (let px = 0; px < w; px++) {
-      c.fillStyle = frac > bayer(x + px, y + py) ? colors[i + 1] : colors[i];
-      c.fillRect(x + px, y + py, 1, 1);
-    }
+    c.fillStyle = mixHex(colors[i], colors[i + 1], pos - i);
+    c.fillRect(x, y + py, w, 1);
   }
 }
 
-/** Flat dithered blend of exactly two colours at a fixed mix. */
+/** Vertical gradient down a named ramp, from shade `t0` to shade `t1`. */
+export function rampGradient(
+  c: Ctx,
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  name: string,
+  t0: number,
+  t1: number,
+  power = 1,
+): void {
+  for (let py = 0; py < h; py++) {
+    const t = Math.pow(h <= 1 ? 0 : py / (h - 1), power);
+    c.fillStyle = shade(name, t0 + (t1 - t0) * t);
+    c.fillRect(x, y + py, w, 1);
+  }
+}
+
+/** Flat blend of two colours. Was a dither; now a straight mix. */
 export function ditherFill(
   c: Ctx,
   x: number,
@@ -97,12 +140,8 @@ export function ditherFill(
   b: string,
   mix: number,
 ): void {
-  for (let py = 0; py < h; py++) {
-    for (let px = 0; px < w; px++) {
-      c.fillStyle = mix > bayer(x + px, y + py) ? b : a;
-      c.fillRect(x + px, y + py, 1, 1);
-    }
-  }
+  c.fillStyle = mixHex(a, b, mix);
+  c.fillRect(x, y, w, h);
 }
 
 /** Speckled grime/texture. `density` is the fraction of pixels touched. */
@@ -268,49 +307,71 @@ export function cabinet(
   y: number,
   w: number,
   h: number,
-  body: string,
-  accent: string,
+  rampName: string,
   screen: string,
   on = true,
   seed = 5,
+  lean = 1.5,
 ): void {
-  const shade = ramp('neutral', 1);
+  groundShadow(c, x + w / 2, y + h + 1, w * 0.62, 4);
 
-  // Body with a lit left edge and shaded right, so cabinets read as 3D.
-  rect(c, x, y, w, h, body);
-  vline(c, x, y, h, accent);
-  rect(c, x + w - 2, y, 2, h, shade);
+  // The body leans back slightly and tapers, so it reads as a solid object
+  // seen from just below rather than a flat coloured rectangle.
+  celQuad(c, [
+    [x + lean, y],
+    [x + w - lean, y],
+    [x + w, y + h],
+    [x, y + h],
+  ], rampName, { base: 0.66, shadow: 0.28, highlight: 0.16, light: [-3, -2] });
 
-  // Marquee
-  const marqueeH = Math.max(3, Math.floor(h * 0.13));
-  rect(c, x + 1, y + 1, w - 3, marqueeH, on ? accent : shade);
-  if (on) rect(c, x + 2, y + 2, w - 5, Math.max(1, marqueeH - 2), ramp('amber', 3));
+  // Marquee.
+  const marqueeH = Math.max(4, Math.floor(h * 0.14));
+  celQuad(c, [
+    [x + lean + 1, y + 1],
+    [x + w - lean - 1, y + 1],
+    [x + w - 2, y + marqueeH],
+    [x + 2, y + marqueeH],
+  ], on ? 'gold' : 'neutral', { base: on ? 0.86 : 0.3, shadow: 0.2, outlineWidth: 1 });
 
-  // Screen, recessed
-  const sy = y + marqueeH + 3;
+  // Screen, recessed behind a dark bezel.
+  const sy = y + marqueeH + 4;
   const sh = Math.floor(h * 0.34);
-  rect(c, x + 2, sy, w - 5, sh, Colors.ink);
+  celQuad(c, [
+    [x + 3, sy], [x + w - 3, sy], [x + w - 4, sy + sh], [x + 4, sy + sh],
+  ], 'neutral', { base: 0.06, shadow: 0.04, outlineWidth: 1 });
   if (on) {
-    rect(c, x + 3, sy + 1, w - 7, sh - 2, screen);
-    // A couple of bright blobs read as "a game is happening" at this size.
+    c.save();
+    c.beginPath();
+    c.moveTo(x + 5, sy + 2);
+    c.lineTo(x + w - 5, sy + 2);
+    c.lineTo(x + w - 6, sy + sh - 2);
+    c.lineTo(x + 6, sy + sh - 2);
+    c.closePath();
+    c.clip();
+    c.fillStyle = screen;
+    c.fillRect(x, sy, w, sh);
     const r = rng(seed);
-    c.fillStyle = ramp('paper', 0);
-    for (let i = 0; i < 5; i++) {
-      c.fillRect(x + 4 + Math.floor(r() * (w - 9)), sy + 2 + Math.floor(r() * (sh - 4)), 1, 1);
+    c.fillStyle = Colors.paper;
+    for (let i = 0; i < 6; i++) {
+      c.fillRect(x + 5 + r() * (w - 11), sy + 3 + r() * (sh - 6), 2, 2);
     }
+    c.restore();
   }
 
-  // Control panel, angled
+  // Control panel, sloping towards the player.
   const cpY = sy + sh + 2;
-  rect(c, x + 1, cpY, w - 3, 4, accent);
-  c.fillStyle = Colors.danger;
-  c.fillRect(x + 4, cpY + 1, 2, 2);
-  c.fillStyle = ramp('cyan', 2);
-  c.fillRect(x + 8, cpY + 1, 2, 2);
+  celQuad(c, [
+    [x + 2, cpY], [x + w - 2, cpY], [x + w, cpY + 6], [x, cpY + 6],
+  ], rampName, { base: 0.44, shadow: 0.2, outlineWidth: 1 });
+  celEllipse(c, x + 7, cpY + 3, 2.5, 2.5, 'red', { base: 0.78, outlineWidth: 1 });
+  celEllipse(c, x + 14, cpY + 3, 2.5, 2.5, 'teal', { base: 0.78, outlineWidth: 1 });
 
-  // Coin door
-  rect(c, x + Math.floor(w / 2) - 3, y + h - 8, 6, 5, shade);
-  hline(c, x + Math.floor(w / 2) - 2, y + h - 6, 4, ramp('amber', 2));
+  // Coin door.
+  celQuad(c, [
+    [x + w / 2 - 5, y + h - 10], [x + w / 2 + 5, y + h - 10],
+    [x + w / 2 + 5, y + h - 3], [x + w / 2 - 5, y + h - 3],
+  ], 'neutral', { base: 0.22, shadow: 0.1, outlineWidth: 1 });
+  rect(c, x + w / 2 - 3, y + h - 8, 6, 1, shade('gold', 0.7));
 }
 
 /** Sea with dithered bands and a few horizontal glints. */
@@ -356,7 +417,13 @@ export function nightSky(
   }
 }
 
-/** A pool of light cast on the floor by a lamp or a doorway. */
+/**
+ * A pool of light cast on the floor by a lamp or a doorway.
+ *
+ * Drawn as a real radial gradient rather than a dither. The old dot-screen
+ * version was the most visible remaining source of "blockiness" - a halo made
+ * of a visible 4x4 grid reads as a mesh, not as light.
+ */
 export function lightPool(
   c: Ctx,
   cx: number,
@@ -366,16 +433,20 @@ export function lightPool(
   color: string,
   strength = 0.5,
 ): void {
-  for (let py = -ry; py <= ry; py++) {
-    for (let px = -rx; px <= rx; px++) {
-      const d = (px * px) / (rx * rx) + (py * py) / (ry * ry);
-      if (d > 1) continue;
-      if ((1 - d) * strength > bayer(cx + px, cy + py)) {
-        c.fillStyle = color;
-        c.fillRect(cx + px, cy + py, 1, 1);
-      }
-    }
-  }
+  c.save();
+  c.translate(cx, cy);
+  c.scale(1, ry / rx);
+  const g = c.createRadialGradient(0, 0, 0, 0, 0, rx);
+  g.addColorStop(0, color);
+  g.addColorStop(0.55, color);
+  g.addColorStop(1, 'rgba(0,0,0,0)');
+  c.globalAlpha = strength;
+  c.fillStyle = g;
+  c.beginPath();
+  c.arc(0, 0, rx, 0, Math.PI * 2);
+  c.fill();
+  c.restore();
+  c.globalAlpha = 1;
 }
 
 /** A CRT screen showing static, for televisions and dead arcade monitors. */
@@ -435,4 +506,220 @@ export function silhouette(
   c.fillRect(Math.round(x + 0.6), y - legH, headR - 0.4, legH);
 }
 
-export { Colors, ramp, font };
+export { Colors, ramp, shade, font };
+
+// ---------------------------------------------------------------------------
+// Cel shading, curves and palette snapping
+//
+// These are the primitives the Day of the Tentacle direction needs. The key
+// idea is `snapToPalette`: painters draw with the full canvas API - bezier
+// curves, ellipses, anti-aliased fills, real gradients, none of which respect a
+// palette - and the finished image is snapped afterwards. That removes the
+// constraint that pushed the earlier art into axis-aligned rectangles, which is
+// what made it read as blocky.
+// ---------------------------------------------------------------------------
+
+/**
+ * Force a region onto the palette and to binary alpha.
+ *
+ * Call once at the end of a painter. Everything before it can be as smooth and
+ * as curved as you like.
+ */
+export function snapToPalette(c: Ctx, x = 0, y = 0, w?: number, h?: number): void {
+  const width = w ?? c.canvas.width - x;
+  const height = h ?? c.canvas.height - y;
+  if (width <= 0 || height <= 0) return;
+  const img = c.getImageData(x, y, width, height);
+  snapImageData(img.data);
+  c.putImageData(img, x, y);
+}
+
+/** Build a closed path through points, smoothed with quadratic curves. */
+export function curvePath(c: Ctx, pts: readonly (readonly [number, number])[]): void {
+  if (pts.length < 3) return;
+  c.beginPath();
+  // Start at the midpoint of the closing edge so every corner gets smoothed.
+  const mid = (a: readonly [number, number], b: readonly [number, number]) =>
+    [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2] as const;
+  let prev = mid(pts[pts.length - 1], pts[0]);
+  c.moveTo(prev[0], prev[1]);
+  for (let i = 0; i < pts.length; i++) {
+    const cur = pts[i];
+    const next = pts[(i + 1) % pts.length];
+    const m = mid(cur, next);
+    c.quadraticCurveTo(cur[0], cur[1], m[0], m[1]);
+    prev = m;
+  }
+  c.closePath();
+}
+
+/** An organic closed blob: an ellipse with per-vertex wobble. */
+export function blobPath(
+  c: Ctx,
+  cx: number,
+  cy: number,
+  rx: number,
+  ry: number,
+  wobble = 0.18,
+  seed = 1,
+  points = 9,
+): void {
+  const r = rng(seed);
+  const pts: [number, number][] = [];
+  for (let i = 0; i < points; i++) {
+    const a = (i / points) * Math.PI * 2;
+    const k = 1 + (r() - 0.5) * 2 * wobble;
+    pts.push([cx + Math.cos(a) * rx * k, cy + Math.sin(a) * ry * k]);
+  }
+  curvePath(c, pts);
+}
+
+export interface CelOptions {
+  /** Shade of the ramp for the lit face, 0 (dark) to 1 (light). */
+  base?: number;
+  /** How much darker the shadow side is, in shade units. */
+  shadow?: number;
+  /** Optional third, brightest tone. */
+  highlight?: number;
+  /** Light direction, in pixels of offset. */
+  light?: [number, number];
+  /** Contour colour. `null` disables the outline. */
+  outline?: string | null;
+  outlineWidth?: number;
+}
+
+/**
+ * Fill a path with flat cel shading and a dark contour.
+ *
+ * Shading is done by filling the whole shape in shadow, clipping to it, then
+ * re-filling the same path offset towards the light. The overlap becomes the
+ * lit face and the sliver left behind becomes the shadow - two flat tones with
+ * a hard edge between them, which is how cartoon animation shades a volume.
+ * A gradient would look airbrushed and completely wrong for this style.
+ */
+export function celShape(
+  c: Ctx,
+  build: (ctx: Ctx) => void,
+  rampName: string,
+  opts: CelOptions = {},
+): void {
+  const base = opts.base ?? 0.62;
+  const shadowDrop = opts.shadow ?? 0.26;
+  const [lx, ly] = opts.light ?? [-2, -2];
+  const outlineColor = opts.outline === undefined ? Colors.ink : opts.outline;
+  const lw = opts.outlineWidth ?? 2;
+
+  c.save();
+  build(c);
+  c.fillStyle = shade(rampName, Math.max(0, base - shadowDrop));
+  c.fill();
+
+  c.clip();
+  c.save();
+  c.translate(lx, ly);
+  build(c);
+  c.fillStyle = shade(rampName, base);
+  c.fill();
+  if (opts.highlight !== undefined) {
+    c.translate(lx * 0.9, ly * 0.9);
+    build(c);
+    c.fillStyle = shade(rampName, Math.min(1, base + opts.highlight));
+    c.fill();
+  }
+  c.restore();
+  c.restore();
+
+  if (outlineColor) {
+    c.save();
+    build(c);
+    c.lineWidth = lw;
+    c.lineJoin = 'round';
+    c.strokeStyle = outlineColor;
+    c.stroke();
+    c.restore();
+  }
+}
+
+/** Cel-shaded ellipse - the workhorse for cartoon props and body parts. */
+export function celEllipse(
+  c: Ctx,
+  cx: number,
+  cy: number,
+  rx: number,
+  ry: number,
+  rampName: string,
+  opts: CelOptions = {},
+): void {
+  celShape(c, (ctx) => {
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+  }, rampName, opts);
+}
+
+/** Cel-shaded quad. Corners are given explicitly so nothing has to be square. */
+export function celQuad(
+  c: Ctx,
+  pts: readonly [number, number][],
+  rampName: string,
+  opts: CelOptions = {},
+): void {
+  celShape(c, (ctx) => {
+    ctx.beginPath();
+    ctx.moveTo(pts[0][0], pts[0][1]);
+    for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+    ctx.closePath();
+  }, rampName, opts);
+}
+
+/** Cel-shaded organic blob. */
+export function celBlob(
+  c: Ctx,
+  cx: number,
+  cy: number,
+  rx: number,
+  ry: number,
+  rampName: string,
+  opts: CelOptions & { wobble?: number; seed?: number } = {},
+): void {
+  celShape(
+    c,
+    (ctx) => blobPath(ctx, cx, cy, rx, ry, opts.wobble ?? 0.18, opts.seed ?? 1),
+    rampName,
+    opts,
+  );
+}
+
+/** A rounded rectangle that leans, for architecture that is never quite square. */
+export function skewRect(
+  c: Ctx,
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  lean: number,
+  rampName: string,
+  opts: CelOptions = {},
+): void {
+  celQuad(
+    c,
+    [
+      [x + lean, y],
+      [x + w + lean, y],
+      [x + w, y + h],
+      [x, y + h],
+    ],
+    rampName,
+    opts,
+  );
+}
+
+/** A soft contact shadow on the floor beneath an object. */
+export function groundShadow(c: Ctx, cx: number, cy: number, rx: number, ry = rx * 0.32): void {
+  c.save();
+  c.globalAlpha = 0.42;
+  c.fillStyle = Colors.ink;
+  c.beginPath();
+  c.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+  c.fill();
+  c.restore();
+}

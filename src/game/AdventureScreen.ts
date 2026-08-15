@@ -13,7 +13,10 @@ import { SCENES } from '../content/scenes';
 import { VISIONS } from '../content/visions';
 import { ActionRunner, type RunnerHost } from './ActionRunner';
 import { Actor, clampToWalkable, depthScale } from './Actor';
-import { BackgroundStore } from './BackgroundStore';
+import { hotspotContains } from './normalizeScene';
+import { drawArtBadge, SceneArtStore } from '../engine/SceneArtStore';
+import { BACKGROUNDS } from '../content/backgrounds';
+import { sceneArtFor } from '../content/sceneArt';
 import { DialogueUi } from './DialogueUi';
 import { Minigames } from './Minigames';
 import { rect, outline } from './paint';
@@ -48,8 +51,11 @@ export class AdventureScreen implements RunnerHost {
   state: GameState;
   ui: UiState = newUiState();
 
+  /** Character sheets, from /assets/characters. */
   private readonly assets: AssetStore;
-  private readonly backgrounds = new BackgroundStore();
+  /** Inventory icons and scene props, from /assets/objects. */
+  private readonly objectAssets: AssetStore;
+  private readonly art = new SceneArtStore();
   private readonly runner: ActionRunner;
   /**
    * Actions produced *by* a conversation run here rather than on the main
@@ -65,6 +71,10 @@ export class AdventureScreen implements RunnerHost {
   private scene: Scene;
   private jack: Actor;
   private npcs: Actor[] = [];
+  /** Scenery that depth-sorts against characters. */
+  private objects: Actor[] = [];
+  /** Set true to draw hotspot polygons and walkboxes. Toggled with F1. */
+  private debugOverlay = false;
   /** Characters hidden by script, beyond their scene `visibleIf`. */
   private hidden = new Set<string>();
 
@@ -90,8 +100,13 @@ export class AdventureScreen implements RunnerHost {
   /** Interaction queued behind Jack's walk to the hotspot. */
   private pendingInteraction: (() => void) | null = null;
 
-  constructor(assets: AssetStore, state: GameState = newGameState()) {
+  constructor(
+    assets: AssetStore,
+    objectAssets: AssetStore,
+    state: GameState = newGameState(),
+  ) {
     this.assets = assets;
+    this.objectAssets = objectAssets;
     this.state = state;
     this.runner = new ActionRunner(this);
     this.dialogueRunner = new ActionRunner(this);
@@ -135,6 +150,7 @@ export class AdventureScreen implements RunnerHost {
     this.jack.visible = !scene.hideJack;
 
     this.buildNpcs();
+    this.buildObjects();
 
     if (scene.music) audio.playMusic(scene.music);
     this.ambienceTimer = 3 + Math.random() * 4;
@@ -156,6 +172,25 @@ export class AdventureScreen implements RunnerHost {
       if (def.scale !== undefined) actor.fixedScale = def.scale;
       actor.foreground = !!def.foreground;
       this.npcs.push(actor);
+    }
+  }
+
+  /**
+   * Scene props are built as Actors so they share the depth-sorting and
+   * animation path with characters - a crate and a person are the same problem.
+   */
+  private buildObjects(): void {
+    this.objects = [];
+    for (const def of this.scene.objects ?? []) {
+      if (!evalCond(this.state, def.visibleIf)) continue;
+      if (!this.objectAssets.has(def.sprite)) {
+        console.warn(`[scenes] ${this.scene.id}: unknown object sprite "${def.sprite}"`);
+        continue;
+      }
+      const actor = new Actor(def.id, this.objectAssets.get(def.sprite), def.x, def.y);
+      if (def.anim) actor.play(def.anim);
+      if (def.scale !== undefined) actor.fixedScale = def.scale;
+      this.objects.push(actor);
     }
   }
 
@@ -270,6 +305,8 @@ export class AdventureScreen implements RunnerHost {
         this.idleTime = 0;
       }
     }
+
+    if (input.wasPressed('F1')) this.debugOverlay = !this.debugOverlay;
 
     if (input.wasPressed('KeyH')) {
       const objective = OBJECTIVES.find((o) => !evalCond(this.state, o.done));
@@ -566,8 +603,7 @@ export class AdventureScreen implements RunnerHost {
     for (const h of this.scene.hotspots ?? []) {
       if (!evalCond(this.state, h.visibleIf)) continue;
       if (h.hiddenUntil && !evalCond(this.state, h.hiddenUntil)) continue;
-      const r = h.rect;
-      if (x >= r.x && x < r.x + r.w && y >= r.y && y < r.y + r.h) return h;
+      if (hotspotContains(h, x, y)) return h;
     }
     return null;
   }
@@ -770,17 +806,36 @@ export class AdventureScreen implements RunnerHost {
       );
     }
 
-    ctx.drawImage(this.backgrounds.get(this.scene.background), 0, 0);
+    const art = sceneArtFor(this.scene.id);
+    ctx.drawImage(
+      this.art.plate({
+        sceneId: this.scene.id,
+        background: art?.background,
+        painter: BACKGROUNDS[this.scene.background],
+        displayName: this.scene.name,
+      }),
+      0, 0,
+    );
 
-    // Depth sort: everything on the floor draws back-to-front by y.
+    this.drawLayers(ctx, 'midground');
+
+    // Depth sort: characters and scene props interleave strictly by baseline y,
+    // so a character walking up-stage of a cabinet is drawn behind it and one
+    // walking down-stage is drawn in front. Anything that must always be in
+    // front belongs in a foreground art layer instead.
     const drawables = [
       ...this.npcs.filter((n) => n.visible && !this.hidden.has(n.id) && !n.foreground),
+      ...this.objects,
       ...(this.jack.visible ? [this.jack] : []),
     ].sort((a, b) => a.y - b.y);
     for (const actor of drawables) actor.draw(ctx, this.scene.depth);
     for (const fg of this.npcs.filter((n) => n.foreground && n.visible)) {
       fg.draw(ctx, this.scene.depth);
     }
+
+    this.drawLayers(ctx, 'foreground');
+    this.drawLayers(ctx, 'effects');
+    if (this.debugOverlay) this.drawDebugOverlay(ctx);
 
     // Exit arrows on the screen edge, so the player can see where the room leads.
     this.drawExitArrows(ctx);
@@ -798,10 +853,66 @@ export class AdventureScreen implements RunnerHost {
       ctx.globalAlpha = 1;
     }
 
-    drawPanel(ctx, this.state, this.ui, this.assets, ITEM_NAMES);
+    drawPanel(ctx, this.state, this.ui, this.objectAssets, ITEM_NAMES);
+    drawArtBadge(ctx, this.art.sourceFor(this.scene.id));
     this.drawOverlays(ctx);
 
     if (this.minigames.isOpen) this.minigames.draw(ctx);
+  }
+
+  /** Composite the scene's optional art layers for one plane. */
+  private drawLayers(ctx: CanvasRenderingContext2D, plane: string): void {
+    const art = sceneArtFor(this.scene.id);
+    if (!art?.layers) return;
+    for (const layer of art.layers) {
+      if (layer.plane !== plane) continue;
+      if (!evalCond(this.state, layer.showIf)) continue;
+      const img = this.art.layer(layer.src);
+      if (!img) continue;
+      ctx.globalAlpha = layer.opacity ?? 1;
+      ctx.drawImage(img, 0, 0, GAME_WIDTH, PLAY_HEIGHT + 0, 0, 0, GAME_WIDTH, PLAY_HEIGHT + 0);
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  /**
+   * Hotspot polygons, walkboxes and object baselines. Invisible in play - this
+   * exists so interaction geometry can be checked against artwork it knows
+   * nothing about.
+   */
+  private drawDebugOverlay(ctx: CanvasRenderingContext2D): void {
+    ctx.save();
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = ramp('phosphor', 2);
+    for (const box of this.scene.walkboxes ?? []) {
+      ctx.beginPath();
+      for (let i = 0; i < box.length; i += 2) {
+        if (i === 0) ctx.moveTo(box[0], box[1]);
+        else ctx.lineTo(box[i], box[i + 1]);
+      }
+      ctx.closePath();
+      ctx.stroke();
+    }
+    ctx.strokeStyle = ramp('amber', 2);
+    for (const h of this.scene.hotspots ?? []) {
+      if (!evalCond(this.state, h.visibleIf)) continue;
+      ctx.beginPath();
+      if (h.polygon?.length) {
+        h.polygon.forEach(([px, py], i) => (i ? ctx.lineTo(px, py) : ctx.moveTo(px, py)));
+        ctx.closePath();
+      } else if (h.rect) {
+        ctx.rect(h.rect.x, h.rect.y, h.rect.w, h.rect.h);
+      }
+      ctx.stroke();
+    }
+    ctx.strokeStyle = ramp('cyan', 2);
+    for (const o of this.objects) {
+      ctx.beginPath();
+      ctx.moveTo(o.x - 10, o.y);
+      ctx.lineTo(o.x + 10, o.y);
+      ctx.stroke();
+    }
+    ctx.restore();
   }
 
   private drawExitArrows(ctx: CanvasRenderingContext2D): void {

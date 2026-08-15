@@ -1,3 +1,4 @@
+import { normalizeScene } from '../../game/normalizeScene';
 import type { Scene } from '../../game/types';
 import { ARCADE_SCENES } from './arcade';
 import { HOTEL_SCENES } from './hotel';
@@ -10,12 +11,23 @@ import { TOWN_SCENES } from './town';
  * Split by area purely so the files stay readable - the runtime only ever sees
  * this flat map, and adding a location means adding one object here.
  */
-export const SCENES: Record<string, Scene> = {
+const AUTHORED: Record<string, Scene> = {
   ...ARCADE_SCENES,
   ...TOWN_SCENES,
   ...STORY_SCENES,
   ...HOTEL_SCENES,
 };
+
+/**
+ * Every scene, in world (640x400) coordinates.
+ *
+ * Scenes still authored in the old 320x200 space are converted here, so a room
+ * can be migrated to world coordinates by adding `space: 'world'` to it and
+ * nothing else in the engine has to care.
+ */
+export const SCENES: Record<string, Scene> = Object.fromEntries(
+  Object.entries(AUTHORED).map(([id, scene]) => [id, normalizeScene(scene)]),
+);
 
 /** Sanity check run once at startup: every exit must point at a real scene. */
 export function validateScenes(): string[] {

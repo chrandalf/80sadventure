@@ -20,7 +20,8 @@ async function main(): Promise<void> {
 
   const screen = new Screen(mount);
   const input = new Input(screen);
-  const assets = new AssetStore();
+  const assets = new AssetStore('assets/characters/');
+  const objectAssets = new AssetStore('assets/objects/');
 
   // Audio cannot start until the player interacts; hook the first of anything.
   const unlock = () => audio.unlock();
@@ -49,12 +50,14 @@ async function main(): Promise<void> {
   drawLoading();
 
   try {
-    await assets.loadManifest();
-    await assets.loadAll((done, count) => {
-      progress = done;
-      total = count;
+    await Promise.all([assets.loadManifest(), objectAssets.loadManifest()]);
+    total = assets.spriteIds.length + objectAssets.spriteIds.length;
+    let done = 0;
+    const step = () => {
+      progress = ++done;
       drawLoading();
-    });
+    };
+    await Promise.all([assets.loadAll(step), objectAssets.loadAll(step)]);
   } catch (err) {
     console.error('[boot] asset load failed', err);
     const c = screen.ctx;
@@ -68,7 +71,7 @@ async function main(): Promise<void> {
 
   // Content sanity check - a dangling reference is a soft-lock, not a crash,
   // so it has to be found here rather than by playing for forty minutes.
-  const problems = validateContent(new Set(assets.spriteIds));
+  const problems = validateContent(new Set([...assets.spriteIds, ...objectAssets.spriteIds]));
   if (problems.length) {
     console.warn(`[content] ${problems.length} problem(s):\n  ` + problems.join('\n  '));
   } else {
@@ -76,7 +79,7 @@ async function main(): Promise<void> {
   }
   (window as unknown as Record<string, unknown>).__contentProblems = problems;
 
-  const shell = new Shell(assets);
+  const shell = new Shell(assets, objectAssets);
   ready = true;
 
   let last = performance.now();
@@ -101,7 +104,10 @@ async function main(): Promise<void> {
 
   // Expose a little for debugging without opening the bundle.
   Object.assign(window as unknown as Record<string, unknown>, {
-    __omc: { screen, assets, shell, missingArt: () => assets.missingArt },
+    __omc: {
+      screen, assets, objectAssets, shell,
+      missingArt: () => [...assets.missingArt, ...objectAssets.missingArt],
+    },
   });
 
   void GAME_HEIGHT;

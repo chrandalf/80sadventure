@@ -1,0 +1,6122 @@
+{
+  "$schema": "https://one-more-credit.local/assets.schema.json",
+  "generated": "by tools/gen-assets-manifest.ts - do not edit by hand, run `npm run assets:manifest`",
+  "game": "ONE MORE CREDIT",
+  "renderResolution": {
+    "width": 640,
+    "height": 400
+  },
+  "playfield": {
+    "width": 640,
+    "height": 288,
+    "note": "Rows below this are behind the interface panel."
+  },
+  "artDirection": {
+    "era": "Late-1980s / early-1990s VGA point-and-click adventure (the 256-colour era, not the 16-colour EGA era).",
+    "reference": "Hand-illustrated, painterly backgrounds with strong composition and warm practical lighting. Characters are cel-shaded with bold dark contours.",
+    "setting": "Brighton Vale, a fictional British seaside town, over a single night: Friday 18 September 1987, 19:00 to midnight.",
+    "rules": [
+      "Backgrounds contain no characters, no text, no UI and no watermarks.",
+      "Characters and props are supplied separately with full alpha.",
+      "Every background is exactly 640x400. Every sprite sheet is exactly the dimensions given.",
+      "Alpha must be binary - fully opaque or fully transparent. Soft edges halo when the image is scaled.",
+      "Interaction is defined by invisible polygons in the game data. Art must depict the listed hotspots at the stated pixel positions so the two agree.",
+      "Nothing may reference or reproduce an existing commercial game, film or brand."
+    ]
+  },
+  "counts": {
+    "total": 92,
+    "byType": {
+      "background": 33,
+      "background-layer": 1,
+      "character-sheet": 10,
+      "portrait": 10,
+      "prop": 1,
+      "inventory-icon": 33,
+      "ui": 1,
+      "effect": 3
+    },
+    "byPriority": {
+      "p1": 73,
+      "p0": 2,
+      "p2": 17
+    }
+  },
+  "assets": [
+    {
+      "id": "bg.arcade_lobby",
+      "scene": "arcade_lobby",
+      "type": "background",
+      "path": "/assets/backgrounds/arcade_lobby.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [
+        "arthur"
+      ],
+      "hotspots": [
+        {
+          "id": "arthur",
+          "name": "Arthur",
+          "bounds": {
+            "x": 556,
+            "y": 180,
+            "w": 56,
+            "h": 68
+          },
+          "centre": [
+            584,
+            214
+          ],
+          "verbs": [
+            "LOOK",
+            "TALK",
+            "TAKE"
+          ],
+          "conditional": false,
+          "isCharacter": true
+        },
+        {
+          "id": "poster",
+          "name": "Space Wars Poster",
+          "bounds": {
+            "x": 252,
+            "y": 48,
+            "w": 68,
+            "h": 92
+          },
+          "centre": [
+            286,
+            94
+          ],
+          "verbs": [
+            "LOOK",
+            "PULL",
+            "PUSH",
+            "TAKE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "office_door",
+          "name": "Office Door",
+          "bounds": {
+            "x": 344,
+            "y": 56,
+            "w": 60,
+            "h": 120
+          },
+          "centre": [
+            374,
+            116
+          ],
+          "verbs": [
+            "LOOK",
+            "OPEN"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "vending",
+          "name": "Vending Machine",
+          "bounds": {
+            "x": 84,
+            "y": 52,
+            "w": 60,
+            "h": 124
+          },
+          "centre": [
+            114,
+            114
+          ],
+          "verbs": [
+            "LOOK",
+            "USE",
+            "PUSH",
+            "PULL"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "cigarette_machine",
+          "name": "Cigarette Machine",
+          "bounds": {
+            "x": 164,
+            "y": 60,
+            "w": 52,
+            "h": 116
+          },
+          "centre": [
+            190,
+            118
+          ],
+          "verbs": [
+            "LOOK",
+            "TAKE",
+            "PUSH",
+            "USE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "counter",
+          "name": "Change Counter",
+          "bounds": {
+            "x": 428,
+            "y": 116,
+            "w": 124,
+            "h": 68
+          },
+          "centre": [
+            490,
+            150
+          ],
+          "verbs": [
+            "LOOK",
+            "TAKE",
+            "OPEN"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "to_floor",
+          "name": "Arcade Floor",
+          "bounds": {
+            "x": 0,
+            "y": 56,
+            "w": 60,
+            "h": 124
+          },
+          "centre": [
+            30,
+            118
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "to_outside",
+          "name": "Seafront",
+          "bounds": {
+            "x": 572,
+            "y": 52,
+            "w": 68,
+            "h": 128
+          },
+          "centre": [
+            606,
+            116
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": true,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Starlight Arcade - Lobby. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Space Wars Poster (around x286, y94); Office Door (around x374, y116); Vending Machine (around x114, y114); Cigarette Machine (around x190, y118); Change Counter (around x490, y150). Visible ways out: Arcade Floor; Seafront. Characters stand in this room (drawn separately, not in the background): Arthur. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.starlight_arcade",
+      "scene": "starlight_arcade",
+      "type": "background",
+      "path": "/assets/backgrounds/starlight_arcade.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [
+        "kevin",
+        "maggie"
+      ],
+      "hotspots": [
+        {
+          "id": "maggie",
+          "name": "Maggie",
+          "bounds": {
+            "x": 168,
+            "y": 192,
+            "w": 52,
+            "h": 80
+          },
+          "centre": [
+            194,
+            232
+          ],
+          "verbs": [
+            "LOOK",
+            "TALK",
+            "PUSH"
+          ],
+          "conditional": false,
+          "isCharacter": true
+        },
+        {
+          "id": "kevin",
+          "name": "Kevin",
+          "bounds": {
+            "x": 476,
+            "y": 168,
+            "w": 48,
+            "h": 76
+          },
+          "centre": [
+            500,
+            206
+          ],
+          "verbs": [
+            "LOOK",
+            "TALK"
+          ],
+          "conditional": true,
+          "isCharacter": true
+        },
+        {
+          "id": "coin_pusher",
+          "name": "Coin Pusher",
+          "bounds": {
+            "x": 454,
+            "y": 86,
+            "w": 106,
+            "h": 94
+          },
+          "centre": [
+            507,
+            133
+          ],
+          "verbs": [
+            "LOOK",
+            "TAKE",
+            "PUSH",
+            "USE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "machine_turbo",
+          "name": "Turbo Racer",
+          "bounds": {
+            "x": 80,
+            "y": 52,
+            "w": 60,
+            "h": 128
+          },
+          "centre": [
+            110,
+            116
+          ],
+          "verbs": [
+            "LOOK",
+            "USE",
+            "PUSH"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "machine_space",
+          "name": "Space Wars",
+          "bounds": {
+            "x": 148,
+            "y": 52,
+            "w": 60,
+            "h": 128
+          },
+          "centre": [
+            178,
+            116
+          ],
+          "verbs": [
+            "LOOK",
+            "USE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "machine_manor",
+          "name": "Monster Manor",
+          "bounds": {
+            "x": 216,
+            "y": 52,
+            "w": 60,
+            "h": 128
+          },
+          "centre": [
+            246,
+            116
+          ],
+          "verbs": [
+            "LOOK",
+            "USE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "machine_galactic",
+          "name": "Galactic Raiders",
+          "bounds": {
+            "x": 284,
+            "y": 52,
+            "w": 60,
+            "h": 128
+          },
+          "centre": [
+            314,
+            116
+          ],
+          "verbs": [
+            "LOOK",
+            "USE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "onemorecredit",
+          "name": "Unmarked Machine",
+          "bounds": {
+            "x": 362,
+            "y": 46,
+            "w": 72,
+            "h": 136
+          },
+          "centre": [
+            398,
+            114
+          ],
+          "verbs": [
+            "LOOK",
+            "PUSH",
+            "USE",
+            "TAKE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "basement_door",
+          "name": "Staff Door",
+          "bounds": {
+            "x": 8,
+            "y": 68,
+            "w": 52,
+            "h": 112
+          },
+          "centre": [
+            34,
+            124
+          ],
+          "verbs": [
+            "LOOK",
+            "OPEN"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "to_lobby",
+          "name": "Lobby",
+          "bounds": {
+            "x": 576,
+            "y": 60,
+            "w": 64,
+            "h": 120
+          },
+          "centre": [
+            608,
+            120
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Starlight Arcade. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Coin Pusher (around x507, y133); Turbo Racer (around x110, y116); Space Wars (around x178, y116); Monster Manor (around x246, y116); Galactic Raiders (around x314, y116); Unmarked Machine (around x398, y114); Staff Door (around x34, y124). Visible ways out: Lobby. Characters stand in this room (drawn separately, not in the background): Kevin, Maggie. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p0"
+    },
+    {
+      "id": "bg.starlight_arcade.foreground",
+      "scene": "starlight_arcade",
+      "type": "background-layer",
+      "path": "/assets/backgrounds/starlight_arcade_foreground.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "foreground",
+        "notes": "Near-camera scenery, composited over characters. Everything not part of that scenery must be fully transparent."
+      },
+      "description": "Optional foreground layer for Starlight Arcade, aligned pixel-for-pixel with the background plate. Only the objects nearest the camera, which characters should be able to walk behind. Everything else transparent.",
+      "priority": "p2"
+    },
+    {
+      "id": "bg.arcade_office",
+      "scene": "arcade_office",
+      "type": "background",
+      "path": "/assets/backgrounds/arcade_office.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [
+        {
+          "id": "desk",
+          "name": "Desk",
+          "bounds": {
+            "x": 192,
+            "y": 164,
+            "w": 184,
+            "h": 52
+          },
+          "centre": [
+            284,
+            190
+          ],
+          "verbs": [
+            "LOOK",
+            "TAKE",
+            "OPEN"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "framed_photo",
+          "name": "Framed Photograph",
+          "bounds": {
+            "x": 412,
+            "y": 60,
+            "w": 80,
+            "h": 64
+          },
+          "centre": [
+            452,
+            92
+          ],
+          "verbs": [
+            "LOOK",
+            "TAKE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "safe",
+          "name": "Safe",
+          "bounds": {
+            "x": 500,
+            "y": 164,
+            "w": 80,
+            "h": 68
+          },
+          "centre": [
+            540,
+            198
+          ],
+          "verbs": [
+            "LOOK",
+            "OPEN"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "filing_cabinet",
+          "name": "Filing Cabinet",
+          "bounds": {
+            "x": 32,
+            "y": 104,
+            "w": 68,
+            "h": 120
+          },
+          "centre": [
+            66,
+            164
+          ],
+          "verbs": [
+            "LOOK",
+            "OPEN"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "office_tv",
+          "name": "Television",
+          "bounds": {
+            "x": 576,
+            "y": 80,
+            "w": 60,
+            "h": 56
+          },
+          "centre": [
+            606,
+            108
+          ],
+          "verbs": [
+            "LOOK",
+            "USE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "telephone",
+          "name": "Telephone",
+          "bounds": {
+            "x": 220,
+            "y": 156,
+            "w": 40,
+            "h": 28
+          },
+          "centre": [
+            240,
+            170
+          ],
+          "verbs": [
+            "LOOK",
+            "USE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "office_out",
+          "name": "Lobby",
+          "bounds": {
+            "x": 0,
+            "y": 192,
+            "w": 40,
+            "h": 96
+          },
+          "centre": [
+            20,
+            240
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Arthur's Office. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Desk (around x284, y190); Framed Photograph (around x452, y92); Safe (around x540, y198); Filing Cabinet (around x66, y164); Television (around x606, y108); Telephone (around x240, y170). Visible ways out: Lobby. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.arcade_basement",
+      "scene": "arcade_basement",
+      "type": "background",
+      "path": "/assets/backgrounds/arcade_basement.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [
+        {
+          "id": "fusebox",
+          "name": "Fuse Box",
+          "bounds": {
+            "x": 452,
+            "y": 88,
+            "w": 80,
+            "h": 64
+          },
+          "centre": [
+            492,
+            120
+          ],
+          "verbs": [
+            "LOOK",
+            "USE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "dust_sheets",
+          "name": "Dust Sheets",
+          "bounds": {
+            "x": 32,
+            "y": 108,
+            "w": 200,
+            "h": 104
+          },
+          "centre": [
+            132,
+            160
+          ],
+          "verbs": [
+            "LOOK",
+            "PULL"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "hatch",
+          "name": "Floor Hatch",
+          "bounds": {
+            "x": 264,
+            "y": 216,
+            "w": 112,
+            "h": 48
+          },
+          "centre": [
+            320,
+            240
+          ],
+          "verbs": [
+            "LOOK",
+            "OPEN",
+            "PULL"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "basement_up",
+          "name": "Arcade Floor",
+          "bounds": {
+            "x": 0,
+            "y": 200,
+            "w": 36,
+            "h": 88
+          },
+          "centre": [
+            18,
+            244
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Arcade Basement. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Fuse Box (around x492, y120); Dust Sheets (around x132, y160); Floor Hatch (around x320, y240). Visible ways out: Arcade Floor. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.arcade_roof",
+      "scene": "arcade_roof",
+      "type": "background",
+      "path": "/assets/backgrounds/arcade_roof.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [
+        {
+          "id": "aerial_mast",
+          "name": "Aerial Mast",
+          "bounds": {
+            "x": 464,
+            "y": 48,
+            "w": 52,
+            "h": 160
+          },
+          "centre": [
+            490,
+            128
+          ],
+          "verbs": [
+            "LOOK",
+            "USE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "parapet",
+          "name": "Parapet",
+          "bounds": {
+            "x": 0,
+            "y": 172,
+            "w": 640,
+            "h": 36
+          },
+          "centre": [
+            320,
+            190
+          ],
+          "verbs": [
+            "LOOK",
+            "PUSH",
+            "USE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "roof_down",
+          "name": "Hatch",
+          "bounds": {
+            "x": 120,
+            "y": 212,
+            "w": 80,
+            "h": 44
+          },
+          "centre": [
+            160,
+            234
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Arcade Roof. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Aerial Mast (around x490, y128); Parapet (around x320, y190). Visible ways out: Hatch. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.seafront",
+      "scene": "seafront",
+      "type": "background",
+      "path": "/assets/backgrounds/seafront.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [
+        {
+          "id": "railings",
+          "name": "Railings",
+          "bounds": {
+            "x": 0,
+            "y": 140,
+            "w": 640,
+            "h": 28
+          },
+          "centre": [
+            320,
+            154
+          ],
+          "verbs": [
+            "LOOK",
+            "USE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "newspaper_spot",
+          "name": "Newspaper",
+          "bounds": {
+            "x": 80,
+            "y": 216,
+            "w": 60,
+            "h": 40
+          },
+          "centre": [
+            110,
+            236
+          ],
+          "verbs": [
+            "LOOK",
+            "USE"
+          ],
+          "conditional": true,
+          "isCharacter": false
+        },
+        {
+          "id": "tv_listings",
+          "name": "Television Listings",
+          "bounds": {
+            "x": 144,
+            "y": 216,
+            "w": 52,
+            "h": 40
+          },
+          "centre": [
+            170,
+            236
+          ],
+          "verbs": [
+            "LOOK"
+          ],
+          "conditional": true,
+          "isCharacter": false
+        },
+        {
+          "id": "sf_arcade",
+          "name": "Starlight Arcade",
+          "bounds": {
+            "x": 480,
+            "y": 68,
+            "w": 160,
+            "h": 96
+          },
+          "centre": [
+            560,
+            116
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "sf_chips",
+          "name": "Fish & Chip Shop",
+          "bounds": {
+            "x": 8,
+            "y": 80,
+            "w": 124,
+            "h": 84
+          },
+          "centre": [
+            70,
+            122
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "sf_alley",
+          "name": "Back Alley",
+          "bounds": {
+            "x": 144,
+            "y": 68,
+            "w": 52,
+            "h": 96
+          },
+          "centre": [
+            170,
+            116
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "sf_pool",
+          "name": "The Lido",
+          "bounds": {
+            "x": 212,
+            "y": 56,
+            "w": 124,
+            "h": 108
+          },
+          "centre": [
+            274,
+            110
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "sf_pier",
+          "name": "The Pier",
+          "bounds": {
+            "x": 0,
+            "y": 192,
+            "w": 48,
+            "h": 96
+          },
+          "centre": [
+            24,
+            240
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "sf_town",
+          "name": "Town Centre",
+          "bounds": {
+            "x": 592,
+            "y": 192,
+            "w": 48,
+            "h": 96
+          },
+          "centre": [
+            616,
+            240
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "The Seafront. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Railings (around x320, y154); Newspaper (around x110, y236); Television Listings (around x170, y236). Visible ways out: Starlight Arcade; Fish & Chip Shop; Back Alley; The Lido; The Pier; Town Centre. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.pier",
+      "scene": "pier",
+      "type": "background",
+      "path": "/assets/backgrounds/pier.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [
+        {
+          "id": "photo_booth",
+          "name": "Photographic Booth",
+          "bounds": {
+            "x": 468,
+            "y": 68,
+            "w": 80,
+            "h": 104
+          },
+          "centre": [
+            508,
+            120
+          ],
+          "verbs": [
+            "LOOK",
+            "TAKE",
+            "USE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "red_coat",
+          "name": "Woman in a Red Coat",
+          "bounds": {
+            "x": 200,
+            "y": 152,
+            "w": 48,
+            "h": 80
+          },
+          "centre": [
+            224,
+            192
+          ],
+          "verbs": [
+            "LOOK",
+            "TALK"
+          ],
+          "conditional": true,
+          "isCharacter": false
+        },
+        {
+          "id": "lighthouse_view",
+          "name": "Lighthouse",
+          "bounds": {
+            "x": 28,
+            "y": 68,
+            "w": 44,
+            "h": 68
+          },
+          "centre": [
+            50,
+            102
+          ],
+          "verbs": [
+            "LOOK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "pier_back",
+          "name": "Seafront",
+          "bounds": {
+            "x": 0,
+            "y": 192,
+            "w": 52,
+            "h": 96
+          },
+          "centre": [
+            26,
+            240
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "pier_cafe",
+          "name": "Pier Café",
+          "bounds": {
+            "x": 260,
+            "y": 80,
+            "w": 80,
+            "h": 68
+          },
+          "centre": [
+            300,
+            114
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "pier_cinema",
+          "name": "Abandoned Cinema",
+          "bounds": {
+            "x": 584,
+            "y": 192,
+            "w": 56,
+            "h": 96
+          },
+          "centre": [
+            612,
+            240
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": true,
+          "isCharacter": false
+        },
+        {
+          "id": "pier_lighthouse",
+          "name": "Lighthouse",
+          "bounds": {
+            "x": 24,
+            "y": 64,
+            "w": 52,
+            "h": 76
+          },
+          "centre": [
+            50,
+            102
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": true,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "The Pier. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Photographic Booth (around x508, y120); Woman in a Red Coat (around x224, y192); Lighthouse (around x50, y102). Visible ways out: Seafront; Pier Café; Abandoned Cinema; Lighthouse. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.pier_cafe",
+      "scene": "pier_cafe",
+      "type": "background",
+      "path": "/assets/backgrounds/pier_cafe.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [
+        {
+          "id": "urn",
+          "name": "Tea Urn",
+          "bounds": {
+            "x": 64,
+            "y": 112,
+            "w": 44,
+            "h": 48
+          },
+          "centre": [
+            86,
+            136
+          ],
+          "verbs": [
+            "LOOK",
+            "USE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "cafe_table",
+          "name": "Formica Table",
+          "bounds": {
+            "x": 352,
+            "y": 164,
+            "w": 96,
+            "h": 68
+          },
+          "centre": [
+            400,
+            198
+          ],
+          "verbs": [
+            "LOOK",
+            "TAKE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "cafe_window",
+          "name": "Window",
+          "bounds": {
+            "x": 336,
+            "y": 48,
+            "w": 264,
+            "h": 80
+          },
+          "centre": [
+            468,
+            88
+          ],
+          "verbs": [
+            "LOOK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "cafe_out",
+          "name": "Pier",
+          "bounds": {
+            "x": 0,
+            "y": 192,
+            "w": 48,
+            "h": 96
+          },
+          "centre": [
+            24,
+            240
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Pier Café. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Tea Urn (around x86, y136); Formica Table (around x400, y198); Window (around x468, y88). Visible ways out: Pier. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.chip_shop",
+      "scene": "chip_shop",
+      "type": "background",
+      "path": "/assets/backgrounds/chip_shop.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [
+        {
+          "id": "fryer",
+          "name": "Fryers",
+          "bounds": {
+            "x": 80,
+            "y": 128,
+            "w": 300,
+            "h": 60
+          },
+          "centre": [
+            230,
+            158
+          ],
+          "verbs": [
+            "LOOK",
+            "USE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "butter_tray",
+          "name": "Butter",
+          "bounds": {
+            "x": 400,
+            "y": 168,
+            "w": 80,
+            "h": 44
+          },
+          "centre": [
+            440,
+            190
+          ],
+          "verbs": [
+            "LOOK",
+            "TAKE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "price_list",
+          "name": "Price List",
+          "bounds": {
+            "x": 420,
+            "y": 44,
+            "w": 176,
+            "h": 100
+          },
+          "centre": [
+            508,
+            94
+          ],
+          "verbs": [
+            "LOOK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "chips_out",
+          "name": "Seafront",
+          "bounds": {
+            "x": 0,
+            "y": 192,
+            "w": 48,
+            "h": 96
+          },
+          "centre": [
+            24,
+            240
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Fish & Chip Shop. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Fryers (around x230, y158); Butter (around x440, y190); Price List (around x508, y94). Visible ways out: Seafront. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.back_alley",
+      "scene": "back_alley",
+      "type": "background",
+      "path": "/assets/backgrounds/back_alley.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [
+        {
+          "id": "bins",
+          "name": "Bins",
+          "bounds": {
+            "x": 492,
+            "y": 164,
+            "w": 68,
+            "h": 80
+          },
+          "centre": [
+            526,
+            204
+          ],
+          "verbs": [
+            "LOOK",
+            "OPEN",
+            "PUSH"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "fire_door",
+          "name": "Fire Door",
+          "bounds": {
+            "x": 80,
+            "y": 120,
+            "w": 64,
+            "h": 124
+          },
+          "centre": [
+            112,
+            182
+          ],
+          "verbs": [
+            "LOOK",
+            "OPEN"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "puddle",
+          "name": "Puddle",
+          "bounds": {
+            "x": 184,
+            "y": 244,
+            "w": 112,
+            "h": 32
+          },
+          "centre": [
+            240,
+            260
+          ],
+          "verbs": [
+            "LOOK",
+            "USE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "dead_fly_1",
+          "name": "Dead Fly",
+          "bounds": {
+            "x": 352,
+            "y": 232,
+            "w": 20,
+            "h": 16
+          },
+          "centre": [
+            362,
+            240
+          ],
+          "verbs": [
+            "LOOK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "dead_fly_2",
+          "name": "Dead Fly",
+          "bounds": {
+            "x": 380,
+            "y": 240,
+            "w": 20,
+            "h": 16
+          },
+          "centre": [
+            390,
+            248
+          ],
+          "verbs": [
+            "LOOK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "dead_fly_3",
+          "name": "Dead Fly",
+          "bounds": {
+            "x": 408,
+            "y": 232,
+            "w": 20,
+            "h": 16
+          },
+          "centre": [
+            418,
+            240
+          ],
+          "verbs": [
+            "LOOK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "alley_out",
+          "name": "Seafront",
+          "bounds": {
+            "x": 0,
+            "y": 200,
+            "w": 40,
+            "h": 88
+          },
+          "centre": [
+            20,
+            244
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "alley_tv",
+          "name": "Piper's Television Emporium",
+          "bounds": {
+            "x": 600,
+            "y": 200,
+            "w": 40,
+            "h": 88
+          },
+          "centre": [
+            620,
+            244
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Back Alley. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Bins (around x526, y204); Fire Door (around x112, y182); Puddle (around x240, y260); Dead Fly (around x362, y240); Dead Fly (around x390, y248); Dead Fly (around x418, y240). Visible ways out: Seafront; Piper's Television Emporium. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.tv_shop",
+      "scene": "tv_shop",
+      "type": "background",
+      "path": "/assets/backgrounds/tv_shop.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [
+        "derek"
+      ],
+      "hotspots": [
+        {
+          "id": "derek",
+          "name": "Derek",
+          "bounds": {
+            "x": 456,
+            "y": 188,
+            "w": 52,
+            "h": 80
+          },
+          "centre": [
+            482,
+            228
+          ],
+          "verbs": [
+            "LOOK",
+            "TALK"
+          ],
+          "conditional": false,
+          "isCharacter": true
+        },
+        {
+          "id": "tv_wall",
+          "name": "Wall of Televisions",
+          "bounds": {
+            "x": 16,
+            "y": 16,
+            "w": 600,
+            "h": 176
+          },
+          "centre": [
+            316,
+            104
+          ],
+          "verbs": [
+            "LOOK",
+            "USE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "antenna_stock",
+          "name": "Aerial",
+          "bounds": {
+            "x": 500,
+            "y": 184,
+            "w": 80,
+            "h": 36
+          },
+          "centre": [
+            540,
+            202
+          ],
+          "verbs": [
+            "LOOK",
+            "TAKE"
+          ],
+          "conditional": true,
+          "isCharacter": false
+        },
+        {
+          "id": "tv_out",
+          "name": "Back Alley",
+          "bounds": {
+            "x": 0,
+            "y": 208,
+            "w": 40,
+            "h": 80
+          },
+          "centre": [
+            20,
+            248
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Piper's Television Emporium. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Wall of Televisions (around x316, y104); Aerial (around x540, y202). Visible ways out: Back Alley. Characters stand in this room (drawn separately, not in the background): Derek. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.amusement_park",
+      "scene": "amusement_park",
+      "type": "background",
+      "path": "/assets/backgrounds/amusement_park.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [
+        "brenda"
+      ],
+      "hotspots": [
+        {
+          "id": "brenda",
+          "name": "Brenda",
+          "bounds": {
+            "x": 424,
+            "y": 160,
+            "w": 56,
+            "h": 80
+          },
+          "centre": [
+            452,
+            200
+          ],
+          "verbs": [
+            "LOOK",
+            "TALK"
+          ],
+          "conditional": false,
+          "isCharacter": true
+        },
+        {
+          "id": "big_wheel",
+          "name": "Big Wheel",
+          "bounds": {
+            "x": 40,
+            "y": 24,
+            "w": 184,
+            "h": 184
+          },
+          "centre": [
+            132,
+            116
+          ],
+          "verbs": [
+            "LOOK",
+            "USE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "kiosk",
+          "name": "Kiosk",
+          "bounds": {
+            "x": 352,
+            "y": 88,
+            "w": 200,
+            "h": 108
+          },
+          "centre": [
+            452,
+            142
+          ],
+          "verbs": [
+            "LOOK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "park_out",
+          "name": "Bus Station",
+          "bounds": {
+            "x": 0,
+            "y": 192,
+            "w": 48,
+            "h": 96
+          },
+          "centre": [
+            24,
+            240
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "park_haunted",
+          "name": "Haunted House",
+          "bounds": {
+            "x": 576,
+            "y": 80,
+            "w": 64,
+            "h": 120
+          },
+          "centre": [
+            608,
+            140
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Amusement Park. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Big Wheel (around x132, y116); Kiosk (around x452, y142). Visible ways out: Bus Station; Haunted House. Characters stand in this room (drawn separately, not in the background): Brenda. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.haunted_house",
+      "scene": "haunted_house",
+      "type": "background",
+      "path": "/assets/backgrounds/haunted_house.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [
+        {
+          "id": "plastic_ghost",
+          "name": "Plastic Ghost",
+          "bounds": {
+            "x": 456,
+            "y": 84,
+            "w": 60,
+            "h": 84
+          },
+          "centre": [
+            486,
+            126
+          ],
+          "verbs": [
+            "LOOK",
+            "PUSH"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "skeleton",
+          "name": "Skeleton",
+          "bounds": {
+            "x": 112,
+            "y": 128,
+            "w": 56,
+            "h": 88
+          },
+          "centre": [
+            140,
+            172
+          ],
+          "verbs": [
+            "LOOK",
+            "TALK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "rubber_duck",
+          "name": "Rubber Duck",
+          "bounds": {
+            "x": 300,
+            "y": 244,
+            "w": 28,
+            "h": 24
+          },
+          "centre": [
+            314,
+            256
+          ],
+          "verbs": [
+            "LOOK",
+            "TAKE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "haunted_out",
+          "name": "Amusement Park",
+          "bounds": {
+            "x": 0,
+            "y": 200,
+            "w": 40,
+            "h": 88
+          },
+          "centre": [
+            20,
+            244
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Haunted House. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Plastic Ghost (around x486, y126); Skeleton (around x140, y172); Rubber Duck (around x314, y256). Visible ways out: Amusement Park. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.bus_station",
+      "scene": "bus_station",
+      "type": "background",
+      "path": "/assets/backgrounds/bus_station.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [
+        {
+          "id": "timetable",
+          "name": "Timetable",
+          "bounds": {
+            "x": 380,
+            "y": 112,
+            "w": 144,
+            "h": 88
+          },
+          "centre": [
+            452,
+            156
+          ],
+          "verbs": [
+            "LOOK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "bench",
+          "name": "Bench",
+          "bounds": {
+            "x": 96,
+            "y": 164,
+            "w": 128,
+            "h": 52
+          },
+          "centre": [
+            160,
+            190
+          ],
+          "verbs": [
+            "LOOK",
+            "USE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "bus_sea",
+          "name": "Seafront",
+          "bounds": {
+            "x": 0,
+            "y": 192,
+            "w": 48,
+            "h": 96
+          },
+          "centre": [
+            24,
+            240
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "bus_park",
+          "name": "Amusement Park",
+          "bounds": {
+            "x": 592,
+            "y": 192,
+            "w": 48,
+            "h": 96
+          },
+          "centre": [
+            616,
+            240
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "bus_phone",
+          "name": "Telephone Box",
+          "bounds": {
+            "x": 256,
+            "y": 112,
+            "w": 52,
+            "h": 96
+          },
+          "centre": [
+            282,
+            160
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "bus_town",
+          "name": "Town Hall",
+          "bounds": {
+            "x": 380,
+            "y": 200,
+            "w": 80,
+            "h": 40
+          },
+          "centre": [
+            420,
+            220
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "bus_clock",
+          "name": "Clock Tower",
+          "bounds": {
+            "x": 60,
+            "y": 80,
+            "w": 80,
+            "h": 72
+          },
+          "centre": [
+            100,
+            116
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "bus_hotel",
+          "name": "Golden Sands Hotel",
+          "bounds": {
+            "x": 500,
+            "y": 80,
+            "w": 88,
+            "h": 72
+          },
+          "centre": [
+            544,
+            116
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Bus Station. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Timetable (around x452, y156); Bench (around x160, y190). Visible ways out: Seafront; Amusement Park; Telephone Box; Town Hall; Clock Tower; Golden Sands Hotel. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.phone_box",
+      "scene": "phone_box",
+      "type": "background",
+      "path": "/assets/backgrounds/phone_box.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [
+        {
+          "id": "phone_dial",
+          "name": "Telephone",
+          "bounds": {
+            "x": 256,
+            "y": 80,
+            "w": 128,
+            "h": 112
+          },
+          "centre": [
+            320,
+            136
+          ],
+          "verbs": [
+            "LOOK",
+            "USE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "phone_cards",
+          "name": "Cards",
+          "bounds": {
+            "x": 192,
+            "y": 84,
+            "w": 60,
+            "h": 44
+          },
+          "centre": [
+            222,
+            106
+          ],
+          "verbs": [
+            "LOOK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "phone_out",
+          "name": "Bus Station",
+          "bounds": {
+            "x": 0,
+            "y": 200,
+            "w": 60,
+            "h": 88
+          },
+          "centre": [
+            30,
+            244
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Telephone Box. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Telephone (around x320, y136); Cards (around x222, y106). Visible ways out: Bus Station. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.town_hall",
+      "scene": "town_hall",
+      "type": "background",
+      "path": "/assets/backgrounds/town_hall.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [
+        {
+          "id": "notice_board",
+          "name": "Notice Board",
+          "bounds": {
+            "x": 496,
+            "y": 104,
+            "w": 88,
+            "h": 68
+          },
+          "centre": [
+            540,
+            138
+          ],
+          "verbs": [
+            "LOOK",
+            "TAKE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "town_doors",
+          "name": "Doors",
+          "bounds": {
+            "x": 276,
+            "y": 124,
+            "w": 88,
+            "h": 92
+          },
+          "centre": [
+            320,
+            170
+          ],
+          "verbs": [
+            "LOOK",
+            "OPEN"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "hall_out",
+          "name": "Bus Station",
+          "bounds": {
+            "x": 0,
+            "y": 192,
+            "w": 48,
+            "h": 96
+          },
+          "centre": [
+            24,
+            240
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "hall_police",
+          "name": "Police Station",
+          "bounds": {
+            "x": 592,
+            "y": 192,
+            "w": 48,
+            "h": 96
+          },
+          "centre": [
+            616,
+            240
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Town Hall. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Notice Board (around x540, y138); Doors (around x320, y170). Visible ways out: Bus Station; Police Station. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.police_station",
+      "scene": "police_station",
+      "type": "background",
+      "path": "/assets/backgrounds/police_station.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [
+        {
+          "id": "missing_posters",
+          "name": "Missing Person Posters",
+          "bounds": {
+            "x": 444,
+            "y": 44,
+            "w": 184,
+            "h": 156
+          },
+          "centre": [
+            536,
+            122
+          ],
+          "verbs": [
+            "LOOK",
+            "TAKE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "desk_bell",
+          "name": "Desk Bell",
+          "bounds": {
+            "x": 336,
+            "y": 148,
+            "w": 36,
+            "h": 28
+          },
+          "centre": [
+            354,
+            162
+          ],
+          "verbs": [
+            "LOOK",
+            "PUSH"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "police_out",
+          "name": "Town Hall",
+          "bounds": {
+            "x": 0,
+            "y": 192,
+            "w": 48,
+            "h": 96
+          },
+          "centre": [
+            24,
+            240
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Police Station. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Missing Person Posters (around x536, y122); Desk Bell (around x354, y162). Visible ways out: Town Hall. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.cinema_exterior",
+      "scene": "cinema_exterior",
+      "type": "background",
+      "path": "/assets/backgrounds/cinema_exterior.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [
+        {
+          "id": "marquee",
+          "name": "Marquee",
+          "bounds": {
+            "x": 88,
+            "y": 56,
+            "w": 464,
+            "h": 68
+          },
+          "centre": [
+            320,
+            90
+          ],
+          "verbs": [
+            "LOOK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "cinema_doors",
+          "name": "Boarded Doors",
+          "bounds": {
+            "x": 252,
+            "y": 124,
+            "w": 136,
+            "h": 88
+          },
+          "centre": [
+            320,
+            168
+          ],
+          "verbs": [
+            "LOOK",
+            "PULL",
+            "OPEN"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "air_vent",
+          "name": "Pavement Grating",
+          "bounds": {
+            "x": 120,
+            "y": 216,
+            "w": 88,
+            "h": 40
+          },
+          "centre": [
+            164,
+            236
+          ],
+          "verbs": [
+            "LOOK",
+            "PUSH",
+            "USE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "red_coat_cinema",
+          "name": "Woman in the Red Coat",
+          "bounds": {
+            "x": 472,
+            "y": 120,
+            "w": 52,
+            "h": 92
+          },
+          "centre": [
+            498,
+            166
+          ],
+          "verbs": [
+            "LOOK",
+            "TALK"
+          ],
+          "conditional": true,
+          "isCharacter": false
+        },
+        {
+          "id": "poster_case",
+          "name": "Poster Case",
+          "bounds": {
+            "x": 424,
+            "y": 120,
+            "w": 68,
+            "h": 88
+          },
+          "centre": [
+            458,
+            164
+          ],
+          "verbs": [
+            "LOOK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "cin_out",
+          "name": "Pier",
+          "bounds": {
+            "x": 0,
+            "y": 200,
+            "w": 44,
+            "h": 88
+          },
+          "centre": [
+            22,
+            244
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "cin_in",
+          "name": "Inside",
+          "bounds": {
+            "x": 252,
+            "y": 124,
+            "w": 136,
+            "h": 88
+          },
+          "centre": [
+            320,
+            168
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": true,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "The Regal Cinema. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Marquee (around x320, y90); Boarded Doors (around x320, y168); Pavement Grating (around x164, y236); Woman in the Red Coat (around x498, y166); Poster Case (around x458, y164). Visible ways out: Pier; Inside. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.cinema_lobby",
+      "scene": "cinema_lobby",
+      "type": "background",
+      "path": "/assets/backgrounds/cinema_lobby.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [
+        {
+          "id": "ticket_booth",
+          "name": "Ticket Booth",
+          "bounds": {
+            "x": 232,
+            "y": 92,
+            "w": 152,
+            "h": 96
+          },
+          "centre": [
+            308,
+            140
+          ],
+          "verbs": [
+            "LOOK",
+            "TAKE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "projection_door",
+          "name": "Projection Room Door",
+          "bounds": {
+            "x": 536,
+            "y": 84,
+            "w": 104,
+            "h": 104
+          },
+          "centre": [
+            588,
+            136
+          ],
+          "verbs": [
+            "LOOK",
+            "OPEN",
+            "PULL"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "carpet",
+          "name": "Carpet",
+          "bounds": {
+            "x": 40,
+            "y": 200,
+            "w": 180,
+            "h": 80
+          },
+          "centre": [
+            130,
+            240
+          ],
+          "verbs": [
+            "LOOK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "lobby_out",
+          "name": "Outside",
+          "bounds": {
+            "x": 0,
+            "y": 200,
+            "w": 44,
+            "h": 88
+          },
+          "centre": [
+            22,
+            244
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "lobby_proj",
+          "name": "Projection Room",
+          "bounds": {
+            "x": 536,
+            "y": 84,
+            "w": 104,
+            "h": 104
+          },
+          "centre": [
+            588,
+            136
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": true,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Cinema Lobby. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Ticket Booth (around x308, y140); Projection Room Door (around x588, y136); Carpet (around x130, y240). Visible ways out: Outside; Projection Room. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.cinema_projection",
+      "scene": "cinema_projection",
+      "type": "background",
+      "path": "/assets/backgrounds/cinema_projection.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [
+        {
+          "id": "projector",
+          "name": "Projector",
+          "bounds": {
+            "x": 48,
+            "y": 60,
+            "w": 176,
+            "h": 124
+          },
+          "centre": [
+            136,
+            122
+          ],
+          "verbs": [
+            "LOOK",
+            "USE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "fuse_box_shelf",
+          "name": "Shelf",
+          "bounds": {
+            "x": 260,
+            "y": 192,
+            "w": 192,
+            "h": 56
+          },
+          "centre": [
+            356,
+            220
+          ],
+          "verbs": [
+            "LOOK",
+            "TAKE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "swimsuit_poster",
+          "name": "Old Poster",
+          "bounds": {
+            "x": 388,
+            "y": 40,
+            "w": 88,
+            "h": 116
+          },
+          "centre": [
+            432,
+            98
+          ],
+          "verbs": [
+            "LOOK",
+            "PULL",
+            "TAKE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "film_cans",
+          "name": "Film Cans",
+          "bounds": {
+            "x": 256,
+            "y": 216,
+            "w": 180,
+            "h": 36
+          },
+          "centre": [
+            346,
+            234
+          ],
+          "verbs": [
+            "LOOK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "proj_out",
+          "name": "Lobby",
+          "bounds": {
+            "x": 0,
+            "y": 200,
+            "w": 44,
+            "h": 88
+          },
+          "centre": [
+            22,
+            244
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Projection Room. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Projector (around x136, y122); Shelf (around x356, y220); Old Poster (around x432, y98); Film Cans (around x346, y234). Visible ways out: Lobby. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.clock_tower_ext",
+      "scene": "clock_tower_ext",
+      "type": "background",
+      "path": "/assets/backgrounds/clock_tower_ext.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [
+        {
+          "id": "clock_face",
+          "name": "Clock Face",
+          "bounds": {
+            "x": 268,
+            "y": 40,
+            "w": 104,
+            "h": 100
+          },
+          "centre": [
+            320,
+            90
+          ],
+          "verbs": [
+            "LOOK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "brass_key_spot",
+          "name": "Something on the Ground",
+          "bounds": {
+            "x": 380,
+            "y": 244,
+            "w": 48,
+            "h": 28
+          },
+          "centre": [
+            404,
+            258
+          ],
+          "verbs": [
+            "LOOK",
+            "TAKE"
+          ],
+          "conditional": true,
+          "isCharacter": false
+        },
+        {
+          "id": "maintenance_panel",
+          "name": "Maintenance Panel",
+          "bounds": {
+            "x": 288,
+            "y": 180,
+            "w": 64,
+            "h": 48
+          },
+          "centre": [
+            320,
+            204
+          ],
+          "verbs": [
+            "LOOK",
+            "OPEN"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "clock_out",
+          "name": "Bus Station",
+          "bounds": {
+            "x": 0,
+            "y": 224,
+            "w": 48,
+            "h": 64
+          },
+          "centre": [
+            24,
+            256
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "clock_in",
+          "name": "Inside the Tower",
+          "bounds": {
+            "x": 288,
+            "y": 180,
+            "w": 64,
+            "h": 52
+          },
+          "centre": [
+            320,
+            206
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": true,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Clock Tower. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Clock Face (around x320, y90); Something on the Ground (around x404, y258); Maintenance Panel (around x320, y204). Visible ways out: Bus Station; Inside the Tower. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.clock_tower_int",
+      "scene": "clock_tower_int",
+      "type": "background",
+      "path": "/assets/backgrounds/clock_tower_int.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [
+        {
+          "id": "mechanism",
+          "name": "Mechanism",
+          "bounds": {
+            "x": 92,
+            "y": 112,
+            "w": 160,
+            "h": 112
+          },
+          "centre": [
+            172,
+            168
+          ],
+          "verbs": [
+            "LOOK",
+            "PULL"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "clock_back",
+          "name": "Back of the Clock Face",
+          "bounds": {
+            "x": 240,
+            "y": 24,
+            "w": 160,
+            "h": 160
+          },
+          "centre": [
+            320,
+            104
+          ],
+          "verbs": [
+            "LOOK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "recorder_shelf",
+          "name": "Ledge",
+          "bounds": {
+            "x": 432,
+            "y": 192,
+            "w": 120,
+            "h": 36
+          },
+          "centre": [
+            492,
+            210
+          ],
+          "verbs": [
+            "LOOK",
+            "TAKE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "clockint_out",
+          "name": "Outside",
+          "bounds": {
+            "x": 0,
+            "y": 216,
+            "w": 44,
+            "h": 72
+          },
+          "centre": [
+            22,
+            252
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Inside the Clock Tower. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Mechanism (around x172, y168); Back of the Clock Face (around x320, y104); Ledge (around x492, y210). Visible ways out: Outside. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.lighthouse_ext",
+      "scene": "lighthouse_ext",
+      "type": "background",
+      "path": "/assets/backgrounds/lighthouse_ext.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [
+        "maggie"
+      ],
+      "hotspots": [
+        {
+          "id": "maggie",
+          "name": "Maggie",
+          "bounds": {
+            "x": 336,
+            "y": 192,
+            "w": 52,
+            "h": 80
+          },
+          "centre": [
+            362,
+            232
+          ],
+          "verbs": [
+            "LOOK",
+            "TALK"
+          ],
+          "conditional": true,
+          "isCharacter": true
+        },
+        {
+          "id": "lighthouse_door",
+          "name": "Lighthouse Door",
+          "bounds": {
+            "x": 420,
+            "y": 168,
+            "w": 64,
+            "h": 60
+          },
+          "centre": [
+            452,
+            198
+          ],
+          "verbs": [
+            "LOOK",
+            "OPEN"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "rocks",
+          "name": "Rocks",
+          "bounds": {
+            "x": 40,
+            "y": 236,
+            "w": 180,
+            "h": 44
+          },
+          "centre": [
+            130,
+            258
+          ],
+          "verbs": [
+            "LOOK",
+            "USE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "lh_out",
+          "name": "Pier",
+          "bounds": {
+            "x": 0,
+            "y": 220,
+            "w": 44,
+            "h": 68
+          },
+          "centre": [
+            22,
+            254
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "The Lighthouse. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Lighthouse Door (around x452, y198); Rocks (around x130, y258). Visible ways out: Pier. Characters stand in this room (drawn separately, not in the background): Maggie. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.lighthouse_int",
+      "scene": "lighthouse_int",
+      "type": "background",
+      "path": "/assets/backgrounds/lighthouse_int.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [
+        {
+          "id": "log_book",
+          "name": "Log Book",
+          "bounds": {
+            "x": 400,
+            "y": 216,
+            "w": 88,
+            "h": 36
+          },
+          "centre": [
+            444,
+            234
+          ],
+          "verbs": [
+            "LOOK",
+            "TAKE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "lh_locker",
+          "name": "Keeper's Locker",
+          "bounds": {
+            "x": 192,
+            "y": 192,
+            "w": 92,
+            "h": 44
+          },
+          "centre": [
+            238,
+            214
+          ],
+          "verbs": [
+            "LOOK",
+            "OPEN"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "porthole",
+          "name": "Porthole",
+          "bounds": {
+            "x": 76,
+            "y": 84,
+            "w": 76,
+            "h": 76
+          },
+          "centre": [
+            114,
+            122
+          ],
+          "verbs": [
+            "LOOK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "lh_stairs",
+          "name": "Stairs",
+          "bounds": {
+            "x": 260,
+            "y": 40,
+            "w": 120,
+            "h": 180
+          },
+          "centre": [
+            320,
+            130
+          ],
+          "verbs": [
+            "LOOK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "lhint_out",
+          "name": "Outside",
+          "bounds": {
+            "x": 0,
+            "y": 228,
+            "w": 48,
+            "h": 60
+          },
+          "centre": [
+            24,
+            258
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Inside the Lighthouse. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Log Book (around x444, y234); Keeper's Locker (around x238, y214); Porthole (around x114, y122); Stairs (around x320, y130). Visible ways out: Outside. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.arcade_machineroom",
+      "scene": "arcade_machineroom",
+      "type": "background",
+      "path": "/assets/backgrounds/arcade_machineroom.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [
+        "maggie",
+        "arthur"
+      ],
+      "hotspots": [
+        {
+          "id": "maggie",
+          "name": "Maggie",
+          "bounds": {
+            "x": 168,
+            "y": 200,
+            "w": 52,
+            "h": 80
+          },
+          "centre": [
+            194,
+            240
+          ],
+          "verbs": [
+            "LOOK",
+            "TALK"
+          ],
+          "conditional": true,
+          "isCharacter": true
+        },
+        {
+          "id": "arthur",
+          "name": "Arthur",
+          "bounds": {
+            "x": 500,
+            "y": 200,
+            "w": 52,
+            "h": 80
+          },
+          "centre": [
+            526,
+            240
+          ],
+          "verbs": [
+            "LOOK",
+            "TALK"
+          ],
+          "conditional": true,
+          "isCharacter": true
+        },
+        {
+          "id": "socket_power",
+          "name": "POWER Socket",
+          "bounds": {
+            "x": 200,
+            "y": 116,
+            "w": 56,
+            "h": 56
+          },
+          "centre": [
+            228,
+            144
+          ],
+          "verbs": [
+            "LOOK",
+            "USE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "socket_signal",
+          "name": "SIGNAL Socket",
+          "bounds": {
+            "x": 284,
+            "y": 116,
+            "w": 56,
+            "h": 56
+          },
+          "centre": [
+            312,
+            144
+          ],
+          "verbs": [
+            "LOOK",
+            "USE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "socket_memory",
+          "name": "MEMORY Socket",
+          "bounds": {
+            "x": 368,
+            "y": 116,
+            "w": 56,
+            "h": 56
+          },
+          "centre": [
+            396,
+            144
+          ],
+          "verbs": [
+            "LOOK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "memorymaster",
+          "name": "Memory Master 3000",
+          "bounds": {
+            "x": 192,
+            "y": 40,
+            "w": 256,
+            "h": 80
+          },
+          "centre": [
+            320,
+            80
+          ],
+          "verbs": [
+            "LOOK",
+            "USE",
+            "PUSH"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "mr_out",
+          "name": "Basement",
+          "bounds": {
+            "x": 0,
+            "y": 228,
+            "w": 40,
+            "h": 60
+          },
+          "centre": [
+            20,
+            258
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Underground Machine Room. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: POWER Socket (around x228, y144); SIGNAL Socket (around x312, y144); MEMORY Socket (around x396, y144); Memory Master 3000 (around x320, y80). Visible ways out: Basement. Characters stand in this room (drawn separately, not in the background): Maggie, Arthur. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.hotel_reception",
+      "scene": "hotel_reception",
+      "type": "background",
+      "path": "/assets/backgrounds/hotel_reception.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [
+        "valerie"
+      ],
+      "hotspots": [
+        {
+          "id": "valerie",
+          "name": "Valerie",
+          "bounds": {
+            "x": 272,
+            "y": 164,
+            "w": 56,
+            "h": 80
+          },
+          "centre": [
+            300,
+            204
+          ],
+          "verbs": [
+            "LOOK",
+            "TALK"
+          ],
+          "conditional": false,
+          "isCharacter": true
+        },
+        {
+          "id": "pigeonholes",
+          "name": "Key Pigeonholes",
+          "bounds": {
+            "x": 192,
+            "y": 60,
+            "w": 256,
+            "h": 104
+          },
+          "centre": [
+            320,
+            112
+          ],
+          "verbs": [
+            "LOOK",
+            "TAKE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "register",
+          "name": "Register",
+          "bounds": {
+            "x": 352,
+            "y": 152,
+            "w": 64,
+            "h": 24
+          },
+          "centre": [
+            384,
+            164
+          ],
+          "verbs": [
+            "LOOK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "desk_bell_hotel",
+          "name": "Desk Bell",
+          "bounds": {
+            "x": 208,
+            "y": 148,
+            "w": 32,
+            "h": 24
+          },
+          "centre": [
+            224,
+            160
+          ],
+          "verbs": [
+            "LOOK",
+            "PUSH"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "palm",
+          "name": "Potted Palm",
+          "bounds": {
+            "x": 28,
+            "y": 152,
+            "w": 64,
+            "h": 92
+          },
+          "centre": [
+            60,
+            198
+          ],
+          "verbs": [
+            "LOOK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "hotel_out",
+          "name": "Bus Station",
+          "bounds": {
+            "x": 0,
+            "y": 200,
+            "w": 44,
+            "h": 88
+          },
+          "centre": [
+            22,
+            244
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "hotel_up",
+          "name": "Stairs",
+          "bounds": {
+            "x": 536,
+            "y": 80,
+            "w": 104,
+            "h": 128
+          },
+          "centre": [
+            588,
+            144
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": true,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Golden Sands Hotel. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Key Pigeonholes (around x320, y112); Register (around x384, y164); Desk Bell (around x224, y160); Potted Palm (around x60, y198). Visible ways out: Bus Station; Stairs. Characters stand in this room (drawn separately, not in the background): Valerie. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.hotel_corridor",
+      "scene": "hotel_corridor",
+      "type": "background",
+      "path": "/assets/backgrounds/hotel_corridor.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [
+        {
+          "id": "door10",
+          "name": "Room 10",
+          "bounds": {
+            "x": 20,
+            "y": 80,
+            "w": 60,
+            "h": 136
+          },
+          "centre": [
+            50,
+            148
+          ],
+          "verbs": [
+            "LOOK",
+            "OPEN"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "door11",
+          "name": "Room 11",
+          "bounds": {
+            "x": 140,
+            "y": 72,
+            "w": 60,
+            "h": 144
+          },
+          "centre": [
+            170,
+            144
+          ],
+          "verbs": [
+            "LOOK",
+            "OPEN"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "door12",
+          "name": "Room 12",
+          "bounds": {
+            "x": 300,
+            "y": 64,
+            "w": 60,
+            "h": 152
+          },
+          "centre": [
+            330,
+            140
+          ],
+          "verbs": [
+            "LOOK",
+            "OPEN"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "door14",
+          "name": "Room 14",
+          "bounds": {
+            "x": 488,
+            "y": 72,
+            "w": 60,
+            "h": 144
+          },
+          "centre": [
+            518,
+            144
+          ],
+          "verbs": [
+            "LOOK",
+            "OPEN"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "corridor_down",
+          "name": "Reception",
+          "bounds": {
+            "x": 0,
+            "y": 216,
+            "w": 40,
+            "h": 72
+          },
+          "centre": [
+            20,
+            252
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Hotel Corridor. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Room 10 (around x50, y148); Room 11 (around x170, y144); Room 12 (around x330, y140); Room 14 (around x518, y144). Visible ways out: Reception. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.hotel_room12",
+      "scene": "hotel_room12",
+      "type": "background",
+      "path": "/assets/backgrounds/hotel_room12.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [
+        {
+          "id": "bathroom_door",
+          "name": "Bathroom Door",
+          "bounds": {
+            "x": 192,
+            "y": 60,
+            "w": 88,
+            "h": 136
+          },
+          "centre": [
+            236,
+            128
+          ],
+          "verbs": [
+            "LOOK",
+            "OPEN",
+            "TALK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "room12_bed",
+          "name": "Bed",
+          "bounds": {
+            "x": 56,
+            "y": 148,
+            "w": 188,
+            "h": 92
+          },
+          "centre": [
+            150,
+            194
+          ],
+          "verbs": [
+            "LOOK",
+            "PULL"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "dressing_table",
+          "name": "Dressing Table",
+          "bounds": {
+            "x": 488,
+            "y": 104,
+            "w": 116,
+            "h": 68
+          },
+          "centre": [
+            546,
+            138
+          ],
+          "verbs": [
+            "LOOK",
+            "TAKE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "room12_window",
+          "name": "Window",
+          "bounds": {
+            "x": 300,
+            "y": 52,
+            "w": 148,
+            "h": 92
+          },
+          "centre": [
+            374,
+            98
+          ],
+          "verbs": [
+            "LOOK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "room12_out",
+          "name": "Corridor",
+          "bounds": {
+            "x": 0,
+            "y": 204,
+            "w": 44,
+            "h": 84
+          },
+          "centre": [
+            22,
+            246
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Room 12. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Bathroom Door (around x236, y128); Bed (around x150, y194); Dressing Table (around x546, y138); Window (around x374, y98). Visible ways out: Corridor. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.pool_cabins",
+      "scene": "pool_cabins",
+      "type": "background",
+      "path": "/assets/backgrounds/pool_cabins.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [
+        {
+          "id": "cabin1",
+          "name": "Cabin 1",
+          "bounds": {
+            "x": 284,
+            "y": 68,
+            "w": 80,
+            "h": 148
+          },
+          "centre": [
+            324,
+            142
+          ],
+          "verbs": [
+            "LOOK",
+            "OPEN"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "cabin2",
+          "name": "Cabin 2",
+          "bounds": {
+            "x": 372,
+            "y": 68,
+            "w": 80,
+            "h": 148
+          },
+          "centre": [
+            412,
+            142
+          ],
+          "verbs": [
+            "LOOK",
+            "OPEN"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "cabin3",
+          "name": "Cabin 3",
+          "bounds": {
+            "x": 460,
+            "y": 68,
+            "w": 80,
+            "h": 148
+          },
+          "centre": [
+            500,
+            142
+          ],
+          "verbs": [
+            "LOOK",
+            "OPEN"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "the_pool",
+          "name": "Swimming Pool",
+          "bounds": {
+            "x": 0,
+            "y": 112,
+            "w": 244,
+            "h": 92
+          },
+          "centre": [
+            122,
+            158
+          ],
+          "verbs": [
+            "LOOK",
+            "USE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "no_running",
+          "name": "Sign",
+          "bounds": {
+            "x": 528,
+            "y": 208,
+            "w": 96,
+            "h": 40
+          },
+          "centre": [
+            576,
+            228
+          ],
+          "verbs": [
+            "LOOK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "pool_out",
+          "name": "Seafront",
+          "bounds": {
+            "x": 0,
+            "y": 208,
+            "w": 40,
+            "h": 80
+          },
+          "centre": [
+            20,
+            248
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "pool_beach",
+          "name": "The Far Beach",
+          "bounds": {
+            "x": 600,
+            "y": 208,
+            "w": 40,
+            "h": 80
+          },
+          "centre": [
+            620,
+            248
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": true,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Seafront Pool. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Cabin 1 (around x324, y142); Cabin 2 (around x412, y142); Cabin 3 (around x500, y142); Swimming Pool (around x122, y158); Sign (around x576, y228). Visible ways out: Seafront; The Far Beach. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.nudist_beach",
+      "scene": "nudist_beach",
+      "type": "background",
+      "path": "/assets/backgrounds/nudist_beach.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [
+        {
+          "id": "umbrella",
+          "name": "Beach Umbrella",
+          "bounds": {
+            "x": 88,
+            "y": 116,
+            "w": 88,
+            "h": 68
+          },
+          "centre": [
+            132,
+            150
+          ],
+          "verbs": [
+            "LOOK",
+            "PUSH"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "towel",
+          "name": "Towel",
+          "bounds": {
+            "x": 232,
+            "y": 188,
+            "w": 92,
+            "h": 32
+          },
+          "centre": [
+            278,
+            204
+          ],
+          "verbs": [
+            "LOOK",
+            "TAKE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "sunbather",
+          "name": "Sunbather",
+          "bounds": {
+            "x": 436,
+            "y": 132,
+            "w": 68,
+            "h": 60
+          },
+          "centre": [
+            470,
+            162
+          ],
+          "verbs": [
+            "LOOK",
+            "TALK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "windbreak",
+          "name": "Windbreak",
+          "bounds": {
+            "x": 492,
+            "y": 196,
+            "w": 148,
+            "h": 60
+          },
+          "centre": [
+            566,
+            226
+          ],
+          "verbs": [
+            "LOOK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "shingle",
+          "name": "Shingle",
+          "bounds": {
+            "x": 40,
+            "y": 232,
+            "w": 180,
+            "h": 44
+          },
+          "centre": [
+            130,
+            254
+          ],
+          "verbs": [
+            "LOOK",
+            "TAKE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "beach_out",
+          "name": "Seafront Pool",
+          "bounds": {
+            "x": 0,
+            "y": 216,
+            "w": 40,
+            "h": 72
+          },
+          "centre": [
+            20,
+            252
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "The Far Beach. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Beach Umbrella (around x132, y150); Towel (around x278, y204); Sunbather (around x470, y162); Windbreak (around x566, y226); Shingle (around x130, y254). Visible ways out: Seafront Pool. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.video_shop",
+      "scene": "video_shop",
+      "type": "background",
+      "path": "/assets/backgrounds/video_shop.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [
+        "graham"
+      ],
+      "hotspots": [
+        {
+          "id": "graham",
+          "name": "Graham",
+          "bounds": {
+            "x": 472,
+            "y": 172,
+            "w": 56,
+            "h": 80
+          },
+          "centre": [
+            500,
+            212
+          ],
+          "verbs": [
+            "LOOK",
+            "TALK"
+          ],
+          "conditional": false,
+          "isCharacter": true
+        },
+        {
+          "id": "vhs_wall",
+          "name": "Video Cassettes",
+          "bounds": {
+            "x": 16,
+            "y": 48,
+            "w": 364,
+            "h": 152
+          },
+          "centre": [
+            198,
+            124
+          ],
+          "verbs": [
+            "LOOK",
+            "TAKE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "display_projector",
+          "name": "Display Projector",
+          "bounds": {
+            "x": 416,
+            "y": 120,
+            "w": 68,
+            "h": 48
+          },
+          "centre": [
+            450,
+            144
+          ],
+          "verbs": [
+            "LOOK",
+            "TAKE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "beaded_curtain",
+          "name": "Beaded Curtain",
+          "bounds": {
+            "x": 572,
+            "y": 48,
+            "w": 68,
+            "h": 120
+          },
+          "centre": [
+            606,
+            108
+          ],
+          "verbs": [
+            "LOOK",
+            "OPEN"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "video_out",
+          "name": "Back Alley",
+          "bounds": {
+            "x": 0,
+            "y": 200,
+            "w": 44,
+            "h": 88
+          },
+          "centre": [
+            22,
+            244
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "video_office",
+          "name": "Graham's Office",
+          "bounds": {
+            "x": 400,
+            "y": 176,
+            "w": 80,
+            "h": 48
+          },
+          "centre": [
+            440,
+            200
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "video_back",
+          "name": "Back Section",
+          "bounds": {
+            "x": 572,
+            "y": 48,
+            "w": 68,
+            "h": 120
+          },
+          "centre": [
+            606,
+            108
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Video Rental Shop. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Video Cassettes (around x198, y124); Display Projector (around x450, y144); Beaded Curtain (around x606, y108). Visible ways out: Back Alley; Graham's Office; Back Section. Characters stand in this room (drawn separately, not in the background): Graham. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.video_shop_back",
+      "scene": "video_shop_back",
+      "type": "background",
+      "path": "/assets/backgrounds/video_shop_back.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [
+        {
+          "id": "adult_shelf",
+          "name": "Shelf",
+          "bounds": {
+            "x": 80,
+            "y": 48,
+            "w": 480,
+            "h": 132
+          },
+          "centre": [
+            320,
+            114
+          ],
+          "verbs": [
+            "LOOK",
+            "TAKE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "over18_sign",
+          "name": "Sign",
+          "bounds": {
+            "x": 216,
+            "y": 164,
+            "w": 208,
+            "h": 28
+          },
+          "centre": [
+            320,
+            178
+          ],
+          "verbs": [
+            "LOOK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "back_out",
+          "name": "Video Shop",
+          "bounds": {
+            "x": 0,
+            "y": 84,
+            "w": 60,
+            "h": 116
+          },
+          "centre": [
+            30,
+            142
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Back Section. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Shelf (around x320, y114); Sign (around x320, y178). Visible ways out: Video Shop. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "bg.graham_office",
+      "scene": "graham_office",
+      "type": "background",
+      "path": "/assets/backgrounds/graham_office.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [
+        {
+          "id": "calendar",
+          "name": "Calendar",
+          "bounds": {
+            "x": 416,
+            "y": 52,
+            "w": 112,
+            "h": 128
+          },
+          "centre": [
+            472,
+            116
+          ],
+          "verbs": [
+            "LOOK",
+            "TAKE"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "graham_desk",
+          "name": "Desk",
+          "bounds": {
+            "x": 120,
+            "y": 164,
+            "w": 220,
+            "h": 60
+          },
+          "centre": [
+            230,
+            194
+          ],
+          "verbs": [
+            "LOOK",
+            "OPEN"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "dead_plant",
+          "name": "Pot Plant",
+          "bounds": {
+            "x": 564,
+            "y": 148,
+            "w": 52,
+            "h": 80
+          },
+          "centre": [
+            590,
+            188
+          ],
+          "verbs": [
+            "LOOK"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        },
+        {
+          "id": "goffice_out",
+          "name": "Video Shop",
+          "bounds": {
+            "x": 0,
+            "y": 204,
+            "w": 44,
+            "h": 84
+          },
+          "centre": [
+            22,
+            246
+          ],
+          "verbs": [
+            "EXIT"
+          ],
+          "conditional": false,
+          "isCharacter": false
+        }
+      ],
+      "layering": {
+        "plane": "background",
+        "safeArea": {
+          "x": 0,
+          "y": 0,
+          "w": 640,
+          "h": 288
+        },
+        "notes": "Rows 288-400 are covered by the verb/inventory panel in normal play."
+      },
+      "description": "Graham's Office. Interior/exterior of a fictional British seaside town, Brighton Vale, on the night of Friday 18 September 1987. Late-1980s/early-1990s VGA point-and-click adventure background: hand-illustrated, richly detailed, painterly, warm practical light sources, strong readable composition. Must clearly depict, positioned so these screen coordinates land on the object: Calendar (around x472, y116); Desk (around x230, y194); Pot Plant (around x590, y188). Visible ways out: Video Shop. No characters, no text, no UI, no watermark in the background plate itself. Compose the important content in the top 288 rows; the bottom 112 rows sit behind the interface panel during play.",
+      "priority": "p1"
+    },
+    {
+      "id": "char.jack",
+      "scene": null,
+      "type": "character-sheet",
+      "path": "/assets/characters/jack.png",
+      "dimensions": {
+        "width": 144,
+        "height": 160
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": true,
+        "frameWidth": 24,
+        "frameHeight": 40,
+        "columns": 6,
+        "rows": 4,
+        "sheetWidth": 144,
+        "sheetHeight": 160,
+        "states": [
+          "idle",
+          "walk",
+          "talk",
+          "surprised",
+          "annoyed",
+          "happy",
+          "frightened",
+          "worried",
+          "smug"
+        ],
+        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Anchor is bottom-centre of each frame - the character stands on that point."
+      },
+      "characters": [
+        "jack"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Sorted against other characters and props by baseline y."
+      },
+      "description": "Jack Mercer, 20, male. Trainee arcade-machine technician and the player character. Cheap dark bomber jacket over a band t-shirt, jeans, trainers, unfortunate 1987 hair. Wiry, slightly slouched, permanently unimpressed.. Sprite sheet for a late-1980s VGA point-and-click adventure: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients, no anti-aliased edges. Fully transparent background. Consistent proportions and colours across every frame on the sheet. Appears in: cutscenes only.",
+      "priority": "p0"
+    },
+    {
+      "id": "portrait.jack",
+      "scene": null,
+      "type": "portrait",
+      "path": "/assets/portraits/jack.png",
+      "dimensions": {
+        "width": 128,
+        "height": 128
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [
+        "jack"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Optional. Shown beside dialogue if present; dialogue works without it."
+      },
+      "description": "Head-and-shoulders portrait of Jack in the same style as the sprite sheet. Jack Mercer, 20, male. Trainee arcade-machine technician and the player character. Cheap dark bomber jacket over a band t-shirt, jeans, trainers, unfortunate 1987 hair. Wiry, slightly slouched, permanently unimpressed. Neutral expression, facing slightly off-camera, transparent background.",
+      "priority": "p2"
+    },
+    {
+      "id": "char.maggie",
+      "scene": "starlight_arcade",
+      "type": "character-sheet",
+      "path": "/assets/characters/maggie.png",
+      "dimensions": {
+        "width": 144,
+        "height": 160
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": true,
+        "frameWidth": 24,
+        "frameHeight": 40,
+        "columns": 6,
+        "rows": 4,
+        "sheetWidth": 144,
+        "sheetHeight": 160,
+        "states": [
+          "idle",
+          "walk",
+          "talk",
+          "surprised",
+          "annoyed",
+          "happy",
+          "frightened",
+          "worried",
+          "smug"
+        ],
+        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Anchor is bottom-centre of each frame - the character stands on that point."
+      },
+      "characters": [
+        "maggie"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Sorted against other characters and props by baseline y."
+      },
+      "description": "Margaret \"Maggie\" Vale, 19, female. Works at the arcade. Practical and guarded, never styled as a romantic prize. Denim jacket, dark red top, jeans, boots. Stands like someone who knows more than she is saying.. Sprite sheet for a late-1980s VGA point-and-click adventure: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients, no anti-aliased edges. Fully transparent background. Consistent proportions and colours across every frame on the sheet. Appears in: starlight_arcade, lighthouse_ext, arcade_machineroom.",
+      "priority": "p1"
+    },
+    {
+      "id": "portrait.maggie",
+      "scene": null,
+      "type": "portrait",
+      "path": "/assets/portraits/maggie.png",
+      "dimensions": {
+        "width": 128,
+        "height": 128
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [
+        "maggie"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Optional. Shown beside dialogue if present; dialogue works without it."
+      },
+      "description": "Head-and-shoulders portrait of Maggie in the same style as the sprite sheet. Margaret \"Maggie\" Vale, 19, female. Works at the arcade. Practical and guarded, never styled as a romantic prize. Denim jacket, dark red top, jeans, boots. Stands like someone who knows more than she is saying. Neutral expression, facing slightly off-camera, transparent background.",
+      "priority": "p2"
+    },
+    {
+      "id": "char.arthur",
+      "scene": "arcade_lobby",
+      "type": "character-sheet",
+      "path": "/assets/characters/arthur.png",
+      "dimensions": {
+        "width": 144,
+        "height": 160
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": true,
+        "frameWidth": 24,
+        "frameHeight": 40,
+        "columns": 6,
+        "rows": 4,
+        "sheetWidth": 144,
+        "sheetHeight": 160,
+        "states": [
+          "idle",
+          "walk",
+          "talk",
+          "surprised",
+          "annoyed",
+          "happy",
+          "frightened",
+          "worried",
+          "smug"
+        ],
+        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Anchor is bottom-centre of each frame - the character stands on that point."
+      },
+      "characters": [
+        "arthur"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Sorted against other characters and props by baseline y."
+      },
+      "description": "Arthur Bell, 57, male. Owns the arcade. Enormous grey moustache, permanent mustard cardigan over shirt and tie, slacks. Slightly stooped, hands often in cardigan pockets.. Sprite sheet for a late-1980s VGA point-and-click adventure: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients, no anti-aliased edges. Fully transparent background. Consistent proportions and colours across every frame on the sheet. Appears in: arcade_lobby, arcade_machineroom.",
+      "priority": "p1"
+    },
+    {
+      "id": "portrait.arthur",
+      "scene": null,
+      "type": "portrait",
+      "path": "/assets/portraits/arthur.png",
+      "dimensions": {
+        "width": 128,
+        "height": 128
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [
+        "arthur"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Optional. Shown beside dialogue if present; dialogue works without it."
+      },
+      "description": "Head-and-shoulders portrait of Arthur in the same style as the sprite sheet. Arthur Bell, 57, male. Owns the arcade. Enormous grey moustache, permanent mustard cardigan over shirt and tie, slacks. Slightly stooped, hands often in cardigan pockets. Neutral expression, facing slightly off-camera, transparent background.",
+      "priority": "p2"
+    },
+    {
+      "id": "char.derek",
+      "scene": "tv_shop",
+      "type": "character-sheet",
+      "path": "/assets/characters/derek.png",
+      "dimensions": {
+        "width": 144,
+        "height": 160
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": true,
+        "frameWidth": 24,
+        "frameHeight": 40,
+        "columns": 6,
+        "rows": 4,
+        "sheetWidth": 144,
+        "sheetHeight": 160,
+        "states": [
+          "idle",
+          "walk",
+          "talk",
+          "surprised",
+          "annoyed",
+          "happy",
+          "frightened",
+          "worried",
+          "smug"
+        ],
+        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Anchor is bottom-centre of each frame - the character stands on that point."
+      },
+      "characters": [
+        "derek"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Sorted against other characters and props by baseline y."
+      },
+      "description": "Derek Piper, 32, male. Television repairman and conspiracy theorist. Brown shop coat over a shirt, wild hair, oversized square glasses. Always mid-gesture, mid-explanation.. Sprite sheet for a late-1980s VGA point-and-click adventure: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients, no anti-aliased edges. Fully transparent background. Consistent proportions and colours across every frame on the sheet. Appears in: tv_shop.",
+      "priority": "p1"
+    },
+    {
+      "id": "portrait.derek",
+      "scene": null,
+      "type": "portrait",
+      "path": "/assets/portraits/derek.png",
+      "dimensions": {
+        "width": 128,
+        "height": 128
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [
+        "derek"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Optional. Shown beside dialogue if present; dialogue works without it."
+      },
+      "description": "Head-and-shoulders portrait of Derek in the same style as the sprite sheet. Derek Piper, 32, male. Television repairman and conspiracy theorist. Brown shop coat over a shirt, wild hair, oversized square glasses. Always mid-gesture, mid-explanation. Neutral expression, facing slightly off-camera, transparent background.",
+      "priority": "p2"
+    },
+    {
+      "id": "char.kevin",
+      "scene": "starlight_arcade",
+      "type": "character-sheet",
+      "path": "/assets/characters/kevin.png",
+      "dimensions": {
+        "width": 144,
+        "height": 160
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": true,
+        "frameWidth": 24,
+        "frameHeight": 40,
+        "columns": 6,
+        "rows": 4,
+        "sheetWidth": 144,
+        "sheetHeight": 160,
+        "states": [
+          "idle",
+          "walk",
+          "talk",
+          "surprised",
+          "annoyed",
+          "happy",
+          "frightened",
+          "worried",
+          "smug"
+        ],
+        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Anchor is bottom-centre of each frame - the character stands on that point."
+      },
+      "characters": [
+        "kevin"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Sorted against other characters and props by baseline y."
+      },
+      "description": "Kevin, 16, male. Arcade kid. Shell suit in colours that should not co-exist, trainers, pockets sagging with ten-pence pieces. Permanently smug posture.. Sprite sheet for a late-1980s VGA point-and-click adventure: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients, no anti-aliased edges. Fully transparent background. Consistent proportions and colours across every frame on the sheet. Appears in: starlight_arcade.",
+      "priority": "p1"
+    },
+    {
+      "id": "portrait.kevin",
+      "scene": null,
+      "type": "portrait",
+      "path": "/assets/portraits/kevin.png",
+      "dimensions": {
+        "width": 128,
+        "height": 128
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [
+        "kevin"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Optional. Shown beside dialogue if present; dialogue works without it."
+      },
+      "description": "Head-and-shoulders portrait of Kevin in the same style as the sprite sheet. Kevin, 16, male. Arcade kid. Shell suit in colours that should not co-exist, trainers, pockets sagging with ten-pence pieces. Permanently smug posture. Neutral expression, facing slightly off-camera, transparent background.",
+      "priority": "p2"
+    },
+    {
+      "id": "char.brenda",
+      "scene": "amusement_park",
+      "type": "character-sheet",
+      "path": "/assets/characters/brenda.png",
+      "dimensions": {
+        "width": 144,
+        "height": 160
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": true,
+        "frameWidth": 24,
+        "frameHeight": 40,
+        "columns": 6,
+        "rows": 4,
+        "sheetWidth": 144,
+        "sheetHeight": 160,
+        "states": [
+          "idle",
+          "walk",
+          "talk",
+          "surprised",
+          "annoyed",
+          "happy",
+          "frightened",
+          "worried",
+          "smug"
+        ],
+        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Anchor is bottom-centre of each frame - the character stands on that point."
+      },
+      "characters": [
+        "brenda"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Sorted against other characters and props by baseline y."
+      },
+      "description": "Brenda Holt, 46, female. Runs the amusement-park kiosk. Tabard over a blouse, immovable set hair, arms folded as a default stance.. Sprite sheet for a late-1980s VGA point-and-click adventure: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients, no anti-aliased edges. Fully transparent background. Consistent proportions and colours across every frame on the sheet. Appears in: amusement_park.",
+      "priority": "p1"
+    },
+    {
+      "id": "portrait.brenda",
+      "scene": null,
+      "type": "portrait",
+      "path": "/assets/portraits/brenda.png",
+      "dimensions": {
+        "width": 128,
+        "height": 128
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [
+        "brenda"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Optional. Shown beside dialogue if present; dialogue works without it."
+      },
+      "description": "Head-and-shoulders portrait of Brenda in the same style as the sprite sheet. Brenda Holt, 46, female. Runs the amusement-park kiosk. Tabard over a blouse, immovable set hair, arms folded as a default stance. Neutral expression, facing slightly off-camera, transparent background.",
+      "priority": "p2"
+    },
+    {
+      "id": "char.valerie",
+      "scene": "hotel_reception",
+      "type": "character-sheet",
+      "path": "/assets/characters/valerie.png",
+      "dimensions": {
+        "width": 144,
+        "height": 160
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": true,
+        "frameWidth": 24,
+        "frameHeight": 40,
+        "columns": 6,
+        "rows": 4,
+        "sheetWidth": 144,
+        "sheetHeight": 160,
+        "states": [
+          "idle",
+          "walk",
+          "talk",
+          "surprised",
+          "annoyed",
+          "happy",
+          "frightened",
+          "worried",
+          "smug"
+        ],
+        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Anchor is bottom-centre of each frame - the character stands on that point."
+      },
+      "characters": [
+        "valerie"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Sorted against other characters and props by baseline y."
+      },
+      "description": "Valerie Price, 28, female. Receptionist at the Golden Sands Hotel. Glamorous and sardonic; sharp 1987 shoulders, gold earrings, immaculate. Bored expression as a resting state.. Sprite sheet for a late-1980s VGA point-and-click adventure: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients, no anti-aliased edges. Fully transparent background. Consistent proportions and colours across every frame on the sheet. Appears in: hotel_reception.",
+      "priority": "p1"
+    },
+    {
+      "id": "portrait.valerie",
+      "scene": null,
+      "type": "portrait",
+      "path": "/assets/portraits/valerie.png",
+      "dimensions": {
+        "width": 128,
+        "height": 128
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [
+        "valerie"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Optional. Shown beside dialogue if present; dialogue works without it."
+      },
+      "description": "Head-and-shoulders portrait of Valerie in the same style as the sprite sheet. Valerie Price, 28, female. Receptionist at the Golden Sands Hotel. Glamorous and sardonic; sharp 1987 shoulders, gold earrings, immaculate. Bored expression as a resting state. Neutral expression, facing slightly off-camera, transparent background.",
+      "priority": "p2"
+    },
+    {
+      "id": "char.graham",
+      "scene": "video_shop",
+      "type": "character-sheet",
+      "path": "/assets/characters/graham.png",
+      "dimensions": {
+        "width": 144,
+        "height": 160
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": true,
+        "frameWidth": 24,
+        "frameHeight": 40,
+        "columns": 6,
+        "rows": 4,
+        "sheetWidth": 144,
+        "sheetHeight": 160,
+        "states": [
+          "idle",
+          "walk",
+          "talk",
+          "surprised",
+          "annoyed",
+          "happy",
+          "frightened",
+          "worried",
+          "smug"
+        ],
+        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Anchor is bottom-centre of each frame - the character stands on that point."
+      },
+      "characters": [
+        "graham"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Sorted against other characters and props by baseline y."
+      },
+      "description": "Graham, 34, male. Owns the video rental shop. Slightly-too-tight polo shirt, moustache, the unhurried patience of a man who has heard every excuse twice.. Sprite sheet for a late-1980s VGA point-and-click adventure: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients, no anti-aliased edges. Fully transparent background. Consistent proportions and colours across every frame on the sheet. Appears in: video_shop.",
+      "priority": "p1"
+    },
+    {
+      "id": "portrait.graham",
+      "scene": null,
+      "type": "portrait",
+      "path": "/assets/portraits/graham.png",
+      "dimensions": {
+        "width": 128,
+        "height": 128
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [
+        "graham"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Optional. Shown beside dialogue if present; dialogue works without it."
+      },
+      "description": "Head-and-shoulders portrait of Graham in the same style as the sprite sheet. Graham, 34, male. Owns the video rental shop. Slightly-too-tight polo shirt, moustache, the unhurried patience of a man who has heard every excuse twice. Neutral expression, facing slightly off-camera, transparent background.",
+      "priority": "p2"
+    },
+    {
+      "id": "char.drvale",
+      "scene": null,
+      "type": "character-sheet",
+      "path": "/assets/characters/vale.png",
+      "dimensions": {
+        "width": 144,
+        "height": 160
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": true,
+        "frameWidth": 24,
+        "frameHeight": 40,
+        "columns": 6,
+        "rows": 4,
+        "sheetWidth": 144,
+        "sheetHeight": 160,
+        "states": [
+          "idle",
+          "walk",
+          "talk",
+          "surprised",
+          "annoyed",
+          "happy",
+          "frightened",
+          "worried",
+          "smug"
+        ],
+        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Anchor is bottom-centre of each frame - the character stands on that point."
+      },
+      "characters": [
+        "vale"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Sorted against other characters and props by baseline y."
+      },
+      "description": "Dr Elliot Vale. White shirt, dark trousers, black tie - always exactly this. Row 3 holds his three states instead of expressions: 0 = full black silhouette with no facial detail at all, 1 = normal and fully rendered, 2 = distorted, as though torn by scanlines. His face must be unreadable in state 0.. Sprite sheet for a late-1980s VGA point-and-click adventure: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients, no anti-aliased edges. Fully transparent background. Consistent proportions and colours across every frame on the sheet. Appears in: cutscenes only.",
+      "priority": "p2"
+    },
+    {
+      "id": "portrait.vale",
+      "scene": null,
+      "type": "portrait",
+      "path": "/assets/portraits/vale.png",
+      "dimensions": {
+        "width": 128,
+        "height": 128
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [
+        "vale"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Optional. Shown beside dialogue if present; dialogue works without it."
+      },
+      "description": "Head-and-shoulders portrait of Dr Vale in the same style as the sprite sheet. Dr Elliot Vale. White shirt, dark trousers, black tie - always exactly this. Row 3 holds his three states instead of expressions: 0 = full black silhouette with no facial detail at all, 1 = normal and fully rendered, 2 = distorted, as though torn by scanlines. His face must be unreadable in state 0. Neutral expression, facing slightly off-camera, transparent background.",
+      "priority": "p2"
+    },
+    {
+      "id": "char.guest",
+      "scene": null,
+      "type": "character-sheet",
+      "path": "/assets/characters/guest.png",
+      "dimensions": {
+        "width": 144,
+        "height": 160
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": true,
+        "frameWidth": 24,
+        "frameHeight": 40,
+        "columns": 6,
+        "rows": 4,
+        "sheetWidth": 144,
+        "sheetHeight": 160,
+        "states": [
+          "idle",
+          "walk",
+          "talk",
+          "surprised",
+          "annoyed",
+          "happy",
+          "frightened",
+          "worried",
+          "smug"
+        ],
+        "layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is generated by mirroring row 1, so do not draw it. Columns 0-3 of rows 0-2 are the walk cycle (column 0 doubles as the standing pose); columns 4-5 are a two-frame talk loop. Row 3 columns 0-5 are: surprised, annoyed, happy, frightened, worried, smug. Anchor is bottom-centre of each frame - the character stands on that point."
+      },
+      "characters": [
+        "guest"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Sorted against other characters and props by baseline y."
+      },
+      "description": "A hotel guest, adult male, seen for one comic beat wrapped in a bath towel from the waist down. Drawn from the chest up in near-silhouette against a bright doorway; no explicit detail. He is calm and dignified; the joke is entirely Jack's reaction.. Sprite sheet for a late-1980s VGA point-and-click adventure: bold readable silhouette, thick dark contour, flat cel shading with two or three tones per surface, no gradients, no anti-aliased edges. Fully transparent background. Consistent proportions and colours across every frame on the sheet. Appears in: cutscenes only.",
+      "priority": "p2"
+    },
+    {
+      "id": "portrait.guest",
+      "scene": null,
+      "type": "portrait",
+      "path": "/assets/portraits/guest.png",
+      "dimensions": {
+        "width": 128,
+        "height": 128
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [
+        "guest"
+      ],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Optional. Shown beside dialogue if present; dialogue works without it."
+      },
+      "description": "Head-and-shoulders portrait of Guest in the same style as the sprite sheet. A hotel guest, adult male, seen for one comic beat wrapped in a bath towel from the waist down. Drawn from the chest up in near-silhouette against a bright doorway; no explicit detail. He is calm and dignified; the joke is entirely Jack's reaction. Neutral expression, facing slightly off-camera, transparent background.",
+      "priority": "p2"
+    },
+    {
+      "id": "prop.stool",
+      "scene": "starlight_arcade",
+      "type": "prop",
+      "path": "/assets/objects/prop_stool.png",
+      "dimensions": {
+        "width": 64,
+        "height": 64
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": true,
+        "frameWidth": 32,
+        "frameHeight": 32,
+        "columns": 2,
+        "rows": 1,
+        "states": [
+          "idle",
+          "active"
+        ],
+        "layout": "Frame 0 = resting, frame 1 = active/alternate. Anchor is bottom-centre."
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "midground",
+        "depthSorted": true,
+        "notes": "Depth-sorts against characters by baseline y - characters pass both in front of and behind it."
+      },
+      "description": "Free-standing scene prop \"stool\" in starlight_arcade. Same illustration style as the backgrounds, transparent background, lit to match the room.",
+      "priority": "p2"
+    },
+    {
+      "id": "item.screwdriver",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/item_screwdriver.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Screwdriver\". Flat head. Arthur's, technically. Mine, practically. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "item.arcade_key",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/item_arcade_key.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Arcade Key\". The key to the entire building. He gave it to a twenty-year-old. Bold. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "item.office_key",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/item_office_key.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Office Key\". Small, brass, and hanging behind a poster like the world's laziest secret. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "item.kevin_money",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/item_kevin_money.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"£2.20 in Change\". Twenty-two ten-pence pieces, still warm from a sixteen-year-old's pocket. I will not be thinking about that. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "item.coin20",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/item_coin20.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"20p Coin\". Twenty pence. Heptagonal. The most exciting shape available in 1987. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "item.lighter",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/item_lighter.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Cigarette Lighter\". Arthur's. It runs out halfway through every use, like most things here. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "item.coat_hanger",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/item_coat_hanger.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Coat Hanger\". A coat hanger. In an adventure game. This will absolutely be used for crime. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "item.butter",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/item_butter.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Butter\". A catering pat of butter. Slightly warm. Deeply unpleasant to carry. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "item.fuse",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/item_fuse.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Projector Fuse\". Five amp. Glass. The single most fragile object I have ever been responsible for. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "item.brass_key",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/item_brass_key.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Brass Key\". Heavy. Old. Dropped by someone at 10:32 tomorrow evening. I have stopped questioning this. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "item.antenna",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/item_antenna.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Television Antenna\". Derek's aerial. Cut down to size. He took it well, in the sense that he didn't. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "item.bolt_cutters",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/item_bolt_cutters.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Bolt Cutters\". For cutting bolts. And, it turns out, aerials. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "item.photograph",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/item_photograph.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Photograph\". The arcade. Tomorrow. Still standing. Me in the doorway. Still unsettling. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "item.film_reel",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/item_film_reel.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Film Reel\". Labelled SATURDAY. Which is a strange thing to label a Friday. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "item.token",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/item_token.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Arcade Token\". STARLIGHT ARCADE. Worth ten pence, redeemable nowhere, guarded like treasure. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "item.toolbox",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/item_toolbox.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Toolbox\". Standard issue. Contains three screwdrivers, none of which is the one I need. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "item.cable",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/item_cable.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Electrical Cable\". Heavy gauge. Frayed at one end. Extremely 1987 approach to safety. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "item.gum",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/item_gum.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Chewing Gum\". Found under a cabinet. I am choosing to believe it was never chewed. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "item.chocolate",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/item_chocolate.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Chocolate Bar\". Twenty pence. Fifteen pence for the privilege of watching someone else eat it. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "item.newspaper",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/item_newspaper.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Newspaper\". ARCADE TO BE DEMOLISHED TOMORROW. And a crossword I have nearly finished. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "item.extension",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/item_extension.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Screwdriver Extension\". An extension for a screwdriver. There is a version of my life where this is thrilling. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "item.recorder",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/item_recorder.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Cassette Recorder\". Portable. Heavy. Eats batteries and, occasionally, tapes. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "item.cartridge",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/item_cartridge.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Memory Cartridge\". It is warm. Nothing that is switched off should be warm. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "item.postcard",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/item_postcard.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Old Postcard\". A seaside postcard. The joke on the back was not funny in 1971 either. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "item.room12_key",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/item_room12_key.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Room 12 Key\". Golden Sands Hotel, room 12. Attached to a fob the size of a house brick. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "item.calendar",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/item_calendar.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"1987 Calendar\". The photograph is doing a lot of work. The numbers beside the months are doing more. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "item.blank_cassette",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/item_blank_cassette.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Blank Cassette\". Ninety minutes. Completely empty. Waiting for something worth recording. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "cassette_jack",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/cassette_jack.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Cassette: JACK\". My own handwriting. On a tape I have not recorded yet. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "cassette_arthur",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/cassette_arthur.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Cassette: ARTHUR\". Arthur's confession. He labelled it neatly. Of course he did. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "cassette_vale",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/cassette_vale.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Cassette: E.V.\". Two initials. Thirteen years of somebody thinking they were abandoned. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "cassette_maggie",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/cassette_maggie.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Cassette: MAGGIE\". For her. Not for me. I should probably remember that. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "cassette_saturday",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/cassette_saturday.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Cassette: SATURDAY\". A day that has not happened, recorded in full. Ninety minutes of tomorrow. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "cassette_1974",
+      "scene": null,
+      "type": "inventory-icon",
+      "path": "/assets/objects/cassette_1974.png",
+      "dimensions": {
+        "width": 16,
+        "height": 16
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Drawn in an inventory slot at 2x. Keep one pixel of padding all round."
+      },
+      "description": "Inventory icon for \"Cassette: 1974\". The year it started. The year he stopped. Single object centred on a fully transparent background, readable as a silhouette at 16x16, bold dark outline, flat cel shading, 1987 British period-appropriate.",
+      "priority": "p1"
+    },
+    {
+      "id": "ui.title_background",
+      "scene": null,
+      "type": "ui",
+      "path": "/assets/ui/title_background.webp",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "opaque",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "ui",
+        "notes": "Title screen plate. The logo and menu are drawn over it by the engine."
+      },
+      "description": "Title screen background: the interior of Starlight Arcade at night, seen down the row of cabinets, their screens the only light source. Deep shadow across the upper third so the logo reads over it. No text of any kind in the image.",
+      "priority": "p1"
+    },
+    {
+      "id": "effects.rain",
+      "scene": null,
+      "type": "effect",
+      "path": "/assets/effects/rain.png",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "effects",
+        "notes": "Composited over everything including characters."
+      },
+      "description": "Tileable rain overlay for exterior scenes: fine diagonal streaks, mostly transparent, no colour cast.",
+      "priority": "p2"
+    },
+    {
+      "id": "effects.dust",
+      "scene": null,
+      "type": "effect",
+      "path": "/assets/effects/dust.png",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "effects",
+        "notes": "Composited over everything including characters."
+      },
+      "description": "Floating dust motes for interiors lit by a single source. Very sparse, soft, mostly transparent.",
+      "priority": "p2"
+    },
+    {
+      "id": "effects.crt_glow",
+      "scene": null,
+      "type": "effect",
+      "path": "/assets/effects/crt_glow.png",
+      "dimensions": {
+        "width": 640,
+        "height": 400
+      },
+      "transparency": "alpha-required",
+      "animation": {
+        "animated": false
+      },
+      "characters": [],
+      "hotspots": [],
+      "layering": {
+        "plane": "effects",
+        "notes": "Composited over everything including characters."
+      },
+      "description": "Soft additive glow to sit over arcade screens. Mostly transparent, warm centre falloff.",
+      "priority": "p2"
+    }
+  ]
+}

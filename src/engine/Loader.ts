@@ -1,3 +1,4 @@
+import { font } from './BitmapFont';
 import { Colors, ramp } from './Palette';
 import {
   resolveSpriteDef, SpriteSheet,
@@ -151,11 +152,14 @@ function buildPlaceholder(id: string, def: SpriteDef): HTMLCanvasElement {
   const c = cv.getContext('2d')!;
   c.imageSmoothingEnabled = false;
 
+  const label = hint.label ?? id.split('.').pop() ?? id;
+  const ax = def.anchorX ?? Math.floor(fw / 2);
+  const ay = def.anchorY ?? fh;
   for (let r = 0; r < rows; r++) {
     for (let col = 0; col < cols; col++) {
       c.save();
       c.translate(col * fw, r * fh);
-      drawPlaceholderFrame(c, kind, fw, fh, col, r, primary, secondary);
+      drawPlaceholderFrame(c, kind, fw, fh, col, r, primary, secondary, label, ax, ay);
       c.restore();
     }
   }
@@ -177,6 +181,15 @@ function pickColor(id: string, offset: number): string {
   return ramp(name, offset === 0 ? 2 : 1);
 }
 
+/**
+ * Draw one placeholder frame.
+ *
+ * Deliberately not an attempt at the character. The brief is explicit that
+ * missing art must be an obvious labelled placeholder rather than programmer-art
+ * standing in for a person: a dashed box, the sprite's label, the frame index
+ * and a marker at the anchor point so staging can still be checked. It should
+ * be impossible to mistake this for artwork.
+ */
 function drawPlaceholderFrame(
   c: CanvasRenderingContext2D,
   kind: NonNullable<PlaceholderHint['kind']>,
@@ -186,80 +199,42 @@ function drawPlaceholderFrame(
   row: number,
   primary: string,
   secondary: string,
+  label: string,
+  anchorX: number,
+  anchorY: number,
 ): void {
-  // Every placeholder gets a dashed-looking border so it reads instantly as
-  // "art not final" even in a screenshot.
-  const border = () => {
-    c.fillStyle = secondary;
-    for (let x = 0; x < w; x += 2) {
-      c.fillRect(x, 0, 1, 1);
-      c.fillRect(x, h - 1, 1, 1);
-    }
-    for (let y = 0; y < h; y += 2) {
-      c.fillRect(0, y, 1, 1);
-      c.fillRect(w - 1, y, 1, 1);
-    }
-  };
-
-  if (kind === 'humanoid') {
-    const bob = col % 2 === 0 ? 0 : 1;
-    const headR = Math.max(2, Math.floor(w * 0.28));
-    const cx = Math.floor(w / 2);
-
-    // Legs - offset per frame so the walk cycle visibly animates.
-    const legSpread = (col % 4 === 1 ? 2 : col % 4 === 3 ? -2 : 0);
-    c.fillStyle = secondary;
-    c.fillRect(cx - 3 + legSpread, h - Math.floor(h * 0.3), 2, Math.floor(h * 0.3) - 1);
-    c.fillRect(cx + 1 - legSpread, h - Math.floor(h * 0.3), 2, Math.floor(h * 0.3) - 1);
-
-    // Torso
-    c.fillStyle = primary;
-    const torsoTop = headR * 2 + 1 + bob;
-    c.fillRect(cx - Math.floor(w * 0.25), torsoTop, Math.floor(w * 0.5), h - Math.floor(h * 0.3) - torsoTop);
-
-    // Head
-    c.fillStyle = Colors.paper;
-    c.beginPath();
-    c.arc(cx, headR + 1 + bob, headR, 0, Math.PI * 2);
-    c.fill();
-
-    // Facing pip - which way this row looks, so direction rows are tellable apart.
-    c.fillStyle = Colors.ink;
-    const pipX = row === 1 ? cx + headR - 2 : row === 3 ? cx - headR + 1 : cx;
-    if (row !== 2) c.fillRect(pipX, headR + bob, 1, 1);
-
-    border();
-    return;
-  }
-
-  if (kind === 'panel') {
-    c.fillStyle = Colors.uiPanel;
-    c.fillRect(0, 0, w, h);
-    c.fillStyle = primary;
-    // Diagonal hatching reads clearly as a placeholder backdrop.
-    for (let d = -h; d < w; d += 8) {
-      for (let y = 0; y < h; y++) {
-        const x = d + y;
-        if (x >= 0 && x < w) c.fillRect(x, y, 1, 1);
-      }
-    }
-    border();
-    return;
-  }
-
-  if (kind === 'blob') {
-    c.fillStyle = primary;
-    c.beginPath();
-    c.ellipse(w / 2, h / 2, w * 0.4, h * 0.4, 0, 0, Math.PI * 2);
-    c.fill();
-    border();
-    return;
-  }
-
-  // 'object' / 'prop': a solid block with a highlight corner.
+  // Translucent fill so the background stays readable behind it.
+  c.globalAlpha = 0.34;
   c.fillStyle = primary;
   c.fillRect(1, 1, w - 2, h - 2);
+  c.globalAlpha = 1;
+
+  // Dashed border.
   c.fillStyle = secondary;
-  c.fillRect(1, 1, Math.max(1, Math.floor(w / 3)), Math.max(1, Math.floor(h / 3)));
-  border();
+  for (let x = 0; x < w; x += 3) {
+    c.fillRect(x, 0, 2, 1);
+    c.fillRect(x, h - 1, 2, 1);
+  }
+  for (let y = 0; y < h; y += 3) {
+    c.fillRect(0, y, 1, 2);
+    c.fillRect(w - 1, y, 1, 2);
+  }
+
+  // Anchor marker - where this sprite meets the floor.
+  c.fillStyle = ramp('magenta', 2);
+  c.fillRect(anchorX - 2, Math.min(h - 1, anchorY - 1), 5, 1);
+  c.fillRect(anchorX, Math.min(h - 1, anchorY - 3), 1, 3);
+
+  // Label, only where there is room for it.
+  if (w >= 20 && h >= 16) {
+    font.draw(c, label.slice(0, Math.max(1, Math.floor(w / 6))), Math.floor(w / 2), 2, {
+      color: Colors.paper,
+      align: 'center',
+    });
+    font.draw(c, `${row}:${col}`, Math.floor(w / 2), h - 10, {
+      color: ramp('amber', 2),
+      align: 'center',
+    });
+  }
+  void kind;
 }

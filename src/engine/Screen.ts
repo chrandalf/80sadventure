@@ -9,8 +9,16 @@ import { Colors } from './Palette';
  * hundred meaningful pixels rather than a few hundred thousand. That is the
  * difference between art you can finish and art you can't.
  */
-export const GAME_WIDTH = 320;
-export const GAME_HEIGHT = 200;
+export const GAME_WIDTH = 640;
+export const GAME_HEIGHT = 400;
+
+/**
+ * Legacy authoring space. Content written before the 640x400 move is authored
+ * in 320x200 and scaled by this at load; see normalizeScene().
+ */
+export const LEGACY_WIDTH = 320;
+export const LEGACY_HEIGHT = 200;
+export const LEGACY_SCALE = GAME_WIDTH / LEGACY_WIDTH;
 
 /**
  * Mode 13h pixels were not square: 320x200 filled a 4:3 monitor, so each pixel
@@ -39,16 +47,41 @@ export interface ScreenOptions {
   flicker: boolean;
 }
 
+/**
+ * Defaults chosen so the artwork is shown exactly as drawn.
+ *
+ * `aspect: 'square'` means a 640x400 background displays at 640x400 with no
+ * vertical stretch - an illustrator sees what they painted. 'crt43' reproduces
+ * the 1.2 tall pixels of a real VGA tube, which is period-accurate but does
+ * distort supplied artwork, so it is opt-in.
+ *
+ * Every CRT effect is off-by-default-subtle rather than off: the brief is that
+ * the game must still look good with the whole post-process disabled, so
+ * nothing here is allowed to carry the image.
+ */
 export const DEFAULT_SCREEN_OPTIONS: ScreenOptions = {
-  aspect: 'crt43',
+  aspect: 'square',
   bloom: true,
-  bloomRadius: 2.5,
-  bloomStrength: 0.5,
+  bloomRadius: 2,
+  bloomStrength: 0.22,
   scanlines: true,
-  scanlineStrength: 0.16,
-  chromaticAberration: true,
+  scanlineStrength: 0.07,
+  chromaticAberration: false,
   vignette: true,
-  flicker: true,
+  flicker: false,
+};
+
+/** Everything off. The artwork on its own. */
+export const CRT_OFF: ScreenOptions = {
+  aspect: 'square',
+  bloom: false,
+  bloomRadius: 0,
+  bloomStrength: 0,
+  scanlines: false,
+  scanlineStrength: 0,
+  chromaticAberration: false,
+  vignette: false,
+  flicker: false,
 };
 
 /**
@@ -276,21 +309,23 @@ export class Screen {
 
     if (this.options.scanlines && this.scaleY >= 2) {
       c.fillStyle = `rgba(0,0,0,${this.options.scanlineStrength})`;
-      // One dark line per *game* pixel row, so density follows the art rather
-      // than the window size.
-      const lineH = Math.max(1, Math.floor(this.scaleY / 3));
-      for (let y = 0; y < h; y += this.scaleY) {
-        c.fillRect(0, y + this.scaleY - lineH, w, lineH);
+      // One dark line per *pair* of game pixel rows. At 640x400 a line per row
+      // would be a 50% duty cycle and would eat the artwork; per two rows
+      // matches how a 400-line mode actually looked on a 15kHz tube.
+      const period = this.scaleY * 2;
+      const lineH = Math.max(1, Math.floor(this.scaleY / 2));
+      for (let y = 0; y < h; y += period) {
+        c.fillRect(0, y + period - lineH, w, lineH);
       }
     }
 
     if (this.options.vignette) {
       const g = c.createRadialGradient(
-        w / 2, h / 2, Math.min(w, h) * 0.34,
-        w / 2, h / 2, Math.max(w, h) * 0.72,
+        w / 2, h / 2, Math.min(w, h) * 0.42,
+        w / 2, h / 2, Math.max(w, h) * 0.78,
       );
       g.addColorStop(0, 'rgba(0,0,0,0)');
-      g.addColorStop(1, 'rgba(0,0,0,0.5)');
+      g.addColorStop(1, 'rgba(0,0,0,0.28)');
       c.fillStyle = g;
       c.fillRect(0, 0, w, h);
     }

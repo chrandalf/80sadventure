@@ -1,0 +1,390 @@
+{
+  "_readme": "OBJECT + INVENTORY SPRITE CONTRACT. Same rules as the character manifest: logical ids, declared geometry, drop-in replacement. 'item.*' are inventory icons; 'prop.*' are scene objects that depth-sort against characters.",
+  "templates": {
+    "icon": {
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "columns": 1,
+      "rows": 1,
+      "anchorX": 8,
+      "anchorY": 16,
+      "_layout": "A single 16x16 inventory icon. Keep one pixel of padding all round so it does not touch the slot border.",
+      "animations": {
+        "idle": {
+          "frames": [
+            0
+          ],
+          "fps": 0,
+          "loop": false
+        }
+      },
+      "renderScale": 2,
+      "_renderScale": "Sheet is cut in the legacy 320x200 space, so it is drawn at 2x on the 640x400 screen. Art authored natively at 640x400 should set renderScale to 1 and double its frameWidth/frameHeight instead."
+    },
+    "prop": {
+      "frameWidth": 32,
+      "frameHeight": 32,
+      "columns": 2,
+      "rows": 1,
+      "anchorX": 16,
+      "anchorY": 32,
+      "_layout": "Two frames: 0 = resting, 1 = active/alternate. Anchored at the bottom centre so it sits on the floor.",
+      "animations": {
+        "idle": {
+          "frames": [
+            0
+          ],
+          "fps": 0,
+          "loop": false
+        },
+        "active": {
+          "frames": [
+            0,
+            1
+          ],
+          "fps": 4
+        }
+      },
+      "renderScale": 2,
+      "_renderScale": "Sheet is cut in the legacy 320x200 space, so it is drawn at 2x on the 640x400 screen. Art authored natively at 640x400 should set renderScale to 1 and double its frameWidth/frameHeight instead."
+    }
+  },
+  "sprites": {
+    "prop.onemorecredit": {
+      "template": "prop",
+      "file": "prop_onemorecredit.png",
+      "frameWidth": 34,
+      "frameHeight": 66,
+      "anchorX": 17,
+      "anchorY": 66,
+      "description": "The ONE MORE CREDIT cabinet as a foreground object. Frame 0 = dark screen, frame 1 = screen showing its message. No manufacturer marks anywhere on it.",
+      "placeholder": {
+        "kind": "panel",
+        "primary": "#33244d",
+        "secondary": "#c4142e"
+      }
+    },
+    "prop.photobooth_photo": {
+      "template": "prop",
+      "file": "prop_photo.png",
+      "frameWidth": 48,
+      "frameHeight": 36,
+      "anchorX": 24,
+      "anchorY": 36,
+      "description": "The impossible photograph: the arcade still standing, Jack in the doorway, timestamped SATURDAY 19 SEPTEMBER 1987.",
+      "placeholder": {
+        "kind": "panel",
+        "primary": "#8f86a8",
+        "secondary": "#ffd486"
+      }
+    },
+    "item.screwdriver": {
+      "template": "icon",
+      "file": "item_screwdriver.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#f09030",
+        "secondary": "#8f86a8"
+      }
+    },
+    "item.arcade_key": {
+      "template": "icon",
+      "file": "item_arcade_key.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#ffd486",
+        "secondary": "#a8560c"
+      }
+    },
+    "item.office_key": {
+      "template": "icon",
+      "file": "item_office_key.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#8f86a8",
+        "secondary": "#5a4a73"
+      }
+    },
+    "item.kevin_money": {
+      "template": "icon",
+      "file": "item_kevin_money.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#8f86a8",
+        "secondary": "#ffd486"
+      }
+    },
+    "item.coin20": {
+      "template": "icon",
+      "file": "item_coin20.png",
+      "placeholder": {
+        "kind": "blob",
+        "primary": "#ffd486",
+        "secondary": "#a8560c"
+      }
+    },
+    "item.lighter": {
+      "template": "icon",
+      "file": "item_lighter.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#c4142e",
+        "secondary": "#8f86a8"
+      }
+    },
+    "item.coat_hanger": {
+      "template": "icon",
+      "file": "item_coat_hanger.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#8f86a8",
+        "secondary": "#d8d4e8"
+      }
+    },
+    "item.butter": {
+      "template": "icon",
+      "file": "item_butter.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#ffd486",
+        "secondary": "#d8d4e8"
+      }
+    },
+    "item.fuse": {
+      "template": "icon",
+      "file": "item_fuse.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#22d3d8",
+        "secondary": "#8f86a8"
+      }
+    },
+    "item.brass_key": {
+      "template": "icon",
+      "file": "item_brass_key.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#f09030",
+        "secondary": "#4a2408"
+      }
+    },
+    "item.antenna": {
+      "template": "icon",
+      "file": "item_antenna.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#8f86a8",
+        "secondary": "#5a4a73"
+      }
+    },
+    "item.bolt_cutters": {
+      "template": "icon",
+      "file": "item_bolt_cutters.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#c4142e",
+        "secondary": "#5a4a73"
+      }
+    },
+    "item.photograph": {
+      "template": "icon",
+      "file": "item_photograph.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#d8d4e8",
+        "secondary": "#8f86a8"
+      }
+    },
+    "item.film_reel": {
+      "template": "icon",
+      "file": "item_film_reel.png",
+      "placeholder": {
+        "kind": "blob",
+        "primary": "#5a4a73",
+        "secondary": "#33244d"
+      }
+    },
+    "item.token": {
+      "template": "icon",
+      "file": "item_token.png",
+      "placeholder": {
+        "kind": "blob",
+        "primary": "#e0349e",
+        "secondary": "#92196e"
+      }
+    },
+    "item.toolbox": {
+      "template": "icon",
+      "file": "item_toolbox.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#c4142e",
+        "secondary": "#4a2408"
+      }
+    },
+    "item.cable": {
+      "template": "icon",
+      "file": "item_cable.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#7a4de8",
+        "secondary": "#241452"
+      }
+    },
+    "item.gum": {
+      "template": "icon",
+      "file": "item_gum.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#ff8fd0",
+        "secondary": "#d8d4e8"
+      }
+    },
+    "item.chocolate": {
+      "template": "icon",
+      "file": "item_chocolate.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#4a2408",
+        "secondary": "#a8560c"
+      }
+    },
+    "item.newspaper": {
+      "template": "icon",
+      "file": "item_newspaper.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#d8d4e8",
+        "secondary": "#5a4a73"
+      }
+    },
+    "item.extension": {
+      "template": "icon",
+      "file": "item_extension.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#8f86a8",
+        "secondary": "#f09030"
+      }
+    },
+    "item.recorder": {
+      "template": "icon",
+      "file": "item_recorder.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#33244d",
+        "secondary": "#22d3d8"
+      }
+    },
+    "item.cartridge": {
+      "template": "icon",
+      "file": "item_cartridge.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#241452",
+        "secondary": "#b48cff"
+      }
+    },
+    "item.postcard": {
+      "template": "icon",
+      "file": "item_postcard.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#22d3d8",
+        "secondary": "#ffd486"
+      }
+    },
+    "item.room12_key": {
+      "template": "icon",
+      "file": "item_room12_key.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#ffd486",
+        "secondary": "#c4142e"
+      }
+    },
+    "item.calendar": {
+      "template": "icon",
+      "file": "item_calendar.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#d8d4e8",
+        "secondary": "#c4142e"
+      }
+    },
+    "item.blank_cassette": {
+      "template": "icon",
+      "file": "item_blank_cassette.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#8f86a8",
+        "secondary": "#0a0713"
+      }
+    },
+    "cassette_jack": {
+      "template": "icon",
+      "file": "cassette_jack.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#33244d",
+        "secondary": "#ffd486"
+      }
+    },
+    "cassette_arthur": {
+      "template": "icon",
+      "file": "cassette_arthur.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#33244d",
+        "secondary": "#f09030"
+      }
+    },
+    "cassette_vale": {
+      "template": "icon",
+      "file": "cassette_vale.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#33244d",
+        "secondary": "#d8d4e8"
+      }
+    },
+    "cassette_maggie": {
+      "template": "icon",
+      "file": "cassette_maggie.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#33244d",
+        "secondary": "#c4142e"
+      }
+    },
+    "cassette_saturday": {
+      "template": "icon",
+      "file": "cassette_saturday.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#33244d",
+        "secondary": "#22d3d8"
+      }
+    },
+    "cassette_1974": {
+      "template": "icon",
+      "file": "cassette_1974.png",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#33244d",
+        "secondary": "#3ad65e"
+      }
+    },
+    "prop.stool": {
+      "template": "prop",
+      "file": "prop_stool.png",
+      "description": "A bar stool on the arcade floor. Exists to demonstrate depth sorting: Jack passes behind it up-stage and in front of it down-stage.",
+      "placeholder": {
+        "kind": "object",
+        "primary": "#a8560c",
+        "secondary": "#4a2408",
+        "label": "stool"
+      }
+    }
+  }
+}

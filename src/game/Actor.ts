@@ -73,7 +73,7 @@ export function depthScale(depth: DepthBand | undefined, y: number): number {
   return scaleFar + (scaleNear - scaleFar) * clamped;
 }
 
-const BASE_SPEED = 62; // px/sec at full scale
+const BASE_SPEED = 124; // world px/sec at full scale (640x400 space)
 
 /**
  * A character on screen. Jack is one of these; so is every NPC, which keeps

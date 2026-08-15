@@ -15,20 +15,20 @@ import { VERBS, type Verb } from './types';
  * outer frame scales, the interface never reflows.
  */
 
-export const PLAY_HEIGHT = 144;
+export const PLAY_HEIGHT = 288;
 export const BAR_Y = PLAY_HEIGHT;
-export const BAR_H = 9;
+export const BAR_H = 18;
 export const PANEL_Y = PLAY_HEIGHT + BAR_H + 1;
 
 const VERB_COLS = 4;
-const VERB_W = 36;
-const VERB_H = 14;
-const VERB_X = 4;
-const VERB_Y = PANEL_Y + 2;
+const VERB_W = 72;
+const VERB_H = 28;
+const VERB_X = 8;
+const VERB_Y = PANEL_Y + 4;
 
-const INV_X = 156;
-const INV_Y = PANEL_Y + 1;
-const SLOT = 20;
+const INV_X = 312;
+const INV_Y = PANEL_Y + 2;
+const SLOT = 40;
 const INV_COLS = 7;
 const INV_ROWS = 2;
 export const INV_VISIBLE = INV_COLS * INV_ROWS;
@@ -91,13 +91,13 @@ export function drawPanel(
   rect(ctx, 0, BAR_Y, GAME_WIDTH, BAR_H, Colors.uiPanel);
   hline(ctx, 0, BAR_Y, GAME_WIDTH, ramp('violet', 1));
 
-  font.draw(ctx, formatClock(state.time), 4, BAR_Y + 1, { color: ramp('cyan', 2) });
-  font.draw(ctx, `${state.score}/${MAX_SCORE}`, GAME_WIDTH - 4, BAR_Y + 1, {
+  font.draw(ctx, formatClock(state.time), 8, BAR_Y + 3, { color: ramp('cyan', 2) });
+  font.draw(ctx, `${state.score}/${MAX_SCORE}`, GAME_WIDTH - 8, BAR_Y + 3, {
     color: ramp('amber', 2),
     align: 'right',
   });
   if (ui.statusText) {
-    font.draw(ctx, ui.statusText, GAME_WIDTH / 2, BAR_Y + 1, {
+    font.draw(ctx, ui.statusText, GAME_WIDTH / 2, BAR_Y + 3, {
       color: Colors.uiText,
       align: 'center',
     });
@@ -115,9 +115,9 @@ export function drawPanel(
     const y = VERB_Y + row * VERB_H;
     const active = ui.verb === verb && !ui.heldItem;
 
-    rect(ctx, x, y, VERB_W - 2, VERB_H - 2, active ? ramp('violet', 1) : Colors.uiPanelLight);
-    outline(ctx, x, y, VERB_W - 2, VERB_H - 2, active ? ramp('cyan', 2) : ramp('neutral', 2));
-    font.draw(ctx, verb, x + (VERB_W - 2) / 2, y + 3, {
+    rect(ctx, x, y, VERB_W - 4, VERB_H - 4, active ? ramp('violet', 1) : Colors.uiPanelLight);
+    outline(ctx, x, y, VERB_W - 4, VERB_H - 4, active ? ramp('cyan', 2) : ramp('neutral', 2));
+    font.draw(ctx, verb, x + (VERB_W - 4) / 2, y + 7, {
       color: active ? Colors.paper : ramp('neutral', 4),
       align: 'center',
     });
@@ -133,16 +133,16 @@ export function drawPanel(
       const idx = (row + scroll) * INV_COLS + col;
       const itemId = state.inventory[idx];
 
-      rect(ctx, x, y, SLOT - 1, SLOT - 1, Colors.uiPanelLight);
-      outline(ctx, x, y, SLOT - 1, SLOT - 1, ramp('neutral', 2));
+      rect(ctx, x, y, SLOT - 2, SLOT - 2, Colors.uiPanelLight);
+      outline(ctx, x, y, SLOT - 2, SLOT - 2, ramp('neutral', 2));
       if (!itemId) continue;
 
       const held = ui.heldItem === itemId;
       if (held) {
-        rect(ctx, x + 1, y + 1, SLOT - 3, SLOT - 3, ramp('violet', 1));
-        outline(ctx, x, y, SLOT - 1, SLOT - 1, ramp('cyan', 2));
+        rect(ctx, x + 2, y + 2, SLOT - 6, SLOT - 6, ramp('violet', 1));
+        outline(ctx, x, y, SLOT - 2, SLOT - 2, ramp('cyan', 2));
       }
-      drawItemIcon(ctx, assets, itemId, x + 2, y + 2);
+      drawItemIcon(ctx, assets, itemId, x + 4, y + 4);
     }
   }
 
@@ -155,7 +155,7 @@ export function drawPanel(
   // --- held-item reminder, so USE X WITH Y is never ambiguous
   if (ui.heldItem) {
     const name = itemNames[ui.heldItem] ?? ui.heldItem;
-    font.draw(ctx, `USE ${name.toUpperCase()} WITH...`, GAME_WIDTH / 2, GAME_HEIGHT - 8, {
+    font.draw(ctx, `USE ${name.toUpperCase()} WITH...`, GAME_WIDTH / 2, GAME_HEIGHT - 18, {
       color: ramp('amber', 2),
       align: 'center',
     });
@@ -184,8 +184,8 @@ function drawArrow(
   dir: 'up' | 'down',
   active: boolean,
 ): void {
-  rect(ctx, x, y, SLOT - 1, SLOT - 1, Colors.uiPanelLight);
-  outline(ctx, x, y, SLOT - 1, SLOT - 1, ramp('neutral', 2));
+  rect(ctx, x, y, SLOT - 2, SLOT - 2, Colors.uiPanelLight);
+  outline(ctx, x, y, SLOT - 2, SLOT - 2, ramp('neutral', 2));
   const color = active ? ramp('cyan', 2) : ramp('neutral', 2);
   const cx = x + Math.floor((SLOT - 1) / 2);
   const cy = y + Math.floor((SLOT - 1) / 2);

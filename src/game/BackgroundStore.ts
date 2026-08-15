@@ -1,5 +1,6 @@
 import { GAME_HEIGHT, GAME_WIDTH } from '../engine/Screen';
 import { BACKGROUNDS, paintUnknown } from '../content/backgrounds';
+import { snapToPalette } from './paint';
 
 /**
  * Supplies each scene's backdrop, cached as a ready-to-blit canvas.
@@ -41,6 +42,10 @@ export class BackgroundStore {
     const painter = BACKGROUNDS[id];
     if (painter) painter(ctx);
     else paintUnknown(ctx, id);
+
+    // Painters may use curves, gradients and anti-aliased fills; this is what
+    // brings the result back onto the locked palette.
+    snapToPalette(ctx);
 
     this.cache.set(id, cv);
     this.maybeLoadPng(id);

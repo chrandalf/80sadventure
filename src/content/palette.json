@@ -1,7 +1,9 @@
 {
-  "name": "Arcade Dusk 32",
-  "note": "The single source of truth for every colour in the game. Sprites, backgrounds, UI and font must use ONLY these colours (plus fully-transparent pixels, alpha 0). Tools read this file; the game imports it. Change it here and everything follows.",
+  "name": "Arcade Dusk VGA",
+  "note": "The single source of truth for every colour in the game. The ramps below are KEY colours; the engine interpolates each one up to `stepsPerRamp` shades at load, giving a ~224-colour VGA-era palette with smooth gradients. Sprites, backgrounds, UI and font must use only colours from that expanded set. Tools read this file; the game imports it.",
   "transparencyRule": "Alpha is binary. A pixel is either fully opaque (255) or fully transparent (0). No partial alpha - it produces halos when scaled and breaks the pixel-art read.",
+  "stepsPerRamp": 16,
+  "rampNote": "Key colours are the anchors of each ramp, darkest first. ramp(name, i) still addresses these by index, so existing painters are unaffected; shade(name, t) addresses the smooth expansion with t from 0 (darkest) to 1 (lightest).",
   "ramps": {
     "neutral": ["#0a0713", "#1b1430", "#33244d", "#5a4a73", "#8f86a8", "#d8d4e8"],
     "magenta": ["#4a0f3a", "#92196e", "#e0349e", "#ff8fd0"],
@@ -10,7 +12,13 @@
     "amber": ["#4a2408", "#a8560c", "#f09030", "#ffd486"],
     "phosphor": ["#0c3319", "#1a7a35", "#3ad65e", "#a6f7a0"],
     "red": ["#5c0d17", "#c4142e", "#ff5a5a"],
-    "blue": ["#101f5c", "#2050c8", "#64a8ff"]
+    "blue": ["#101f5c", "#2050c8", "#64a8ff"],
+    "skin": ["#2e1512", "#6b3527", "#a85f42", "#d18f66", "#efbb91", "#ffe0c0"],
+    "wood": ["#2a1608", "#4d2a12", "#7a4620", "#a8682e", "#c98a46", "#e8b06a"],
+    "brick": ["#2b0f0c", "#5a1f16", "#8a3324", "#b04d33", "#c97050", "#e09a78"],
+    "denim": ["#0e1830", "#1c2f5c", "#2f4a8a", "#4a6dbb", "#7a99d9", "#b0c6ee"],
+    "gold": ["#3a2405", "#6b4410", "#a06a1c", "#d1962f", "#eec158", "#ffe9a0"],
+    "teal": ["#062a2a", "#0d4d4d", "#147575", "#1fa3a3", "#48cfc9", "#8fe8e2"]
   },
   "roles": {
     "void": "#0a0713",

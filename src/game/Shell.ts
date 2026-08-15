@@ -4,9 +4,10 @@ import type { Input } from '../engine/Input';
 import type { AssetStore } from '../engine/Loader';
 import { Colors, ramp } from '../engine/Palette';
 import { GAME_HEIGHT, GAME_WIDTH } from '../engine/Screen';
+import { BACKGROUNDS } from '../content/backgrounds';
 import { ENDINGS } from '../content/endings';
+import { SceneArtStore } from '../engine/SceneArtStore';
 import { AdventureScreen } from './AdventureScreen';
-import { BackgroundStore } from './BackgroundStore';
 import { ditherFill, neonText, outline, rect, rng, staticScreen } from './paint';
 import {
   cheekyVerdict, deleteSave, loadGame, MAX_CHEEKY, MAX_SCORE, newGameState, saveGame,
@@ -32,8 +33,9 @@ export class Shell {
   private mode: Mode = 'intro';
   private game: AdventureScreen | null = null;
   private readonly assets: AssetStore;
-  private readonly backgrounds = new BackgroundStore();
+  private readonly objectAssets: AssetStore;
 
+  private readonly art = new SceneArtStore();
   private t = 0;
   private cursor = 0;
   private menu: MenuItem[] = [];
@@ -42,8 +44,9 @@ export class Shell {
   /** Set once the player has finished at least once (spec s.31). */
   private seenEnding = false;
 
-  constructor(assets: AssetStore) {
+  constructor(assets: AssetStore, objectAssets: AssetStore) {
     this.assets = assets;
+    this.objectAssets = objectAssets;
   }
 
   // ------------------------------------------------------------------ update
@@ -109,14 +112,14 @@ export class Shell {
   }
 
   private startNewGame(): void {
-    this.game = new AdventureScreen(this.assets, newGameState());
+    this.game = new AdventureScreen(this.assets, this.objectAssets, newGameState());
     this.mode = 'game';
   }
 
   private loadInto(slot: string): void {
     const state = loadGame(slot);
     if (!state) return;
-    this.game = new AdventureScreen(this.assets, state);
+    this.game = new AdventureScreen(this.assets, this.objectAssets, state);
     this.mode = 'game';
   }
 
@@ -222,7 +225,9 @@ export class Shell {
       if (this.slotMode === 'save' && this.game) {
         saveGame(slot, this.game.state, this.game.sceneName);
         audio.sfx('select');
-        this.openPause();
+        // Straight back into play. Bouncing to the pause menu after a save is
+        // an extra keypress for no reason.
+        this.mode = 'game';
       } else if (slotInfo(slot)) {
         audio.sfx('select');
         this.loadInto(slot);
@@ -301,7 +306,7 @@ export class Shell {
     if (this.t > 7) {
       const reveal = Math.min(1, (this.t - 7) / 2.6);
       ctx.globalAlpha = reveal;
-      ctx.drawImage(this.backgrounds.get('arcade_floor'), 0, 0);
+      ctx.drawImage(this.art.plate({ sceneId: 'title', background: '/assets/ui/title_background.webp', painter: BACKGROUNDS.arcade_floor, displayName: 'Title' }), 0, 0);
       ctx.globalAlpha = 1;
       // Dark wash that lifts as it reveals.
       ditherFill(ctx, 0, 0, GAME_WIDTH, GAME_HEIGHT, Colors.ink, Colors.ink, 0);
@@ -333,7 +338,15 @@ export class Shell {
   }
 
   private drawTitleBackdrop(ctx: CanvasRenderingContext2D): void {
-    ctx.drawImage(this.backgrounds.get('arcade_floor'), 0, 0);
+    ctx.drawImage(
+      this.art.plate({
+        sceneId: 'title',
+        background: '/assets/ui/title_background.webp',
+        painter: BACKGROUNDS.arcade_floor,
+        displayName: 'Title',
+      }),
+      0, 0,
+    );
     ctx.globalAlpha = 0.72;
     ctx.fillStyle = Colors.ink;
     ctx.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);

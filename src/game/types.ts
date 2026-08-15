@@ -95,7 +95,19 @@ export interface Hotspot {
   id: string;
   /** Shown in the status line, e.g. "LOOK AT COIN PUSHER". */
   name: string;
-  rect: Rect;
+  /**
+   * Axis-aligned bounds. Kept for legacy scenes; `polygon` wins where both are
+   * given. At least one is required.
+   */
+  rect?: Rect;
+  /**
+   * An invisible interaction polygon in world coordinates, as [x, y] pairs.
+   *
+   * This is never drawn, and the artwork knows nothing about it. That
+   * separation is the point: an illustrator can completely redraw a room and
+   * the only thing that needs updating is this list of points.
+   */
+  polygon?: [number, number][];
   /** Where Jack stands to interact. Omit if he needn't approach. */
   walkTo?: [number, number];
   facing?: Facing;
@@ -139,6 +151,25 @@ export interface SceneCharacter {
   foreground?: boolean;
 }
 
+/**
+ * A piece of scenery that participates in depth sorting.
+ *
+ * Use these for objects a character can pass both in front of and behind. Flat
+ * scenery that is always in front belongs in a `foreground` art layer instead;
+ * scenery that is always behind belongs in the background plate.
+ */
+export interface SceneObject {
+  id: string;
+  /** Sprite id from the objects manifest. */
+  sprite: string;
+  /** World position. `y` is the object's baseline - what it is sorted on. */
+  x: number;
+  y: number;
+  scale?: number;
+  anim?: string;
+  visibleIf?: Cond;
+}
+
 /** Perspective: Jack shrinks as he walks upstage (spec-standard adventure tech). */
 export interface DepthBand {
   yNear: number;
@@ -151,8 +182,19 @@ export interface Scene {
   id: string;
   /** Shown briefly on entry and in the save-slot summary. */
   name: string;
-  /** Background id. Resolved to assets/backgrounds/<id>.png, else painted in code. */
+  /**
+   * Coordinate space this scene's data is authored in.
+   *
+   * 'legacy320' (the default) means the numbers were written for the old
+   * 320x200 screen and are doubled at load. 'world' means they are already in
+   * 640x400 space. This is what lets scenes be migrated one at a time instead
+   * of in a single risky sweep.
+   */
+  space?: 'legacy320' | 'world';
+  /** Fallback painter id, used until external artwork exists for this scene. */
   background: string;
+  /** Objects that depth-sort against characters. */
+  objects?: SceneObject[];
   music?: string;
   /** Walkable polygons, as flat [x,y,x,y,...] point lists. */
   walkboxes?: number[][];

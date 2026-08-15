@@ -1,0 +1,270 @@
+{
+  "_readme": "CHARACTER SPRITE CONTRACT. Game code never names a PNG - it asks for a logical id below. Drop a sprite sheet with the declared dimensions into this folder and it is used on the next load; no code change, no rebuild. To change a sheet's size or frame layout, edit its entry here - this is the only place geometry is defined. Missing files render as a clearly labelled placeholder sprite so the game always runs. See docs/ASSETS.md and docs/ART-BRIEF.md.",
+  "templates": {
+    "person": {
+      "frameWidth": 24,
+      "frameHeight": 40,
+      "columns": 6,
+      "rows": 4,
+      "anchorX": 12,
+      "anchorY": 40,
+      "_layout": "Row 0 = facing camera, row 1 = facing right, row 2 = facing away, row 3 = expressions. Left-facing is the right-facing row mirrored automatically, so you never draw it. Columns 0-3 of rows 0-2 are the walk cycle (col 0 doubles as the standing pose); columns 4-5 are the two-frame talk loop.",
+      "animations": {
+        "idle": {
+          "frames": [
+            0
+          ],
+          "fps": 0,
+          "loop": false
+        },
+        "idle.south": {
+          "frames": [
+            0
+          ],
+          "fps": 0,
+          "loop": false
+        },
+        "walk.south": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 8
+        },
+        "talk.south": {
+          "frames": [
+            4,
+            5
+          ],
+          "fps": 6
+        },
+        "idle.east": {
+          "frames": [
+            6
+          ],
+          "fps": 0,
+          "loop": false
+        },
+        "walk.east": {
+          "frames": [
+            6,
+            7,
+            8,
+            9
+          ],
+          "fps": 8
+        },
+        "talk.east": {
+          "frames": [
+            10,
+            11
+          ],
+          "fps": 6
+        },
+        "idle.north": {
+          "frames": [
+            12
+          ],
+          "fps": 0,
+          "loop": false
+        },
+        "walk.north": {
+          "frames": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "fps": 8
+        },
+        "talk.north": {
+          "frames": [
+            16,
+            17
+          ],
+          "fps": 6
+        },
+        "surprised": {
+          "frames": [
+            18
+          ],
+          "fps": 0,
+          "loop": false
+        },
+        "annoyed": {
+          "frames": [
+            19
+          ],
+          "fps": 0,
+          "loop": false
+        },
+        "happy": {
+          "frames": [
+            20
+          ],
+          "fps": 0,
+          "loop": false
+        },
+        "frightened": {
+          "frames": [
+            21
+          ],
+          "fps": 0,
+          "loop": false
+        },
+        "worried": {
+          "frames": [
+            22
+          ],
+          "fps": 0,
+          "loop": false
+        },
+        "smug": {
+          "frames": [
+            23
+          ],
+          "fps": 0,
+          "loop": false
+        }
+      },
+      "renderScale": 2,
+      "_renderScale": "Sheet is cut in the legacy 320x200 space, so it is drawn at 2x on the 640x400 screen. Art authored natively at 640x400 should set renderScale to 1 and double its frameWidth/frameHeight instead."
+    }
+  },
+  "sprites": {
+    "char.jack": {
+      "template": "person",
+      "file": "jack.png",
+      "description": "Jack Mercer, 20. Trainee arcade technician. Cheap dark jacket, band t-shirt, jeans, terrible 1987 hair. Perpetually unimpressed.",
+      "placeholder": {
+        "kind": "humanoid",
+        "primary": "#2050c8",
+        "secondary": "#33244d",
+        "label": "Jack"
+      }
+    },
+    "char.maggie": {
+      "template": "person",
+      "file": "maggie.png",
+      "description": "Maggie Vale, 19. Works the arcade. Practical, guarded. Denim jacket, dark red top. Never drawn as a prize - she stands like someone who knows more than you.",
+      "placeholder": {
+        "kind": "humanoid",
+        "primary": "#c4142e",
+        "secondary": "#4a0f3a",
+        "label": "Maggie"
+      }
+    },
+    "char.arthur": {
+      "template": "person",
+      "file": "arthur.png",
+      "description": "Arthur Bell, 57. Arcade owner. Enormous moustache, permanent mustard cardigan, shirt and tie underneath. Slightly stooped.",
+      "placeholder": {
+        "kind": "humanoid",
+        "primary": "#a8560c",
+        "secondary": "#4a2408",
+        "label": "Arthur"
+      }
+    },
+    "char.derek": {
+      "template": "person",
+      "file": "derek.png",
+      "description": "Derek Piper, 32. TV repairman and conspiracy theorist. Brown work coat, wild hair, enormous glasses, permanently mid-explanation.",
+      "placeholder": {
+        "kind": "humanoid",
+        "primary": "#1a7a35",
+        "secondary": "#0c3319",
+        "label": "Derek"
+      }
+    },
+    "char.kevin": {
+      "template": "person",
+      "file": "kevin.png",
+      "description": "Kevin, 16. Arcade kid. Shell suit in colours that should not co-exist, pockets full of 10p pieces. Perpetually smug.",
+      "placeholder": {
+        "kind": "humanoid",
+        "primary": "#e0349e",
+        "secondary": "#22d3d8",
+        "label": "Kevin"
+      }
+    },
+    "char.brenda": {
+      "template": "person",
+      "file": "brenda.png",
+      "description": "Brenda Holt, 46. Runs the kiosk. Tabard over a blouse, immovable hair, arms folded by default. Approximately 700 rules.",
+      "placeholder": {
+        "kind": "humanoid",
+        "primary": "#7a4de8",
+        "secondary": "#241452",
+        "label": "Brenda"
+      }
+    },
+    "char.valerie": {
+      "template": "person",
+      "file": "valerie.png",
+      "description": "Valerie Price, 28. Golden Sands receptionist. Glamorous, sarcastic, entirely unimpressed by Jack. Sharp 80s shoulders, gold earrings.",
+      "placeholder": {
+        "kind": "humanoid",
+        "primary": "#f09030",
+        "secondary": "#92196e",
+        "label": "Valerie"
+      }
+    },
+    "char.graham": {
+      "template": "person",
+      "file": "graham.png",
+      "description": "Graham, 34. Video shop owner. Slightly-too-tight polo shirt, moustache, the patient manner of a man who has heard every excuse.",
+      "placeholder": {
+        "kind": "humanoid",
+        "primary": "#0a7d8c",
+        "secondary": "#06333f",
+        "label": "Graham"
+      }
+    },
+    "char.drvale": {
+      "template": "person",
+      "file": "drvale.png",
+      "description": "Dr Elliot Vale. White shirt, dark trousers, black tie. Row 3 holds his three states: silhouette (18), normal (19), distorted/scanline-torn (20). His face must not be legible until frame 19 is used.",
+      "placeholder": {
+        "kind": "humanoid",
+        "primary": "#d8d4e8",
+        "secondary": "#0a0713",
+        "label": "Vale"
+      }
+    },
+    "char.guest": {
+      "template": "person",
+      "file": "guest.png",
+      "description": "Hotel guest for the Room 12 gag (s.47). Adult male in a towel and nothing else - drawn strictly from the waist up in silhouette against the bathroom light, per s.56. Comedy is the timing, not the anatomy.",
+      "placeholder": {
+        "kind": "humanoid",
+        "primary": "#d8d4e8",
+        "secondary": "#8f86a8",
+        "label": "Guest"
+      }
+    },
+    "char.cabin": {
+      "template": "person",
+      "file": "cabin.png",
+      "description": "Changing-cabin occupant (s.48). Adult woman, seen for a single frame before the hard cut, drawn as a flat silhouette behind a half-drawn curtain. Never rendered in detail.",
+      "placeholder": {
+        "kind": "humanoid",
+        "primary": "#33244d",
+        "secondary": "#1b1430",
+        "label": "Cabin"
+      }
+    },
+    "char.crowd": {
+      "template": "person",
+      "file": "crowd.png",
+      "description": "Generic arcade punter, recoloured per instance. Used for the early-evening arcade crowd before closing time.",
+      "placeholder": {
+        "kind": "humanoid",
+        "primary": "#5a4a73",
+        "secondary": "#33244d",
+        "label": "Punter"
+      }
+    }
+  }
+}

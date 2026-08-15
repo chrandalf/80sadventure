@@ -7,10 +7,10 @@ import { outline, rect, rng, staticScreen } from './paint';
 import type { Action } from './types';
 
 /** The playfield sits inside a drawn cabinet bezel. */
-const VX = 60;
-const VY = 22;
-const VW = 200;
-const VH = 108;
+const VX = 120;
+const VY = 44;
+const VW = 400;
+const VH = 216;
 
 interface Entity {
   x: number;

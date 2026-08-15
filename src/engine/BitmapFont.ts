@@ -13,8 +13,15 @@ export interface TextStyle {
   align?: 'left' | 'center' | 'right';
 }
 
-const CHAR_ADVANCE = FONT_WIDTH + 1; // 5px glyph + 1px gap
-const LINE_ADVANCE = FONT_HEIGHT + 2;
+/**
+ * The bitmap font was cut for a 320x200 screen. At 640x400 it is drawn at 2x so
+ * it keeps the same apparent size and stays pixel-crisp - scaling by a whole
+ * number is the only way to enlarge a bitmap font without destroying it.
+ */
+export const FONT_SCALE = 2;
+
+const CHAR_ADVANCE = (FONT_WIDTH + 1) * FONT_SCALE;
+const LINE_ADVANCE = (FONT_HEIGHT + 2) * FONT_SCALE;
 
 /**
  * Renders the 5x7 bitmap font.
@@ -36,7 +43,7 @@ export class BitmapFont {
   }
 
   charWidth(): number {
-    return FONT_WIDTH;
+    return FONT_WIDTH * FONT_SCALE;
   }
 
   lineHeight(leading = 0): number {
@@ -105,11 +112,12 @@ export class BitmapFont {
     if (style.outline) {
       const outlineAtlas = this.atlas(style.outline);
       // Eight-way outline: a four-way one leaves diagonal gaps that let
-      // background detail bleed through the letterforms.
+      // background detail bleed through the letterforms. Offset by the font
+      // scale so the outline stays one *font* pixel thick, not one screen pixel.
       for (let dy = -1; dy <= 1; dy++) {
         for (let dx = -1; dx <= 1; dx++) {
           if (dx === 0 && dy === 0) continue;
-          this.blit(ctx, outlineAtlas, text, px + dx, py + dy, tracking);
+          this.blit(ctx, outlineAtlas, text, px + dx * FONT_SCALE, py + dy * FONT_SCALE, tracking);
         }
       }
     }
@@ -147,7 +155,10 @@ export class BitmapFont {
       if (ch !== ' ') {
         const idx = this.indexOf.get(ch);
         const sx = (idx === undefined ? this.order.length : idx) * FONT_WIDTH;
-        ctx.drawImage(atlas, sx, 0, FONT_WIDTH, FONT_HEIGHT, cx, y, FONT_WIDTH, FONT_HEIGHT);
+        ctx.drawImage(
+          atlas, sx, 0, FONT_WIDTH, FONT_HEIGHT,
+          cx, y, FONT_WIDTH * FONT_SCALE, FONT_HEIGHT * FONT_SCALE,
+        );
       }
       cx += CHAR_ADVANCE + tracking;
     }

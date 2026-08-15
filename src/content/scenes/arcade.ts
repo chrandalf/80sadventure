@@ -4,6 +4,10 @@ import type { Scene } from '../../game/types';
 const FLOOR = [[8, 96, 312, 96, 316, 140, 4, 140]];
 const DEPTH = { yNear: 140, yFar: 96, scaleNear: 1, scaleFar: 0.62 };
 
+/** The same floor and perspective band, in world (640x400) coordinates. */
+const FLOOR_WORLD = [[16, 192, 624, 192, 632, 280, 8, 280]];
+const DEPTH_WORLD = { yNear: 280, yFar: 192, scaleNear: 1, scaleFar: 0.62 };
+
 /**
  * Starlight Arcade and everything under it (spec Acts I, IV, V).
  *
@@ -230,7 +234,7 @@ export const ARCADE_SCENES: Record<string, Scene> = {
         id: 'to_floor',
         name: 'Arcade Floor',
         rect: { x: 0, y: 28, w: 30, h: 62 },
-        to: 'arcade_floor',
+        to: 'starlight_arcade',
         entry: 'fromLobby',
         walkTo: [26, 118],
         arrow: 'left',
@@ -249,21 +253,38 @@ export const ARCADE_SCENES: Record<string, Scene> = {
     ],
   },
 
-  arcade_floor: {
-    id: 'arcade_floor',
+  /**
+   * THE FIRST SCENE CONVERTED TO EXTERNAL ARTWORK.
+   *
+   * Authored directly in world (640x400) coordinates - note `space: 'world'`,
+   * which stops the legacy doubling in normalizeScene(). Its interaction
+   * geometry is polygons, which are invisible and know nothing about the
+   * artwork; the background comes from /assets/backgrounds/starlight_arcade.webp
+   * via src/content/sceneArt.ts, and falls back to the old painter until that
+   * file exists.
+   */
+  starlight_arcade: {
+    id: 'starlight_arcade',
+    space: 'world',
     name: 'Starlight Arcade',
     background: 'arcade_floor',
     music: 'arcade',
-    walkboxes: FLOOR,
-    depth: DEPTH,
+    walkboxes: FLOOR_WORLD,
+    depth: DEPTH_WORLD,
     entries: {
-      default: { x: 160, y: 128, facing: 'south' },
-      fromLobby: { x: 292, y: 126, facing: 'west' },
-      fromBasement: { x: 30, y: 122, facing: 'east' },
+      default: { x: 320, y: 256, facing: 'south' },
+      fromLobby: { x: 584, y: 252, facing: 'west' },
+      fromBasement: { x: 60, y: 244, facing: 'east' },
     },
+    objects: [
+      // Depth-sorts against characters: Jack passes behind it up-stage and in
+      // front of it down-stage. Always-in-front scenery belongs in a foreground
+      // art layer instead.
+      { id: 'stool', sprite: 'prop.stool', x: 470, y: 250 },
+    ],
     characters: [
-      { id: 'kevin', sprite: 'char.kevin', x: 250, y: 118, facing: 'north', visibleIf: ['noflag', 'closingTime'] },
-      { id: 'maggie', sprite: 'char.maggie', x: 96, y: 132, facing: 'east' },
+      { id: 'kevin', sprite: 'char.kevin', x: 500, y: 236, facing: 'north', visibleIf: ['noflag', 'closingTime'] },
+      { id: 'maggie', sprite: 'char.maggie', x: 192, y: 264, facing: 'east' },
     ],
     ambience: [
       { sfx: 'coin', everyMin: 7, everyMax: 16 },
@@ -293,8 +314,8 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'maggie',
         name: 'Maggie',
-        rect: { x: 84, y: 96, w: 26, h: 40 },
-        walkTo: [120, 134],
+        rect: { x: 168, y: 192, w: 52, h: 80 },
+        walkTo: [240, 268],
         facing: 'west',
         defaultVerb: 'TALK',
         verbs: {
@@ -306,8 +327,8 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'kevin',
         name: 'Kevin',
-        rect: { x: 238, y: 84, w: 24, h: 38 },
-        walkTo: [222, 126],
+        rect: { x: 476, y: 168, w: 48, h: 76 },
+        walkTo: [444, 252],
         facing: 'east',
         visibleIf: ['noflag', 'closingTime'],
         defaultVerb: 'TALK',
@@ -319,8 +340,8 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'coin_pusher',
         name: 'Coin Pusher',
-        rect: { x: 230, y: 44, w: 46, h: 46 },
-        walkTo: [252, 118],
+        polygon: [[458, 86], [556, 86], [560, 180], [454, 180]],
+        walkTo: [504, 236],
         facing: 'north',
         verbs: {
           LOOK: [
@@ -357,8 +378,8 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'machine_turbo',
         name: 'Turbo Racer',
-        rect: { x: 40, y: 26, w: 30, h: 64 },
-        walkTo: [55, 114],
+        polygon: [[84, 52], [136, 52], [140, 180], [80, 180]],
+        walkTo: [110, 228],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'TURBO RACER. The steering wheel has been loose since 1984 and Arthur calls it "character".']],
@@ -381,8 +402,8 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'machine_space',
         name: 'Space Wars',
-        rect: { x: 74, y: 26, w: 30, h: 64 },
-        walkTo: [89, 114],
+        polygon: [[152, 52], [204, 52], [208, 180], [148, 180]],
+        walkTo: [178, 228],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'SPACE WARS. Vector graphics. Genuinely beautiful, and completely impossible to see in daylight.']],
@@ -392,8 +413,8 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'machine_manor',
         name: 'Monster Manor',
-        rect: { x: 108, y: 26, w: 30, h: 64 },
-        walkTo: [123, 114],
+        polygon: [[220, 52], [272, 52], [276, 180], [216, 180]],
+        walkTo: [246, 228],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'MONSTER MANOR. The monsters are four pixels each and I have had nightmares about them since I was nine.']],
@@ -416,8 +437,8 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'machine_galactic',
         name: 'Galactic Raiders',
-        rect: { x: 142, y: 26, w: 30, h: 64 },
-        walkTo: [157, 114],
+        polygon: [[288, 52], [340, 52], [344, 180], [284, 180]],
+        walkTo: [314, 228],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'GALACTIC RAIDERS. Kevin claims the high score. The high score is three letters and none of them are K.']],
@@ -442,8 +463,8 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'onemorecredit',
         name: 'Unmarked Machine',
-        rect: { x: 182, y: 24, w: 34, h: 66 },
-        walkTo: [199, 116],
+        polygon: [[366, 46], [430, 46], [434, 182], [362, 182]],
+        walkTo: [398, 232],
         facing: 'north',
         verbs: {
           LOOK: [
@@ -496,8 +517,8 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'basement_door',
         name: 'Staff Door',
-        rect: { x: 4, y: 34, w: 26, h: 56 },
-        walkTo: [24, 116],
+        rect: { x: 8, y: 68, w: 52, h: 112 },
+        walkTo: [48, 232],
         facing: 'west',
         verbs: {
           LOOK: [['jack', 'STAFF ONLY. Which, tonight, is me.']],
@@ -517,10 +538,10 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'to_lobby',
         name: 'Lobby',
-        rect: { x: 288, y: 30, w: 32, h: 60 },
+        rect: { x: 576, y: 60, w: 64, h: 120 },
         to: 'arcade_lobby',
         entry: 'fromFloor',
-        walkTo: [290, 118],
+        walkTo: [580, 236],
         arrow: 'right',
       },
     ],
@@ -797,7 +818,7 @@ export const ARCADE_SCENES: Record<string, Scene> = {
         id: 'basement_up',
         name: 'Arcade Floor',
         rect: { x: 0, y: 100, w: 18, h: 44 },
-        to: 'arcade_floor',
+        to: 'starlight_arcade',
         entry: 'fromBasement',
         walkTo: [20, 132],
         arrow: 'left',

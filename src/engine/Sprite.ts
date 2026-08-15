@@ -42,6 +42,12 @@ export interface SpriteDef {
    *  that stands on the ground. */
   anchorX?: number;
   anchorY?: number;
+  /**
+   * Multiplier applied when drawing. Sheets cut for the old 320x200 screen use
+   * 2; art authored natively for 640x400 uses 1. Lets both live in the game at
+   * once during the art migration.
+   */
+  renderScale?: number;
   animations?: Record<string, AnimDef>;
   placeholder?: PlaceholderHint;
   /** Free-text note for whoever draws the replacement. Surfaced by the validator. */
@@ -99,6 +105,8 @@ export class SpriteSheet {
   readonly frameCount: number;
   /** True when this is a generated stand-in rather than the authored art. */
   readonly isPlaceholder: boolean;
+  /** Multiplier baked into every draw of this sheet. */
+  readonly renderScale: number;
 
   /** Lazily-built horizontally mirrored copy, for `flipX` animations. */
   private mirrored: HTMLCanvasElement | null = null;
@@ -115,6 +123,7 @@ export class SpriteSheet {
     this.anchorY = def.anchorY ?? def.frameHeight;
     this.frameCount = this.columns * this.rows;
     this.isPlaceholder = isPlaceholder;
+    this.renderScale = def.renderScale ?? 1;
   }
 
   hasAnimation(name: string): boolean {
@@ -160,7 +169,8 @@ export class SpriteSheet {
     const col = idx % this.columns;
     const row = Math.floor(idx / this.columns);
 
-    const snapped = scale === 1 ? 1 : Math.max(0.125, Math.round(scale * 8) / 8);
+    const effective = scale * this.renderScale;
+    const snapped = effective === 1 ? 1 : Math.max(0.125, Math.round(effective * 8) / 8);
     const dw = Math.max(1, Math.round(this.frameWidth * snapped));
     const dh = Math.max(1, Math.round(this.frameHeight * snapped));
     const dx = Math.round(x - this.anchorX * snapped);

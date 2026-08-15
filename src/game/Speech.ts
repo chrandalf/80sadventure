@@ -16,7 +16,7 @@ interface Pending {
 }
 
 const CHARS_PER_SEC = 46;
-const MAX_LINE_WIDTH = 230;
+const MAX_LINE_WIDTH = 460;
 
 /**
  * On-screen text: character-by-character reveal, SPACE to finish the current
@@ -123,12 +123,12 @@ export class Speech {
 
     // Position above the speaker, clamped on screen. Captions sit centre-low.
     let cx = GAME_WIDTH / 2;
-    let top = 12;
+    let top = 24;
     if (cur.kind === 'speech' && cur.anchorX !== undefined && cur.anchorY !== undefined) {
-      cx = Math.max(60, Math.min(GAME_WIDTH - 60, cur.anchorX));
-      top = Math.max(4, cur.anchorY - 46 - blockH);
+      cx = Math.max(120, Math.min(GAME_WIDTH - 120, cur.anchorX));
+      top = Math.max(8, cur.anchorY - 92 - blockH);
     } else if (cur.kind === 'caption') {
-      top = 100;
+      top = 200;
     }
 
     // Re-wrap only the revealed prefix so lines don't reflow as they type.
@@ -151,7 +151,7 @@ export class Speech {
 
     const isDeath = cur.kind === 'death';
     const color = isDeath ? Colors.danger : cur.color;
-    const lines = font.wrap(shown, 240);
+    const lines = font.wrap(shown, 480);
     const lh = font.lineHeight(3);
     const startY = GAME_HEIGHT / 2 - (lines.length * lh) / 2 - (cur.subtitle ? 8 : 0);
 
@@ -167,7 +167,7 @@ export class Speech {
     }
 
     if (this.finished) {
-      font.draw(ctx, 'PRESS SPACE', GAME_WIDTH / 2, GAME_HEIGHT - 22, {
+      font.draw(ctx, 'PRESS SPACE', GAME_WIDTH / 2, GAME_HEIGHT - 44, {
         color: ramp('neutral', 3),
         align: 'center',
       });
