@@ -182,6 +182,31 @@ const requests = readFileSync(resolve(process.cwd(), jsonl), 'utf8')
     || castRank(a.custom_id) - castRank(b.custom_id)
     || a.custom_id.localeCompare(b.custom_id));
 
+/**
+ * --dry: say what this lane would generate and what it would cost, and stop.
+ *
+ * With two providers, two balances and a filter deciding which assets go
+ * where, the useful question before running anything is "how much is this
+ * one?" - and the honest answer needs the same filtering, skipping and
+ * pricing the real run uses, not a sum done by hand.
+ */
+if (args.includes('--dry')) {
+  const todo = requests.filter((r) => !existsSync(join(dir, `${r.custom_id}.png`)));
+  const have = requests.length - todo.length;
+  const affordable = Math.min(todo.length, Math.floor((budget + 1e-9) / PRICE));
+  console.log(`\n${c.bold(`${provider}: ${model}`)}`);
+  console.log(`  ${requests.length} in scope, ${have} already on disk, ${todo.length} to generate`);
+  console.log(`  ${affordable} affordable at $${PRICE.toFixed(2)} within $${budget.toFixed(2)}`
+    + `  =  ${c.bold(`$${(affordable * PRICE).toFixed(2)}`)}`);
+  if (affordable < todo.length) {
+    console.log(c.yellow(`  ${todo.length - affordable} would be left over - raise --budget or run the rest elsewhere`));
+  }
+  const preview = todo.slice(0, affordable).map((r) => r.custom_id);
+  const subjects = [...new Set(preview.map((id) => id.split('.').slice(0, 2).join('.')))];
+  console.log(c.dim(`  subjects: ${subjects.join(', ') || '(none)'}`));
+  process.exit(0);
+}
+
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 /** Set once, so a wrong-format model says so once rather than per image. */
