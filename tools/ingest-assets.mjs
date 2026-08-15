@@ -144,7 +144,45 @@ function keyOutFlatBorder(img, tolerance = 12) {
     cleared++;
     stack.push([x + 1, y], [x - 1, y], [x, y + 1], [x, y - 1]);
   }
+  if (cleared && saturation > 100) cleared += erodeKeyFringe(img, [r0, g0, b0]);
   return cleared > 0;
+}
+
+/**
+ * Remove the rim where the subject's outline was blended into the key colour.
+ *
+ * Those pixels are a mix of the two, so they fall outside the flood's tolerance
+ * and survive it - as a purple halo once the key colour is gone. Anything still
+ * pulled towards the key and touching transparency is part of that rim, so it
+ * goes too. Two passes, because the blend is rarely wider than that and eating
+ * further would start taking the outline itself.
+ */
+function erodeKeyFringe(img, [kr, kg, kb], passes = 2) {
+  const { width: w, height: h } = img;
+  let removed = 0;
+  for (let pass = 0; pass < passes; pass++) {
+    const doomed = [];
+    for (let y = 0; y < h; y++) {
+      for (let x = 0; x < w; x++) {
+        const k = y * w + x;
+        if (img.data[(k << 2) + 3] === 0) continue;
+        const touchesClear =
+          (x > 0 && img.data[((k - 1) << 2) + 3] === 0) ||
+          (x < w - 1 && img.data[((k + 1) << 2) + 3] === 0) ||
+          (y > 0 && img.data[((k - w) << 2) + 3] === 0) ||
+          (y < h - 1 && img.data[((k + w) << 2) + 3] === 0);
+        if (!touchesClear) continue;
+        const [r, g, b] = px(img, x, y);
+        // Halfway to the key colour or closer, in the direction the key pulls.
+        const pull = (c, kc) => (kc > 127 ? c > (kc + 96) / 2 : c < kc + 64);
+        if (pull(r, kr) && pull(g, kg) && pull(b, kb)) doomed.push(k);
+      }
+    }
+    if (!doomed.length) break;
+    for (const k of doomed) img.data[(k << 2) + 3] = 0;
+    removed += doomed.length;
+  }
+  return removed;
 }
 
 /** Alpha must be all-or-nothing; soft edges halo badly under integer scaling. */
