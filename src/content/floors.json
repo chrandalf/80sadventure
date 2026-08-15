@@ -1,0 +1,666 @@
+{
+  "_generated": "by tools/fit-floors.mjs - run it again after regenerating backgrounds",
+  "_note": "A starting point per room. A scene that declares its own walkboxes overrides this entirely.",
+  "floors": {
+    "arcade_lobby": {
+      "walkboxes": [
+        [
+          24,
+          157,
+          616,
+          157,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 157,
+        "scaleNear": 1,
+        "scaleFar": 0.62
+      }
+    },
+    "starlight_arcade": {
+      "walkboxes": [
+        [
+          24,
+          242,
+          616,
+          242,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 242,
+        "scaleNear": 1,
+        "scaleFar": 0.82
+      }
+    },
+    "arcade_office": {
+      "walkboxes": [
+        [
+          24,
+          201,
+          616,
+          201,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 201,
+        "scaleNear": 1,
+        "scaleFar": 0.71
+      }
+    },
+    "arcade_basement": {
+      "walkboxes": [
+        [
+          24,
+          209,
+          616,
+          209,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 209,
+        "scaleNear": 1,
+        "scaleFar": 0.73
+      }
+    },
+    "arcade_roof": {
+      "walkboxes": [
+        [
+          24,
+          170,
+          616,
+          170,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 170,
+        "scaleNear": 1,
+        "scaleFar": 0.63
+      }
+    },
+    "seafront": {
+      "walkboxes": [
+        [
+          24,
+          232,
+          616,
+          232,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 232,
+        "scaleNear": 1,
+        "scaleFar": 0.8
+      }
+    },
+    "pier": {
+      "walkboxes": [
+        [
+          24,
+          212,
+          616,
+          212,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 212,
+        "scaleNear": 1,
+        "scaleFar": 0.74
+      }
+    },
+    "pier_cafe": {
+      "walkboxes": [
+        [
+          24,
+          234,
+          616,
+          234,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 234,
+        "scaleNear": 1,
+        "scaleFar": 0.8
+      }
+    },
+    "chip_shop": {
+      "walkboxes": [
+        [
+          24,
+          234,
+          616,
+          234,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 234,
+        "scaleNear": 1,
+        "scaleFar": 0.8
+      }
+    },
+    "back_alley": {
+      "walkboxes": [
+        [
+          24,
+          169,
+          616,
+          169,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 169,
+        "scaleNear": 1,
+        "scaleFar": 0.63
+      }
+    },
+    "tv_shop": {
+      "walkboxes": [
+        [
+          24,
+          199,
+          616,
+          199,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 199,
+        "scaleNear": 1,
+        "scaleFar": 0.71
+      }
+    },
+    "amusement_park": {
+      "walkboxes": [
+        [
+          24,
+          209,
+          616,
+          209,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 209,
+        "scaleNear": 1,
+        "scaleFar": 0.73
+      }
+    },
+    "haunted_house": {
+      "walkboxes": [
+        [
+          24,
+          211,
+          616,
+          211,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 211,
+        "scaleNear": 1,
+        "scaleFar": 0.74
+      }
+    },
+    "bus_station": {
+      "walkboxes": [
+        [
+          24,
+          194,
+          616,
+          194,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 194,
+        "scaleNear": 1,
+        "scaleFar": 0.69
+      }
+    },
+    "phone_box": {
+      "walkboxes": [
+        [
+          24,
+          157,
+          616,
+          157,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 157,
+        "scaleNear": 1,
+        "scaleFar": 0.62
+      }
+    },
+    "town_hall": {
+      "walkboxes": [
+        [
+          24,
+          177,
+          616,
+          177,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 177,
+        "scaleNear": 1,
+        "scaleFar": 0.65
+      }
+    },
+    "police_station": {
+      "walkboxes": [
+        [
+          24,
+          221,
+          616,
+          221,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 221,
+        "scaleNear": 1,
+        "scaleFar": 0.77
+      }
+    },
+    "cinema_exterior": {
+      "walkboxes": [
+        [
+          24,
+          241,
+          616,
+          241,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 241,
+        "scaleNear": 1,
+        "scaleFar": 0.82
+      }
+    },
+    "cinema_lobby": {
+      "walkboxes": [
+        [
+          24,
+          203,
+          616,
+          203,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 203,
+        "scaleNear": 1,
+        "scaleFar": 0.72
+      }
+    },
+    "cinema_projection": {
+      "walkboxes": [
+        [
+          24,
+          174,
+          616,
+          174,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 174,
+        "scaleNear": 1,
+        "scaleFar": 0.64
+      }
+    },
+    "clock_tower_ext": {
+      "walkboxes": [
+        [
+          24,
+          219,
+          616,
+          219,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 219,
+        "scaleNear": 1,
+        "scaleFar": 0.76
+      }
+    },
+    "clock_tower_int": {
+      "walkboxes": [
+        [
+          24,
+          234,
+          616,
+          234,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 234,
+        "scaleNear": 1,
+        "scaleFar": 0.8
+      }
+    },
+    "lighthouse_ext": {
+      "walkboxes": [
+        [
+          24,
+          217,
+          616,
+          217,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 217,
+        "scaleNear": 1,
+        "scaleFar": 0.76
+      }
+    },
+    "lighthouse_int": {
+      "walkboxes": [
+        [
+          24,
+          219,
+          616,
+          219,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 219,
+        "scaleNear": 1,
+        "scaleFar": 0.76
+      }
+    },
+    "arcade_machineroom": {
+      "walkboxes": [
+        [
+          24,
+          165,
+          616,
+          165,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 165,
+        "scaleNear": 1,
+        "scaleFar": 0.62
+      }
+    },
+    "hotel_reception": {
+      "walkboxes": [
+        [
+          24,
+          184,
+          616,
+          184,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 184,
+        "scaleNear": 1,
+        "scaleFar": 0.67
+      }
+    },
+    "hotel_corridor": {
+      "walkboxes": [
+        [
+          24,
+          178,
+          616,
+          178,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 178,
+        "scaleNear": 1,
+        "scaleFar": 0.65
+      }
+    },
+    "hotel_room12": {
+      "walkboxes": [
+        [
+          24,
+          208,
+          616,
+          208,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 208,
+        "scaleNear": 1,
+        "scaleFar": 0.73
+      }
+    },
+    "pool_cabins": {
+      "walkboxes": [
+        [
+          24,
+          204,
+          616,
+          204,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 204,
+        "scaleNear": 1,
+        "scaleFar": 0.72
+      }
+    },
+    "nudist_beach": {
+      "walkboxes": [
+        [
+          24,
+          242,
+          616,
+          242,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 242,
+        "scaleNear": 1,
+        "scaleFar": 0.82
+      }
+    },
+    "video_shop": {
+      "walkboxes": [
+        [
+          24,
+          150,
+          616,
+          150,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 150,
+        "scaleNear": 1,
+        "scaleFar": 0.62
+      }
+    },
+    "video_shop_back": {
+      "walkboxes": [
+        [
+          24,
+          229,
+          616,
+          229,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 229,
+        "scaleNear": 1,
+        "scaleFar": 0.79
+      }
+    },
+    "graham_office": {
+      "walkboxes": [
+        [
+          24,
+          242,
+          616,
+          242,
+          632,
+          286,
+          8,
+          286
+        ]
+      ],
+      "depth": {
+        "yNear": 286,
+        "yFar": 242,
+        "scaleNear": 1,
+        "scaleFar": 0.82
+      }
+    }
+  }
+}

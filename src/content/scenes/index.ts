@@ -1,5 +1,6 @@
 import { normalizeScene } from '../../game/normalizeScene';
-import type { Scene } from '../../game/types';
+import type { DepthBand, Scene } from '../../game/types';
+import FLOORS from '../floors.json';
 import { ARCADE_SCENES } from './arcade';
 import { HOTEL_SCENES } from './hotel';
 import { STORY_SCENES } from './story';
@@ -26,8 +27,28 @@ const AUTHORED: Record<string, Scene> = {
  * nothing else in the engine has to care.
  */
 export const SCENES: Record<string, Scene> = Object.fromEntries(
-  Object.entries(AUTHORED).map(([id, scene]) => [id, normalizeScene(scene)]),
+  Object.entries(AUTHORED).map(([id, scene]) => [id, withFloor(normalizeScene(scene))]),
 );
+
+/**
+ * Give a room the floor measured off its own artwork.
+ *
+ * Every scene was blocked out with a generic band across the bottom of a
+ * 320x200 screen, which no longer agrees with a painted room: characters stand
+ * in the wall, or hover above the carpet, or shrink to nothing over forty
+ * pixels of lino. `tools/fit-floors.mjs` finds the wall-floor join in each
+ * plate and `src/content/floors.json` records it.
+ *
+ * A room that has been fitted by hand says `space: 'world'` and keeps its own,
+ * because a detector reads a dado rail or a row of cabinet bases as the floor
+ * often enough that measured-by-eye has to win.
+ */
+function withFloor(scene: Scene): Scene {
+  if (scene.space === 'world') return scene;
+  const fitted = (FLOORS.floors as Record<string, { walkboxes: number[][]; depth: DepthBand }>)[scene.id];
+  if (!fitted) return scene;
+  return { ...scene, walkboxes: fitted.walkboxes, depth: fitted.depth };
+}
 
 /** Sanity check run once at startup: every exit must point at a real scene. */
 export function validateScenes(): string[] {
