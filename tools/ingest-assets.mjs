@@ -421,6 +421,23 @@ for (const [sheetId, set] of poseSets) {
       filled.add(`${row},${col}`);
     }
     if (pose.id.endsWith('front_stand')) standing = { cell, ox, oy };
+
+    /*
+     * Keep the fitted pose at the path the manifest gives it.
+     *
+     * Poses are consumed rather than installed, so without this there is no
+     * record on disk that one arrived - and `--missing` would ask for all sixty
+     * again after a run that only failed forty. It also means the sheet can be
+     * rebuilt later, after a cell-size change, without the originals.
+     */
+    const poseAsset = manifest.assets.find((a) => a.id === pose.id);
+    if (poseAsset && !dry) {
+      const kept = blank(fw, fh);
+      blit(kept, cell, ox, oy);
+      const at = resolve(ROOT, 'public' + poseAsset.path.replace(/\.(webp|jpe?g)$/i, '.png'));
+      mkdirSync(dirname(at), { recursive: true });
+      writeFileSync(at, PNG.sync.write(kept));
+    }
   }
 
   // Any cell no supplied pose claims falls back to standing, so a pose that

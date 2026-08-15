@@ -70,9 +70,20 @@ function sizeFor(asset) {
   return '1024x1024';
 }
 
+/**
+ * Quality costs real money, and detail smaller than the destination cell is
+ * thrown away by ingest before it is ever seen.
+ *
+ * A background is displayed at 640x400 and is worth paying for. A character
+ * pose ends up in a 48x80 cell and an inventory icon in a 16x16 one; asking for
+ * high quality there buys nothing but the bill. Sixty poses at high quality is
+ * what emptied an account mid-run.
+ */
 function qualityFor(asset) {
-  if (asset.type === 'inventory-icon') return 'medium'; // 16x16 final - detail is wasted
-  return 'high';
+  const px = asset.dimensions.width * asset.dimensions.height;
+  if (px <= 32 * 32) return 'low';                                   // inventory icons
+  if (px >= res.width * res.height) return 'high';                   // full-screen plates
+  return 'medium';                                                   // poses, portraits, props
 }
 
 const STYLE = [
@@ -245,6 +256,19 @@ if (types.length) assets = assets.filter((a) => types.includes(a.type));
 // --missing: only ask for what is not already in the game. A partly successful
 // run is the normal case - refusals and per-asset errors are expected - so the
 // retry should cost only what actually failed.
+/*
+ * A character's poses and its single-figure sheet are two ways of producing the
+ * same sprite sheet, and the poses win. Generating both means paying twice for
+ * every character, so the sheet is only requested when nothing else will fill
+ * it - or when it is asked for by name.
+ */
+if (!types.includes('character-sheet')) {
+  const posed = new Set(
+    assets.filter((a) => a.type === 'character-pose').map((a) => a.assemble?.sheet),
+  );
+  assets = assets.filter((a) => !(a.type === 'character-sheet' && posed.has(a.id)));
+}
+
 if (argv.includes('--missing')) {
   const before = assets.length;
   assets = assets.filter((a) => {

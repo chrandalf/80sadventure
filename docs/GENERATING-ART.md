@@ -145,6 +145,39 @@ Every sheet is rebuilt from the images already downloaded, so resizing the cast
 costs nothing to generate. `--force` is needed because ingest will not overwrite
 art you have already accepted.
 
+### What it costs, and how to not overspend
+
+Quality is chosen from the size the asset ends up at, because ingest throws away
+everything finer than that before it is ever seen:
+
+| Destination | Quality |
+|---|---|
+| 640x400 plates | `high` |
+| poses, portraits, props | `medium` |
+| 16x16 inventory icons | `low` |
+
+Sixty character poses at `high` is what emptied an account halfway through a
+run. A pose lands in a 48x80 cell; paying for detail forty times finer than that
+buys nothing.
+
+Two other things drive the bill up:
+
+- **`/v1/responses` runs a full model turn per image**, on top of the image
+  itself. It is not just an image call.
+- **A character's poses and its single-figure sheet produce the same sheet**, so
+  generating both pays twice per character. The sheet is now skipped whenever
+  poses exist for it, unless asked for by name with `--type character-sheet`.
+
+Ingest keeps each fitted pose at its manifest path, so `--missing` knows which
+ones already arrived. After a run that failed part-way:
+
+```bash
+npm run assets:ingest -- ./incoming --force        # bank what did arrive
+node tools/gen-openai-batch.mjs --missing --endpoint responses
+```
+
+asks only for the gap.
+
 ### Characters: six poses, assembled into a sheet
 
 A `char.*` sheet is a 6x4 grid of the same person in twenty-four positions. No
