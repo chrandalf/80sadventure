@@ -78,7 +78,10 @@ function framing(asset) {
     case 'ui':
       return [
         'A single flat illustrated backdrop plate for a point-and-click adventure room, drawn as one continuous painted scene from a fixed camera at standing eye level.',
-        'Completely empty of people and animals.',
+        // Not "empty of people": some rooms list a figure among the objects the
+        // plate must contain, and a blanket ban contradicts that list. gpt-5
+        // stopped to reason about the conflict rather than draw anything.
+        'The only figures in the plate are any listed below as objects to depict; those are scenery. No other people or animals.',
         'The image will be centre-cropped to a slightly wider frame, so keep everything important away from the extreme top and bottom edges.',
       ].join(' ');
     case 'background-layer':
@@ -104,13 +107,22 @@ function framing(asset) {
   }
 }
 
-/** Reduce needless refusals on the two deliberately non-explicit comedy assets. */
-const CLARIFY = new Set(['char.guest', 'portrait.guest']);
+/**
+ * The seaside-postcard scenes are non-graphic by design (spec s.49, s.54): the
+ * comedy is in the staging, never in what is shown. Saying so plainly keeps the
+ * generator from either refusing or overreaching - both of which are wrong.
+ */
+const CLARIFY = {
+  'char.guest': 'Fully covered and non-explicit: an ordinary adult in a bath towel as seen in a broad television sitcom. No nudity.',
+  'portrait.guest': 'Fully covered and non-explicit: an ordinary adult in a bath towel as seen in a broad television sitcom. No nudity.',
+  'bg.nudist_beach': 'A deserted shingle beach late at night, lit by moonlight. Any figure is distant, fully obscured by the umbrella, towel and windbreak, and reads only as a shape. Nothing explicit and no nudity: this is a seaside-postcard joke, staged entirely through objects in the way.',
+  'bg.pool_cabins': 'Closed wooden changing cabins beside an empty pool at night. Doors shut, nobody visible. Nothing explicit and no nudity.',
+};
 
 function promptFor(asset) {
   const parts = [STYLE, framing(asset), asset.description];
-  if (CLARIFY.has(asset.id)) {
-    parts.push('Fully covered and non-explicit: an ordinary adult in a bath towel as seen in a broad television sitcom. No nudity.');
+  if (CLARIFY[asset.id]) {
+    parts.push(CLARIFY[asset.id]);
   }
   if (asset.transparency === 'alpha-required') {
     parts.push('The background must be genuine transparency (alpha), not a white, black or chequerboard fill. Hard edges, no soft feathering or glow at the silhouette.');
