@@ -55,6 +55,31 @@ gives you a per-asset error instead of one opaque failed job. It skips files
 that already exist, so rerunning fills the gaps rather than paying twice. Given
 four failed batches, this is the path that gets you pictures today.
 
+### Transparency: ask for magenta, not alpha
+
+> `Transparent background is not supported for this model.`
+
+`/v1/responses` cannot return an alpha channel. A run of 59 assets failed 58 of
+them on exactly this, and the one that succeeded was the only opaque request in
+the file.
+
+So for that endpoint the pipeline does not ask for alpha at all. Cutouts are
+requested on a flat pure-magenta field and `assets:ingest` floods the magenta
+out, widening its tolerance because a saturated key colour can be keyed
+generously — which also eats the anti-aliased fringe around the silhouette.
+Magenta because nothing in a 1987 seaside arcade is legitimately that colour,
+so keying it cannot bite into the subject.
+
+This is the default for `--endpoint responses`. `--chroma` forces it on the
+images endpoint too; `--alpha` forces real transparency back on.
+
+Note that the prompt must not ask for both. `assets.json` writes "transparent
+background" into its descriptions, because that is what a finished file
+genuinely requires, so those sentences are stripped from the prompt when
+chroma-keying. A prompt that asks for transparency *and* a magenta fill is the
+same self-contradiction that made gpt-5 reason about the Far Beach instead of
+drawing it.
+
 ### If a batch does succeed
 
 The output is one `.jsonl` of base64, not image files, and it is big — every

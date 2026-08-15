@@ -3,7 +3,8 @@
  *
  *   node tools/gen-openai-batch.mjs [--endpoint images|responses]
  *                                   [--only p0,p1] [--type background,portrait]
- *                                   [--missing] [--model gpt-image-1] [--out <file>]
+ *                                   [--missing] [--chroma|--alpha]
+ *                                   [--model gpt-image-1] [--out <file>]
  *
  * THE ONE RULE THAT BREAKS BATCHES: the `url` on every line must be character
  * for character the same as the endpoint the batch is created with. A file full
@@ -37,6 +38,14 @@ const URL_FOR = {
   images: '/v1/images/generations',
   responses: '/v1/responses',
 };
+
+/**
+ * `/v1/responses` cannot return an alpha channel, so anything needing one is
+ * chroma-keyed instead. `--chroma` forces it on the images endpoint too, and
+ * `--alpha` forces real transparency if a model ever supports it there.
+ */
+const useChroma = argv.includes('--chroma')
+  || (endpointKind === 'responses' && !argv.includes('--alpha'));
 if (!URL_FOR[endpointKind]) {
   console.error(`--endpoint must be one of: ${Object.keys(URL_FOR).join(', ')}`);
   process.exit(2);
@@ -70,6 +79,14 @@ const STYLE = [
   'No text, no lettering, no signature, no watermark, no logo, no user interface anywhere in the image.',
 ].join(' ');
 
+/**
+ * How to describe "nothing behind the subject". These must agree with the
+ * chroma-key paragraph: asking for transparency and a magenta fill in the same
+ * prompt is a contradiction, and a contradicted prompt is what made gpt-5
+ * reason about the Far Beach instead of drawing it.
+ */
+const EMPTY_BG = () => (useChroma ? 'a flat magenta background' : 'a fully transparent background');
+
 /** Extra direction per asset type, including how the image will be cut down. */
 function framing(asset) {
   const full = asset.dimensions.width === res.width && asset.dimensions.height === res.height;
@@ -88,20 +105,22 @@ function framing(asset) {
     case 'effect':
       return [
         full ? 'A full-frame overlay layer.' : 'An overlay layer.',
-        'Everything that is not the subject must be fully transparent, not white and not black.',
+        useChroma
+          ? 'Everything that is not the effect itself must be flat pure magenta.'
+          : 'Everything that is not the subject must be fully transparent, not white and not black.',
         'The image will be centre-cropped slightly, so let the effect run past all four edges.',
       ].join(' ');
     case 'character-sheet':
       return [
         'One single full-length standing figure, alone, facing the camera, arms relaxed at the sides, feet together, whole body visible from the top of the head to the soles of the shoes with clear space around it.',
-        'Isolated on a fully transparent background - no floor, no shadow, no scenery, no second figure.',
+        `Isolated on ${EMPTY_BG()} - no floor, no shadow, no scenery, no second figure.`,
         'Do not draw a grid, a contact sheet, multiple poses or an animation strip.',
       ].join(' ');
     case 'portrait':
-      return 'Head and shoulders only, one person, isolated on a fully transparent background, no border and no frame.';
+      return `Head and shoulders only, one person, isolated on ${EMPTY_BG()}, no border and no frame.`;
     case 'prop':
     case 'inventory-icon':
-      return 'One single object, centred, isolated on a fully transparent background, no shadow, no floor, no scenery, no hand holding it.';
+      return `One single object, centred, isolated on ${EMPTY_BG()}, no shadow, no floor, no scenery, no hand holding it.`;
     default:
       return '';
   }
@@ -119,13 +138,51 @@ const CLARIFY = {
   'bg.pool_cabins': 'Closed wooden changing cabins beside an empty pool at night. Doors shut, nobody visible. Nothing explicit and no nudity.',
 };
 
+/**
+ * Chroma key, for models that cannot return alpha.
+ *
+ * `/v1/responses` rejects `background: "transparent"` outright - "Transparent
+ * background is not supported for this model" - which failed every sprite,
+ * portrait and icon in a run while the one opaque request succeeded. So the
+ * subject is asked for on a flat magenta field and ingest floods it out. That
+ * works on any model, which makes it the safer default rather than a fallback.
+ *
+ * Magenta because nothing in a 1987 seaside arcade is legitimately this colour,
+ * so keying it cannot eat part of the subject.
+ */
+const CHROMA = [
+  'Place the subject on a completely flat, uniform, pure magenta background, RGB 255 0 255, filling the entire frame behind it.',
+  'That magenta must be one solid colour edge to edge: no gradient, no vignette, no shadow, no texture, no reflection and no glow spilling onto it.',
+  'Do not use magenta, pink or violet anywhere in the subject itself, since the magenta is removed afterwards and anything matching it would be removed too.',
+  'Keep the outline of the subject crisp and hard-edged against it.',
+].join(' ');
+
+/**
+ * assets.json writes "transparent background" into the descriptions themselves,
+ * because that is what the asset genuinely requires of a finished file. When we
+ * are chroma-keying, the generator must not be told both things at once, so
+ * those phrases come out of the description here rather than out of the spec.
+ */
+function scrubTransparency(text) {
+  if (!useChroma || !text) return text;
+  return text
+    // Drop whole sentences that mention transparency, including the effects'
+    // "mostly transparent", rather than only the exact phrase.
+    .replace(/[^.]*\btransparen\w*\b[^.]*\.\s*/gi, '')
+    .replace(/\s+/g, ' ')
+    .replace(/\s+([.,;])/g, '$1')
+    .trim();
+}
+
 function promptFor(asset) {
-  const parts = [STYLE, framing(asset), asset.description];
+  const parts = [STYLE, framing(asset), scrubTransparency(asset.description)];
   if (CLARIFY[asset.id]) {
     parts.push(CLARIFY[asset.id]);
   }
   if (asset.transparency === 'alpha-required') {
-    parts.push('The background must be genuine transparency (alpha), not a white, black or chequerboard fill. Hard edges, no soft feathering or glow at the silhouette.');
+    parts.push(useChroma
+      ? CHROMA
+      : 'The background must be genuine transparency (alpha), not a white, black or chequerboard fill. Hard edges, no soft feathering or glow at the silhouette.');
   }
   return parts.filter(Boolean).join('\n\n');
 }
@@ -133,7 +190,7 @@ function promptFor(asset) {
 function bodyFor(asset) {
   const prompt = promptFor(asset);
   const size = sizeFor(asset);
-  const transparent = asset.transparency === 'alpha-required';
+  const transparent = asset.transparency === 'alpha-required' && !useChroma;
 
   if (endpointKind === 'responses') {
     const body = {
@@ -199,6 +256,7 @@ for (const a of assets) counts[a.type] = (counts[a.type] ?? 0) + 1;
 console.log(`\n${c.bold(out)}`);
 console.log(`  ${lines.length} requests, ${(bytes / 1024).toFixed(0)} KiB`);
 console.log(`  ${Object.entries(counts).map(([t, n]) => `${t} ${n}`).join(', ')}`);
+console.log(c.dim(`  cutouts: ${useChroma ? 'magenta chroma key, removed during ingest' : 'real alpha from the API'}`));
 console.log(c.yellow(`\n  create the batch with endpoint ${URL_FOR[endpointKind]} - it must match the url on every line`));
 console.log(c.dim(`\n  openai.batches.create(input_file_id=..., endpoint="${URL_FOR[endpointKind]}", completion_window="24h")`));
 console.log(c.dim(`  then save each result as <custom_id>.png and run: node tools/ingest-assets.mjs <dir>\n`));

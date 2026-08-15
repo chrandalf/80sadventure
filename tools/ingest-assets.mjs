@@ -113,7 +113,18 @@ function keyOutFlatBorder(img, tolerance = 12) {
   ];
   if (corners.some((p) => p[3] < 250)) return false; // already has alpha
   const [r0, g0, b0] = corners[0];
-  const near = (p) => Math.abs(p[0] - r0) <= tolerance && Math.abs(p[1] - g0) <= tolerance && Math.abs(p[2] - b0) <= tolerance;
+
+  /*
+   * A deliberate chroma key is a saturated colour nothing in the artwork uses,
+   * so it can be keyed generously; an incidental flat backdrop (a white or grey
+   * studio sweep) sits close to real subject colours and must not be. Widen the
+   * tolerance only for the former, which also eats the anti-aliased fringe the
+   * renderer leaves around the silhouette.
+   */
+  const saturation = Math.max(r0, g0, b0) - Math.min(r0, g0, b0);
+  const tol = saturation > 100 ? Math.max(tolerance, 72) : tolerance;
+
+  const near = (p) => Math.abs(p[0] - r0) <= tol && Math.abs(p[1] - g0) <= tol && Math.abs(p[2] - b0) <= tol;
   if (!corners.every(near)) return false;
 
   // Flood from the border only, so a same-coloured region inside stays opaque.
