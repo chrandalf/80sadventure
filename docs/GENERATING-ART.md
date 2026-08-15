@@ -282,6 +282,26 @@ Two rules survive the change of model:
   nothing, so the artwork has to do the same. Prompts that drop those clauses
   produce images the game will not use.
 
+### Spicy mode
+
+Grok Imagine's spicy mode (SuperGrok / Premium+, age-verified) allows the
+R-rated-movie standard: partial nudity and suggestive scenes, not explicit
+material. Add `--spicy` to the batch command and the three cheeky assets are
+briefed to that standard instead of the sitcom one - the guest becomes
+genuinely fresh-out-of-the-shower, the Far Beach gets distant bare-backed
+bathers instead of heads over a windbreak, and one pool cabin becomes
+suspiciously occupied.
+
+The ceiling is written into the prompts and is not negotiable: rear views at
+a distance, nothing frontal, no close figures, no detail, adults only. That
+is what keeps the certificate a 15. Everything else in the sheet is identical
+with or without the flag - spicy mode changes three assets, not the game.
+
+Note the two backgrounds already exist and are fitted; regenerating
+`bg.pool_cabins` means re-checking that room's geometry (the cabins carry
+blockers and hotspots measured off the current plate), so regenerate the
+beach freely but the cabins only if the towel gag is worth the refit.
+
 ---
 
 ## Filtering

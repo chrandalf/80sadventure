@@ -165,6 +165,56 @@ const CLARIFY = {
 };
 
 /**
+ * --spicy: the same three assets, briefed to the R-rated-comedy standard
+ * instead of the sitcom standard, for generators whose mature mode allows it
+ * (Grok Imagine's spicy mode, notably). Bare backs and implied nudity at a
+ * distance, in the saucy-postcard tradition.
+ *
+ * The ceiling is deliberate and stays in the prompt: rear views only, nothing
+ * frontal, no close figures, no anatomical detail, adults only, and the joke
+ * is always the staging. That ceiling is what keeps the game a 15 - prompts
+ * that go past it produce images the game will not ship, whatever the
+ * generator was willing to draw.
+ */
+const SPICY = {
+  'char.guest': [
+    'An adult man fresh out of the shower: bare-chested, still damp, a bath',
+    'towel wrapped and knotted firmly round his waist, another small towel',
+    'over one shoulder. Bare torso, arms and legs below the knee are visible',
+    'and that is all - the waist towel is secure and opaque. He is calm and',
+    'quietly dignified; the comedy is entirely in being walked in on.',
+    'Non-explicit: nothing frontal beyond an ordinary bare chest, no anatomy',
+    'beyond what an R-rated comedy would show.',
+  ].join(' '),
+  'portrait.guest': [
+    'Head and bare shoulders of an adult man fresh out of the shower, hair',
+    'wet, a small towel draped round his neck, expression of mild patience.',
+    'Bare shoulders and upper chest only. Non-explicit.',
+  ].join(' '),
+  'bg.nudist_beach': [
+    'A moonlit shingle beach - the naturist end, staged like a saucy 1970s',
+    'British seaside postcard. Two or three adult bathers, far from the',
+    'camera and small in the frame, seen strictly from behind: bare backs',
+    'and shoulders in the moonlight, everything from the waist down hidden',
+    'by the shingle bank, the striped windbreak or draped towels. One',
+    'neatly folded pile of clothes with shoes on top beside the umbrella.',
+    'No figure is close to the camera, none faces it, and no detail beyond',
+    'a bare back is ever visible: rear views at a distance, comic and coy,',
+    'the postcard tradition of implied nudity. Nothing frontal, nothing',
+    'explicit, all subjects adults.',
+  ].join(' '),
+  'bg.pool_cabins': [
+    'Wooden changing cabins beside an empty pool at night. One cabin door',
+    'slightly ajar with only darkness behind it; a towel slung over the top',
+    'of another door and a pair of bare feet just visible in the gap beneath',
+    'it, toes towards the camera. Nobody otherwise visible. Suggestive in',
+    'the seaside-postcard manner - the gag is what is implied behind the',
+    'doors - never explicit, no nudity shown.',
+  ].join(' '),
+};
+if (args.includes('--spicy')) Object.assign(CLARIFY, SPICY);
+
+/**
  * Chroma key, for models that cannot return alpha.
  *
  * `/v1/responses` rejects `background: "transparent"` outright - "Transparent
