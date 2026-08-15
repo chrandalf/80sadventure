@@ -7,7 +7,22 @@ import { evalCond, type GameState } from './state';
 import type { Action, DialogueNode } from './types';
 
 const MAX_CHOICES = 6;
-const CHOICE_H = 9;
+
+/**
+ * One row per line of the font, plus a little air.
+ *
+ * This was 9 - half a line - left over from when the screen was 320x200 and a
+ * line of this font was 9px tall. At 640x400 it is 18, so every choice was
+ * drawn on top of the one below it.
+ */
+const CHOICE_H = font.lineHeight() + 2;
+
+/** Rows below this are behind the interface panel. */
+const PLAYFIELD_H = 288;
+
+const PAD_X = 8;
+const NUMBER_X = 14;
+const TEXT_X = 44;
 
 /**
  * Branching conversations (spec s.12, s.34).
@@ -17,6 +32,14 @@ const CHOICE_H = 9;
  * choices simply ends, which makes one-shot exchanges and full trees the same
  * data structure.
  */
+/** Trim a choice to the width of its row, since each choice is a single line. */
+function fit(text: string, maxWidth: number): string {
+  if (font.measure(text) <= maxWidth) return text;
+  let out = text;
+  while (out.length > 1 && font.measure(`${out}...`) > maxWidth) out = out.slice(0, -1);
+  return `${out.trimEnd()}...`;
+}
+
 export class DialogueUi {
   private nodes: Record<string, DialogueNode>;
   private nodeId: string | null = null;
@@ -120,13 +143,13 @@ export class DialogueUi {
 
   private choiceAt(x: number, y: number): number {
     const top = this.choicesTop();
-    if (x < 6 || x > GAME_WIDTH - 6) return -1;
+    if (x < PAD_X || x > GAME_WIDTH - PAD_X) return -1;
     const i = Math.floor((y - top) / CHOICE_H);
     return i >= 0 && i < this.visibleChoices.length ? i : -1;
   }
 
   private choicesTop(): number {
-    return 140 - this.visibleChoices.length * CHOICE_H;
+    return PLAYFIELD_H - 10 - this.visibleChoices.length * CHOICE_H;
   }
 
   /**
@@ -160,17 +183,20 @@ export class DialogueUi {
   draw(ctx: CanvasRenderingContext2D): void {
     if (this.mode !== 'choices' || this.visibleChoices.length === 0) return;
     const top = this.choicesTop();
-    const h = this.visibleChoices.length * CHOICE_H + 2;
+    const h = this.visibleChoices.length * CHOICE_H + 6;
 
-    rect(ctx, 4, top - 2, GAME_WIDTH - 8, h, Colors.uiPanel);
-    outline(ctx, 4, top - 2, GAME_WIDTH - 8, h, ramp('violet', 1));
+    rect(ctx, PAD_X - 4, top - 4, GAME_WIDTH - (PAD_X - 4) * 2, h, Colors.uiPanel);
+    outline(ctx, PAD_X - 4, top - 4, GAME_WIDTH - (PAD_X - 4) * 2, h, ramp('violet', 1));
 
+    const room = GAME_WIDTH - TEXT_X - PAD_X - 4;
     this.visibleChoices.forEach((choice, i) => {
       const y = top + i * CHOICE_H;
       const on = i === this.hovered;
-      if (on) rect(ctx, 6, y - 1, GAME_WIDTH - 12, CHOICE_H, ramp('violet', 1));
-      font.draw(ctx, `${i + 1}.`, 9, y, { color: on ? ramp('cyan', 3) : ramp('neutral', 3) });
-      font.draw(ctx, choice.text, 22, y, { color: on ? Colors.paper : ramp('neutral', 4) });
+      if (on) rect(ctx, PAD_X - 2, y - 2, GAME_WIDTH - (PAD_X - 2) * 2, CHOICE_H, ramp('violet', 1));
+      font.draw(ctx, `${i + 1}.`, NUMBER_X, y, { color: on ? ramp('cyan', 3) : ramp('neutral', 3) });
+      font.draw(ctx, fit(choice.text, room), TEXT_X, y, {
+        color: on ? Colors.paper : ramp('neutral', 4),
+      });
     });
   }
 }

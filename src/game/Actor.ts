@@ -79,6 +79,12 @@ const BASE_SPEED = 124; // world px/sec at full scale (640x400 space)
  * A character on screen. Jack is one of these; so is every NPC, which keeps
  * NPC animation and depth sorting on the same code path as the player.
  */
+/**
+ * World pixels per complete two-step cycle. Tied to distance rather than time
+ * so the stride stays in step with the feet however fast the actor is moving.
+ */
+const STRIDE_LENGTH = 26;
+
 export class Actor {
   readonly id: string;
   anim: AnimationPlayer;
@@ -93,6 +99,8 @@ export class Actor {
 
   private targetX: number | null = null;
   private targetY: number | null = null;
+  /** Ground covered on foot, which drives the synthetic stride. */
+  private strideDistance = 0;
   /** Animation to return to once the current one-shot finishes. */
   private restAnim = 'idle';
 
@@ -190,11 +198,14 @@ export class Actor {
         // gets Jack around furniture without a full pathfinder, and a scene
         // whose walkbox has a genuine dead end simply stops him at the wall.
         if (isWalkable(boxes, nx, ny)) {
+          this.strideDistance += Math.hypot(nx - this.x, ny - this.y);
           this.x = nx;
           this.y = ny;
         } else if (isWalkable(boxes, nx, this.y)) {
+          this.strideDistance += Math.abs(nx - this.x);
           this.x = nx;
         } else if (isWalkable(boxes, this.x, ny)) {
+          this.strideDistance += Math.abs(ny - this.y);
           this.y = ny;
         } else {
           this.targetX = null;
@@ -216,9 +227,24 @@ export class Actor {
     this.anim.update(dt);
   }
 
+  /** How far through one two-step cycle, 0..1. */
+  get stridePhase(): number {
+    return (this.strideDistance / STRIDE_LENGTH) % 1;
+  }
+
   draw(ctx: CanvasRenderingContext2D, depth: DepthBand | undefined): void {
     if (!this.visible) return;
     const scale = this.fixedScale ?? depthScale(depth, this.y);
+
+    // Generated character art is one standing pose repeated across the sheet,
+    // so playing the walk animation moves nothing. Fake the stride instead.
+    if (this.isWalking && this.anim.sheet.isStill) {
+      this.anim.sheet.drawFrameWalking(
+        ctx, this.anim.frame, this.x, this.y,
+        this.anim.flippedWith(this.flipped), scale, this.stridePhase,
+      );
+      return;
+    }
     this.anim.draw(ctx, this.x, this.y, this.flipped, scale);
   }
 }

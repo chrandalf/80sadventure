@@ -29,6 +29,15 @@ interface MenuItem {
  * Owns the AdventureScreen and swaps it in and out, so restarting is simply
  * throwing the old one away.
  */
+/**
+ * Height of one selectable row.
+ *
+ * Menus were laid out on 12px and 14px rows, which was right when the screen
+ * was 320x200 and a line of this font was 9px tall. At 640x400 a line is 18px,
+ * so every menu drew its rows on top of each other.
+ */
+const ROW_H = font.lineHeight() + 2;
+
 export class Shell {
   private mode: Mode = 'intro';
   private game: AdventureScreen | null = null;
@@ -192,11 +201,11 @@ export class Shell {
   }
 
   private menuTop(): number {
-    return GAME_HEIGHT / 2 - (this.menu.length * 12) / 2 + 14;
+    return GAME_HEIGHT / 2 - (this.menu.length * ROW_H) / 2 + 14;
   }
 
   private menuIndexAt(y: number): number {
-    const i = Math.floor((y - this.menuTop() + 3) / 12);
+    const i = Math.floor((y - this.menuTop() + ROW_H / 3) / ROW_H);
     return i >= 0 && i < this.menu.length ? i : -1;
   }
 
@@ -298,7 +307,7 @@ export class Shell {
       if (this.t < at) return;
       const age = Math.min(1, (this.t - at) / 0.5);
       ctx.globalAlpha = age * (this.t > 6.4 ? Math.max(0, 1 - (this.t - 6.4) / 0.8) : 1);
-      font.draw(ctx, text, GAME_WIDTH / 2, 52 + i * 14, { color, align: 'center' });
+      font.draw(ctx, text, GAME_WIDTH / 2, 52 + i * ROW_H, { color, align: 'center' });
       ctx.globalAlpha = 1;
     });
 
@@ -367,15 +376,15 @@ export class Shell {
     this.drawLogo(ctx, 22);
 
     const top = this.menuTop();
-    ditherFill(ctx, 96, top - 8, 128, this.menu.length * 12 + 12, Colors.ink, Colors.uiPanel, 0.5);
+    ditherFill(ctx, 88, top - 10, 168, this.menu.length * ROW_H + 16, Colors.ink, Colors.uiPanel, 0.5);
     this.menu.forEach((item, i) => {
       const on = i === this.cursor;
       const disabled = item.enabled === false;
       const color = disabled ? ramp('neutral', 2) : on ? Colors.paper : ramp('neutral', 4);
       if (on && !disabled) {
-        font.draw(ctx, '>', GAME_WIDTH / 2 - 62, top + i * 12, { color: ramp('cyan', 3) });
+        font.draw(ctx, '>', GAME_WIDTH / 2 - 78, top + i * ROW_H, { color: ramp('cyan', 3) });
       }
-      font.draw(ctx, item.label, GAME_WIDTH / 2, top + i * 12, {
+      font.draw(ctx, item.label, GAME_WIDTH / 2, top + i * ROW_H, {
         color, outline: Colors.ink, align: 'center',
       });
     });
@@ -386,8 +395,8 @@ export class Shell {
   }
 
   private drawMenuPanel(ctx: CanvasRenderingContext2D, title: string): void {
-    const h = this.menu.length * 12 + 26;
-    const w = 150;
+    const h = this.menu.length * ROW_H + 34;
+    const w = 220;
     const x = GAME_WIDTH / 2 - w / 2;
     const y = GAME_HEIGHT / 2 - h / 2 - 6;
 
@@ -403,7 +412,7 @@ export class Shell {
     const top = this.menuTop();
     this.menu.forEach((item, i) => {
       const on = i === this.cursor;
-      font.draw(ctx, item.label, GAME_WIDTH / 2, top + i * 12, {
+      font.draw(ctx, item.label, GAME_WIDTH / 2, top + i * ROW_H, {
         color: item.enabled === false ? ramp('neutral', 2) : on ? Colors.paper : ramp('neutral', 4),
         align: 'center',
       });
@@ -417,16 +426,16 @@ export class Shell {
     ctx.globalAlpha = 1;
 
     const slots = saveSlots();
-    rect(ctx, 24, 24, GAME_WIDTH - 48, 24 + slots.length * 14, Colors.uiPanel);
-    outline(ctx, 24, 24, GAME_WIDTH - 48, 24 + slots.length * 14, ramp('violet', 2));
+    rect(ctx, 24, 24, GAME_WIDTH - 48, 30 + slots.length * ROW_H, Colors.uiPanel);
+    outline(ctx, 24, 24, GAME_WIDTH - 48, 30 + slots.length * ROW_H, ramp('violet', 2));
     font.draw(ctx, this.slotMode === 'save' ? 'SAVE GAME' : 'LOAD GAME', GAME_WIDTH / 2, 29, {
       color: ramp('cyan', 3), align: 'center',
     });
 
     slots.forEach((slot, i) => {
-      const y = 40 + i * 14;
+      const y = 46 + i * ROW_H;
       const on = i === this.cursor;
-      if (on) rect(ctx, 28, y - 2, GAME_WIDTH - 56, 13, ramp('violet', 1));
+      if (on) rect(ctx, 28, y - 3, GAME_WIDTH - 56, ROW_H, ramp('violet', 1));
       const info = slotInfo(slot);
       const label = slot === 'auto' ? 'AUTO' : `SLOT ${slot}`;
       font.draw(ctx, label, 34, y, { color: on ? Colors.paper : ramp('neutral', 4) });
@@ -521,7 +530,7 @@ export class Shell {
       const r = rng(7);
       for (let i = 0; i < 3; i++) {
         font.draw(ctx, ['ONE MORE CREDIT', 'BRIGHTON VALE, 1987', 'PRESS SPACE'][i],
-          GAME_WIDTH / 2, 116 + i * 12, {
+          GAME_WIDTH / 2, 116 + i * ROW_H, {
             color: [ramp('magenta', 2), ramp('neutral', 3), ramp('neutral', 3)][i],
             align: 'center',
           });

@@ -110,6 +110,8 @@ export class SpriteSheet {
 
   /** Lazily-built horizontally mirrored copy, for `flipX` animations. */
   private mirrored: HTMLCanvasElement | null = null;
+  /** Cached answer to "is every cell on this sheet the same picture?" */
+  private still: boolean | null = null;
 
   constructor(id: string, image: CanvasImageSource, def: SpriteDef, isPlaceholder = false) {
     this.id = id;
@@ -124,6 +126,44 @@ export class SpriteSheet {
     this.frameCount = this.columns * this.rows;
     this.isPlaceholder = isPlaceholder;
     this.renderScale = def.renderScale ?? 1;
+  }
+
+  /**
+   * True when every cell holds the same picture, so playing an animation would
+   * show no movement at all.
+   *
+   * Generated character art arrives as one standing figure copied across the
+   * sheet, because no image model produces a frame-accurate walk cycle. Knowing
+   * that lets the actor fake a stride rather than glide along bolt upright.
+   * Compared once, on the first ask, and remembered.
+   */
+  get isStill(): boolean {
+    if (this.still !== null) return this.still;
+    this.still = this.framesAreIdentical();
+    return this.still;
+  }
+
+  private framesAreIdentical(): boolean {
+    if (this.frameCount < 2) return true;
+    const w = this.frameWidth;
+    const h = this.frameHeight;
+    try {
+      const cv = document.createElement('canvas');
+      cv.width = w * 2;
+      cv.height = h;
+      const c = cv.getContext('2d', { willReadFrequently: true })!;
+      c.imageSmoothingEnabled = false;
+      // Frame 0 beside frame 1: the walk cycle's first two cells.
+      c.drawImage(this.image, 0, 0, w, h, 0, 0, w, h);
+      c.drawImage(this.image, w, 0, w, h, w, 0, w, h);
+      const a = c.getImageData(0, 0, w, h).data;
+      const b = c.getImageData(w, 0, w, h).data;
+      for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return false;
+      return true;
+    } catch {
+      // A tainted or not-yet-decoded image: assume it animates and leave it be.
+      return false;
+    }
   }
 
   hasAnimation(name: string): boolean {
@@ -187,6 +227,58 @@ export class SpriteSheet {
       dx, dy,
       dw, dh,
     );
+  }
+
+  /**
+   * Draw a frame as though it were mid-stride.
+   *
+   * With only one pose available, the movement has to come from how it is
+   * drawn. The figure is cut at the hip and the two halves are offset against
+   * each other by a pixel while the whole body rises and falls - the shoulders
+   * roll one way as the legs swing the other. At this size that reads as
+   * walking far better than any attempt to fake individual legs, which at
+   * fourteen pixels across just looks broken.
+   *
+   * `phase` is 0..1 through one full two-step cycle.
+   */
+  drawFrameWalking(
+    ctx: CanvasRenderingContext2D,
+    frame: number,
+    x: number,
+    y: number,
+    flipX = false,
+    scale = 1,
+    phase = 0,
+  ): void {
+    const idx = ((frame % this.frameCount) + this.frameCount) % this.frameCount;
+    const col = idx % this.columns;
+    const row = Math.floor(idx / this.columns);
+
+    const effective = scale * this.renderScale;
+    const snapped = effective === 1 ? 1 : Math.max(0.125, Math.round(effective * 8) / 8);
+    const dw = Math.max(1, Math.round(this.frameWidth * snapped));
+    const dx = Math.round(x - this.anchorX * snapped);
+    const dy = Math.round(y - this.anchorY * snapped);
+
+    const src = flipX ? this.ensureMirrored() : this.image;
+    const sCol = flipX ? this.columns - 1 - col : col;
+    const sx = sCol * this.frameWidth;
+    const sy = row * this.frameHeight;
+
+    const swing = Math.sin(phase * Math.PI * 2);
+    // Two footfalls per cycle, so the body is lowest as each foot lands.
+    const bob = Math.abs(Math.cos(phase * Math.PI * 2)) > 0.72 ? 0 : -1;
+    const lean = swing > 0.4 ? 1 : swing < -0.4 ? -1 : 0;
+
+    const hip = Math.round(this.frameHeight * 0.55);
+    const topH = Math.max(1, Math.round(hip * snapped));
+    const botSrcH = this.frameHeight - hip;
+    const botH = Math.max(1, Math.round(botSrcH * snapped));
+
+    ctx.drawImage(src, sx, sy, this.frameWidth, hip,
+      dx + lean, dy + bob, dw, topH);
+    ctx.drawImage(src, sx, sy + hip, this.frameWidth, botSrcH,
+      dx - lean, dy + topH + bob, dw, botH);
   }
 
   /**
@@ -281,6 +373,16 @@ export class AnimationPlayer {
     }
   }
 
+  /** The sheet cell currently showing. */
+  get frame(): number {
+    return this.frames[Math.min(this.index, this.frames.length - 1)];
+  }
+
+  /** True when the animation's own flip disagrees with the caller's. */
+  flippedWith(extraFlip: boolean): boolean {
+    return this.flip !== extraFlip;
+  }
+
   draw(
     ctx: CanvasRenderingContext2D,
     x: number,
@@ -288,7 +390,6 @@ export class AnimationPlayer {
     extraFlip = false,
     scale = 1,
   ): void {
-    const frame = this.frames[Math.min(this.index, this.frames.length - 1)];
-    this.sheet.drawFrame(ctx, frame, x, y, this.flip !== extraFlip, scale);
+    this.sheet.drawFrame(ctx, this.frame, x, y, this.flippedWith(extraFlip), scale);
   }
 }
