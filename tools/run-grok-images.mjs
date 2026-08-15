@@ -69,10 +69,20 @@ if (!PROVIDERS) {
   process.exit(2);
 }
 
+// --url points the same logic at an OpenAI-compatible proxy, or at a local
+// stub when testing the budget arithmetic without spending anything.
+const endpoint = flag('url', PROVIDERS.url);
 const model = flag('model', PROVIDERS.defaultModel);
 const resolution = flag('resolution', '1k');
 const budget = Number(flag('budget', '2.80'));
 const limit = Number(flag('limit', 'Infinity'));
+/**
+ * How many images to have in flight. One image takes tens of seconds, so a
+ * hundred of them one after another is most of an hour of watching a cursor.
+ * Six is comfortably inside both providers' rate limits; 429s back off and
+ * retry anyway.
+ */
+const concurrency = Number(flag('concurrency', '6'));
 
 // Per-image price for the ledger. The xAI numbers are the console's
 // published flat rates; on OpenRouter the price is per model (Seedream 4.5
@@ -124,38 +134,34 @@ const requests = readFileSync(resolve(process.cwd(), jsonl), 'utf8')
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-let spent = 0;
+/**
+ * Money committed to requests that are in flight or finished.
+ *
+ * The budget is checked against this, not against completed spend, and it is
+ * incremented *before* a request goes out. A worker that cannot reserve the
+ * price of one image stops. That is what lets several images run at once
+ * without the cap becoming a race: with N in flight, N prices are already
+ * reserved, so the ceiling holds no matter how the responses interleave.
+ */
+let reserved = 0;
 let done = 0;
 let skipped = 0;
 let failed = 0;
-/**
- * Consecutive hard failures. Three in a row with zero successes means the
- * model name or the key is wrong, not the prompts - abort before the ledger
- * fills up with billed-but-useless attempts.
- */
-let streak = 0;
+let stopped = false;
 
-// Sequential on purpose: the budget check must see every previous attempt.
-for (const req of requests) {
-  if (done + failed >= limit) break;
-  const dest = join(dir, `${req.custom_id}.png`);
-  if (existsSync(dest)) { skipped++; continue; }
+/** Shared cursor into the request list; workers take the next unclaimed one. */
+let cursor = 0;
 
-  if (spent + PRICE > budget + 1e-9) {
-    console.log(c.yellow(`\nbudget: $${spent.toFixed(2)} spent, next image would pass $${budget.toFixed(2)} - stopping here.`));
-    break;
-  }
-
+async function generate(req, dest) {
   // The JSONL was written for OpenAI; keep the prompt, rebuild the body in
   // whatever shape this provider wants.
   const prompt = req.body.prompt ?? req.body.input;
   const body = PROVIDERS.body(model, prompt, resolution);
 
-  let outcome = 'fail';
   for (let attempt = 0; attempt <= 2; attempt++) {
     let res;
     try {
-      res = await fetch(PROVIDERS.url, {
+      res = await fetch(endpoint, {
         method: 'POST',
         headers: { authorization: `Bearer ${key}`, 'content-type': 'application/json' },
         body: JSON.stringify(body),
@@ -165,6 +171,8 @@ for (const req of requests) {
       await sleep(2000 * 2 ** attempt);
       continue;
     }
+    // Rate limits are expected when several run at once: back off and retry
+    // rather than counting it as a failure.
     if (res.status === 429 || res.status >= 500) {
       await sleep(3000 * 2 ** attempt);
       continue;
@@ -172,7 +180,7 @@ for (const req of requests) {
     const data = await res.json().catch(() => null);
     if (!res.ok) {
       appendFileSync(errLog, `${req.custom_id}\t${res.status}\t${JSON.stringify(data?.error ?? data).slice(0, 300)}\n`);
-      break;
+      return false;
     }
     // OpenAI-style and OpenRouter-style responses both land here.
     const b64 = data?.data?.[0]?.b64_json
@@ -180,31 +188,58 @@ for (const req of requests) {
       ?? data?.output?.[0]?.b64_json;
     if (!b64) {
       appendFileSync(errLog, `${req.custom_id}\tno-image\t${JSON.stringify(data).slice(0, 300)}\n`);
-      break;
+      return false;
     }
     writeFileSync(dest, Buffer.from(b64, 'base64'));
-    outcome = 'ok';
-    break;
+    return true;
   }
+  return false;
+}
 
-  // Count the attempt as spent either way - a refused request may still have
-  // been billed, and guessing low is how a $2.82 balance goes negative.
-  spent += PRICE;
-  if (outcome === 'ok') {
-    done++;
-    streak = 0;
-    console.log(`${c.green('+')} ${req.custom_id}  ($${spent.toFixed(2)} of $${budget.toFixed(2)})`);
-  } else {
-    failed++;
-    streak++;
-    console.log(`${c.red('x')} ${req.custom_id}  (see _errors.log)`);
-    if (streak >= 3 && done === 0) {
-      console.error(c.red('\nthree failures and no successes - the model name or key is wrong.'));
-      console.error(c.red(`check ${errLog}, then retry (already-written files are skipped). Try --model grok-2-image.`));
-      break;
+async function worker() {
+  while (!stopped) {
+    const req = requests[cursor++];
+    if (!req) return;
+    if (done + failed >= limit) return;
+
+    const dest = join(dir, `${req.custom_id}.png`);
+    if (existsSync(dest)) { skipped++; continue; }
+
+    // Reserve before dispatching. JS runs this check-and-increment without
+    // interleaving, so the reservation is atomic even with workers in flight.
+    if (reserved + PRICE > budget + 1e-9) {
+      if (!stopped) {
+        stopped = true;
+        console.log(c.yellow(`\nbudget: $${reserved.toFixed(2)} committed, next image would pass $${budget.toFixed(2)} - stopping here.`));
+      }
+      return;
+    }
+    // Counted as spent whatever happens - a refused request may still have
+    // been billed, and guessing low is how a balance goes negative.
+    reserved += PRICE;
+
+    const ok = await generate(req, dest);
+    if (ok) {
+      done++;
+      console.log(`${c.green('+')} ${req.custom_id}  ($${reserved.toFixed(2)} of $${budget.toFixed(2)})`);
+    } else {
+      failed++;
+      console.log(`${c.red('x')} ${req.custom_id}  (see _errors.log)`);
+      // Three failures and nothing working means the model name or the key is
+      // wrong, not the prompts. Stop before the ledger fills with billed-but-
+      // useless attempts.
+      if (failed >= 3 && done === 0) {
+        stopped = true;
+        console.error(c.red('\nthree failures and no successes - the model name or key is likely wrong.'));
+        console.error(c.red(`check ${errLog}, then retry (already-written files are skipped).`));
+        return;
+      }
     }
   }
 }
+
+await Promise.all(Array.from({ length: Math.max(1, concurrency) }, worker));
+const spent = reserved;
 
 console.log(`\n${done} written, ${skipped} already present, ${failed} failed`);
 console.log(`estimated spend this run: $${spent.toFixed(2)} at $${PRICE.toFixed(2)}/image (${model}, ${resolution})`);
