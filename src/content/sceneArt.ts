@@ -45,10 +45,21 @@ export const ART_HEIGHT = 400;
 
 export const SCENE_ART: Record<string, SceneArt> = {
   /**
-   * The first converted scene. Drop a 640x400 image at the path below and it
-   * appears in game on the next visit - no code change, no rebuild.
+   * The haunted house plate put its rubber duck in a puddle at y~330 - under
+   * the verb panel, invisible in play. `tools/relocate-duck.mjs` lifts the
+   * duck's own pixels onto visible floor as this layer; the plate itself is
+   * untouched. Midground, so characters walk in front of it.
    */
-  // Empty by design.
+  haunted_house: {
+    id: 'haunted_house',
+    background: '/assets/backgrounds/haunted_house.webp',
+    width: ART_WIDTH,
+    height: ART_HEIGHT,
+    layers: [
+      { src: '/assets/backgrounds/haunted_house_duck.png', plane: 'midground' },
+    ],
+  },
+  // Otherwise empty by design.
   //
   // A foreground layer used to live here: a second image, aligned pixel for
   // pixel with the plate, holding the near-camera scenery so characters could

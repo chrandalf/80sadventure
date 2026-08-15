@@ -281,14 +281,14 @@ export const STORY_SCENES: Record<string, Scene> = {
       { polygon: [72, 95, 131, 95, 131, 152, 70, 152], y: 152 },
       { polygon: [160, 97, 251, 97, 251, 152, 158, 152], y: 152 },
     ],
-    entries: { default: { x: 60, y: 132, facing: 'east' } },
+    entries: { default: { x: 280, y: 138, facing: 'west' } },
     ambience: [{ sfx: 'projector', everyMin: 12, everyMax: 28 }],
     hotspots: [
       {
         id: 'projector',
         name: 'Projector',
         rect: { x: 24, y: 30, w: 88, h: 62 },
-        walkTo: [70, 128],
+        walkTo: [145, 138],
         facing: 'north',
         verbs: {
           LOOK: [
@@ -338,7 +338,7 @@ export const STORY_SCENES: Record<string, Scene> = {
         id: 'fuse_box_shelf',
         name: 'Shelf',
         rect: { x: 130, y: 96, w: 96, h: 28 },
-        walkTo: [176, 132],
+        walkTo: [158, 140],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'Film cans, a tin of splicing cement, and a jar of fuses sorted by amperage. Someone loved this room.']],
@@ -365,7 +365,7 @@ export const STORY_SCENES: Record<string, Scene> = {
         id: 'swimsuit_poster',
         name: 'Old Poster',
         rect: { x: 194, y: 20, w: 44, h: 58 },
-        walkTo: [212, 126],
+        walkTo: [251, 142],
         facing: 'north',
         verbs: {
           LOOK: [
@@ -422,7 +422,7 @@ export const STORY_SCENES: Record<string, Scene> = {
       },
     ],
     exits: [
-      { id: 'proj_out', name: 'Lobby', rect: { x: 0, y: 100, w: 22, h: 44 }, to: 'cinema_lobby', entry: 'default', walkTo: [24, 132], arrow: 'left' },
+      { id: 'proj_out', name: 'Lobby', rect: { x: 252, y: 12, w: 62, h: 126 }, to: 'cinema_lobby', entry: 'default', walkTo: [280, 139], arrow: 'right' },
     ],
   },
 
@@ -534,17 +534,27 @@ export const STORY_SCENES: Record<string, Scene> = {
     name: 'Inside the Clock Tower',
     background: 'clock_tower_int',
     music: 'machine',
-    walkboxes: [[16, 112, 300, 112, 306, 140, 10, 140]],
-    depth: { yNear: 140, yFar: 112, scaleNear: 1, scaleFar: 0.86 },
-    entries: { default: { x: 60, y: 132, facing: 'east' } },
+    // Mechanism fills the left half. Crate mid-floor, ladder right, arch right.
+    autoFloor: false,
+    walkboxes: [[130, 131, 306, 131, 314, 143, 126, 143]],
+    depth: { yNear: 143, yFar: 131, scaleNear: 1, scaleFar: 0.92 },
+    blockers: [
+      [0, 100, 140, 100, 140, 144, 0, 144],
+      [144, 110, 184, 110, 184, 141, 144, 141],
+      [296, 100, 320, 100, 320, 144, 296, 144],
+    ],
+    occluders: [
+      { polygon: [144, 110, 184, 110, 184, 141, 144, 141], y: 141 },
+    ],
+    entries: { default: { x: 272, y: 141, facing: 'west' } },
     onFirstEnter: [['jack', 'The mechanism is intact. Oiled, even. It is not broken. It has been stopped.']],
     hotspots: [
       {
         id: 'mechanism',
         name: 'Mechanism',
-        rect: { x: 46, y: 56, w: 80, h: 56 },
-        walkTo: [90, 132],
-        facing: 'north',
+        rect: { x: 10, y: 20, w: 96, h: 110 },
+        walkTo: [148, 141],
+        facing: 'west',
         verbs: {
           LOOK: [
             ['jack', 'Somebody put a steel pin through the escapement. Deliberately. Neatly.'],
@@ -569,7 +579,7 @@ export const STORY_SCENES: Record<string, Scene> = {
       {
         id: 'clock_back',
         name: 'Back of the Clock Face',
-        rect: { x: 120, y: 12, w: 80, h: 80 },
+        rect: { x: 108, y: 8, w: 125, h: 104 },
         verbs: {
           LOOK: [['jack', 'From behind, the hands are just two pieces of metal. It is a great deal less mystical from this side.']],
         },
@@ -577,9 +587,9 @@ export const STORY_SCENES: Record<string, Scene> = {
       {
         id: 'recorder_shelf',
         name: 'Ledge',
-        rect: { x: 216, y: 96, w: 60, h: 18 },
-        walkTo: [244, 132],
-        facing: 'north',
+        rect: { x: 144, y: 108, w: 40, h: 32 },
+        walkTo: [190, 141],
+        facing: 'west',
         verbs: {
           LOOK: [['jack', 'A portable cassette recorder on a ledge, plugged into nothing, with the record button taped down.']],
           TAKE: [
@@ -604,7 +614,8 @@ export const STORY_SCENES: Record<string, Scene> = {
       },
     ],
     exits: [
-      { id: 'clockint_out', name: 'Outside', rect: { x: 0, y: 108, w: 22, h: 36 }, to: 'clock_tower_ext', entry: 'default', walkTo: [24, 134], arrow: 'left' },
+      // The arch on the right, with the town below it - the only opening.
+      { id: 'clockint_out', name: 'Outside', rect: { x: 230, y: 26, w: 60, h: 110 }, to: 'clock_tower_ext', entry: 'default', walkTo: [268, 141], arrow: 'right' },
     ],
   },
 
@@ -684,16 +695,24 @@ export const STORY_SCENES: Record<string, Scene> = {
     name: 'Inside the Lighthouse',
     background: 'lighthouse_int',
     music: 'machine',
-    walkboxes: [[20, 118, 300, 118, 304, 140, 16, 140]],
-    depth: { yNear: 140, yFar: 118, scaleNear: 1, scaleFar: 0.9 },
-    entries: { default: { x: 70, y: 134, facing: 'east' } },
+    // Round room. Table left, locker and stairs centre-right, writing desk right.
+    autoFloor: false,
+    walkboxes: [[80, 128, 312, 128, 318, 143, 56, 143]],
+    depth: { yNear: 143, yFar: 128, scaleNear: 1, scaleFar: 0.9 },
+    blockers: [
+      [0, 95, 76, 95, 76, 144, 0, 144],
+      [140, 108, 187, 108, 187, 141, 140, 141],
+      [195, 112, 235, 112, 235, 144, 195, 144],
+      [244, 108, 320, 108, 320, 144, 244, 144],
+    ],
+    entries: { default: { x: 112, y: 139, facing: 'south' } },
     hotspots: [
       {
         id: 'log_book',
         name: 'Log Book',
-        rect: { x: 200, y: 108, w: 44, h: 18 },
-        walkTo: [216, 136],
-        facing: 'north',
+        rect: { x: 245, y: 72, w: 65, h: 48 },
+        walkTo: [239, 142],
+        facing: 'east',
         verbs: {
           LOOK: [
             ['jack', 'The keeper\'s log. Last entry, September 1974.'],
@@ -708,8 +727,8 @@ export const STORY_SCENES: Record<string, Scene> = {
       {
         id: 'lh_locker',
         name: "Keeper's Locker",
-        rect: { x: 96, y: 96, w: 46, h: 22 },
-        walkTo: [118, 136],
+        rect: { x: 141, y: 42, w: 45, h: 95 },
+        walkTo: [163, 142],
         facing: 'north',
         verbs: {
           LOOK: [['jack', "The keeper's locker. Empty, apart from a tobacco tin."]],
@@ -735,7 +754,7 @@ export const STORY_SCENES: Record<string, Scene> = {
       {
         id: 'porthole',
         name: 'Porthole',
-        rect: { x: 38, y: 42, w: 38, h: 38 },
+        rect: { x: 25, y: 20, w: 52, h: 55 },
         verbs: {
           LOOK: [['jack', 'Black water and, a mile off, the lights of a town that is about to be preserved in aspic.']],
         },
@@ -743,14 +762,15 @@ export const STORY_SCENES: Record<string, Scene> = {
       {
         id: 'lh_stairs',
         name: 'Stairs',
-        rect: { x: 130, y: 20, w: 60, h: 90 },
+        rect: { x: 192, y: 8, w: 56, h: 120 },
         verbs: {
           LOOK: [['jack', 'A hundred and forty steps to a lamp that runs itself. Not tonight.']],
         },
       },
     ],
     exits: [
-      { id: 'lhint_out', name: 'Outside', rect: { x: 0, y: 114, w: 24, h: 30 }, to: 'lighthouse_ext', entry: 'default', walkTo: [26, 136], arrow: 'left' },
+      // Back out through the open door, centre-left, gallery beyond it.
+      { id: 'lhint_out', name: 'Outside', rect: { x: 86, y: 26, w: 50, h: 112 }, to: 'lighthouse_ext', entry: 'default', walkTo: [112, 139], arrow: 'up' },
     ],
   },
 
@@ -828,7 +848,7 @@ export const STORY_SCENES: Record<string, Scene> = {
         id: 'arthur',
         name: 'Arthur',
         rect: { x: 250, y: 100, w: 26, h: 40 },
-        walkTo: [238, 136],
+        walkTo: [221, 136],
         facing: 'east',
         visibleIf: ['flag', 'machineReady'],
         defaultVerb: 'TALK',

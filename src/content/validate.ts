@@ -1,4 +1,5 @@
 import type { Action, Cond, Scene } from '../game/types';
+import { isWalkable } from '../game/Actor';
 import { TUNES } from '../engine/Audio';
 import { CHARACTERS } from './characters';
 import { DIALOGUE } from './dialogue';
@@ -151,6 +152,61 @@ export function validateContent(spriteIds: ReadonlySet<string>): string[] {
     const spriteId = item.id.startsWith('cassette_') ? item.id : `item.${item.id}`;
     if (!spriteIds.has(spriteId)) {
       at(`item ${item.id}`, `no manifest sprite "${spriteId}" - it will have no inventory icon`);
+    }
+  }
+
+  return problems;
+}
+
+/**
+ * Cross-check every *position* in the content data against each room's
+ * walkable geometry.
+ *
+ * References going stale is one failure mode; positions going stale is the
+ * other, and it happens every time a room is refitted to new artwork. A
+ * `walkTo` inside a blocker means clicking that hotspot walks Jack somewhere
+ * he cannot stand - which the pathfinder resolves to "as close as it can get",
+ * sometimes on the wrong side of a desk. An entry inside a blocker strands him
+ * on arrival. Both have shipped; both are pure geometry, so a machine can
+ * catch them.
+ *
+ * Characters are deliberately not checked: an NPC standing inside a blocker is
+ * normal (Arthur lives behind his counter), and the actors only avoid each
+ * other, not the scenery they are posed against.
+ */
+export function validateGeometry(): string[] {
+  const problems: string[] = [];
+
+  for (const scene of Object.values(SCENES)) {
+    const stand = (x: number, y: number) => isWalkable(scene.walkboxes, x, y, scene.blockers);
+    const w = `scene ${scene.id}`;
+
+    for (const [name, spot] of Object.entries(scene.entries ?? {})) {
+      if (!stand(spot.x, spot.y)) {
+        problems.push(`${w}: entry "${name}" (${spot.x},${spot.y}) is not standable`);
+      }
+    }
+    for (const h of scene.hotspots ?? []) {
+      if (h.walkTo && !stand(h.walkTo[0], h.walkTo[1])) {
+        problems.push(`${w}: hotspot "${h.id}" walkTo (${h.walkTo[0]},${h.walkTo[1]}) is not standable`);
+      }
+    }
+    const exits = scene.exits ?? [];
+    for (const e of exits) {
+      if (e.walkTo && !stand(e.walkTo[0], e.walkTo[1])) {
+        problems.push(`${w}: exit "${e.id}" walkTo (${e.walkTo[0]},${e.walkTo[1]}) is not standable`);
+      }
+    }
+    // Two exits sharing screen space means the player cannot tell which one
+    // they are about to click.
+    for (let i = 0; i < exits.length; i++) {
+      for (let j = i + 1; j < exits.length; j++) {
+        const a = exits[i].rect;
+        const b = exits[j].rect;
+        if (a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h) {
+          problems.push(`${w}: exits "${exits[i].id}" and "${exits[j].id}" overlap`);
+        }
+      }
     }
   }
 

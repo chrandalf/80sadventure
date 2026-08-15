@@ -122,6 +122,14 @@ export class AdventureScreen implements RunnerHost {
     this.dialogueRunner = new ActionRunner(this);
     this.minigames = new Minigames();
 
+    // Dev builds honour ?room=<sceneId>, so any room's fitted geometry can be
+    // checked against its artwork without playing to it.
+    if (import.meta.env.DEV) {
+      const room = new URLSearchParams(location.search).get('room');
+      if (room && SCENES[room]) state.currentScene = room;
+      else if (room) console.warn(`[scenes] ?room=${room}: no such scene`);
+    }
+
     this.scene = SCENES[state.currentScene] ?? Object.values(SCENES)[0];
     this.jack = new Actor('jack', assets.get('char.jack'), state.jack.x, state.jack.y);
     this.jack.facing = state.jack.facing;

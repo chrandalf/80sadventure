@@ -109,7 +109,7 @@ export const TOWN_SCENES: Record<string, Scene> = {
     walkboxes: [[20, 118, 300, 118, 310, 143, 10, 143]],
     depth: { yNear: 143, yFar: 118, scaleNear: 1, scaleFar: 0.78 },
     blockers: [
-      [216, 118, 262, 118, 262, 145, 216, 145],
+      [216, 118, 262, 118, 262, 137, 216, 137],
       [262, 110, 320, 110, 320, 145, 262, 145],
       [84, 116, 104, 116, 104, 133, 84, 133],
     ],
@@ -125,7 +125,7 @@ export const TOWN_SCENES: Record<string, Scene> = {
         id: 'photo_booth',
         name: 'Photographic Booth',
         rect: { x: 234, y: 34, w: 40, h: 52 },
-        walkTo: [246, 118],
+        walkTo: [235, 140],
         facing: 'north',
         verbs: {
           LOOK: [
@@ -199,9 +199,9 @@ export const TOWN_SCENES: Record<string, Scene> = {
     ],
     exits: [
       { id: 'pier_back', name: 'Seafront', rect: { x: 0, y: 96, w: 26, h: 48 }, to: 'seafront', entry: 'fromPier', walkTo: [34, 132], arrow: 'left' },
-      { id: 'pier_cafe', name: 'Pier Café', rect: { x: 130, y: 40, w: 40, h: 34 }, to: 'pier_cafe', entry: 'default', walkTo: [150, 110], arrow: 'up' },
-      { id: 'pier_cinema', name: 'Abandoned Cinema', rect: { x: 292, y: 96, w: 28, h: 48 }, to: 'cinema_exterior', entry: 'default', walkTo: [286, 132], arrow: 'right', requires: ['flag', 'cinemaOpen'], lockedText: 'There is nothing down that way but a shut cinema and a lot of pigeons.' },
-      { id: 'pier_lighthouse', name: 'Lighthouse', rect: { x: 12, y: 32, w: 26, h: 38 }, to: 'lighthouse_ext', entry: 'default', walkTo: [40, 116], arrow: 'up', requires: ['flag', 'predLighthouse'], lockedText: 'A long walk out to an automated lighthouse in the dark. Not without a reason.' },
+      { id: 'pier_cafe', name: 'Pier Café', rect: { x: 262, y: 20, w: 58, h: 100 }, to: 'pier_cafe', entry: 'default', walkTo: [254, 141], arrow: 'right' },
+      { id: 'pier_cinema', name: 'Abandoned Cinema', rect: { x: 150, y: 15, w: 75, h: 55 }, to: 'cinema_exterior', entry: 'default', walkTo: [187, 122], arrow: 'up', requires: ['flag', 'cinemaOpen'], lockedText: 'There is nothing down that way but a shut cinema and a lot of pigeons.' },
+      { id: 'pier_lighthouse', name: 'Lighthouse', rect: { x: 12, y: 32, w: 26, h: 38 }, to: 'lighthouse_ext', entry: 'default', walkTo: [40, 118], arrow: 'up', requires: ['flag', 'predLighthouse'], lockedText: 'A long walk out to an automated lighthouse in the dark. Not without a reason.' },
     ],
   },
 
@@ -222,13 +222,13 @@ export const TOWN_SCENES: Record<string, Scene> = {
       { polygon: [0, 72, 89, 72, 89, 152, 0, 152], y: 152 },
       { polygon: [160, 105, 310, 105, 310, 152, 158, 152], y: 152 },
     ],
-    entries: { default: { x: 160, y: 130, facing: 'north' } },
+    entries: { default: { x: 108, y: 139, facing: 'south' } },
     hotspots: [
       {
         id: 'urn',
         name: 'Tea Urn',
         rect: { x: 32, y: 56, w: 22, h: 24 },
-        walkTo: [60, 122],
+        walkTo: [96, 134],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'A tea urn the size of a water tank, kept at a temperature that would sterilise surgical equipment.']],
@@ -239,7 +239,7 @@ export const TOWN_SCENES: Record<string, Scene> = {
         id: 'cafe_table',
         name: 'Formica Table',
         rect: { x: 176, y: 82, w: 48, h: 34 },
-        walkTo: [200, 130],
+        walkTo: [155, 138],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'Someone has scratched KEV WOZ ERE into the formica. Kev is consistent, if nothing else.']],
@@ -268,7 +268,7 @@ export const TOWN_SCENES: Record<string, Scene> = {
       },
     ],
     exits: [
-      { id: 'cafe_out', name: 'Pier', rect: { x: 0, y: 96, w: 24, h: 48 }, to: 'pier', entry: 'default', walkTo: [26, 132], arrow: 'left' },
+      { id: 'cafe_out', name: 'Pier', rect: { x: 88, y: 15, w: 42, h: 122 }, to: 'pier', entry: 'default', walkTo: [108, 140], arrow: 'left' },
     ],
   },
 
@@ -287,13 +287,13 @@ export const TOWN_SCENES: Record<string, Scene> = {
     occluders: [
       { polygon: [0, 74, 232, 74, 232, 146, 0, 146], y: 146 },
     ],
-    entries: { default: { x: 160, y: 132, facing: 'north' } },
+    entries: { default: { x: 270, y: 135, facing: 'west' } },
     hotspots: [
       {
         id: 'fryer',
         name: 'Fryers',
         rect: { x: 40, y: 64, w: 150, h: 30 },
-        walkTo: [110, 122],
+        walkTo: [235, 133],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'Three fryers, one of which has been making the same noise since 1982.']],
@@ -304,7 +304,7 @@ export const TOWN_SCENES: Record<string, Scene> = {
         id: 'butter_tray',
         name: 'Butter',
         rect: { x: 200, y: 84, w: 40, h: 22 },
-        walkTo: [216, 126],
+        walkTo: [232, 126],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'A tray of catering butter pats, going soft under a heat lamp. Five pence each, which is theft.']],
@@ -337,7 +337,7 @@ export const TOWN_SCENES: Record<string, Scene> = {
       },
     ],
     exits: [
-      { id: 'chips_out', name: 'Seafront', rect: { x: 0, y: 96, w: 24, h: 48 }, to: 'seafront', entry: 'default', walkTo: [26, 132], arrow: 'left' },
+      { id: 'chips_out', name: 'Seafront', rect: { x: 228, y: 12, w: 76, h: 118 }, to: 'seafront', entry: 'default', walkTo: [270, 136], arrow: 'right' },
     ],
   },
 
@@ -362,7 +362,7 @@ export const TOWN_SCENES: Record<string, Scene> = {
         id: 'bins',
         name: 'Bins',
         rect: { x: 246, y: 82, w: 34, h: 40 },
-        walkTo: [240, 130],
+        walkTo: [240, 121],
         facing: 'east',
         verbs: {
           LOOK: [['jack', 'Two bins and a crate. The traditional contents of every alley in every game I have ever played.']],
@@ -384,7 +384,7 @@ export const TOWN_SCENES: Record<string, Scene> = {
         id: 'fire_door',
         name: 'Fire Door',
         rect: { x: 40, y: 60, w: 32, h: 62 },
-        walkTo: [66, 130],
+        walkTo: [66, 136],
         facing: 'west',
         verbs: {
           LOOK: [['jack', 'The back of the video shop. Fire door, propped open with a videocassette. Poetic.']],
@@ -422,8 +422,8 @@ export const TOWN_SCENES: Record<string, Scene> = {
       },
     ],
     exits: [
-      { id: 'alley_out', name: 'Seafront', rect: { x: 0, y: 100, w: 20, h: 44 }, to: 'seafront', entry: 'default', walkTo: [24, 132], arrow: 'left' },
-      { id: 'alley_tv', name: "Piper's Television Emporium", rect: { x: 300, y: 100, w: 20, h: 44 }, to: 'tv_shop', entry: 'default', walkTo: [298, 132], arrow: 'right' },
+      { id: 'alley_out', name: 'Seafront', rect: { x: 0, y: 100, w: 20, h: 44 }, to: 'seafront', entry: 'default', walkTo: [68, 132], arrow: 'left' },
+      { id: 'alley_tv', name: "Piper's Television Emporium", rect: { x: 300, y: 100, w: 20, h: 44 }, to: 'tv_shop', entry: 'default', walkTo: [298, 121], arrow: 'right' },
     ],
   },
 
@@ -444,7 +444,7 @@ export const TOWN_SCENES: Record<string, Scene> = {
       { polygon: [0, 75, 84, 75, 84, 152, 0, 152], y: 152 },
       { polygon: [276, 73, 320, 73, 320, 152, 276, 152], y: 152 },
     ],
-    entries: { default: { x: 60, y: 132, facing: 'east' } },
+    entries: { default: { x: 205, y: 135, facing: 'south' } },
     characters: [{ id: 'derek', sprite: 'char.derek', x: 240, y: 130, facing: 'west' }],
     ambience: [{ sfx: 'static', everyMin: 8, everyMax: 18 }],
     hotspots: [
@@ -480,7 +480,7 @@ export const TOWN_SCENES: Record<string, Scene> = {
         id: 'tv_wall',
         name: 'Wall of Televisions',
         rect: { x: 8, y: 8, w: 300, h: 88 },
-        walkTo: [120, 126],
+        walkTo: [120, 128],
         facing: 'north',
         verbs: {
           LOOK: [
@@ -531,7 +531,7 @@ export const TOWN_SCENES: Record<string, Scene> = {
       },
     ],
     exits: [
-      { id: 'tv_out', name: 'Back Alley', rect: { x: 0, y: 104, w: 20, h: 40 }, to: 'back_alley', entry: 'default', walkTo: [22, 134], arrow: 'left' },
+      { id: 'tv_out', name: 'Back Alley', rect: { x: 193, y: 20, w: 42, h: 108 }, to: 'back_alley', entry: 'default', walkTo: [205, 135], arrow: 'up' },
     ],
   },
 
@@ -588,17 +588,27 @@ export const TOWN_SCENES: Record<string, Scene> = {
     name: 'Haunted House',
     background: 'haunted_house',
     music: 'cinema',
-    walkboxes: [[20, 108, 300, 108, 306, 140, 14, 140]],
-    depth: { yNear: 140, yFar: 108, scaleNear: 1, scaleFar: 0.8 },
-    entries: { default: { x: 40, y: 132, facing: 'east' } },
+    // Stairs left, ticket booth centre, exit through the right doorway.
+    autoFloor: false,
+    walkboxes: [[68, 124, 310, 124, 316, 143, 0, 143]],
+    depth: { yNear: 143, yFar: 124, scaleNear: 1, scaleFar: 0.88 },
+    blockers: [
+      [0, 100, 66, 100, 66, 144, 0, 144],
+      [86, 115, 110, 115, 110, 139, 86, 139],
+      [112, 100, 198, 100, 198, 144, 112, 144],
+    ],
+    occluders: [
+      { polygon: [84, 46, 112, 46, 112, 139, 84, 139], y: 139 },
+    ],
+    entries: { default: { x: 252, y: 139, facing: 'west' } },
     onFirstEnter: [['jack', 'A ghost train without the train. Just the walking, and the disappointment.']],
     hotspots: [
       {
         id: 'plastic_ghost',
         name: 'Plastic Ghost',
-        rect: { x: 228, y: 42, w: 30, h: 42 },
-        walkTo: [214, 130],
-        facing: 'east',
+        rect: { x: 205, y: 8, w: 36, h: 92 },
+        walkTo: [233, 135],
+        facing: 'north',
         verbs: {
           LOOK: [['jack', 'A plastic ghost with a bulb inside it. One of its eyes has slipped, giving it a look of profound disappointment.']],
           PUSH: [['sfx', 'zap'], ['jack', 'It swings out at me on a wire, thirty years too slowly.'], ['cheeky', 'ghost']],
@@ -607,7 +617,9 @@ export const TOWN_SCENES: Record<string, Scene> = {
       {
         id: 'skeleton',
         name: 'Skeleton',
-        rect: { x: 56, y: 64, w: 28, h: 44 },
+        rect: { x: 36, y: 14, w: 34, h: 74 },
+        walkTo: [74, 138],
+        facing: 'west',
         verbs: {
           LOOK: [['jack', 'A skeleton on a rail. Someone has given it a cigarette.']],
           TALK: [['jack', 'Nothing. Which is the correct response and I respect it.'], ['cheeky', 'skeleton']],
@@ -616,7 +628,9 @@ export const TOWN_SCENES: Record<string, Scene> = {
       {
         id: 'rubber_duck',
         name: 'Rubber Duck',
-        rect: { x: 150, y: 122, w: 14, h: 12 },
+        rect: { x: 204, y: 127, w: 25, h: 16 },
+        walkTo: [232, 141],
+        facing: 'west',
         verbs: {
           LOOK: [['jack', 'Someone has been watching too many detective films.'], ['cheeky', 'duck'], ['score', 5, 'duck']],
           TAKE: [['jack', 'I have enough problems without a duck.']],
@@ -624,7 +638,9 @@ export const TOWN_SCENES: Record<string, Scene> = {
       },
     ],
     exits: [
-      { id: 'haunted_out', name: 'Amusement Park', rect: { x: 0, y: 100, w: 20, h: 44 }, to: 'amusement_park', entry: 'default', walkTo: [24, 132], arrow: 'left' },
+      // The way out is the doorway on the right - the ferris wheel is visible
+      // through it, which is what tells the player where it goes.
+      { id: 'haunted_out', name: 'Amusement Park', rect: { x: 240, y: 30, w: 42, h: 106 }, to: 'amusement_park', entry: 'default', walkTo: [250, 139], arrow: 'right' },
     ],
   },
 
@@ -633,16 +649,26 @@ export const TOWN_SCENES: Record<string, Scene> = {
     name: 'Bus Station',
     background: 'bus_station',
     music: 'mystery',
-    walkboxes: OUTDOOR,
-    depth: OUTDOOR_DEPTH,
-    entries: { default: { x: 60, y: 132, facing: 'east' } },
+    // Concourse. Bench and bin stand on the floor; the town is seen through the glass.
+    autoFloor: false,
+    walkboxes: [[6, 124, 316, 118, 320, 143, 2, 143]],
+    depth: { yNear: 143, yFar: 120, scaleNear: 1, scaleFar: 0.88 },
+    blockers: [
+      [58, 120, 136, 120, 136, 137, 58, 137],
+      [212, 117, 236, 117, 236, 129, 212, 129],
+    ],
+    occluders: [
+      { polygon: [58, 96, 136, 96, 136, 137, 58, 137], y: 137 },
+      { polygon: [212, 104, 236, 104, 236, 129, 212, 129], y: 129 },
+    ],
+    entries: { default: { x: 50, y: 136, facing: 'east' } },
     hotspots: [
       {
         id: 'timetable',
         name: 'Timetable',
-        rect: { x: 190, y: 56, w: 72, h: 44 },
-        walkTo: [226, 126],
-        facing: 'north',
+        rect: { x: 236, y: 48, w: 30, h: 56 },
+        walkTo: [230, 130],
+        facing: 'east',
         verbs: {
           LOOK: [
             ['jack', 'Last bus to anywhere: twenty-two forty.'],
@@ -655,8 +681,8 @@ export const TOWN_SCENES: Record<string, Scene> = {
       {
         id: 'bench',
         name: 'Bench',
-        rect: { x: 48, y: 82, w: 64, h: 26 },
-        walkTo: [80, 126],
+        rect: { x: 60, y: 92, w: 74, h: 42 },
+        walkTo: [96, 141],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'A bench with the middle armrest fitted specifically so nobody can sleep on it. Very 1987.']],
@@ -665,12 +691,14 @@ export const TOWN_SCENES: Record<string, Scene> = {
       },
     ],
     exits: [
-      { id: 'bus_sea', name: 'Seafront', rect: { x: 0, y: 96, w: 24, h: 48 }, to: 'seafront', entry: 'default', walkTo: [26, 132], arrow: 'left' },
-      { id: 'bus_park', name: 'Amusement Park', rect: { x: 296, y: 96, w: 24, h: 48 }, to: 'amusement_park', entry: 'default', walkTo: [298, 132], arrow: 'right' },
-      { id: 'bus_phone', name: 'Telephone Box', rect: { x: 128, y: 56, w: 26, h: 48 }, to: 'phone_box', entry: 'default', walkTo: [140, 120], arrow: 'up' },
-      { id: 'bus_town', name: 'Town Hall', rect: { x: 190, y: 100, w: 40, h: 20 }, to: 'town_hall', entry: 'default', walkTo: [210, 126], arrow: 'up' },
-      { id: 'bus_clock', name: 'Clock Tower', rect: { x: 30, y: 40, w: 40, h: 36 }, to: 'clock_tower_ext', entry: 'default', walkTo: [50, 116], arrow: 'up' },
-      { id: 'bus_hotel', name: 'Golden Sands Hotel', rect: { x: 250, y: 40, w: 44, h: 36 }, to: 'hotel_reception', entry: 'default', walkTo: [270, 116], arrow: 'up' },
+      // The concourse looks out over the whole town: the far exits sit on what
+      // is visible through the glass, and every walk ends at the centre doors.
+      { id: 'bus_sea', name: 'Seafront', rect: { x: 0, y: 108, w: 22, h: 36 }, to: 'seafront', entry: 'default', walkTo: [24, 136], arrow: 'left' },
+      { id: 'bus_park', name: 'Amusement Park', rect: { x: 92, y: 28, w: 48, h: 52 }, to: 'amusement_park', entry: 'default', walkTo: [150, 130], arrow: 'up' },
+      { id: 'bus_phone', name: 'Telephone Box', rect: { x: 16, y: 50, w: 26, h: 56 }, to: 'phone_box', entry: 'default', walkTo: [28, 132], arrow: 'left' },
+      { id: 'bus_town', name: 'Town Hall', rect: { x: 142, y: 62, w: 70, h: 62 }, to: 'town_hall', entry: 'default', walkTo: [178, 128], arrow: 'up' },
+      { id: 'bus_clock', name: 'Clock Tower', rect: { x: 170, y: 20, w: 24, h: 30 }, to: 'clock_tower_ext', entry: 'default', walkTo: [178, 128], arrow: 'up' },
+      { id: 'bus_hotel', name: 'Golden Sands Hotel', rect: { x: 196, y: 26, w: 34, h: 34 }, to: 'hotel_reception', entry: 'default', walkTo: [190, 128], arrow: 'up' },
     ],
   },
 
@@ -710,15 +738,20 @@ export const TOWN_SCENES: Record<string, Scene> = {
     name: 'Town Hall',
     background: 'town_hall',
     music: 'mystery',
-    walkboxes: OUTDOOR,
-    depth: OUTDOOR_DEPTH,
-    entries: { default: { x: 60, y: 132, facing: 'east' } },
+    // Marble lobby. Doors centre, arch to the bus station left, board right.
+    autoFloor: false,
+    walkboxes: [[18, 126, 316, 129, 320, 143, 2, 143]],
+    depth: { yNear: 143, yFar: 126, scaleNear: 1, scaleFar: 0.86 },
+    blockers: [
+      [78, 118, 106, 118, 106, 130, 78, 130],
+    ],
+    entries: { default: { x: 40, y: 134, facing: 'east' } },
     hotspots: [
       {
         id: 'notice_board',
         name: 'Notice Board',
-        rect: { x: 248, y: 52, w: 44, h: 34 },
-        walkTo: [268, 124],
+        rect: { x: 242, y: 34, w: 72, h: 62 },
+        walkTo: [270, 134],
         facing: 'north',
         verbs: {
           LOOK: [
@@ -734,8 +767,8 @@ export const TOWN_SCENES: Record<string, Scene> = {
       {
         id: 'town_doors',
         name: 'Doors',
-        rect: { x: 138, y: 62, w: 44, h: 46 },
-        walkTo: [160, 130],
+        rect: { x: 128, y: 30, w: 100, h: 97 },
+        walkTo: [178, 132],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'Shut since half past five, as they have been every day since the building went up.']],
@@ -744,8 +777,8 @@ export const TOWN_SCENES: Record<string, Scene> = {
       },
     ],
     exits: [
-      { id: 'hall_out', name: 'Bus Station', rect: { x: 0, y: 96, w: 24, h: 48 }, to: 'bus_station', entry: 'default', walkTo: [26, 132], arrow: 'left' },
-      { id: 'hall_police', name: 'Police Station', rect: { x: 296, y: 96, w: 24, h: 48 }, to: 'police_station', entry: 'default', walkTo: [298, 132], arrow: 'right' },
+      { id: 'hall_out', name: 'Bus Station', rect: { x: 0, y: 80, w: 56, h: 64 }, to: 'bus_station', entry: 'default', walkTo: [30, 134], arrow: 'left' },
+      { id: 'hall_police', name: 'Police Station', rect: { x: 296, y: 96, w: 24, h: 48 }, to: 'police_station', entry: 'default', walkTo: [306, 138], arrow: 'right' },
     ],
   },
 
@@ -764,13 +797,13 @@ export const TOWN_SCENES: Record<string, Scene> = {
     occluders: [
       { polygon: [0, 100, 168, 100, 168, 152, 0, 152], y: 152 },
     ],
-    entries: { default: { x: 60, y: 132, facing: 'east' } },
+    entries: { default: { x: 190, y: 135, facing: 'south' } },
     hotspots: [
       {
         id: 'missing_posters',
         name: 'Missing Person Posters',
         rect: { x: 222, y: 22, w: 92, h: 78 },
-        walkTo: [250, 124],
+        walkTo: [250, 130],
         facing: 'north',
         verbs: {
           LOOK: [
@@ -789,7 +822,7 @@ export const TOWN_SCENES: Record<string, Scene> = {
         id: 'desk_bell',
         name: 'Desk Bell',
         rect: { x: 168, y: 74, w: 18, h: 14 },
-        walkTo: [176, 126],
+        walkTo: [176, 130],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'A brass bell on an empty desk. The universal symbol of nobody coming.']],
@@ -806,7 +839,7 @@ export const TOWN_SCENES: Record<string, Scene> = {
       },
     ],
     exits: [
-      { id: 'police_out', name: 'Town Hall', rect: { x: 0, y: 96, w: 24, h: 48 }, to: 'town_hall', entry: 'default', walkTo: [26, 132], arrow: 'left' },
+      { id: 'police_out', name: 'Town Hall', rect: { x: 145, y: 10, w: 85, h: 122 }, to: 'town_hall', entry: 'default', walkTo: [190, 136], arrow: 'up' },
     ],
   },
 };

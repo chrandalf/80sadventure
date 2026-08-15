@@ -39,8 +39,8 @@ export const HOTEL_SCENES: Record<string, Scene> = {
         id: 'valerie',
         name: 'Valerie',
         rect: { x: 136, y: 82, w: 28, h: 40 },
-        walkTo: [150, 130],
-        facing: 'north',
+        walkTo: [100, 130],
+        facing: 'east',
         defaultVerb: 'TALK',
         verbs: {
           LOOK: [['jack', 'Twenty-eight, glamorous, and radiating the specific boredom of someone who has heard every excuse twice.']],
@@ -51,8 +51,8 @@ export const HOTEL_SCENES: Record<string, Scene> = {
         id: 'pigeonholes',
         name: 'Key Pigeonholes',
         rect: { x: 96, y: 30, w: 128, h: 52 },
-        walkTo: [160, 126],
-        facing: 'north',
+        walkTo: [100, 130],
+        facing: 'east',
         verbs: {
           LOOK: [['jack', 'Twenty-four pigeonholes. Six keys. It is September in a British seaside town.']],
           TAKE: [['jack', 'Reaching over a reception desk to steal a key while the receptionist watches. Bold.']],
@@ -62,7 +62,7 @@ export const HOTEL_SCENES: Record<string, Scene> = {
         id: 'register',
         name: 'Register',
         rect: { x: 176, y: 76, w: 32, h: 12 },
-        walkTo: [190, 128],
+        walkTo: [238, 128],
         facing: 'north',
         verbs: {
           LOOK: [
@@ -103,7 +103,7 @@ export const HOTEL_SCENES: Record<string, Scene> = {
       },
     ],
     exits: [
-      { id: 'hotel_out', name: 'Bus Station', rect: { x: 0, y: 100, w: 22, h: 44 }, to: 'bus_station', entry: 'default', walkTo: [24, 132], arrow: 'left' },
+      { id: 'hotel_out', name: 'Bus Station', rect: { x: 0, y: 100, w: 22, h: 44 }, to: 'bus_station', entry: 'default', walkTo: [42, 132], arrow: 'left' },
       {
         id: 'hotel_up', name: 'Stairs', rect: { x: 268, y: 40, w: 52, h: 64 },
         to: 'hotel_corridor', entry: 'default', walkTo: [286, 128], arrow: 'up',
@@ -118,15 +118,23 @@ export const HOTEL_SCENES: Record<string, Scene> = {
     name: 'Hotel Corridor',
     background: 'hotel_corridor',
     music: 'seafront',
-    walkboxes: [[10, 112, 310, 112, 314, 140, 6, 140]],
-    depth: { yNear: 140, yFar: 112, scaleNear: 1, scaleFar: 0.86 },
-    entries: { default: { x: 40, y: 132, facing: 'east' } },
+    // Four doors along the back wall; the reception arch is on the right.
+    autoFloor: false,
+    walkboxes: [[8, 127, 318, 127, 320, 143, 2, 143]],
+    depth: { yNear: 143, yFar: 127, scaleNear: 1, scaleFar: 0.85 },
+    blockers: [
+      [0, 122, 22, 122, 22, 130, 0, 130],
+    ],
+    entries: {
+      default: { x: 298, y: 140, facing: 'west' },
+      fromRoom12: { x: 216, y: 136, facing: 'south' },
+    },
     hotspots: [
       {
         id: 'door10',
         name: 'Room 10',
-        rect: { x: 10, y: 40, w: 30, h: 68 },
-        walkTo: [26, 130],
+        rect: { x: 27, y: 28, w: 60, h: 100 },
+        walkTo: [57, 136],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'Room 10. A DO NOT DISTURB sign, hung with real conviction.']],
@@ -137,8 +145,8 @@ export const HOTEL_SCENES: Record<string, Scene> = {
         // Spec s.52: the wrong room. Immediate cut, no visual at all.
         id: 'door11',
         name: 'Room 11',
-        rect: { x: 70, y: 36, w: 30, h: 72 },
-        walkTo: [86, 130],
+        rect: { x: 112, y: 27, w: 54, h: 101 },
+        walkTo: [139, 136],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'Room 11. The door is very slightly ajar.']],
@@ -166,8 +174,8 @@ export const HOTEL_SCENES: Record<string, Scene> = {
       {
         id: 'door12',
         name: 'Room 12',
-        rect: { x: 150, y: 32, w: 30, h: 76 },
-        walkTo: [166, 130],
+        rect: { x: 191, y: 25, w: 50, h: 103 },
+        walkTo: [216, 136],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'Room 12. The room Elliot Vale booked every Tuesday for three years, and every Tuesday since.']],
@@ -185,8 +193,8 @@ export const HOTEL_SCENES: Record<string, Scene> = {
       {
         id: 'door14',
         name: 'Room 14',
-        rect: { x: 244, y: 36, w: 30, h: 72 },
-        walkTo: [260, 130],
+        rect: { x: 261, y: 27, w: 40, h: 101 },
+        walkTo: [280, 136],
         facing: 'north',
         verbs: {
           LOOK: [
@@ -201,7 +209,8 @@ export const HOTEL_SCENES: Record<string, Scene> = {
       },
     ],
     exits: [
-      { id: 'corridor_down', name: 'Reception', rect: { x: 0, y: 108, w: 20, h: 36 }, to: 'hotel_reception', entry: 'fromStairs', walkTo: [22, 134], arrow: 'left' },
+      // Down through the archway on the right; the reception desk shows through it.
+      { id: 'corridor_down', name: 'Reception', rect: { x: 302, y: 15, w: 18, h: 125 }, to: 'hotel_reception', entry: 'fromStairs', walkTo: [304, 140], arrow: 'right' },
     ],
   },
 
@@ -223,7 +232,7 @@ export const HOTEL_SCENES: Record<string, Scene> = {
       { polygon: [20, 52, 131, 52, 131, 138, 20, 138], y: 138 },
       { polygon: [250, 30, 311, 30, 311, 134, 248, 134], y: 134 },
     ],
-    entries: { default: { x: 50, y: 132, facing: 'east' } },
+    entries: { default: { x: 50, y: 138, facing: 'east' } },
     onFirstEnter: [
       ['jack', 'Maggie?'],
       ['wait', 1.0],
@@ -239,7 +248,7 @@ export const HOTEL_SCENES: Record<string, Scene> = {
         id: 'bathroom_door',
         name: 'Bathroom Door',
         rect: { x: 96, y: 30, w: 44, h: 68 },
-        walkTo: [118, 126],
+        walkTo: [118, 138],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'Frosted glass. Someone is in there. I can hear the shower and I can see approximately nothing, which is the correct amount.']],
@@ -286,7 +295,7 @@ export const HOTEL_SCENES: Record<string, Scene> = {
         id: 'room12_bed',
         name: 'Bed',
         rect: { x: 28, y: 74, w: 94, h: 46 },
-        walkTo: [70, 132],
+        walkTo: [70, 138],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'Made. Untouched. Nobody has slept here tonight, or possibly ever.']],
@@ -303,7 +312,7 @@ export const HOTEL_SCENES: Record<string, Scene> = {
         id: 'dressing_table',
         name: 'Dressing Table',
         rect: { x: 244, y: 52, w: 58, h: 34 },
-        walkTo: [270, 130],
+        walkTo: [270, 134],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'A mirror, a Gideon Bible and a saucer with two mints in it.']],
@@ -333,7 +342,7 @@ export const HOTEL_SCENES: Record<string, Scene> = {
       },
     ],
     exits: [
-      { id: 'room12_out', name: 'Corridor', rect: { x: 0, y: 102, w: 22, h: 42 }, to: 'hotel_corridor', entry: 'default', walkTo: [24, 132], arrow: 'left' },
+      { id: 'room12_out', name: 'Corridor', rect: { x: 0, y: 102, w: 22, h: 42 }, to: 'hotel_corridor', entry: 'fromRoom12', walkTo: [24, 138], arrow: 'left' },
     ],
   },
 
@@ -344,9 +353,23 @@ export const HOTEL_SCENES: Record<string, Scene> = {
     name: 'Seafront Pool',
     background: 'pool_cabins',
     music: 'seafront',
-    walkboxes: [[10, 108, 310, 108, 314, 140, 6, 140]],
-    depth: { yNear: 140, yFar: 108, scaleNear: 1, scaleFar: 0.8 },
-    entries: { default: { x: 40, y: 132, facing: 'east' } },
+    // The pool fills the left; cabins upstage centre, sign near-camera right.
+    autoFloor: false,
+    walkboxes: [[64, 78, 318, 74, 320, 143, 0, 143]],
+    depth: { yNear: 143, yFar: 76, scaleNear: 1, scaleFar: 0.55 },
+    blockers: [
+      [0, 70, 122, 70, 122, 152, 0, 152],
+      [150, 70, 242, 70, 242, 102, 150, 102],
+      [270, 88, 288, 88, 288, 101, 270, 101],
+      [265, 104, 311, 104, 311, 141, 265, 141],
+    ],
+    occluders: [
+      { polygon: [265, 68, 311, 68, 311, 141, 265, 141], y: 141 },
+    ],
+    entries: {
+      default: { x: 260, y: 120, facing: 'west' },
+      fromBeach: { x: 156, y: 140, facing: 'north' },
+    },
     onFirstEnter: [
       ['jack', 'An open-air swimming pool in September. The British are not a sensible people.'],
     ],
@@ -354,8 +377,8 @@ export const HOTEL_SCENES: Record<string, Scene> = {
       {
         id: 'cabin1',
         name: 'Cabin 1',
-        rect: { x: 142, y: 34, w: 40, h: 74 },
-        walkTo: [162, 130],
+        rect: { x: 152, y: 27, w: 29, h: 74 },
+        walkTo: [166, 106],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'Cabin one. Curtain drawn.']],
@@ -367,8 +390,8 @@ export const HOTEL_SCENES: Record<string, Scene> = {
         // to Jack outside. +1 cheeky, exactly as specified.
         id: 'cabin2',
         name: 'Cabin 2',
-        rect: { x: 186, y: 34, w: 40, h: 74 },
-        walkTo: [206, 130],
+        rect: { x: 182, y: 27, w: 28, h: 74 },
+        walkTo: [196, 106],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'Cabin two. The curtain is not quite closed.']],
@@ -402,8 +425,8 @@ export const HOTEL_SCENES: Record<string, Scene> = {
       {
         id: 'cabin3',
         name: 'Cabin 3',
-        rect: { x: 230, y: 34, w: 40, h: 74 },
-        walkTo: [250, 130],
+        rect: { x: 211, y: 27, w: 28, h: 74 },
+        walkTo: [224, 106],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'Cabin three. Curtain closed properly, by someone competent.']],
@@ -426,9 +449,9 @@ export const HOTEL_SCENES: Record<string, Scene> = {
       {
         id: 'the_pool',
         name: 'Swimming Pool',
-        rect: { x: 0, y: 56, w: 122, h: 46 },
-        walkTo: [70, 122],
-        facing: 'north',
+        rect: { x: 0, y: 80, w: 118, h: 64 },
+        walkTo: [128, 120],
+        facing: 'west',
         verbs: {
           LOOK: [['jack', 'Unheated, unlit, and roughly the temperature of the North Sea it was filled from.']],
           USE: [['die', 'Jack goes for a swim in an unlit outdoor pool in September, fully clothed.']],
@@ -437,17 +460,21 @@ export const HOTEL_SCENES: Record<string, Scene> = {
       {
         id: 'no_running',
         name: 'Sign',
-        rect: { x: 264, y: 104, w: 48, h: 20 },
+        rect: { x: 265, y: 68, w: 46, h: 72 },
+        walkTo: [255, 130],
+        facing: 'east',
         verbs: {
           LOOK: [['jack', 'NO RUNNING. NO DIVING. NO PETTING. Somebody had a very specific summer.'], ['cheeky', 'poolSign']],
         },
       },
     ],
     exits: [
-      { id: 'pool_out', name: 'Seafront', rect: { x: 0, y: 104, w: 20, h: 40 }, to: 'seafront', entry: 'default', walkTo: [22, 132], arrow: 'left' },
+      // The promenade back to town runs off to the right; the left of the
+      // frame is all water, so nothing can exit that way.
+      { id: 'pool_out', name: 'Seafront', rect: { x: 308, y: 40, w: 12, h: 70 }, to: 'seafront', entry: 'default', walkTo: [300, 96], arrow: 'right' },
       {
-        id: 'pool_beach', name: 'The Far Beach', rect: { x: 300, y: 104, w: 20, h: 40 },
-        to: 'nudist_beach', entry: 'default', walkTo: [300, 132], arrow: 'right',
+        id: 'pool_beach', name: 'The Far Beach', rect: { x: 126, y: 134, w: 62, h: 10 },
+        to: 'nudist_beach', entry: 'default', walkTo: [156, 141], arrow: 'down',
         requires: ['flag', 'beachUnlocked'],
         lockedText: 'The path along the shingle. There is nothing down there worth the walk.',
       },
@@ -550,7 +577,7 @@ export const HOTEL_SCENES: Record<string, Scene> = {
       },
     ],
     exits: [
-      { id: 'beach_out', name: 'Seafront Pool', rect: { x: 0, y: 108, w: 20, h: 36 }, to: 'pool_cabins', entry: 'default', walkTo: [22, 134], arrow: 'left' },
+      { id: 'beach_out', name: 'Seafront Pool', rect: { x: 0, y: 108, w: 20, h: 36 }, to: 'pool_cabins', entry: 'fromBeach', walkTo: [22, 134], arrow: 'left' },
     ],
   },
 
@@ -571,7 +598,7 @@ export const HOTEL_SCENES: Record<string, Scene> = {
     occluders: [
       { polygon: [0, 20, 84, 20, 84, 152, 0, 152], y: 152 },
     ],
-    entries: { default: { x: 50, y: 132, facing: 'east' }, fromAlley: { x: 290, y: 132, facing: 'west' } },
+    entries: { default: { x: 113, y: 133, facing: 'south' }, fromAlley: { x: 290, y: 132, facing: 'west' } },
     characters: [{ id: 'graham', sprite: 'char.graham', x: 250, y: 122, facing: 'south' }],
     hotspots: [
       {
@@ -623,9 +650,9 @@ export const HOTEL_SCENES: Record<string, Scene> = {
       },
     ],
     exits: [
-      { id: 'video_out', name: 'Back Alley', rect: { x: 0, y: 100, w: 22, h: 44 }, to: 'back_alley', entry: 'default', walkTo: [24, 132], arrow: 'left' },
-      { id: 'video_office', name: "Graham's Office", rect: { x: 200, y: 88, w: 40, h: 24 }, to: 'graham_office', entry: 'default', walkTo: [214, 130], arrow: 'up' },
-      { id: 'video_back', name: 'Back Section', rect: { x: 286, y: 24, w: 34, h: 60 }, to: 'video_shop_back', entry: 'default', walkTo: [292, 126], arrow: 'right' },
+      { id: 'video_out', name: 'Back Alley', rect: { x: 90, y: 22, w: 42, h: 106 }, to: 'back_alley', entry: 'default', walkTo: [113, 132], arrow: 'up' },
+      { id: 'video_office', name: "Graham's Office", rect: { x: 148, y: 30, w: 34, h: 90 }, to: 'graham_office', entry: 'default', walkTo: [172, 133], arrow: 'up' },
+      { id: 'video_back', name: 'Back Section', rect: { x: 258, y: 20, w: 50, h: 108 }, to: 'video_shop_back', entry: 'default', walkTo: [270, 133], arrow: 'right' },
     ],
   },
 
@@ -653,7 +680,7 @@ export const HOTEL_SCENES: Record<string, Scene> = {
         id: 'adult_shelf',
         name: 'Shelf',
         rect: { x: 40, y: 24, w: 240, h: 66 },
-        walkTo: [160, 128],
+        walkTo: [160, 132],
         facing: 'north',
         verbs: {
           LOOK: [
@@ -690,7 +717,7 @@ export const HOTEL_SCENES: Record<string, Scene> = {
       },
     ],
     exits: [
-      { id: 'back_out', name: 'Video Shop', rect: { x: 0, y: 42, w: 30, h: 58 }, to: 'video_shop', entry: 'default', walkTo: [30, 130], arrow: 'left' },
+      { id: 'back_out', name: 'Video Shop', rect: { x: 0, y: 42, w: 30, h: 58 }, to: 'video_shop', entry: 'default', walkTo: [30, 132], arrow: 'left' },
     ],
   },
 
@@ -711,7 +738,7 @@ export const HOTEL_SCENES: Record<string, Scene> = {
       { polygon: [22, 100, 178, 100, 178, 152, 20, 152], y: 152 },
       { polygon: [265, 97, 320, 97, 320, 152, 263, 152], y: 152 },
     ],
-    entries: { default: { x: 50, y: 132, facing: 'east' } },
+    entries: { default: { x: 210, y: 137, facing: 'south' } },
     hotspots: [
       {
         // Spec s.51: tacky calendar, genuinely useful clue.
@@ -759,7 +786,7 @@ export const HOTEL_SCENES: Record<string, Scene> = {
         id: 'graham_desk',
         name: 'Desk',
         rect: { x: 60, y: 82, w: 110, h: 30 },
-        walkTo: [110, 130],
+        walkTo: [190, 136],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'Rental cards, overdue notices, and a mug of tea with a skin on it you could resole a shoe with.']],
@@ -776,7 +803,7 @@ export const HOTEL_SCENES: Record<string, Scene> = {
       },
     ],
     exits: [
-      { id: 'goffice_out', name: 'Video Shop', rect: { x: 0, y: 102, w: 22, h: 42 }, to: 'video_shop', entry: 'default', walkTo: [24, 132], arrow: 'left' },
+      { id: 'goffice_out', name: 'Video Shop', rect: { x: 180, y: 10, w: 70, h: 125 }, to: 'video_shop', entry: 'default', walkTo: [210, 138], arrow: 'up' },
     ],
   },
 };

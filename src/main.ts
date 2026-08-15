@@ -4,7 +4,7 @@ import { Input } from './engine/Input';
 import { AssetStore } from './engine/Loader';
 import { Colors, ramp } from './engine/Palette';
 import { GAME_HEIGHT, GAME_WIDTH, Screen } from './engine/Screen';
-import { validateContent } from './content/validate';
+import { validateContent, validateGeometry } from './content/validate';
 import { Shell } from './game/Shell';
 
 /**
@@ -71,7 +71,10 @@ async function main(): Promise<void> {
 
   // Content sanity check - a dangling reference is a soft-lock, not a crash,
   // so it has to be found here rather than by playing for forty minutes.
-  const problems = validateContent(new Set([...assets.spriteIds, ...objectAssets.spriteIds]));
+  const problems = [
+    ...validateContent(new Set([...assets.spriteIds, ...objectAssets.spriteIds])),
+    ...validateGeometry(),
+  ];
   if (problems.length) {
     console.warn(`[content] ${problems.length} problem(s):\n  ` + problems.join('\n  '));
   } else {

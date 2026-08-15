@@ -166,7 +166,7 @@ export const ARCADE_SCENES: Record<string, Scene> = {
         id: 'vending',
         name: 'Vending Machine',
         polygon: [[152, 84], [226, 84], [226, 220], [152, 220]],
-        walkTo: [190, 256],
+        walkTo: [190, 258],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'Twenty pence for a chocolate bar. Fifteen pence for the privilege of watching someone else eat it.']],
@@ -199,7 +199,7 @@ export const ARCADE_SCENES: Record<string, Scene> = {
         id: 'cigarette_machine',
         name: 'Cigarette Machine',
         polygon: [[230, 88], [277, 88], [277, 218], [230, 218]],
-        walkTo: [253, 254],
+        walkTo: [253, 258],
         facing: 'north',
         verbs: {
           LOOK: [
@@ -587,7 +587,7 @@ export const ARCADE_SCENES: Record<string, Scene> = {
     }],
     blockers: [[103, 128, 251, 133, 251, 143, 103, 143]],
     depth: { yNear: 140, yFar: 100, scaleNear: 1, scaleFar: 0.68 },
-    entries: { default: { x: 160, y: 132, facing: 'north' } },
+    entries: { default: { x: 160, y: 129, facing: 'north' } },
     hotspots: [
       {
         id: 'desk',
@@ -768,7 +768,7 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       { polygon: [14, 42, 156, 42, 156, 146, 14, 146], y: 146 },
       { polygon: [246, 118, 288, 118, 288, 144, 246, 144], y: 144 },
     ],
-    entries: { default: { x: 60, y: 130, facing: 'east' }, fromHatch: { x: 160, y: 130, facing: 'north' } },
+    entries: { default: { x: 225, y: 129, facing: 'south' }, fromHatch: { x: 160, y: 130, facing: 'north' } },
     ambience: [{ sfx: 'hum', everyMin: 6, everyMax: 12 }],
     onFirstEnter: [
       ['jack', 'Twenty years of broken cabinets under dust sheets. And something underneath them humming.'],
@@ -779,7 +779,7 @@ export const ARCADE_SCENES: Record<string, Scene> = {
         id: 'fusebox',
         name: 'Fuse Box',
         rect: { x: 226, y: 44, w: 40, h: 32 },
-        walkTo: [246, 122],
+        walkTo: [300, 135],
         facing: 'north',
         verbs: {
           LOOK: [
@@ -817,7 +817,7 @@ export const ARCADE_SCENES: Record<string, Scene> = {
         id: 'dust_sheets',
         name: 'Dust Sheets',
         rect: { x: 16, y: 54, w: 100, h: 52 },
-        walkTo: [66, 124],
+        walkTo: [165, 135],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'Cabinets that stopped working and were covered rather than fixed. Very Arthur.']],
@@ -861,11 +861,11 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'basement_up',
         name: 'Arcade Floor',
-        rect: { x: 0, y: 100, w: 18, h: 44 },
+        rect: { x: 200, y: 15, w: 53, h: 108 },
         to: 'starlight_arcade',
         entry: 'fromBasement',
-        walkTo: [20, 132],
-        arrow: 'left',
+        walkTo: [225, 128],
+        arrow: 'up',
       },
     ],
   },
