@@ -123,9 +123,12 @@ function bodyFor(asset) {
   const transparent = asset.transparency === 'alpha-required';
 
   if (endpointKind === 'responses') {
-    return {
+    const body = {
       model,
-      input: prompt,
+      // The Responses API takes an instruction, not a bare image prompt. Say
+      // outright that the only wanted output is the picture, so this still
+      // produces an image if tool_choice is dropped or unsupported.
+      input: `Generate this image. Return the image only - no commentary, no description, no text in the picture.\n\n${prompt}`,
       tools: [{
         type: 'image_generation',
         size,
@@ -133,8 +136,9 @@ function bodyFor(asset) {
         output_format: 'png',
         background: transparent ? 'transparent' : 'opaque',
       }],
-      tool_choice: { type: 'image_generation' },
     };
+    if (!args.includes('--no-tool-choice')) body.tool_choice = { type: 'image_generation' };
+    return body;
   }
 
   return {

@@ -8,44 +8,65 @@ OPENAI_API_KEY=sk-... npm run assets:generate -- one-more-credit-images.jsonl ./
 npm run assets:ingest -- ./incoming
 ```
 
+That middle step calls the API directly. If you would rather use the Batch API,
+see [Why the batch fails](#why-the-batch-fails) — it is fussier than it looks.
+
 Then `npm run dev` and walk into a room. Nothing else needs changing — no
 rebuild, no manifest edit, no code.
 
 ---
 
-## Why the batch failed
+## Why the batch fails
 
 > `The URL provided for this request does not match the batch endpoint`
 > — on every line, `0 completed, 0 failed of 0 total requests`
 
 The `url` field on every line of the `.jsonl` must be character-for-character
-identical to the `endpoint` the batch was **created** with. A batch created as
-`/v1/chat/completions` cannot carry image requests: it rejects the file at parse
-time, before a single request runs, which is why the total is zero rather than
-ninety-two failures.
+identical to the `endpoint` the batch was **created** with. The failure is at
+parse time, before a single request runs, which is why the total is zero rather
+than ninety-two failures — and why the message is identical on every line
+regardless of what those lines contain.
 
-`npm run assets:batch` prints the endpoint to create the batch with. Use that
-exact string:
+Read the failed batch's own **Endpoint** field. If it says
+`/v1/chat/completions` while the file says `/v1/images/generations`, the file
+was never the problem: the batch was created against the wrong endpoint, and
+fixing the file will not help.
 
-```python
-batch = client.batches.create(
-    input_file_id=uploaded.id,
-    endpoint="/v1/images/generations",   # must equal the url on every line
-    completion_window="24h",
-)
-```
-
-If your account's Batch API does not accept that endpoint, generate against
-`/v1/responses` instead, which routes image generation through a tool call:
+**Image generation may not be a batchable endpoint on your account at all.** If
+the endpoint dropdown offers `/v1/chat/completions`, `/v1/embeddings` and
+`/v1/responses` but nothing for images, that is the answer, and no `.jsonl` will
+ever satisfy it. Two ways round:
 
 ```bash
-npm run assets:batch -- --endpoint responses
+npm run assets:batch -- --endpoint responses   # image generation as a tool call
 ```
 
-Or skip batching altogether. Ninety-two images is small; `npm run
-assets:generate` calls the API directly, four at a time, and gives you a
-per-asset error instead of one opaque failed job. It skips files that already
-exist, so rerunning fills the gaps rather than paying twice.
+`/v1/responses` is a standard batch endpoint and reaches the image model through
+its `image_generation` tool. Create the batch with `endpoint="/v1/responses"`.
+
+Or skip batching altogether:
+
+```bash
+OPENAI_API_KEY=sk-... npm run assets:generate -- one-more-credit-images.jsonl ./incoming
+```
+
+Ninety-two images is small. This calls the API directly, four at a time, and
+gives you a per-asset error instead of one opaque failed job. It skips files
+that already exist, so rerunning fills the gaps rather than paying twice. Given
+four failed batches, this is the path that gets you pictures today.
+
+### If a batch does succeed
+
+The output is one `.jsonl` of base64, not image files. Unpack it first:
+
+```bash
+npm run assets:unpack -- batch_output.jsonl ./incoming
+npm run assets:ingest -- ./incoming
+```
+
+`custom_id` carries the asset id through, so nothing needs tracking. The
+unpacker reads both request shapes and logs per-asset failures rather than
+stopping.
 
 ---
 

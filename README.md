@@ -95,6 +95,7 @@ layouts and the validator.
 npm run assets:manifest       # regenerate assets.json from the game data
 npm run assets:batch          # build the image-request .jsonl from assets.json
 npm run assets:generate       # run it against the API (or use the Batch API)
+npm run assets:unpack         # turn Batch API output back into PNG files
 npm run assets:ingest         # crop, resize, binarise alpha, file it correctly
 npm run assets:validate       # check art against the manifests
 npm run assets:placeholders   # drawing templates at the exact final sizes
@@ -128,6 +129,10 @@ The split matters: `src/engine` knows nothing about Brighton Vale, and
 | `npm run preview` | Serve the production build |
 | `npm run typecheck` | Types only |
 | `npm run assets:manifest` | Regenerate `assets.json` from the game data |
+| `npm run assets:batch` | Build the image-request `.jsonl` |
+| `npm run assets:generate` | Run it against the image API |
+| `npm run assets:unpack` | Batch API output back into PNG files |
+| `npm run assets:ingest` | Fit, crop and file generated art correctly |
 | `npm run assets:validate` | Check all art against the manifests |
 | `npm run assets:placeholders` | Regenerate drawing templates |
 

@@ -16,6 +16,7 @@
     "assets:manifest": "esbuild tools/gen-assets-manifest.ts --bundle --platform=node --format=esm --outfile=node_modules/.cache/gen-assets.mjs --log-level=error && node node_modules/.cache/gen-assets.mjs",
     "assets:batch": "node tools/gen-openai-batch.mjs",
     "assets:generate": "node tools/run-openai-images.mjs",
+    "assets:unpack": "node tools/unpack-batch-output.mjs",
     "assets:ingest": "node tools/ingest-assets.mjs"
   },
   "devDependencies": {
