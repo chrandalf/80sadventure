@@ -443,7 +443,12 @@ export const ARCADE_SCENES: Record<string, Scene> = {
         walkTo: [246, 228],
         facing: 'north',
         verbs: {
-          LOOK: [['jack', 'MONSTER MANOR. The monsters are four pixels each and I have had nightmares about them since I was nine.']],
+          LOOK: [
+            ['jack', 'MONSTER MANOR. The monsters are four pixels each and I have had nightmares about them since I was nine.'],
+            ['wait', 0.3],
+            ['jack', 'The high score table reads A.S.S., A.S.S. and A.S.S. Somebody was very committed to the bit.'],
+            ['cheeky', 'highScore'],
+          ],
           USE: [
             ['if', ['and', ['flag', 'predClock'], ['noflag', 'predLighthouse']],
               [

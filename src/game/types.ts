@@ -26,6 +26,14 @@ export type Cond =
   | ['cassettes', number]
   | ['visited', string]
   | ['dialogueAtLeast', string, number]
+  /** True once the named dialogue node has been opened at least once. */
+  | ['talked', string]
+  | ['nottalked', string]
+  /**
+   * True with the given probability, rolled fresh each evaluation. For gags
+   * that should only sometimes fire; anything load-bearing must not use it.
+   */
+  | ['chance', number]
   | ['and', ...Cond[]]
   | ['or', ...Cond[]]
   | ['not', Cond];
@@ -283,6 +291,13 @@ export interface DialogueNode {
   id: string;
   /** Who the player is talking to, for the portrait and for TALK routing. */
   who?: string;
+  /**
+   * Rotating openings, played before `lines`. The first visit always gets
+   * intro[0]; later visits cycle through the rest, so the fifth conversation
+   * does not open word-for-word like the first. One group means a fixed
+   * opening; none means no opening at all.
+   */
+  intro?: DialogueLine[][];
   lines?: DialogueLine[];
   choices?: DialogueChoice[];
   onEnd?: Action[];

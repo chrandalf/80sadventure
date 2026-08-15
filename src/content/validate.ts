@@ -64,6 +64,10 @@ export function validateContent(spriteIds: ReadonlySet<string>): string[] {
       if (!ITEMS[cond[1]]) at(where, `condition references unknown item "${cond[1]}"`);
     } else if (cond[0] === 'visited') {
       if (!SCENES[cond[1]]) at(where, `condition references unknown scene "${cond[1]}"`);
+    } else if (cond[0] === 'talked' || cond[0] === 'nottalked' || cond[0] === 'dialogueAtLeast') {
+      if (!DIALOGUE[cond[1]]) at(where, `condition references unknown dialogue node "${cond[1]}"`);
+    } else if (cond[0] === 'chance') {
+      if (!(cond[1] > 0 && cond[1] < 1)) at(where, `chance ${cond[1]} is not between 0 and 1`);
     } else if (cond[0] === 'and' || cond[0] === 'or') {
       cond.slice(1).forEach((c) => checkCond(where, c as Cond));
     } else if (cond[0] === 'not') {
@@ -116,6 +120,13 @@ export function validateContent(spriteIds: ReadonlySet<string>): string[] {
   // Dialogue graph.
   for (const node of Object.values(DIALOGUE)) {
     const w = `dialogue ${node.id}`;
+    for (const group of node.intro ?? []) {
+      for (const line of group) {
+        if (!CHARACTERS[line.who]) at(w, `unknown speaker "${line.who}" in intro`);
+        checkCond(w, line.showIf);
+        line.actions?.forEach((a) => checkAction(w, a));
+      }
+    }
     for (const line of node.lines ?? []) {
       if (!CHARACTERS[line.who]) at(w, `unknown speaker "${line.who}"`);
       checkCond(w, line.showIf);

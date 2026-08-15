@@ -99,6 +99,15 @@ export const HOTEL_SCENES: Record<string, Scene> = {
         rect: { x: 14, y: 76, w: 32, h: 46 },
         verbs: {
           LOOK: [['jack', 'A plant that has survived on tea dregs and spite since the Coronation.']],
+          PUSH: [
+            ['caption', 'Jack pats the palm down like airport security.'],
+            ['wait', 0.5],
+            ['say', 'valerie', 'Leave Gerald alone.'],
+            ['jack', 'The palm is called Gerald.'],
+            ['say', 'valerie', 'Gerald has been here longer than you have been alive.'],
+            ['cheeky', 'gerald'],
+            ['score', 5, 'gerald'],
+          ],
         },
       },
     ],
@@ -382,7 +391,35 @@ export const HOTEL_SCENES: Record<string, Scene> = {
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'Cabin one. Curtain drawn.']],
-          OPEN: [['jack', 'Empty. A puddle and a lost flip-flop.']],
+          // Almost always empty. Very occasionally it is not, once per game -
+          // the tease that keeps the other cabins tense. Nothing is ever
+          // shown: a shriek, a hard cut, and Jack apologising to a curtain.
+          OPEN: [
+            ['if', ['flag', 'cabin1Occupied'],
+              [['jack', 'I knocked once tonight and I am still recovering. The flip-flop can keep it.']],
+              [
+                ['if', ['chance', 0.15],
+                  [
+                    ['sfx', 'door'],
+                    ['fade', 'out', 0.08],
+                    ['say', 'voice', 'DO YOU MIND.'],
+                    ['wait', 0.5],
+                    ['fade', 'in', 0.12],
+                    ['anim', 'jack', 'frightened'],
+                    ['jack', 'The sign said VACANT.'],
+                    ['say', 'voice', 'THE SIGN IS A LIAR.'],
+                    ['wait', 0.4],
+                    ['jack', 'I apologise to you and to the sign.'],
+                    ['anim', 'jack', 'idle'],
+                    ['flag', 'cabin1Occupied'],
+                    ['cheeky', 'cabin1Occupied'],
+                    ['score', 5, 'cabin1Occupied'],
+                  ],
+                  [['jack', 'Empty. A puddle and a lost flip-flop.']],
+                ],
+              ],
+            ],
+          ],
         },
       },
       {

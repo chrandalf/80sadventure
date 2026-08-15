@@ -4,7 +4,7 @@ import { Colors, ramp } from '../engine/Palette';
 import { GAME_WIDTH } from '../engine/Screen';
 import { rect, outline } from './paint';
 import { evalCond, type GameState } from './state';
-import type { Action, DialogueNode } from './types';
+import type { Action, DialogueLine, DialogueNode } from './types';
 
 const MAX_CHOICES = 6;
 
@@ -44,6 +44,8 @@ export class DialogueUi {
   private nodes: Record<string, DialogueNode>;
   private nodeId: string | null = null;
   private lineIndex = 0;
+  /** This visit's rotating opening, chosen in open(). Played before lines. */
+  private introLines: DialogueLine[] = [];
   private mode: 'lines' | 'choices' = 'lines';
   private visibleChoices: { text: string; index: number }[] = [];
   private hovered = -1;
@@ -66,12 +68,26 @@ export class DialogueUi {
     return this.nodeId ? this.nodes[this.nodeId] ?? null : null;
   }
 
-  open(nodeId: string): void {
-    if (!this.nodes[nodeId]) {
+  open(nodeId: string, state: GameState): void {
+    const node = this.nodes[nodeId];
+    if (!node) {
       console.warn(`[dialogue] unknown node "${nodeId}"`);
       this.nodeId = null;
       return;
     }
+    // Count the visit, so content can route on ['talked', ...] and the
+    // opening below can vary. Saved with the game, like everything in state.
+    const visits = (state.dialogueState[nodeId] ?? 0) + 1;
+    state.dialogueState[nodeId] = visits;
+
+    // First visit always gets the real greeting; later visits cycle the
+    // alternates, so a repeated conversation opens differently each time.
+    const intro = node.intro ?? [];
+    this.introLines =
+      intro.length === 0 ? []
+      : visits === 1 || intro.length === 1 ? intro[0]
+      : intro[1 + ((visits - 2) % (intro.length - 1))];
+
     this.nodeId = nodeId;
     this.lineIndex = 0;
     this.mode = 'lines';
@@ -99,7 +115,7 @@ export class DialogueUi {
     if (!node) return null;
 
     if (this.mode === 'lines') {
-      const lines = node.lines ?? [];
+      const lines = [...this.introLines, ...(node.lines ?? [])];
       // Skip lines whose condition fails, so one node can serve several states.
       while (this.lineIndex < lines.length && !evalCond(state, lines[this.lineIndex].showIf)) {
         this.lineIndex++;
@@ -156,7 +172,7 @@ export class DialogueUi {
    * Player clicked. Returns the actions for the chosen line, or null.
    * Sets up the jump to the next node as a side effect.
    */
-  click(x: number, y: number, keyIndex?: number): Action[] | null {
+  click(state: GameState, x: number, y: number, keyIndex?: number): Action[] | null {
     if (this.mode !== 'choices') return null;
     const node = this.currentNode;
     if (!node) return null;
@@ -171,7 +187,7 @@ export class DialogueUi {
 
     const actions = choice.actions ?? [];
     if (choice.goto) {
-      this.open(choice.goto);
+      this.open(choice.goto, state);
     } else {
       const end = node.onEnd ?? [];
       this.close();

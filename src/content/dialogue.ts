@@ -39,7 +39,15 @@ export const DIALOGUE: Record<string, DialogueNode> = {
   arthur_first: {
     id: 'arthur_first',
     who: 'arthur',
-    lines: [{ who: 'arthur', text: 'Still here, then.' }],
+    intro: [
+      [{ who: 'arthur', text: 'Still here, then.' }],
+      [{ who: 'arthur', text: 'Unless you are holding two pounds forty, the answer has not changed.' }],
+      [
+        { who: 'arthur', text: 'Twice in one evening. People will talk.' },
+        { who: 'jack', text: 'There is nobody here to talk.' },
+        { who: 'arthur', text: 'Kevin talks.' },
+      ],
+    ],
     choices: [
       {
         text: 'Can I have the arcade key?',
@@ -176,7 +184,19 @@ export const DIALOGUE: Record<string, DialogueNode> = {
   maggie_first: {
     id: 'maggie_first',
     who: 'maggie',
-    lines: [{ who: 'maggie', text: "You're still working here?" }],
+    intro: [
+      [{ who: 'maggie', text: "You're still working here?" }],
+      [
+        { who: 'maggie', text: 'If you keep finding reasons to talk to me, I will start keeping count.' },
+        { who: 'jack', text: '...' },
+        { who: 'maggie', text: 'Four.' },
+      ],
+      [
+        { who: 'maggie', text: 'Yes?' },
+        { who: 'jack', text: 'Nothing. Checking you were still there.' },
+        { who: 'maggie', text: 'Where would I go? This is the last good room in town.' },
+      ],
+    ],
     choices: [
       { text: "It's my job.", goto: 'maggie_job', once: true },
       { text: 'Do you know anything about the unmarked machine?', goto: 'maggie_deflect' },
@@ -346,7 +366,15 @@ export const DIALOGUE: Record<string, DialogueNode> = {
   derek_first: {
     id: 'derek_first',
     who: 'derek',
-    lines: [{ who: 'derek', text: 'Shop is closed. Unless it is urgent. Is it urgent?' }],
+    intro: [
+      [{ who: 'derek', text: 'Shop is closed. Unless it is urgent. Is it urgent?' }],
+      [
+        { who: 'derek', text: 'Back again. People will say we are going steady.' },
+        { who: 'jack', text: 'People will say you sell televisions.' },
+        { who: 'derek', text: 'They say that too.' },
+      ],
+      [{ who: 'derek', text: 'Still closed. Still listening.' }],
+    ],
     choices: [
       { text: 'Do television signals record the future?', goto: 'derek_signals', once: true },
       { text: 'I need an aerial.', goto: 'derek_aerial' },
@@ -459,7 +487,19 @@ export const DIALOGUE: Record<string, DialogueNode> = {
   kevin_first: {
     id: 'kevin_first',
     who: 'kevin',
-    lines: [{ who: 'kevin', text: 'I have got the high score on every machine in here.' }],
+    intro: [
+      [{ who: 'kevin', text: 'I have got the high score on every machine in here.' }],
+      [
+        { who: 'kevin', text: 'You again. I am mid-game.' },
+        { who: 'jack', text: 'You are always mid-game.' },
+        { who: 'kevin', text: 'Correct.' },
+      ],
+      [
+        { who: 'kevin', text: 'If you are here to watch and learn, stand on the left.' },
+        { who: 'jack', text: 'What is wrong with the right?' },
+        { who: 'kevin', text: 'That is my drinking arm.' },
+      ],
+    ],
     choices: [
       { text: 'Every machine?', goto: 'kevin_every', once: true },
       { text: 'Can you lend me two pounds?', goto: 'kevin_money' },
@@ -542,7 +582,15 @@ export const DIALOGUE: Record<string, DialogueNode> = {
   kevin_friendly: {
     id: 'kevin_friendly',
     who: 'kevin',
-    lines: [{ who: 'kevin', text: 'All right, chocolate man.' }],
+    intro: [
+      [{ who: 'kevin', text: 'All right, chocolate man.' }],
+      [
+        { who: 'kevin', text: 'Chocolate man returns. Got any more?' },
+        { who: 'jack', text: 'No.' },
+        { who: 'kevin', text: 'Then this is a social call, and I am touched.' },
+      ],
+      [{ who: 'kevin', text: 'Ask quick. Level nine does not pause itself.' }],
+    ],
     choices: [
       { text: 'Can you lend me two pounds?', goto: 'kevin_money', showIf: ['noflag', 'kevinLent'] },
       { text: 'Have you seen anything strange tonight?', goto: 'kevin_strange' },
@@ -567,10 +615,18 @@ export const DIALOGUE: Record<string, DialogueNode> = {
   brenda_first: {
     id: 'brenda_first',
     who: 'brenda',
-    lines: [
-      { who: 'brenda', text: 'Are you buying?' },
-      { who: 'jack', text: 'I was going to ask a question.' },
-      { who: 'brenda', text: 'Questions are for customers.' },
+    intro: [
+      [
+        { who: 'brenda', text: 'Are you buying?' },
+        { who: 'jack', text: 'I was going to ask a question.' },
+        { who: 'brenda', text: 'Questions are for customers.' },
+      ],
+      [
+        { who: 'brenda', text: 'Rule four. No loitering while I cash up.' },
+        { who: 'jack', text: 'You have been cashing up for three hours.' },
+        { who: 'brenda', text: 'Rule five. No commentary.' },
+      ],
+      [{ who: 'brenda', text: 'You are back. The answer to your next question is twenty pence.' }],
     ],
     choices: [
       {
@@ -603,13 +659,48 @@ export const DIALOGUE: Record<string, DialogueNode> = {
   brenda_talks: {
     id: 'brenda_talks',
     who: 'brenda',
-    lines: [{ who: 'brenda', text: 'Go on then. One question. Make it good.' }],
+    intro: [
+      [{ who: 'brenda', text: 'Go on then. One question. Make it good.' }],
+      [{ who: 'brenda', text: 'What now?' }],
+      [
+        { who: 'brenda', text: 'This is becoming a habit. I have a rule about habits.' },
+        { who: 'jack', text: 'Which is?' },
+        { who: 'brenda', text: 'Rule nine. Charge for them.' },
+      ],
+    ],
     choices: [
       { text: 'What do you know about Arthur Bell?', goto: 'brenda_arthur', once: true },
       { text: 'Who was Elliot Vale?', goto: 'brenda_vale', showIf: ['flag', 'arthurColleague'], once: true },
       { text: 'Is there anything unusual about the cinema?', goto: 'brenda_cinema', once: true },
+      { text: 'Anything I should know about the Lido?', goto: 'brenda_lido', once: true },
+      { text: 'Do you sell postcards?', goto: 'brenda_postcards', once: true },
       { text: 'Nothing, thanks.' },
     ],
+  },
+
+  brenda_lido: {
+    id: 'brenda_lido',
+    who: 'brenda',
+    lines: [
+      { who: 'brenda', text: "Rule one of the Lido: cabin three is Arthur's." },
+      { who: 'jack', text: 'What is rule two?' },
+      { who: 'brenda', text: 'Nobody has ever needed rule two.' },
+      { who: 'jack', text: 'I already regret asking.' },
+    ],
+    onEnd: [['cheeky', 'brendaLido'], ['score', 5, 'brendaLido']],
+  },
+
+  brenda_postcards: {
+    id: 'brenda_postcards',
+    who: 'brenda',
+    lines: [
+      { who: 'brenda', text: 'Views of the pier. The other sort are under the counter.' },
+      { who: 'jack', text: 'What other sort?' },
+      { who: 'brenda', text: 'Rule thirty. You have to be married, forty, or a doctor.' },
+      { who: 'jack', text: 'I am none of those things.' },
+      { who: 'brenda', text: 'Then you get the lighthouse.' },
+    ],
+    onEnd: [['cheeky', 'brendaPostcards'], ['score', 5, 'brendaPostcards']],
   },
 
   brenda_arthur: {
@@ -714,7 +805,15 @@ export const DIALOGUE: Record<string, DialogueNode> = {
   graham_first: {
     id: 'graham_first',
     who: 'graham',
-    lines: [{ who: 'graham', text: 'We shut at nine. It is nearly nine.' }],
+    intro: [
+      [{ who: 'graham', text: 'We shut at nine. It is nearly nine.' }],
+      [{ who: 'graham', text: 'It is now past nine, so technically this is a lock-in.' }],
+      [
+        { who: 'graham', text: 'The educational section is still not what you think it is.' },
+        { who: 'jack', text: 'I did not say anything.' },
+        { who: 'graham', text: 'You were going to.' },
+      ],
+    ],
     choices: [
       { text: 'Do you rent out film projector parts?', goto: 'graham_parts', once: true },
       { text: 'What is through the beaded curtain?', goto: 'graham_curtain', once: true },

@@ -196,6 +196,28 @@ export const TOWN_SCENES: Record<string, Scene> = {
           LOOK: [['jack', 'The lighthouse. Automated in 1981, which put a man out of a job he loved.']],
         },
       },
+      {
+        // The painted lady on the billboard. When the actual woman in the red
+        // coat is on the pier (between finding the photo and following her),
+        // she takes these pixels over, so the poster only answers when she is
+        // not standing in front of it.
+        id: 'revue_poster',
+        name: 'Revue Poster',
+        rect: { x: 78, y: 45, w: 35, h: 85 },
+        walkTo: [96, 138],
+        facing: 'north',
+        visibleIf: ['or', ['noflag', 'futurePhotoFound'], ['flag', 'followedRedCoat']],
+        verbs: {
+          LOOK: [
+            ['jack', 'END OF SEASON REVUE. OH, WHAT A NIGHT! A lady in a red coat winks over her shoulder.'],
+            ['wait', 0.4],
+            ['jack', 'She has been winking since June. Her eyelid must be exhausted.'],
+            ['cheeky', 'revuePoster'],
+            ['score', 5, 'revuePoster'],
+          ],
+          TAKE: [['jack', 'The sea glued it on in July. It is part of the pier now.']],
+        },
+      },
     ],
     exits: [
       { id: 'pier_back', name: 'Seafront', rect: { x: 0, y: 96, w: 26, h: 48 }, to: 'seafront', entry: 'fromPier', walkTo: [34, 132], arrow: 'left' },
@@ -332,6 +354,24 @@ export const TOWN_SCENES: Record<string, Scene> = {
             ['jack', 'And underneath, in a different pen: "GREASE FOR JAMMED THINGS - ASK".'],
             ['flag', 'greaseHinted'],
             ['score', 10, 'greaseHint'],
+          ],
+        },
+      },
+      {
+        id: 'menu_board',
+        name: 'Menu Board',
+        rect: { x: 172, y: 25, w: 48, h: 43 },
+        walkTo: [235, 133],
+        facing: 'north',
+        verbs: {
+          LOOK: [
+            ['jack', 'COD. HADDOCK. SAVELOY. And underneath, in different chalk: ASK ABOUT THE SPECIAL.'],
+            ['wait', 0.4],
+            ['jack', 'I am not asking about the special.'],
+            ['wait', 0.6],
+            ['say', 'voice', 'HE NEVER ASKS ABOUT THE SPECIAL.'],
+            ['cheeky', 'theSpecial'],
+            ['score', 5, 'theSpecial'],
           ],
         },
       },
@@ -689,6 +729,28 @@ export const TOWN_SCENES: Record<string, Scene> = {
           USE: [['jack', 'I sit down for a moment. It does not help, but it is free.'], ['cheeky', 'bench']],
         },
       },
+      {
+        id: 'kiosk_shutter',
+        name: 'Shuttered Kiosk',
+        rect: { x: 265, y: 55, w: 55, h: 77 },
+        walkTo: [280, 132],
+        facing: 'east',
+        verbs: {
+          LOOK: [
+            ['jack', "A newsagent's kiosk, shuttered for the night. The top shelf is just visible through the slats."],
+            ['wait', 0.4],
+            ['jack', 'Which is the most 1987 sentence I have ever thought.'],
+            ['cheeky', 'topShelf'],
+            ['score', 5, 'topShelf'],
+          ],
+          OPEN: [
+            ['sfx', 'deny'],
+            ['say', 'voice', 'CLOSED.'],
+            ['jack', 'It is seven in the evening.'],
+            ['say', 'voice', 'CLOSED SINCE 1981.'],
+          ],
+        },
+      },
     ],
     exits: [
       // The concourse looks out over the whole town: the far exits sit on what
@@ -775,6 +837,27 @@ export const TOWN_SCENES: Record<string, Scene> = {
           OPEN: [['sfx', 'deny'], ['jack', 'Locked. Municipally, immovably locked.']],
         },
       },
+      {
+        id: 'radiator',
+        name: 'Radiator',
+        rect: { x: 44, y: 85, w: 31, h: 35 },
+        walkTo: [52, 130],
+        facing: 'west',
+        verbs: {
+          LOOK: [
+            ['jack', 'A municipal radiator the size of a small car. Warm.'],
+            ['wait', 0.4],
+            ['jack', 'Half the marriages in this town started against that radiator, and the council knows it.'],
+            ['cheeky', 'radiator'],
+            ['score', 5, 'radiator'],
+          ],
+          USE: [
+            ['caption', 'Jack warms his hands on it.'],
+            ['wait', 0.6],
+            ['jack', 'I understand the appeal now.'],
+          ],
+        },
+      },
     ],
     exits: [
       { id: 'hall_out', name: 'Bus Station', rect: { x: 0, y: 80, w: 56, h: 64 }, to: 'bus_station', entry: 'default', walkTo: [30, 134], arrow: 'left' },
@@ -835,6 +918,25 @@ export const TOWN_SCENES: Record<string, Scene> = {
             ['jack', 'Still nothing. I could report a crime, commit one, and leave.'],
             ['cheeky', 'policeBell'],
           ],
+        },
+      },
+      {
+        id: 'coat_stand',
+        name: 'Coat Stand',
+        rect: { x: 10, y: 42, w: 28, h: 78 },
+        walkTo: [175, 135],
+        facing: 'west',
+        verbs: {
+          LOOK: [
+            ['jack', 'A police helmet on the coat stand.'],
+            ['wait', 0.4],
+            ['jack', 'In every saucy postcard this town ever printed, that helmet is doing a job helmets were not issued for.'],
+            ['wait', 0.4],
+            ['jack', 'Tonight it is just a hat.'],
+            ['cheeky', 'helmet'],
+            ['score', 5, 'helmet'],
+          ],
+          TAKE: [['jack', 'Stealing a police helmet inside a police station. Even the postcards never went that far.']],
         },
       },
     ],

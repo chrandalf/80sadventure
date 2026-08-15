@@ -384,7 +384,7 @@ export class AdventureScreen implements RunnerHost {
       this.dialogue.hover(input.x, input.y);
       for (let i = 0; i < 6; i++) {
         if (input.wasPressed(`Digit${i + 1}`)) {
-          const actions = this.dialogue.click(0, 0, i);
+          const actions = this.dialogue.click(this.state, 0, 0, i);
           if (actions) this.dialogueRunner.run(actions);
           return;
         }
@@ -396,7 +396,7 @@ export class AdventureScreen implements RunnerHost {
     for (const click of input.takeClicks()) {
       audio.unlock();
       if (this.dialogue.showingChoices) {
-        const actions = this.dialogue.click(click.x, click.y);
+        const actions = this.dialogue.click(this.state, click.x, click.y);
         if (actions) this.dialogueRunner.run(actions);
         continue;
       }
@@ -742,7 +742,7 @@ export class AdventureScreen implements RunnerHost {
   }
 
   startDialogue(nodeId: string): void {
-    this.dialogue.open(nodeId);
+    this.dialogue.open(nodeId, this.state);
   }
 
   isDialogueOpen(): boolean {

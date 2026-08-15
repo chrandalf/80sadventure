@@ -85,6 +85,12 @@ export function evalCond(state: GameState, cond: Cond | undefined): boolean {
       return !!state.visited[cond[1]];
     case 'dialogueAtLeast':
       return (state.dialogueState[cond[1]] ?? 0) >= cond[2];
+    case 'talked':
+      return (state.dialogueState[cond[1]] ?? 0) > 0;
+    case 'nottalked':
+      return (state.dialogueState[cond[1]] ?? 0) === 0;
+    case 'chance':
+      return Math.random() < cond[1];
     case 'and':
       return cond.slice(1).every((c) => evalCond(state, c as Cond));
     case 'or':
