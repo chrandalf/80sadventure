@@ -22,6 +22,24 @@ interface Track {
   attack?: number;
   release?: number;
   detune?: number;
+  /**
+   * How many oscillators to stack, spread either side of the note in cents.
+   *
+   * One oscillator playing one frequency is the sound of a beeper. Two or
+   * three of the same wave a few cents apart beat against each other, and that
+   * slow drift is most of what makes a synthesiser sound like an instrument
+   * rather than a test tone.
+   */
+  unison?: number;
+  spread?: number;
+  /** Filter resonance. The peak at the cutoff is the 'analogue' in analogue. */
+  resonance?: number;
+  /** Stereo position, -1 to 1. Anything mono sounds like it is behind glass. */
+  pan?: number;
+  /** How much of this voice is sent to the reverb, 0 to 1. */
+  space?: number;
+  /** Held fraction of the step, so a pad can sustain instead of stabbing. */
+  sustain?: number;
 }
 
 interface Tune {
@@ -50,12 +68,38 @@ function noteToFreq(note: string): number | null {
   return 440 * Math.pow(2, (midi - 69) / 12);
 }
 
+/**
+ * A reverb impulse: noise decaying exponentially, slightly different per ear.
+ *
+ * A recorded impulse would be better and would also be a file to ship. This is
+ * a few lines and, at this length, indistinguishable from a cheap plate - which
+ * is exactly the reference anyway.
+ */
+function buildImpulse(ctx: AudioContext, seconds: number, decay: number): AudioBuffer {
+  const rate = ctx.sampleRate;
+  const len = Math.floor(rate * seconds);
+  const buf = ctx.createBuffer(2, len, rate);
+  for (let ch = 0; ch < 2; ch++) {
+    const data = buf.getChannelData(ch);
+    for (let i = 0; i < len; i++) {
+      const fade = Math.pow(1 - i / len, decay);
+      // A short silent head stops it sounding like the note itself is smeared.
+      const head = i < rate * 0.012 ? i / (rate * 0.012) : 1;
+      data[i] = (Math.random() * 2 - 1) * fade * head;
+    }
+  }
+  return buf;
+}
+
 export class AudioEngine {
   private ctx: AudioContext | null = null;
   private master: GainNode | null = null;
   private musicBus: GainNode | null = null;
   private sfxBus: GainNode | null = null;
   private noiseBuffer: AudioBuffer | null = null;
+  private reverbSend: GainNode | null = null;
+  private delaySend: GainNode | null = null;
+  private delayNode: DelayNode | null = null;
 
   private currentTune: Tune | null = null;
   private currentId = '';
@@ -85,9 +129,60 @@ export class AudioEngine {
     this.master.gain.value = this.muted ? 0 : 1;
     this.master.connect(ctx.destination);
 
+    /*
+     * Music runs through a proper output chain rather than straight out.
+     *
+     * Dry oscillators panned dead centre are what make synth music sound like
+     * a PC speaker, however good the notes are. A room to play in - a short
+     * plate reverb and a tempo-ish delay - plus a compressor to glue it
+     * together, is the difference between a beeper and a record.
+     */
     this.musicBus = ctx.createGain();
     this.musicBus.gain.value = this.musicVolume;
-    this.musicBus.connect(this.master);
+
+    const glue = ctx.createDynamicsCompressor();
+    glue.threshold.value = -18;
+    glue.knee.value = 12;
+    glue.ratio.value = 3;
+    glue.attack.value = 0.006;
+    glue.release.value = 0.18;
+    glue.connect(this.master);
+    this.musicBus.connect(glue);
+
+    // Reverb send: an impulse built from decaying noise, which is cheap and
+    // sounds far more like a room than any amount of extra oscillators.
+    const verb = ctx.createConvolver();
+    verb.buffer = buildImpulse(ctx, 1.7, 2.6);
+    const verbSend = ctx.createGain();
+    verbSend.gain.value = 1;
+    verbSend.connect(verb);
+    const verbLevel = ctx.createGain();
+    verbLevel.gain.value = 0.5;
+    verb.connect(verbLevel);
+    verbLevel.connect(glue);
+    this.reverbSend = verbSend;
+
+    // Delay send: one eighth-ish repeat, fed back gently and rolled off, which
+    // is the other half of the era's production.
+    const delay = ctx.createDelay(1.5);
+    delay.delayTime.value = 0.33;
+    const fb = ctx.createGain();
+    fb.gain.value = 0.32;
+    const damp = ctx.createBiquadFilter();
+    damp.type = 'lowpass';
+    damp.frequency.value = 2600;
+    delay.connect(damp);
+    damp.connect(fb);
+    fb.connect(delay);
+    const delaySend = ctx.createGain();
+    delaySend.gain.value = 1;
+    delaySend.connect(delay);
+    const delayLevel = ctx.createGain();
+    delayLevel.gain.value = 0.28;
+    damp.connect(delayLevel);
+    delayLevel.connect(glue);
+    this.delaySend = delaySend;
+    this.delayNode = delay;
 
     this.sfxBus = ctx.createGain();
     this.sfxBus.gain.value = this.sfxVolume;
@@ -132,6 +227,12 @@ export class AudioEngine {
 
     this.currentId = id;
     this.currentTune = tune;
+    // A delay at an arbitrary time smears the beat; one locked to a dotted
+    // eighth lands its repeats between the notes, which is what makes the
+    // echo sound deliberate rather than like a fault.
+    if (this.delayNode) {
+      this.delayNode.delayTime.value = (60 / tune.bpm) * 0.75;
+    }
     this.step = 0;
     this.nextStepTime = this.ctx.currentTime + 0.06;
     this.schedulerHandle = window.setInterval(() => this.schedule(), 25);
@@ -174,16 +275,16 @@ export class AudioEngine {
       const swing = tune.swing && s % 2 === 1 ? stepDur * tune.swing : 0;
       const t = this.nextStepTime + swing;
 
-      for (const track of tune.tracks) {
+      tune.tracks.forEach((track, i) => {
         const raw = track.notes[s % track.notes.length];
-        if (!raw || raw === '-' || raw === '.') continue;
+        if (!raw || raw === '-' || raw === '.') return;
         const freq = noteToFreq(raw);
-        if (freq === null) continue;
+        if (freq === null) return;
         // Hold across following '.' steps so notes can be longer than a 16th.
         let len = 1;
         while (track.notes[(s + len) % track.notes.length] === '.') len++;
-        this.voice(track, freq, t, stepDur * len);
-      }
+        this.voice(track, freq, t, stepDur * len, i, tune.tracks.length);
+      });
 
       if (tune.drums) {
         const hit = tune.drums[s % tune.drums.length];
@@ -198,45 +299,90 @@ export class AudioEngine {
     }
   }
 
-  private voice(track: Track, freq: number, t: number, dur: number): void {
+  /**
+   * One note.
+   *
+   * A stack of slightly detuned oscillators through a resonant filter into a
+   * shaped envelope, placed in the stereo field and sent to the reverb and
+   * delay. Every one of those is what a single bare oscillator was missing.
+   */
+  /**
+   * Where a part sits in the stereo field when it has not asked for a place.
+   *
+   * The first track is the bass and stays in the middle, because low frequencies
+   * panned to one side just sound broken. Everything after it fans out to
+   * alternating sides, which stops three parts stacking up in the centre - the
+   * other half of why this sounded like one small speaker.
+   */
+  private static defaultPan(index: number, total: number): number {
+    if (index === 0 || total < 2) return 0;
+    const side = index % 2 === 1 ? -1 : 1;
+    const depth = 0.22 + 0.18 * Math.floor((index - 1) / 2);
+    return side * Math.min(0.6, depth);
+  }
+
+  private voice(
+    track: Track, freq: number, t: number, dur: number,
+    index = 0, total = 1,
+  ): void {
     const ctx = this.ctx;
     if (!ctx || !this.musicBus) return;
 
-    const osc = ctx.createOscillator();
-    osc.type = track.wave;
-    osc.frequency.value = freq;
-    if (track.detune) osc.detune.value = track.detune;
-
-    const amp = ctx.createGain();
+    const held = dur * (track.sustain ?? 1);
     const attack = track.attack ?? 0.008;
     const release = track.release ?? 0.09;
-    const peak = track.gain;
+    const voices = Math.max(1, track.unison ?? 2);
+    const spread = track.spread ?? 9;
+
+    const amp = ctx.createGain();
+    const peak = track.gain / Math.sqrt(voices);
     amp.gain.setValueAtTime(0.0001, t);
     amp.gain.exponentialRampToValueAtTime(peak, t + attack);
-    amp.gain.setValueAtTime(peak, t + Math.max(attack, dur - release));
-    amp.gain.exponentialRampToValueAtTime(0.0001, t + dur + release);
+    amp.gain.setValueAtTime(peak, t + Math.max(attack, held - release));
+    amp.gain.exponentialRampToValueAtTime(0.0001, t + held + release);
 
-    let node: AudioNode = osc;
-    if (track.cutoff) {
-      const filt = ctx.createBiquadFilter();
-      filt.type = 'lowpass';
-      filt.Q.value = 6;
-      filt.frequency.setValueAtTime(track.cutoff, t);
-      if (track.sweep) {
-        filt.frequency.exponentialRampToValueAtTime(
-          Math.max(80, track.cutoff * track.sweep),
-          t + dur,
-        );
-      }
-      osc.connect(filt);
-      node = filt;
+    // Filter first, so every oscillator in the stack shares one sweep.
+    const filt = ctx.createBiquadFilter();
+    filt.type = 'lowpass';
+    filt.Q.value = track.resonance ?? 7;
+    const cutoff = track.cutoff ?? 12000;
+    filt.frequency.setValueAtTime(cutoff, t);
+    if (track.sweep) {
+      filt.frequency.exponentialRampToValueAtTime(
+        Math.max(80, cutoff * track.sweep), t + held,
+      );
     }
-    node.connect(amp);
-    amp.connect(this.musicBus);
+    filt.connect(amp);
 
-    osc.start(t);
-    osc.stop(t + dur + release + 0.02);
-    this.track(osc);
+    const oscs: OscillatorNode[] = [];
+    for (let i = 0; i < voices; i++) {
+      const osc = ctx.createOscillator();
+      osc.type = track.wave;
+      osc.frequency.value = freq;
+      // Centred spread: one voice sits on the note, the rest either side.
+      const offset = voices === 1 ? 0 : (i / (voices - 1) - 0.5) * 2 * spread;
+      osc.detune.value = (track.detune ?? 0) + offset;
+      osc.connect(filt);
+      osc.start(t);
+      osc.stop(t + held + release + 0.02);
+      this.track(osc);
+      oscs.push(osc);
+    }
+
+    const pan = ctx.createStereoPanner();
+    pan.pan.value = track.pan ?? AudioEngine.defaultPan(index, total);
+    amp.connect(pan);
+    pan.connect(this.musicBus);
+
+    // Sends are post-pan taps, so a voice keeps its position in its own tail.
+    const space = track.space ?? 0.25;
+    if (space > 0 && this.reverbSend && this.delaySend) {
+      const send = ctx.createGain();
+      send.gain.value = space;
+      pan.connect(send);
+      send.connect(this.reverbSend);
+      send.connect(this.delaySend);
+    }
   }
 
   private kick(t: number): void {
@@ -244,16 +390,27 @@ export class AudioEngine {
     if (!ctx || !this.musicBus) return;
     const osc = ctx.createOscillator();
     osc.type = 'sine';
-    // Fast pitch drop is what makes a sine into a kick drum.
-    osc.frequency.setValueAtTime(150, t);
-    osc.frequency.exponentialRampToValueAtTime(45, t + 0.11);
+    // Fast pitch drop is what makes a sine into a kick drum. Starting higher
+    // and dropping further gives it a beater click as well as a body.
+    osc.frequency.setValueAtTime(210, t);
+    osc.frequency.exponentialRampToValueAtTime(42, t + 0.09);
     const g = ctx.createGain();
-    g.gain.setValueAtTime(0.9, t);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.24);
+    g.gain.setValueAtTime(1, t);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.3);
+    // A touch of saturation, so it is felt on small speakers rather than just
+    // occupying the bottom of the mix where a laptop cannot reproduce it.
+    const drive = ctx.createWaveShaper();
+    const curve = new Float32Array(1024);
+    for (let i = 0; i < 1024; i++) {
+      const x = (i / 1023) * 2 - 1;
+      curve[i] = Math.tanh(x * 2.2);
+    }
+    drive.curve = curve;
     osc.connect(g);
-    g.connect(this.musicBus);
+    g.connect(drive);
+    drive.connect(this.musicBus);
     osc.start(t);
-    osc.stop(t + 0.26);
+    osc.stop(t + 0.32);
     this.track(osc);
   }
 
@@ -264,18 +421,43 @@ export class AudioEngine {
     src.buffer = this.noiseBuffer;
     const bp = ctx.createBiquadFilter();
     bp.type = 'bandpass';
-    bp.frequency.value = 1900;
-    bp.Q.value = 0.8;
+    bp.frequency.value = 1750;
+    bp.Q.value = 0.7;
     const g = ctx.createGain();
     // A gated reverb is a long tail cut off abruptly - the sound of every drum
     // machine record between 1983 and 1989.
-    const tail = gated ? 0.19 : 0.11;
-    g.gain.setValueAtTime(0.6, t);
-    g.gain.linearRampToValueAtTime(gated ? 0.35 : 0.0001, t + tail * 0.8);
+    const tail = gated ? 0.22 : 0.12;
+    g.gain.setValueAtTime(0.55, t);
+    g.gain.linearRampToValueAtTime(gated ? 0.34 : 0.0001, t + tail * 0.8);
     g.gain.linearRampToValueAtTime(0.0001, t + tail);
     src.connect(bp);
     bp.connect(g);
     g.connect(this.musicBus);
+
+    // Noise alone is a hiss. Real snares have a drum under the wires, so a
+    // short tuned thump underneath gives it a pitch and stops it sounding
+    // like a burst of static on the backbeat.
+    const body = ctx.createOscillator();
+    body.type = 'triangle';
+    body.frequency.setValueAtTime(240, t);
+    body.frequency.exponentialRampToValueAtTime(150, t + 0.08);
+    const bg = ctx.createGain();
+    bg.gain.setValueAtTime(0.34, t);
+    bg.gain.exponentialRampToValueAtTime(0.0001, t + 0.1);
+    body.connect(bg);
+    bg.connect(this.musicBus);
+    body.start(t);
+    body.stop(t + 0.12);
+    this.track(body);
+
+    // The gate is the point, so it goes to the reverb generously.
+    if (this.reverbSend) {
+      const send = ctx.createGain();
+      send.gain.value = gated ? 0.5 : 0.2;
+      g.connect(send);
+      send.connect(this.reverbSend);
+    }
+
     src.start(t);
     src.stop(t + tail + 0.02);
     this.track(src);
