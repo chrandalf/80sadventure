@@ -35,10 +35,18 @@
         },
         "talk.south": {
           "frames": [
+            5,
+            5,
+            5,
             4,
-            5
+            5,
+            5,
+            5,
+            5,
+            4,
+            4
           ],
-          "fps": 6
+          "fps": 3
         },
         "idle.east": {
           "frames": [
@@ -61,7 +69,7 @@
             10,
             11
           ],
-          "fps": 6
+          "fps": 3
         },
         "idle.north": {
           "frames": [
@@ -84,7 +92,7 @@
             16,
             17
           ],
-          "fps": 6
+          "fps": 3
         },
         "surprised": {
           "frames": [

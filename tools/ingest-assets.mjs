@@ -248,6 +248,23 @@ function blank(w, h) {
   return p;
 }
 
+/** Centre-crop an image to a width, for a gesture that overruns its cell. */
+function cropWidth(src, w) {
+  const out = blank(w, src.height);
+  const sx = Math.floor((src.width - w) / 2);
+  for (let y = 0; y < src.height; y++) {
+    for (let x = 0; x < w; x++) {
+      const s = (y * src.width + (sx + x)) << 2;
+      const d = (y * w + x) << 2;
+      out.data[d] = src.data[s];
+      out.data[d + 1] = src.data[s + 1];
+      out.data[d + 2] = src.data[s + 2];
+      out.data[d + 3] = src.data[s + 3];
+    }
+  }
+  return out;
+}
+
 function blit(dst, src, dx, dy) {
   for (let y = 0; y < src.height; y++) {
     const ty = dy + y;
@@ -441,9 +458,20 @@ for (const [sheetId, set] of poseSets) {
    * different shape from a standing one. Sizing them all together keeps the
    * head at a constant height and the feet on the ground.
    */
+  /*
+   * Height alone decides the scale.
+   *
+   * It used to be `min(fh / tallest, fw / widest)`, so one pose drawn with the
+   * arms out - hands on hips, a raised hand mid-sentence - made the whole set
+   * scale down to fit that width, and the character then stood a head shorter
+   * than everyone else in the game for the rest of the run. Width belongs to
+   * one gesture; height is the person. A gesture that overflows its cell is
+   * cropped at the edges instead, which costs a few pixels of fingertip and is
+   * invisible next to a character two thirds the size of their friends.
+   */
   const tallest = Math.max(...trimmed.map((t) => t.bounds.h));
-  const widest = Math.max(...trimmed.map((t) => t.bounds.w));
-  const scale = Math.min(fh / tallest, fw / widest);
+  const scale = fh / tallest;
+  let cropped = 0;
 
   const sheet = blank(fw * columns, fh * rows);
   const filled = new Set();
@@ -452,10 +480,17 @@ for (const [sheetId, set] of poseSets) {
   for (const pose of trimmed) {
     const dw = Math.max(1, Math.round(pose.bounds.w * scale));
     const dh = Math.max(1, Math.round(pose.bounds.h * scale));
-    const cell = resample(pose.img, pose.bounds.x, pose.bounds.y, pose.bounds.w, pose.bounds.h, dw, dh);
+    let cell = resample(pose.img, pose.bounds.x, pose.bounds.y, pose.bounds.w, pose.bounds.h, dw, dh);
     binarise(cell);
+    // A gesture wider than its cell is trimmed evenly from both sides: blit
+    // clips against the sheet rather than the cell, so an overwide pose would
+    // otherwise spill into the neighbouring frame.
+    if (cell.width > fw) {
+      cell = cropWidth(cell, fw);
+      cropped++;
+    }
     // Bottom-centred: the anchor is the soles of the feet.
-    const ox = Math.round((fw - dw) / 2);
+    const ox = Math.round((fw - cell.width) / 2);
     const oy = fh - dh;
     for (const { row, col } of pose.cells) {
       blit(sheet, cell, col * fw + ox, row * fh + oy);
@@ -513,7 +548,7 @@ for (const [sheetId, set] of poseSets) {
     mkdirSync(dirname(dest), { recursive: true });
     writeFileSync(dest, PNG.sync.write(sheet));
   }
-  written.push([sheetId, `${set.poses.length} poses -> ${fw * columns}x${fh * rows}${gaps ? `, ${gaps} cells filled from the standing pose` : ''}`]);
+  written.push([sheetId, `${set.poses.length} poses -> ${fw * columns}x${fh * rows}${cropped ? `, ${cropped} wide poses cropped` : ''}${gaps ? `, ${gaps} cells filled from the standing pose` : ''}`]);
 }
 
 /* ----------------------------------------------------------------- report */
