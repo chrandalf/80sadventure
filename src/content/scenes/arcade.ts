@@ -596,22 +596,46 @@ export const ARCADE_SCENES: Record<string, Scene> = {
     name: "Arthur's Office",
     background: 'arcade_office',
     music: 'mystery',
-    walkboxes: [[14, 100, 306, 100, 312, 140, 8, 140]],
-    // The desk, so Jack can stand behind it. Authored in this scene's 320x200
-    // space; normalizeScene scales it with everything else.
+    /*
+     * Fitted to the plate rather than to a generic band across the room.
+     *
+     * The desk fills the right two thirds and its front face is the nearest
+     * thing to camera, so the only real floor is the strip on the left by the
+     * door and the filing cabinet, plus a narrow run behind the desk. The old
+     * box spanned the whole width while the blocker covered only the desk's
+     * bottom third, so Jack could stand on the desk's own footprint - which is
+     * what made him look like he was walking through it.
+     */
+    autoFloor: false,
+    walkboxes: [
+      [6, 114, 104, 114, 104, 143, 2, 143],
+      [104, 136, 314, 136, 318, 143, 104, 143],
+    ],
+    /*
+     * The desk, traced off the plate: back edge, right end, front face, base.
+     *
+     * Its baseline sits below the strip behind it, so anyone back there is
+     * drawn behind the desk and cut off at the waist - which is the point of
+     * the strip. The polygon has to follow the drawn edges closely or the
+     * character shows through the wood at the corners.
+     */
     occluders: [{
-      polygon: [102, 83, 251, 89, 251, 136, 235, 144, 107, 143, 102, 129],
-      y: 144,
+      polygon: [
+        102, 84, 168, 82, 250, 79,
+        253, 97, 252, 128, 249, 144,
+        160, 146, 108, 146, 101, 128, 100, 100,
+      ],
+      y: 147,
     }],
-    blockers: [[103, 128, 251, 133, 251, 143, 103, 143]],
-    depth: { yNear: 140, yFar: 100, scaleNear: 1, scaleFar: 0.68 },
-    entries: { default: { x: 160, y: 129, facing: 'north' } },
+    depth: { yNear: 143, yFar: 114, scaleNear: 1, scaleFar: 0.8 },
+    // He comes in through the door, which is where the corridor is painted.
+    entries: { default: { x: 88, y: 134, facing: 'south' } },
     hotspots: [
       {
         id: 'desk',
         name: 'Desk',
-        rect: { x: 96, y: 82, w: 92, h: 26 },
-        walkTo: [140, 126],
+        rect: { x: 104, y: 80, w: 148, h: 64 },
+        walkTo: [96, 138],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'Invoices, a calculator, and a mug that has been growing something since the spring.']],
@@ -632,8 +656,8 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'framed_photo',
         name: 'Framed Photograph',
-        rect: { x: 206, y: 30, w: 40, h: 32 },
-        walkTo: [226, 120],
+        rect: { x: 224, y: 14, w: 36, h: 32 },
+        walkTo: [100, 138],
         facing: 'north',
         verbs: {
           LOOK: [
@@ -662,8 +686,8 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'safe',
         name: 'Safe',
-        rect: { x: 250, y: 82, w: 40, h: 34 },
-        walkTo: [270, 128],
+        rect: { x: 260, y: 96, w: 40, h: 36 },
+        walkTo: [268, 140],
         facing: 'north',
         verbs: {
           LOOK: [
@@ -716,8 +740,8 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'filing_cabinet',
         name: 'Filing Cabinet',
-        rect: { x: 16, y: 52, w: 34, h: 60 },
-        walkTo: [40, 122],
+        rect: { x: 4, y: 30, w: 36, h: 88 },
+        walkTo: [40, 126],
         facing: 'west',
         verbs: {
           LOOK: [['jack', 'Three drawers. Labelled ACCOUNTS, ACCOUNTS and ACCOUNTS.']],
@@ -731,8 +755,8 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'office_tv',
         name: 'Television',
-        rect: { x: 288, y: 40, w: 30, h: 28 },
-        walkTo: [292, 118],
+        rect: { x: 266, y: 32, w: 40, h: 38 },
+        walkTo: [280, 140],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'A portable black-and-white set. Off. Reflecting the room back at me slightly wrong.']],
@@ -746,8 +770,8 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'telephone',
         name: 'Telephone',
-        rect: { x: 110, y: 78, w: 20, h: 14 },
-        walkTo: [120, 124],
+        rect: { x: 116, y: 72, w: 26, h: 16 },
+        walkTo: [96, 136],
         facing: 'north',
         verbs: {
           LOOK: [['jack', 'A rotary telephone in a colour they stopped making for a reason.']],
@@ -759,11 +783,13 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'office_out',
         name: 'Lobby',
-        rect: { x: 0, y: 96, w: 20, h: 48 },
+        // The door is centre-left, with the corridor's tiles showing
+        // through it - not the far left corner, where the cabinet stands.
+        rect: { x: 70, y: 4, w: 40, h: 106 },
         to: 'arcade_lobby',
         entry: 'fromOffice',
-        walkTo: [22, 132],
-        arrow: 'left',
+        walkTo: [88, 136],
+        arrow: 'up',
       },
     ],
   },
