@@ -1,6 +1,11 @@
 import { AnimationPlayer, type SpriteSheet } from '../engine/Sprite';
 import type { DepthBand, Facing } from './types';
 
+/** A number somewhere in [lo, hi]. */
+function rand([lo, hi]: readonly [number, number]): number {
+  return lo + Math.random() * (hi - lo);
+}
+
 /** Point-in-polygon, even-odd rule. Polygons are flat [x,y,x,y,...] lists. */
 export function pointInPoly(poly: number[], x: number, y: number): boolean {
   let inside = false;
@@ -129,12 +134,30 @@ export class Actor {
    * else is happening, play their own bit of business once and go back to
    * standing. Staggered per actor so a room does not twitch in unison.
    */
-  private fidgetTimer = 8 + Math.random() * 18;
+  /**
+   * How long a fidget waits, and how long it lasts.
+   *
+   * There is one fidget frame and one standing frame, so the change between
+   * them is a hard cut with nothing to ease it. A short hold therefore reads
+   * as a twitch rather than a movement, and a short gap turns a person
+   * standing quietly into someone having an episode. So: a long wait, and a
+   * hold long enough that the eye registers a different posture and settles
+   * on it before it goes back.
+   */
+  private static readonly FIDGET_WAIT: [number, number] = [55, 150];
+  private static readonly FIDGET_HOLD: [number, number] = [2.6, 4.2];
+  /** Time standing still before a fidget is even considered. */
+  private static readonly FIDGET_SETTLE = 7;
+
+  private fidgetTimer = Actor.FIDGET_WAIT[0] + Math.random()
+    * (Actor.FIDGET_WAIT[1] - Actor.FIDGET_WAIT[0]);
   private fidgeting = false;
+  /** Seconds since this character last moved. */
+  private stillFor = 0;
 
   /** Patrol route, if this character paces. Driven by AdventureScreen. */
   patrol: [number, number][] | null = null;
-  patrolPause: [number, number] = [2, 6];
+  patrolPause: [number, number] = [9, 24];
   patrolIndex = 0;
   patrolWait = 0;
 
@@ -224,21 +247,30 @@ export class Actor {
   private updateFidget(dt: number): void {
     if (!this.anim.sheet.hasAnimation('fidget')) return;
     if (this.isWalking || this.restAnim !== 'idle') {
-      if (this.fidgeting) this.fidgeting = false;
+      // Moving, or mid-scripted-emotion: reset both clocks so nobody arrives
+      // somewhere and immediately starts fussing with their clothes.
+      if (this.fidgeting) {
+        this.fidgeting = false;
+        this.playIdle();
+      }
+      this.stillFor = 0;
       return;
     }
+
+    this.stillFor += dt;
     this.fidgetTimer -= dt;
+
     if (this.fidgeting) {
       if (this.fidgetTimer <= 0) {
         this.fidgeting = false;
-        this.fidgetTimer = 9 + Math.random() * 20;
+        this.fidgetTimer = rand(Actor.FIDGET_WAIT);
         this.playIdle();
       }
       return;
     }
-    if (this.fidgetTimer <= 0) {
+    if (this.fidgetTimer <= 0 && this.stillFor > Actor.FIDGET_SETTLE) {
       this.fidgeting = true;
-      this.fidgetTimer = 0.9 + Math.random() * 0.7;
+      this.fidgetTimer = rand(Actor.FIDGET_HOLD);
       this.playDirectional('fidget');
     }
   }

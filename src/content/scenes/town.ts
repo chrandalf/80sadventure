@@ -488,7 +488,7 @@ export const TOWN_SCENES: Record<string, Scene> = {
     characters: [{
       id: 'derek', sprite: 'char.derek', x: 240, y: 130, facing: 'west',
       patrol: [[240, 130], [150, 134], [240, 130], [200, 138]],
-      patrolPause: [3, 9],
+      patrolPause: [12, 30],
     }],
     ambience: [{ sfx: 'static', everyMin: 8, everyMax: 18 }],
     hotspots: [

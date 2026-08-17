@@ -384,7 +384,7 @@ export const HOTEL_SCENES: Record<string, Scene> = {
         id: 'bather', sprite: 'char.cabin', x: 196, y: 106, facing: 'south',
         visibleIf: ['flag', 'wrongCabin'],
         patrol: [[196, 106], [160, 110], [196, 106], [232, 108]],
-        patrolPause: [7, 16],
+        patrolPause: [22, 50],
       },
     ],
     onFirstEnter: [
@@ -794,7 +794,7 @@ export const HOTEL_SCENES: Record<string, Scene> = {
     characters: [{
       id: 'graham', sprite: 'char.graham', x: 250, y: 130, facing: 'south',
       patrol: [[250, 130], [180, 134], [250, 130], [290, 132]],
-      patrolPause: [5, 12],
+      patrolPause: [16, 38],
     }],
     hotspots: [
       {

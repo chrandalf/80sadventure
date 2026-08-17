@@ -43,7 +43,7 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       {
         id: 'arthur', sprite: 'char.arthur', x: 494, y: 272, facing: 'east',
         patrol: [[494, 272], [516, 278], [494, 272], [430, 270]],
-        patrolPause: [6, 14],
+        patrolPause: [20, 46],
       },
     ],
     ambience: [{ sfx: 'coin', everyMin: 9, everyMax: 20 }],
@@ -317,7 +317,7 @@ export const ARCADE_SCENES: Record<string, Scene> = {
         id: 'kevin', sprite: 'char.kevin', x: 462, y: 280, facing: 'west',
         visibleIf: ['noflag', 'closingTime'],
         patrol: [[462, 280], [372, 274], [300, 268], [372, 274]],
-        patrolPause: [4, 11],
+        patrolPause: [14, 34],
       },
       { id: 'maggie', sprite: 'char.maggie', x: 192, y: 264, facing: 'east' },
     ],
