@@ -612,21 +612,21 @@ export const ARCADE_SCENES: Record<string, Scene> = {
       [104, 136, 314, 136, 318, 143, 104, 143],
     ],
     /*
-     * The desk, traced off the plate: back edge, right end, front face, base.
+     * The desk is a wall, not something to walk behind.
      *
-     * Its baseline sits below the strip behind it, so anyone back there is
-     * drawn behind the desk and cut off at the waist - which is the point of
-     * the strip. The polygon has to follow the drawn edges closely or the
-     * character shows through the wood at the corners.
+     * It stands against the far side of the room, so there is no floor between
+     * it and the window - and a strip of walkable ground back there put Jack's
+     * head bobbing along above the desktop like a man crouching behind it.
+     * Blocking its whole footprint and letting him walk along the front is
+     * both what the painting shows and what reads as a person crossing a room.
+     *
+     * With nowhere to stand behind it, the desk has nothing to occlude, so it
+     * needs no occluder: Jack is always in front of it, which is the one thing
+     * that cannot look like a ghost.
      */
-    occluders: [{
-      polygon: [
-        102, 84, 168, 82, 250, 79,
-        253, 97, 252, 128, 249, 144,
-        160, 146, 108, 146, 101, 128, 100, 100,
-      ],
-      y: 147,
-    }],
+    blockers: [
+      [100, 92, 256, 92, 256, 136, 100, 136],
+    ],
     depth: { yNear: 143, yFar: 114, scaleNear: 1, scaleFar: 0.8 },
     // He comes in through the door, which is where the corridor is painted.
     entries: { default: { x: 88, y: 134, facing: 'south' } },
