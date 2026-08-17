@@ -167,7 +167,8 @@ export const STORY_SCENES: Record<string, Scene> = {
       { polygon: [78, 20, 147, 20, 147, 138, 77, 134], y: 138 },
       { polygon: [278, 105, 320, 105, 320, 148, 276, 148], y: 148 },
     ],
-    entries: { default: { x: 60, y: 132, facing: 'east' } },
+    // He comes in through the glass doors, which are in the middle of the wall.
+    entries: { default: { x: 168, y: 132, facing: 'south' } },
     ambience: [{ sfx: 'buzz', everyMin: 10, everyMax: 24 }],
     onFirstEnter: [
       ['jack', 'Dust, damp carpet and the smell of eleven years of nobody.'],
@@ -252,7 +253,9 @@ export const STORY_SCENES: Record<string, Scene> = {
       },
     ],
     exits: [
-      { id: 'lobby_out', name: 'Outside', rect: { x: 0, y: 100, w: 22, h: 44 }, to: 'cinema_exterior', entry: 'default', walkTo: [24, 132], arrow: 'left' },
+      // The way out is the glass doors with the pier lights behind them, not
+      // the left-hand wall, which is panelling and a poster case.
+      { id: 'lobby_out', name: 'Outside', rect: { x: 126, y: 6, w: 84, h: 96 }, to: 'cinema_exterior', entry: 'default', walkTo: [168, 132], arrow: 'up' },
       {
         id: 'lobby_proj', name: 'Projection Room', rect: { x: 268, y: 42, w: 52, h: 52 },
         to: 'cinema_projection', entry: 'default', walkTo: [268, 126], arrow: 'up',
