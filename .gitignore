@@ -3,3 +3,9 @@ dist/
 art-templates/
 *.local
 .DS_Store
+
+# Ingest keeps a copy of each fitted pose here as a record that it arrived.
+# They are generated art, they are large, and they differ per machine - and a
+# stray one committed from a test run will try to overwrite somebody's real
+# artwork on their next pull, which is exactly what happened once.
+public/assets/characters/poses/
