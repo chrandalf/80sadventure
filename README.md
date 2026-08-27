@@ -92,6 +92,8 @@ the live game data (`npm run assets:manifest`), so it cannot drift.
 pipeline for generating the art and getting it into the game.
 **→ [`docs/ASSETS.md`](docs/ASSETS.md)** covers the sprite contract, sheet
 layouts and the validator.
+**→ [`docs/RUNNING-LOCALLY.md`](docs/RUNNING-LOCALLY.md)** is the setup for
+running this on your own machine with a GPU, which the depth tooling wants.
 
 ```bash
 npm run assets:manifest       # regenerate assets.json from the game data
