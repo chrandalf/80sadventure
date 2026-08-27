@@ -1,0 +1,7 @@
+# Depth estimation for the hybrid renderer. Install torch to match your GPU
+# first if you want CUDA - https://pytorch.org/get-started/locally/ - since the
+# default wheel here is CPU-only on some platforms.
+torch>=2.2
+transformers>=4.45
+pillow>=10.0
+numpy>=1.26
