@@ -88,11 +88,13 @@ Two rules that were learned the hard way:
   premultiplied.
 
 **What is actually in git:** the 34 room plates, and the generated originals in
-`incoming/`. Character sheets are *not* - they are built on your machine by
-`npm run assets:ingest` from whatever source art you hold, and the per-pose
-cache under `public/assets/characters/poses/` is ignored on purpose. A fresh
-clone therefore renders characters as labelled placeholders until you ingest.
-That is working as intended, not a broken checkout.
+`incoming/`. Character sheets are *not* - they live on the working machine,
+built by `npm run assets:ingest`, and the per-pose cache under
+`public/assets/characters/poses/` is ignored on purpose. So the sheets you are
+looking at are real art that exists nowhere else: do not delete them, do not
+overwrite them with a test run, and do not commit them. If a character ever
+renders as a labelled placeholder, the sheet is missing rather than broken -
+re-ingest it, do not go hunting in the engine.
 
 Idle fidgets and patrols are in `src/game/Actor.ts`. The constants are
 calibrated, not arbitrary: 55-150s between fidgets, 2.6-4.2s holds, 7s settle.
