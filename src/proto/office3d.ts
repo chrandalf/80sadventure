@@ -24,6 +24,7 @@ import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
 import { checkerFloor, darkWood, nightWindow, wallpaper, woodFloor } from './textures';
+import { createJack } from './actor3d';
 
 const W = 640;
 const H = 400;
@@ -324,34 +325,14 @@ scene.add(new THREE.HemisphereLight(0x50648f, 0x1d150e, 1.0));
 
 // ------------------------------------------------------------- character
 
-/**
- * Jack, as blocked-out geometry.
- *
- * Deliberately simple: the prototype is asking whether the room works, and a
- * detailed character would answer a different question. He is the right height
- * and the right colours, he casts a shadow, and - the entire point - he is
- * occluded by the desk because he is behind it, with nothing hand-traced.
+/*
+ * The same body and the same walk as the hybrid prototype, so that comparing
+ * the two compares the rooms rather than two different characters.
  */
-const jack = new THREE.Group();
-const jacket = new THREE.MeshStandardMaterial({ color: 0x2c3550, roughness: 0.8 });
-const jeans = new THREE.MeshStandardMaterial({ color: 0x35507e, roughness: 0.85 });
-const skin = new THREE.MeshStandardMaterial({ color: 0xc79b74, roughness: 0.7 });
-const hair = new THREE.MeshStandardMaterial({ color: 0x3a2418, roughness: 0.9 });
-
-const torso = new THREE.Mesh(new THREE.CapsuleGeometry(0.19, 0.42, 4, 12), jacket);
-torso.position.y = 1.18;
-const head = new THREE.Mesh(new THREE.SphereGeometry(0.13, 16, 14), skin);
-head.position.y = 1.62;
-const fringe = new THREE.Mesh(new THREE.SphereGeometry(0.135, 16, 12, 0, Math.PI * 2, 0, 1.5), hair);
-fringe.position.y = 1.635;
-const legs = new THREE.Mesh(new THREE.CapsuleGeometry(0.15, 0.52, 4, 12), jeans);
-legs.position.y = 0.5;
-for (const part of [torso, head, fringe, legs]) {
-  part.castShadow = true;
-  jack.add(part);
-}
-jack.position.set(-1.7, 0, 0.9);
-scene.add(jack);
+const jack = createJack();
+jack.group.position.set(-1.7, 0, 0.9);
+jack.target.copy(jack.group.position);
+scene.add(jack.group);
 
 // ------------------------------------------------------------------ post
 
@@ -381,7 +362,6 @@ composer.addPass(grade);
 
 const ray = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
-let target = jack.position.clone();
 
 renderer.domElement.addEventListener('pointerdown', (e) => {
   const r = renderer.domElement.getBoundingClientRect();
@@ -389,7 +369,7 @@ renderer.domElement.addEventListener('pointerdown', (e) => {
   pointer.y = -((e.clientY - r.top) / r.height) * 2 + 1;
   ray.setFromCamera(pointer, camera);
   const hit = ray.intersectObject(floor)[0];
-  if (hit) target = hit.point.clone();
+  if (hit) jack.target.copy(hit.point);
 });
 
 // ------------------------------------------------------------------ loop
@@ -399,10 +379,9 @@ renderer.domElement.addEventListener('pointerdown', (e) => {
  * This is a prototype page that ships with nothing, so a debug hook here
  * costs nothing and is the only way to place him precisely for a comparison.
  */
-(window as unknown as { jack: THREE.Group; walkTo: (x: number, z: number) => void }).jack = jack;
 (window as unknown as { walkTo: (x: number, z: number) => void }).walkTo = (x, z) => {
-  jack.position.set(x, 0, z);
-  target = jack.position.clone();
+  jack.group.position.set(x, 0, z);
+  jack.target.set(x, 0, z);
 };
 
 const clock = new THREE.Clock();
@@ -410,18 +389,7 @@ function frame(): void {
   const dt = Math.min(0.05, clock.getDelta());
   const t = clock.elapsedTime;
 
-  // Walk, with a step bob so he does not glide.
-  const to = target.clone().sub(jack.position);
-  to.y = 0;
-  const dist = to.length();
-  if (dist > 0.06) {
-    to.normalize();
-    jack.position.addScaledVector(to, Math.min(dist, dt * 1.9));
-    jack.rotation.y = Math.atan2(to.x, to.z);
-    jack.position.y = Math.abs(Math.sin(t * 9)) * 0.035;
-  } else {
-    jack.position.y += (0 - jack.position.y) * 0.2;
-  }
+  jack.update(dt, t);
 
   // The lamp is a filament, not an LED: it should be almost, but not quite, steady.
   lampLight.intensity = 9 + Math.sin(t * 2.7) * 0.25 + Math.sin(t * 11.3) * 0.1;

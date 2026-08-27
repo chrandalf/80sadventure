@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Arthur's Office - hybrid prototype</title>
+    <style>
+      html, body { margin: 0; height: 100%; background: #05060a; overflow: hidden; }
+      body { display: grid; place-items: center; font: 12px/1.5 ui-monospace, monospace; color: #6b7a8c; }
+      #view canvas { width: min(96vw, 1280px); height: auto; image-rendering: pixelated;
+        display: block; box-shadow: 0 0 80px #0d1730; }
+      p { margin: 10px 0 0; letter-spacing: 0.04em; }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div id="view"></div>
+      <p>The painted plate, with invisible geometry in front of it. Click to walk, D to show the proxies.</p>
+    </div>
+    <script type="module" src="/src/proto/officeHybrid.ts"></script>
+  </body>
+</html>
